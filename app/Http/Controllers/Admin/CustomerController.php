@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Bill;
 use App\Models\Customer;
 use App\Helpers\CommonFx;
 use Illuminate\Support\Str;
@@ -81,7 +82,7 @@ class CustomerController extends Controller
     if (request()->ajax()) {
       return datatables()->of(Customer::with('district','thana','area','bill.collection')->whereadmin_id(Auth::guard('admin')->user()->id)->wherestatus(2)->latest())
         ->addColumn('action', function ($data) {
-          $button ='<button type="button" id="UpdateBillBtn" uid="' . $data->id . '" class="invoice-action-view btn-sm" title="Update Bill"><i class="material-icons ">update</i></button>'; 
+          $button ='<button type="button" id="UpdateBillBtn" uid="' . $data->bill[0]->id . '" class="invoice-action-view btn-sm" title="Update Bill"><i class="material-icons ">update</i></button>'; 
           $button .= '&nbsp;&nbsp;';
           $button .= '<a title="Edit Customer" href="/admin/editcustomer/' . $data->id . '" class="invoice-action-view"><i class="material-icons">edit</i></a>';
           $button .= '&nbsp;&nbsp;';
@@ -449,6 +450,54 @@ class CustomerController extends Controller
   {
 
     return response(Customer::whereadmin_id(Auth::id())->findOrFail($id)->delete()) ; 
+   
+  } 
+   public function findbill($id)
+  {
+   
+    $info=Bill::findOrFail($id);
+    $customer=Customer::find($info->customer_id);
+    return response()->json([
+      'suceess'=>true,
+    'info'=>$info,
+   
+    'customer'=>$customer,
+    ],201);
+   
+   
+  }
+   public function updatebillcustomer(Request $request)
+  {
+// return response($request->all());
+     $info=Bill::findOrFail($request->billid)->update(
+      [
+      'monthlyrent' => $request->monthlyrent,
+       'due' => $request->due,
+       'addicrg' => $request->addicrg,
+       'discount' => $request->discount,
+       'advance' => $request->advance,
+        'vat' => $request->vat,
+       'total' => $request->total
+    
+  ]);
+  return response($info);
+  if($info){
+    Customer::findOrFail($request->customerid)->update(
+      [
+      'monthlyrent' => $request->monthlyrent,
+       'due' => $request->due,
+       'addicrg' => $request->addicrg,
+       'discount' => $request->discount,
+       'advance' => $request->advance,
+        'vat' => $request->vat,
+       'total' => $request->total
+    
+  ]);
+  }
+    return response()->json([
+      'suceess'=>true,
+    ],201);
+   
    
   }
   }

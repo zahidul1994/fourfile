@@ -356,25 +356,28 @@ Route::get('customerprofile/{id}','CustomerController@show');
  Route::delete('deletecustomer/{id}','CustomerController@destroy');
 Route::post('customerstatus', 'CustomerController@setapproval');
 Route::post('searchcustomer', 'CustomerController@searchmedicine');
+Route::get('findbill/{id}','CustomerController@findbill');
+Route::post('updatebillcustomer','CustomerController@updatebillcustomer');
 //Customer  End
 //sms Start
 Route::get('smsmessagesetting','SmsController@index');
 Route::patch('updatesmssetting/{id}','SmsController@update');
 
 //sms  End
-//Blog Start 
+//Collection Start 
 
 Route::get('collection','CollectionController@index');
 Route::get('createcollection','CollectionController@create');
 Route::post('createcollection','CollectionController@store');
-Route::get('editblog/{id}','CollectionController@edit');
+Route::get('editcollect/{id}','CollectionController@edit');
  Route::put('updatecollection/{id}','CollectionController@update');
  Route::get('deleteblog/{id}','CollectionController@destroy');
 Route::post('blogstatus', 'CollectionController@setapproval');
 Route::post('searchsinglecustomer', 'CollectionController@searchsinglecustomer');
 Route::post('searchsinglecustomerbill', 'CollectionController@singlecustomerbill');
-
-//Blog  End
+Route::get('cancelcollection', 'CollectionController@cancelcollection');
+Route::delete('cancelcollection/{id}', 'CollectionController@collectiondelete');
+//Collection  End
 
 
        

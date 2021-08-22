@@ -151,6 +151,7 @@ return [
     "Collection"=> "Collection",
     "Collection List"=> "Collection List",
     "Create Collection"=> "Create Collection", 
+    "Cancel Collection"=> "Cancel Collection", 
 	"Medicineinfo"=> "Medicineinfo",
     "Medicineinfo List"=> "Medicineinfo List",
     "Create Medicineinfo"=> "Create Medicineinfo",

@@ -73,7 +73,70 @@
                           </div>
                       </div>
                  
-                 
+               
+  <div id="UpdateBill" class="modal">
+    <div class="modal-content">
+        
+        
+            <div class="row">
+            <div class="input-field col m6 s12">
+            {!! Form::number('monthlyrent', null, ['id' => 'monthlyrent']) !!}
+            {!! Form::label('active', 'Monthly Charge') !!}
+            
+            </div> 
+            <div class="input-field col m6 s12">
+            {!! Form::number('addicrg', null, ['id' => 'addicrg']) !!}
+            {!! Form::label('addicrg', 'Additional Charge') !!}
+            
+            </div>
+            
+            <div class="input-field col m6 s12">
+            {!! Form::number('discount', null, ['id' => 'discount']) !!}
+            {!! Form::label('discount', 'Discount') !!}
+            
+            </div>
+            <div class="input-field col m6 s12">
+                {!! Form::number('due', null, ['id' => 'due']) !!}
+                {!! Form::label('due', 'Due') !!}
+                
+                </div>
+                
+            </div>
+            <div class="row">
+            <div class="input-field col m6 s12">
+            {!! Form::number('advance', null, ['id' => 'advance']) !!}
+            {!! Form::label('advance', 'Advance') !!}
+            
+            </div>
+            
+            <div class="input-field col m6 s12">
+            {!! Form::number('vat', null, ['id' => 'vat']) !!}
+            {!! Form::label('vat', 'VAT (%)') !!}
+            
+            </div>
+            <input type="hidden" value="" id="billid">
+            <input type="hidden" value="" id="customerid">
+            </div>
+            <div class="row">
+            <div class="input-field col m6 s12">
+            {!! Form::number('total', null, ['id' => 'total','step'=>'any']) !!}
+          
+        </div>
+                <div class="input-field col m6 s12">
+                    <button class="btn cyan waves-effect waves-light right" type="button" id="Updatemodal">Update
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+           
+            
+            </div>
+            
+           
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+  </div>  
  
 
   {{-- @endcan --}}
@@ -90,7 +153,11 @@
 <script src="{{asset('app-assets/js/scripts/data-tables.js')}}"></script>
 <script>
 $(document).ready(function () {
- 
+    $(".sidenav-main").addClass("nav-collapsed");
+            $("#main").addClass("main-full");
+            $(".sidenav-main").hover(function(){
+                $(".sidenav-main").toggleClass("nav-collapsed");
+});
  
   $('#dataTable').DataTable({
    // responsive: true,
@@ -210,7 +277,79 @@ $(document).ready(function () {
                  }
              });
          });
+           
          //Delete Admin end
+
+
+         $(document).on('click','#UpdateBillBtn', function(){
+            
+             $billid = $(this).attr('uid');
+             //console.log($roomid);
+             $info_url = url + '/admin/findbill/'+$billid;
+             $.ajax({
+                 url:$info_url,
+                 method: "get",
+                 type: "GET",
+                 data:{
+                 },
+                 success: function(data){
+                     if(data) {
+                     //   console.log(data);
+                      
+                    $("#billid").val(data.info.id);
+                    $("#customerid").val(data.info.customer_id);
+                    $("#monthlyrent").val(data.info.monthlyrent);
+                    $("#addicrg").val(data.info.addicrg);
+                    $("#discount").val(data.info.discount);
+                    $("#due").val(data.info.due);
+                    $("#advance").val(data.info.advance);
+                    $("#vat").val(data.info.vat);
+                    $("#total").val(data.info.total);
+                    $('#UpdateBill').modal('open');
+                         }
+                 },
+                 error:function(data){
+                     console.log(data);
+                 }
+             });
+         });
+         $("#monthlyrent,#due,#addicrg,#discount,#advance,#vat").keyup(function(){
+  
+        var total=isNaN((Number($("#monthlyrent").val()) + Number($("#due").val()) + Number($("#addicrg").val()))-(Number($("#advance").val())+Number($("#discount").val())))? 0 :((Number($("#monthlyrent").val()) + (Number($("#due").val()) + Number($("#addicrg").val()))-(Number($("#advance").val())+Number($("#discount").val()))))+((Number($("#monthlyrent").val())+Number($("#addicrg").val())) *  Number($("#vat").val()))/100;
+        $("#total").val(total);
+        console.log(total);
+    });
+         $(document).on('click','#Updatemodal', function(){
+           
+             $info_url = url + '/admin/updatebillcustomer';
+             $.ajax({
+                 url:$info_url,
+                 method: "POST",
+                 type: "POST",
+                 data:{
+                    customerid:$("#customerid").val(),
+                     billid:$("#billid").val(),
+                     monthlyrent: $("#monthlyrent").val(),
+                   addicrg:$("#addicrg").val(),
+                   due:$("#due").val(),
+                   discount: $("#discount").val(),
+                   advance:$("#advance").val(),
+                   vat: $("#vat").val(),
+                   total: $("#total").val(),
+                 },
+                 success: function(data){
+                     if(data) {
+                        toastr.warning('Update Successfully');
+                        $('#UpdateBill').modal('close');    
+             $('#dataTable').DataTable().ajax.reload();
+                
+                         }
+                 },
+                 error:function(data){
+                     console.log(data);
+                 }
+             });
+         });
 
 });
 </script>

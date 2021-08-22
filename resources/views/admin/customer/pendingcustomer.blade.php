@@ -90,7 +90,8 @@
 <script src="{{asset('app-assets/js/scripts/data-tables.js')}}"></script>
 <script>
 $(document).ready(function () {
- 
+    $(".sidenav-main").addClass("nav-collapsed");
+            $("#main").addClass("main-full");
  
   $('#dataTable').DataTable({
    // responsive: true,

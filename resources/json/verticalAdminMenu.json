@@ -47,7 +47,14 @@
                     "name": "Create Collection",
                     "i18n": "Create Collection",
                     "slug": "createcollection"
+                },
+                {
+                    "url": "admin/cancelcollection",
+                    "name": "Cancel Collection",
+                    "i18n": "Cancel Collection",
+                    "slug": "cancelcollection"
                 }
+
 
             ]
 

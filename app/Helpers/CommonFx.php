@@ -323,6 +323,33 @@ public static function Divisionname(){
 
    }
         }
+        public static function sentsmscustomerbillpaid($smsinfo){
+            $smssetting=Smssent::whereadmin_id(Auth::id())->firstOrFail();
+         
+            $text= str_replace(['#CUSTOMER_NAME#', '#CUSTOMER_ID#','#AMOUNT#','#DUE#'], [$smsinfo['name'], $smsinfo['id'],$smsinfo['paid'],$smsinfo['due']], $smssetting->billingmessage);
+     
+   
+      if($smssetting->billing==1){
+      // $number=$smsinfo->phone;
+      $number=$smsinfo['mobile'];
+     $dataall= array(
+       'username'=>"mtshoes",
+       'password'=>"76PCMA9D",
+       'number'=>$number,
+       'message'=>$text
+       );
+ 
+   $url = "http://66.45.237.70/api.php";
+       $ch = curl_init(); // Initialize cURL
+       curl_setopt($ch, CURLOPT_URL,$url);
+       curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($dataall));
+       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+       $smsresult = curl_exec($ch);
+       $p = explode("|",$smsresult);
+       $sendstatus = $p[0];
+
+   }
+        }
 
         public static function sentsmsbillcreate($smsinfo){
             $smssetting=Smssent::whereadmin_id($smsinfo['adminid'])->firstOrFail();

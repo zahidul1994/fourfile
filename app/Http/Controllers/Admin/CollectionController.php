@@ -1,19 +1,21 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+use Validator;
 use App\Models\Area;
+use App\Models\Bill;
 use App\Models\Thana;
 use App\Models\Customer;
-use Validator;
+use App\Helpers\CommonFx;
+use App\Models\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Kamaln7\Toastr\Facades\Toastr;
 use App\Http\Controllers\Controller;
-use App\Models\Bill;
-use App\Models\Collection;
+use GrahamCampbell\ResultType\Success;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
 //use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redirect;
  use Illuminate\Database\Eloquent\Builder;
 
@@ -29,12 +31,23 @@ class CollectionController extends Controller
       
        public function create(){
      $breadcrumbs = [
-            ['link' => "admin", 'name' => "Home"], ['link' => "admin/arealist", 'name' => "Area"], ['name' => "Create"],
+            ['link' => "admin", 'name' => "Home"], ['link' => "admin/createcollection", 'name' => "Collection"], ['name' => "Create"],
         ];
       
           $pageConfigs = ['pageHeader' => true, 'isFabButton' => false];
         
         return view('admin.collection.create', ['pageConfigs' => $pageConfigs], ['breadcrumbs' => $breadcrumbs]);
+      
+        }
+
+       public function cancelcollection(){
+     $breadcrumbs = [
+            ['link' => "admin", 'name' => "Home"], ['link' => "admin/arealist", 'name' => "Cancel"], ['name' => "Collection"],
+        ];
+      
+          $pageConfigs = ['pageHeader' => true, 'isFabButton' => false];
+        
+        return view('admin.collection.cancel', ['pageConfigs' => $pageConfigs], ['breadcrumbs' => $breadcrumbs]);
       
         }
       
@@ -89,7 +102,8 @@ class CollectionController extends Controller
          $pay->admin_id =Auth::id();
           $pay->save();
            }
-          // return response($pay->save());
+           $smsinfo=['name'=>$cus->customername,'mobile'=>$cus->customermobile,'id'=>$cus->loginid,'paid'=>$request->paid,'due'=>$cus->due];
+           CommonFx::sentsmscustomerbillpaid($smsinfo);
      if($pay){
       return response()->json([
         'suceess'=>true,
@@ -236,6 +250,25 @@ return response()->json([
     ],204 );
    }
     
+      }
+
+      public function collectiondelete(Request $request,$id){
+$info=Collection::whereadmin_id(Auth::id())->find($id);
+if($info){
+  $pa=Bill::find($info->bill_id);
+  $pa->total=$pa->total-$request->payamount;
+  $pa->save();
+}
+if($pa){
+$q=Customer::find($pa->customer_id);
+$q->total=$q->total-$request->payamount;
+$q->due=$q->due+$request->payamount;
+$q->save();
+}
+$info->delete();
+return response()->json([
+  'success'=>true
+],200);
       }
   
 }
