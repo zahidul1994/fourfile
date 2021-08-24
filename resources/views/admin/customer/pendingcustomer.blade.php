@@ -92,6 +92,10 @@
 $(document).ready(function () {
     $(".sidenav-main").addClass("nav-collapsed");
             $("#main").addClass("main-full");
+            $(".sidenav-main").hover(function(){
+                $(".sidenav-main").toggleClass("nav-collapsed");
+});
+ 
  
   $('#dataTable').DataTable({
    // responsive: true,

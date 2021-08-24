@@ -9,6 +9,7 @@ use App\Models\Division;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Models\Payby;
+use App\Models\Printsetting;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Request; 
 
@@ -295,6 +296,11 @@ public static function Divisionname(){
             return Payby::whereadmin_id(Auth::guard('admin')->user()->id)->pluck('paybyname','id');
             
             }
+
+            public static function printsetting(){
+                return Printsetting::whereadmin_id(Auth::guard('admin')->user()->id)->first();
+                
+                }
 
         public static function sentsmscustomer($smsinfo){
             $smssetting=Smssent::whereadmin_id(Auth::id())->firstOrFail();

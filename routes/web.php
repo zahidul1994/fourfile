@@ -362,6 +362,9 @@ Route::post('updatebillcustomer','CustomerController@updatebillcustomer');
 //sms Start
 Route::get('smsmessagesetting','SmsController@index');
 Route::patch('updatesmssetting/{id}','SmsController@update');
+Route::get('printsetting','PrintController@index');
+Route::patch('updateprintsetting/{id}','PrintController@update');
+Route::get('monthlyprint','PrintController@monthly');
 
 //sms  End
 //Collection Start 

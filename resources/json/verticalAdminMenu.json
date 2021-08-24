@@ -61,16 +61,16 @@
         },
         {
             "url": "javascript:void(0)",
-            "name": "Medicines",
-            "i18n": "Medicines",
+            "name": "Print",
+            "i18n": "Print",
             "class": "collapsible-header waves-effect waves-cyan",
-            "slug": "medicines",
-            "icon": "brightness_2",
+            "slug": "print",
+            "icon": "print",
             "submenu": [{
-                    "url": "admin/medicinelist",
-                    "name": "Medicines List",
-                    "i18n": "Medicines List",
-                    "slug": "admin/medicinelist"
+                "url": "admin/monthlyprint",
+                "name": "Monthly Print",
+                "i18n": "Monthly Print",
+                "slug": "admin/monthlyprint"
                 },
                 {
                     "url": "admin/createmedicinelist",
@@ -190,6 +190,12 @@
                     "name": "SMS Setting",
                     "i18n": "SMS Setting",
                     "slug": "admin/smsmessagesetting"
+                },
+                {
+                    "url": "admin/printsetting",
+                    "name": "Print Setting",
+                    "i18n": "Print Setting",
+                    "slug": "admin/printsetting"
                 }
 
 
