@@ -2,7 +2,7 @@
 @extends('layouts.adminMaster')
 
 @section('content')
-@section('title', "Create Package")
+@section('title', "Create Payment Method")
 {{-- @can('Package-Create') --}}
 @include('partial.formerror')
                             <!-- Form Advance -->
@@ -10,7 +10,7 @@
                                
                                 <div id="Form-advance" class="card card card-default scrollspy">
                                     <div class="card-content">
-                                        <h4 class="card-title">Payby Form</h4>
+                                        <h4 class="card-title">Payment Method Form</h4>
                                      
                                         {!! Form::open(array('url' => 'admin/createpayby','method'=>'POST','files'=>true )) !!}
                                     

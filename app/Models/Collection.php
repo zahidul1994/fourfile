@@ -28,4 +28,8 @@ public function admin()
 {
     return $this->belongsTo('App\Models\Admin');
 }
+public function payby()
+{
+    return $this->belongsTo('App\Models\Payby');
+}
 }

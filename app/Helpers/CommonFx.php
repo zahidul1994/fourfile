@@ -332,10 +332,10 @@ public static function Divisionname(){
         public static function sentsmscustomerbillpaid($smsinfo){
             $smssetting=Smssent::whereadmin_id(Auth::id())->firstOrFail();
          
-            $text= str_replace(['#CUSTOMER_NAME#', '#CUSTOMER_ID#','#AMOUNT#','#DUE#'], [$smsinfo['name'], $smsinfo['id'],$smsinfo['paid'],$smsinfo['due']], $smssetting->billingmessage);
+            $text= str_replace(['#CUSTOMER_NAME#', '#CUSTOMER_ID#','#AMOUNT#','#DUE#'], [$smsinfo['name'], $smsinfo['id'],$smsinfo['paid'],$smsinfo['due']], $smssetting->paymentmessage);
      
    
-      if($smssetting->billing==1){
+      if($smssetting->payment==1){
       // $number=$smsinfo->phone;
       $number=$smsinfo['mobile'];
      $dataall= array(

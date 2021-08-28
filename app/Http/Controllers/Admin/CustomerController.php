@@ -42,7 +42,10 @@ class CustomerController extends Controller
           return $button;
         })
    
-      ->addColumn('due' ,function($data){
+      ->addColumn('monthlyrent' ,function($data){
+        return $data->bill[0]->monthlyrent;
+    })  
+        ->addColumn('due' ,function($data){
         return $data->bill[0]->due;
     }) 
       ->addColumn('discount' ,function($data){
@@ -64,7 +67,7 @@ class CustomerController extends Controller
       return $data->bill[0]->collection->sum('paid');
   })
   ->addColumn('duetotal' ,function($data){
-    return ($data->bill[0]->total)-($data->bill[0]->collection->sum('paid'));
+    return (($data->bill[0]->total));
 })
       ->addColumn('address' ,function($data){
         return 'House No- '. $data->houseno.'<br/>'. $data->district->district.'<br/>'.$data->thana->thana.'<br/>'.$data->area->areaname;
@@ -92,7 +95,9 @@ class CustomerController extends Controller
           $button .= '<button type="button" title="Delete Customer" name="delete" id="deleteBtn" rid="' . $data->id . '" class="invoice-action-view btn-sm"><i class="material-icons ">delete_forever</i></button>';
           return $button;
         })
-   
+        ->addColumn('monthlyrent' ,function($data){
+          return $data->bill[0]->monthlyrent;
+      })  
       ->addColumn('due' ,function($data){
         return $data->bill[0]->due;
     }) 
@@ -115,7 +120,7 @@ class CustomerController extends Controller
       return $data->bill[0]->collection->sum('paid');
   })
   ->addColumn('duetotal' ,function($data){
-    return ($data->bill[0]->total)-($data->bill[0]->collection->sum('paid'));
+    return ($data->bill[0]->total);
 })
       ->addColumn('address' ,function($data){
         return 'House No- '. $data->houseno.'<br/>'. $data->district->district.'<br/>'.$data->thana->thana.'<br/>'.$data->area->areaname;
@@ -252,13 +257,13 @@ class CustomerController extends Controller
       'remoteaddress' => $request->remoteaddress,
       'comment' => $request->comment,
       'package_id' => $request->package_id,
-      'monthlyrent' => $request->monthlyrent,
-      'due' => $request->due,
-      'addicrg' => $request->addicrg,
-      'discount' => $request->discount,
-      'advance' => $request->advance,
-      'vat' => $request->vat,
-      'total' => $request->total,
+      'monthlyrent' => $request->monthlyrent?:0,
+      'due' => $request->due?:0,
+      'addicrg' => $request->addicrg?:0,
+      'discount' => $request->discount?:0,
+      'advance' => $request->advance?:0,
+      'vat' => $request->vat?:0,
+      'total' => $request->total?:0,
       'prepaidpostpaid' => $request->prepaidpostpaid,
       'connection' => $request->connection,
       'connectivity' => $request->connectivity,

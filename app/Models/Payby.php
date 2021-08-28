@@ -13,4 +13,9 @@ class Payby extends Model
         'description'
         
     ];
+
+    public function collection()
+    {
+        return $this->hasOne('App\Models\Collection');
+    }
 }

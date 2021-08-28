@@ -48,7 +48,7 @@ class PrintController extends Controller
 
   public function monthly()
   {
-   $Bill=Customer::with('bill.collection')->whereadmin_id(Auth::id())->wherestatus(1)->get();
+   $Bill=Customer::with('bill.collection')->whereadmin_id(Auth::id())->wherestatus(1)->paginate(10);
 
     return view('admin.print.invoice', ['customers' => $Bill]);
   }

@@ -22,7 +22,7 @@
     </div>
 
     <div class="input-field col m6 s12">
-        {!! Form::password('repassword', null, ['id' => 'logtrtypepass', 'required']) !!}
+        {!! Form::text('repassword', null, ['id' => 'logtrtypepass', 'required']) !!}
         {!! Form::label('logtrtypepass', '* Retype password') !!}
 
     </div>
@@ -434,7 +434,7 @@ Type of Connectivity
 </div>
 <div class="row">
 <div class="input-field col m4 s12">
-{!! Form::select('connectedby', ['L' => 'Bangladesh', 'S' => 'India'], null, ['id' => 'connectedby', 'class' => '']) !!}
+{!! Form::select('connectedby', ['{{Auth::id}}' => Auth::user()->name], null, ['id' => 'connectedby', 'class' => '']) !!}
 {!! Form::label('connectedby', 'Connected By') !!}
 </div>
 

@@ -38,8 +38,8 @@
 
             "submenu": [{
                     "url": "admin/collection",
-                    "name": "Collection List",
-                    "i18n": "Collection List",
+                    "name": "Collection Search",
+                    "i18n": "Collection Search",
                     "slug": "admin-collection"
                 },
                 {
@@ -173,16 +173,16 @@
                 },
                 {
                     "url": "admin/paybylist",
-                    "name": "Payby List",
-                    "i18n": "Payby List",
+                    "name": "Payment Method List",
+                    "i18n": "Payment Method List",
                     "slug": "admin/paybylist"
                 },
 
 
                 {
                     "url": "admin/createpayby",
-                    "name": "Create Payby",
-                    "i18n": "Create Payby",
+                    "name": "Create Payment",
+                    "i18n": "Create Payment",
                     "slug": "admin/createpayby"
                 },
                 {

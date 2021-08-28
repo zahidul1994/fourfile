@@ -2,7 +2,7 @@
 @extends('layouts.adminMaster')
 
 @section('content')
-@section('title', "Edit Payby")
+@section('title', "Edit Payment")
 {{-- @can('Package-Edit') --}}
 @include('partial.formerror')
                             <!-- Form Advance -->
@@ -10,7 +10,7 @@
                                
                                 <div id="Form-advance" class="card card card-default scrollspy">
                                     <div class="card-content">
-                                        <h4 class="card-title">Payby Update Form</h4>
+                                        <h4 class="card-title">Payment Method Update Form</h4>
                                      
                                        
                                         {!! Form::model($info, array('url' =>['admin/updatepayby',$info->id], 'method'=>'PATCH','files'=>true)) !!}

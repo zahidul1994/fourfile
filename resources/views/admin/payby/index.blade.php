@@ -1,6 +1,6 @@
 
 @extends('layouts.adminMaster')
-@section('title', "Payby List")
+@section('title', "Payment Method List")
 @section('content')
 
 {{-- @can('Package-Create')  --}}

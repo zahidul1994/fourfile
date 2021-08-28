@@ -443,7 +443,7 @@
                                         </div>
                                         <div class="row">
                                         <div class="input-field col m4 s12">
-                                        {!! Form::select('connectedby', ['L' => 'Bangladesh', 'S' => 'India'], null, ['id' => 'connectedby', 'class' => '']) !!}
+                                        {!! Form::select('connectedby', ['{{Auth::id}}' => Auth::user()->name], null, ['id' => 'connectedby', 'class' => '']) !!}
                                         {!! Form::label('connectedby', 'Connected By') !!}
                                         </div>
                                         

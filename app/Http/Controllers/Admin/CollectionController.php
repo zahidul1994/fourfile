@@ -53,6 +53,7 @@ class CollectionController extends Controller
       
       
       public function store(Request $request){
+      //  return response($request->all());exit;
         $validator = Validator::make($request->all(),[
           'paid'=>'required|min:1', 'max:60',
           'billid'=>'required|min:1', 'max:160',
@@ -72,13 +73,17 @@ class CollectionController extends Controller
 
 
          
-         if($collectioninfo->total<$request->paid){
-            $advance=$request->paid-$collectioninfo->total;
-            $due=0;
+         if($collectioninfo->total>$request->paid){
+           // return response('hi');exit;
+          
+            $due=$collectioninfo->total-$request->paid;
+           $advance=$collectioninfo->advance;
          }
-         if($collectioninfo->total>=$request->paid){
-           $due=$collectioninfo->total-$request->paid;
-           $advance=0;
+         if($collectioninfo->total<=$request->paid){
+         // return response('hi2');exit;
+          $advance=$request->paid-$collectioninfo->total;
+          $due=$collectioninfo->due;
+          
         }
        
            $cus=Customer::find($collectioninfo->customer_id);
@@ -87,11 +92,12 @@ class CollectionController extends Controller
            $cus->addicrg =0;
            $cus->advance =$advance;
            $cus->due =$due;
-           $cus->total =($collectioninfo->monthlyrent+$due)-$advance;
+          // $cus->total =$collectioninfo->monthlyrent+$due)-$advance;
            $cus->save();
            if($cus){
            $info= Bill::find($request->billid);
-           $info->total=$info->total-$request->paid;
+          //  $info->paid=$request->paid;
+           $info->total=$request->totall-$request->paid;
            $info->save();
           $pay= new Collection();
           $pay->paid =trim($request->paid);
@@ -232,7 +238,7 @@ return response()->json([
       public function singlecustomerbill(Request $request){
         $output = "";
         if(! $request->id==null){
-        $searchvalue = Customer::with('district','thana','area','bill.collection.admin')->whereadmin_id(Auth::id())->Where('loginid','LIKE','%'.$request->id."%")->orwhere('customermobile','LIKE','%'.$request->id."%")->orwhere('customername','LIKE','%'.$request->id."%")->orwhere('secretname','LIKE','%'.$request->id."%")->first();
+        $searchvalue = Customer::with('district','thana','area','bill.collection.admin','bill.collection.payby')->whereadmin_id(Auth::id())->Where('loginid','LIKE','%'.$request->id."%")->orwhere('customermobile','LIKE','%'.$request->id."%")->orwhere('customername','LIKE','%'.$request->id."%")->orwhere('secretname','LIKE','%'.$request->id."%")->first();
         
         if($searchvalue)
 {
@@ -256,13 +262,13 @@ return response()->json([
 $info=Collection::whereadmin_id(Auth::id())->find($id);
 if($info){
   $pa=Bill::find($info->bill_id);
-  $pa->total=$pa->total-$request->payamount;
+  $pa->total=$pa->total+$request->payamount;
   $pa->save();
 }
 if($pa){
 $q=Customer::find($pa->customer_id);
-$q->total=$q->total-$request->payamount;
-$q->due=$q->due+$request->payamount;
+$q->total=$q->total+$request->payamount;
+//$q->due=$q->due+$request->payamount;
 $q->save();
 }
 $info->delete();

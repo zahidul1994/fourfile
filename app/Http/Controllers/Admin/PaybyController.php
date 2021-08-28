@@ -30,7 +30,7 @@ class PaybyController extends Controller
   public function create()
   {
     $breadcrumbs = [
-      ['link' => "admin/dashboard", 'name' => "Home"], ['link' => "admin/paybylist", 'name' => "Payby"], ['name' => "Create"],
+      ['link' => "admin/dashboard", 'name' => "Home"], ['link' => "admin/paybylist", 'name' => "Payment Method"], ['name' => "Create"],
     ];
 
     $pageConfigs = ['pageHeader' => true, 'isFabButton' => false];

@@ -1,7 +1,7 @@
 <div class="row">
     <div class="input-field col m12 s12">
         {!!Form::text('paybyname',null, array('id'=>'paybyname','required','placeholder'=>'Bikas/Nagad/Other'))!!}
-        {!!Form::label('paybyname',' Pay By * ')!!}
+        {!!Form::label('paybyname',' Payment Method * ')!!}
         
     </div>
     

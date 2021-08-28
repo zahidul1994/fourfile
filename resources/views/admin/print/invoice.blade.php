@@ -7,9 +7,11 @@
 {{-- page content --}}
 @section('content')
 @section('title', ' Monthly Print')
-
-
-<section class="invoice-view-wrapper section" onload="window.print()">
+{{ $customers->links() }}
+<a href="#" class="btn-block btn btn-light-indigo waves-effect waves-light invoice-print">
+    <span>Print</span>
+</a>
+<section class="invoice-view-wrapper section" >
     @foreach ($customers as $customer)
         
 
@@ -57,15 +59,22 @@
                                         <p class="mb-1">Address & phone no:  {{@$customer->customerphone}},{{@$customer->houseno}} {{@$customer->houseno}},  {{@$customer->district->district}},{{@$customer->thana->thana}},{{@$customer->area->areaname}}</p>
                                      <p class="mb-1">Internal ID: 7331151071</p>
                                        
-                                       
+                                       <div style="border:1px solid; padding:5px">
                                         <p class="mb-1">
                                             Billing Month : {{date('M-Y', strtotime(@Carbon\Carbon::now()))}}
                                         </p>
                                         <p class="mb-1">
-                                            Due Month's List :{{date('M-Y', strtotime(@$customer->bill[0]->created_at))}} : 1000TK
+                                            Due Month's List : @foreach (@$customer->bill as $due)
+                                            @if(@$due->total>0)
+                                                {{date('M-y', strtotime(@$due->created_at))}} : {{$due->total}}TK,
+                                                    @endif
+                                            @endforeach
                                         </p>
-                                    
+
                                     </div>
+
+                                    </div>
+                                    
                                     <div class="col m6 s12">
                                         <ul>
                                             <li class="display-flex justify-content-between">
@@ -157,12 +166,19 @@
                                      <p class="mb-1">Internal ID: 7331151071</p>
                                        
                                        
+                                     <div style="border:1px solid; padding:5px">
                                         <p class="mb-1">
                                             Billing Month : {{date('M-Y', strtotime(@Carbon\Carbon::now()))}}
                                         </p>
                                         <p class="mb-1">
-                                            Due Month's List :{{date('M-Y', strtotime(@$customer->bill[0]->created_at))}} : 1000TK
+                                            Due Month's List : @foreach (@$customer->bill as $due)
+                                            @if(@$due->total>0)
+                                                {{date('M-y', strtotime(@$due->created_at))}} : {{$due->total}}TK,
+                                                    @endif
+                                            @endforeach
                                         </p>
+
+                                    </div>
                                     
                                     </div>
                                     <div class="col m6 s12">
@@ -255,14 +271,19 @@
                                         <p class="mb-1">Address & phone no:  {{@$customer->customerphone}},{{@$customer->houseno}} {{@$customer->houseno}},  {{@$customer->district->district}},{{@$customer->thana->thana}},{{@$customer->area->areaname}}</p>
                                      <p class="mb-1">Internal ID: 7331151071</p>
                                        
-                                       
+                                     <div style="border:1px solid; padding:5px">
                                         <p class="mb-1">
                                             Billing Month : {{date('M-Y', strtotime(@Carbon\Carbon::now()))}}
                                         </p>
                                         <p class="mb-1">
-                                            Due Month's List :{{date('M-Y', strtotime(@$customer->bill[0]->created_at))}} : 1000TK
+                                            Due Month's List : @foreach (@$customer->bill as $due)
+                                            @if(@$due->total>0)
+                                                {{date('M-y', strtotime(@$due->created_at))}} : {{$due->total}}TK,
+                                                    @endif
+                                            @endforeach
                                         </p>
-                                    
+
+                                    </div>
                                     </div>
                                     <div class="col m6 s12">
                                         <ul>
@@ -311,7 +332,7 @@
                                 </div>
 
                                 <!-- product details table-->
-                                <p>Note: Please take money receipt while payingmoney. You might need to show this money receipt if we ask for<p>
+                                <p>Note: {{CommonFx::printsetting()->customtext}} <p>
 
                                     <p class="right">
                                         <img src="{{@url('storage/app/files/shares/singnaturephoto/thumbs/'.CommonFx::printsetting()->singnature)}}" alt=""> <br>
@@ -336,6 +357,6 @@
 <script src="{{ asset('app-assets/js/scripts/app-invoice.js') }}"></script>
 <script>
     
-  window.print();
+//   window.print();
 </script>
 @endsection
