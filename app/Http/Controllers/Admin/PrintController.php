@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Facades\Image;
 use App\Notifications\SmsNotification;
+use GuzzleHttp\Psr7\Request as Psr7Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
 use Yajra\DataTables\Contracts\DataTable;
@@ -51,8 +52,32 @@ class PrintController extends Controller
    $Bill=Customer::with('bill.collection')->whereadmin_id(Auth::id())->wherestatus(1)->paginate(10);
 
     return view('admin.print.invoice', ['customers' => $Bill]);
+  } 
+    public function printinvoice()
+  {
+      return view('admin.print.customerbill');
   }
- 
+  public function customerbill(Request $request)
+  {
+   // dd($request->all());exit;
+    if($request->division_id==!null && $request->district_id==null && $request->thana_id==null && $request->area_id==null){
+   
+      $Bill=Customer::with('bill.collection')->whereadmin_id(Auth::id())->wherestatus(1)->wheredivision_id($request->division_id)->paginate(10);
+    }
+    elseif($request->division_id==!null && $request->district_id==!null && $request->thana_id==null && $request->area_id==null){
+  
+      $Bill=Customer::with('bill.collection')->whereadmin_id(Auth::id())->wherestatus(1)->wheredistrict_id($request->district_id)->paginate(10);
+    }
+     elseif($request->division_id==!null && $request->district_id==!null && $request->thana_id!==null && $request->area_id==null){
+      $Bill=Customer::with('bill.collection')->whereadmin_id(Auth::id())->wherestatus(1)->wherethana_id($request->thana_id)->paginate(10);
+    }
+ else{
+
+    $Bill=Customer::with('bill.collection')->whereadmin_id(Auth::id())->wherestatus(1)->wherethana_id($request->thana_id)->wherearea_id($request->area_id)->paginate(10);
+ }
+
+    return view('admin.print.invoice', ['customers' => $Bill]);
+  }
   
 
 

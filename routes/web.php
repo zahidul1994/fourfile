@@ -364,9 +364,17 @@ Route::get('smsmessagesetting','SmsController@index');
 Route::patch('updatesmssetting/{id}','SmsController@update');
 Route::get('printsetting','PrintController@index');
 Route::patch('updateprintsetting/{id}','PrintController@update');
-Route::get('monthlyprint','PrintController@monthly');
 
 //sms  End
+
+//print
+Route::get('monthlyprint','PrintController@monthly');
+Route::get('printinvoice','PrintController@printinvoice');
+Route::post('customerbill','PrintController@customerbill');
+Route::get('printbylocation','PrintController@printbylocation');
+
+
+//print end
 //Collection Start 
 
 Route::get('collection','CollectionController@index');

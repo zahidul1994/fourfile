@@ -73,10 +73,10 @@
                 "slug": "admin/monthlyprint"
                 },
                 {
-                    "url": "admin/createmedicinelist",
-                    "name": "Create Medicine",
-                    "i18n": "Create Medicine",
-                    "slug": "admin/createmedicinelist"
+                    "url": "admin/printinvoice",
+                    "name": "Ptint Customer",
+                    "i18n": "Ptint Customer",
+                    "slug": "admin/printinvoice"
                 }
 
             ]
