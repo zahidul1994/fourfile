@@ -12,7 +12,7 @@
         <div class="card-content">
             <h4 class="card-title">Find Customer</h4>
          
-            {!! Form::open(array('url' => 'admin/customerbill','method'=>'POST' )) !!}
+            {!! Form::open(array('url' => 'admin/billlocationwise','method'=>'GET' )) !!}
         
              
                     <div class="row">

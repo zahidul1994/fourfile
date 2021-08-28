@@ -369,8 +369,8 @@ Route::patch('updateprintsetting/{id}','PrintController@update');
 
 //print
 Route::get('monthlyprint','PrintController@monthly');
-Route::get('printinvoice','PrintController@printinvoice');
-Route::post('customerbill','PrintController@customerbill');
+Route::get('printlocationwise','PrintController@printlocationwise');
+Route::get('billlocationwise','PrintController@billlocationwise');
 Route::get('printbylocation','PrintController@printbylocation');
 
 

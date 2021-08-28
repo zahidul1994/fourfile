@@ -53,11 +53,11 @@ class PrintController extends Controller
 
     return view('admin.print.invoice', ['customers' => $Bill]);
   } 
-    public function printinvoice()
+    public function printlocationwise()
   {
       return view('admin.print.customerbill');
   }
-  public function customerbill(Request $request)
+  public function billlocationwise(Request $request)
   {
    // dd($request->all());exit;
     if($request->division_id==!null && $request->district_id==null && $request->thana_id==null && $request->area_id==null){
