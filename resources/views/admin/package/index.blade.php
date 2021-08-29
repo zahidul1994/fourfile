@@ -46,9 +46,8 @@
                                                          
                                                           <td>{{$info->packagename}}</td>
                                                           <td>{{$info->packageprice}}</td>
-                                                          <td>{{@$info->description}}</td>
                                                           <td>{{$info->merchant->merchantname}}</td>
-                                                          
+                                                          <td>{{@$info->description}}</td>
                                                          
                                                           
                                                          <td>

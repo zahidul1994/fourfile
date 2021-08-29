@@ -1,5 +1,5 @@
 @extends('layouts.adminMaster')
-@section('title', 'Pending Customer List')
+@section('title', ' Customer List')
 {{-- vendor styles --}}
 @section('vendor-style')
     <link rel="stylesheet" type="text/css" href="{{ asset('vendors/flag-icon/css/flag-icon.min.css') }}">
@@ -53,6 +53,7 @@
                                         <th>Bill <br>Amount</th>
                                         <th>Collection <br>Amount</th>
                                         <th>Total <br>Due</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -250,6 +251,11 @@
                         name: 'duetotal',
                         orderable: false
                     },
+ {
+                        data: 'status',
+                        name: 'status',
+                        orderable: false
+                    },
 
 
                     {
@@ -407,6 +413,51 @@
                     }
                 });
             });
+// admin status active in active
+
+
+$(document).on('click','.Approved', function(){
+        $(".Approved").click(function(){
+                //alert(5);
+                $statusid = $(this).attr('rid');
+                //console.log($statusid);
+                $.ajax({
+                    type: "post",
+                    url:url+'/admin/customerstatus',
+                    data: {
+                        id:$statusid,
+                        action:"allow"
+                    },
+                    dataType: "json",
+                    success: function (d) {
+                        toastr.success(d.message);
+                        $('#dataTable').DataTable().ajax.reload();
+        
+                    }
+                });
+        
+            });
+        });
+        $(document).on('click','.Notapproved', function(){
+            $(".Notapproved").click(function(){
+                $statusid = $(this).attr('rid');
+                $.ajax({
+                    type: "post",
+                    url:url+'/admin/customerstatus',
+                    data: {
+                        id:$statusid,
+                        action:"deny"
+                    },
+                    dataType: "json",
+                    success: function (d) {
+                        toastr.success(d.message);
+                        $('#dataTable').DataTable().ajax.reload();
+        
+                    }
+                });
+        
+            });  
+             }); 
 
         });
     </script>

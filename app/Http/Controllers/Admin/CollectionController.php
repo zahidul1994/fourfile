@@ -108,7 +108,7 @@ class CollectionController extends Controller
          $pay->admin_id =Auth::id();
           $pay->save();
            }
-           $smsinfo=['name'=>$cus->customername,'mobile'=>$cus->customermobile,'id'=>$cus->loginid,'paid'=>$request->paid,'due'=>$cus->due];
+           $smsinfo=['name'=>$cus->customername,'mobile'=>$cus->customermobile,'id'=>$cus->loginid,'paid'=>$request->paid,'due'=>$cus->total];
            CommonFx::sentsmscustomerbillpaid($smsinfo);
      if($pay){
       return response()->json([

@@ -79,7 +79,7 @@ public static function boot()
 {
     parent::boot();
     self::creating(function ($model) {
-       $model->loginid = IdGenerator::generate(['table' => 'customers','field'=>'loginid', 'length' => 10, 'prefix' =>'NAQW']);
+       $model->loginid = IdGenerator::generate(['table' => 'customers','field'=>'loginid', 'length' => 8, 'prefix' =>'NAQW']);
     });
 }
 public function package()

@@ -36,12 +36,20 @@ class CustomerController extends Controller
           $button .= '<a title="Edit Customer" href="/admin/editcustomer/' . $data->id . '" class="invoice-action-view"><i class="material-icons">edit</i></a>';
           $button .= '&nbsp;&nbsp;';
           $button .= '<a target="_blank" href="' . url('admin/customerprofile', $data->id) . '" class="invoice-action-view"><i class="material-icons ">remove_red_eye</i></a>';
-
-          $button .= '&nbsp;&nbsp;';
-          $button .= '<button type="button" title="Delete Customer" name="delete" id="deleteBtn" rid="' . $data->id . '" class="invoice-action-view btn-sm"><i class="material-icons ">delete_forever</i></button>';
+         $button .= '&nbsp;&nbsp;';
+          $button .= '<button type="button" title="Delete Customer" name="delete" id="deleteBtn" rid="' . $data->id . '" class="invoice-action-view btn-sm "><i class="material-icons ">delete_forever</i></button>';
           return $button;
         })
-   
+        ->addColumn('status', function($data){
+          if($data->status==1){
+         $button = '<button type="button" rid="'.$data->id.'" class="btn-sm Approved"><i class="material-icons">beenhere</i></button>';
+        return $button;
+    }
+    
+    else {
+        $button = '<button type="button"  class=" btn-sm Notapproved" rid="'.$data->id.'"><i class="material-icons">block</i> </button>';
+        return $button;
+    }})
       ->addColumn('monthlyrent' ,function($data){
         return $data->bill[0]->monthlyrent;
     })  
@@ -73,7 +81,7 @@ class CustomerController extends Controller
         return 'House No- '. $data->houseno.'<br/>'. $data->district->district.'<br/>'.$data->thana->thana.'<br/>'.$data->area->areaname;
     })
         ->addIndexColumn()
-        ->rawColumns(['action','duetotal','address'])
+        ->rawColumns(['action','duetotal','status','address'])
         ->make(true);
     }
     $pageConfigs = ['pageHeader' => false, 'isFabButton' => false];
@@ -95,6 +103,16 @@ class CustomerController extends Controller
           $button .= '<button type="button" title="Delete Customer" name="delete" id="deleteBtn" rid="' . $data->id . '" class="invoice-action-view btn-sm"><i class="material-icons ">delete_forever</i></button>';
           return $button;
         })
+        ->addColumn('status', function($data){
+          if($data->status==1){
+         $button = '<button type="button" rid="'.$data->id.'" class="btn-sm Approved"><i class="material-icons">beenhere</i></button>';
+        return $button;
+    }
+    
+    else {
+        $button = '<button type="button"  class=" btn-sm Notapproved" rid="'.$data->id.'"><i class="material-icons">block</i> </button>';
+        return $button;
+    }})
         ->addColumn('monthlyrent' ,function($data){
           return $data->bill[0]->monthlyrent;
       })  
@@ -126,7 +144,7 @@ class CustomerController extends Controller
         return 'House No- '. $data->houseno.'<br/>'. $data->district->district.'<br/>'.$data->thana->thana.'<br/>'.$data->area->areaname;
     })
         ->addIndexColumn()
-        ->rawColumns(['action','duetotal','address'])
+        ->rawColumns(['action','duetotal','status','address'])
         ->make(true);
     }
     $pageConfigs = ['pageHeader' => false, 'isFabButton' => false];
@@ -505,6 +523,28 @@ class CustomerController extends Controller
    
    
   }
+
+
+
+  public function setapproval(Request $request){
+    $id =$request->id;
+    $roomapproval = Customer::find($id);
+    if($request->action=="allow"){
+        $roomapproval->status=2;
+    }
+    if($request->action=="deny"){
+        $roomapproval->status=1;
+
+
+    }
+        $roomapproval->update();
+        if($roomapproval->update()==true){
+            return response()->json(['success' => true, 'message' =>'Customer Approved Updated!']);
+        }
+
+
+
+}
   }
 
   

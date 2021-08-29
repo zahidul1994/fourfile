@@ -29,7 +29,6 @@
                                               
                                                       <tr>
                                                          <th>SL</th>
-                                                          <th>Date</th>
                                                           <th>Thana</th>
                                                           <th>Area</th>
                                                             <th>Edit</th>
@@ -43,7 +42,7 @@
                                                        <tr>
                                                           
                                                            <td>{{++$i}}</td>
-                                                    <td>{{$tha->created_at->diffForHumans()}}</td>
+                                                    
                                                     <td>{{@$tha->thana->thana}} </td>
                                                     <td>{{$tha->areaname}}</td>
                                                      <td> <a href="{{url('admin/editarea/'.$tha->id) }}" class="invoice-action-edit">

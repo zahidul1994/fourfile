@@ -212,7 +212,8 @@
                             $('#collection').val( data
                             .result.bill[0].total);
                             $('#collection').focus();
-                           
+                            $("#paybleamount").html('<strong>' + data
+                            .result.bill[0].total + '</strong>');
 
                     }
                 });

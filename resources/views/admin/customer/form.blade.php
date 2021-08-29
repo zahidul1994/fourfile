@@ -294,7 +294,7 @@
 
 <div class="row">
 <div class="input-field col m6 s12">
-{!! Form::number('monthlyrent', null, ['id' => 'monthlyrent', 'required']) !!}
+{!! Form::number('monthlyrent', null, ['id' => 'monthlyrent', 'required','placeholder'=>'select package']) !!}
 {!! Form::label('monthlyrent', '* Monthly Rent',['class' => 'active']) !!}
 
 </div>

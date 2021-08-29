@@ -33,6 +33,21 @@ class CustomerObserver
             $smsinfo=['name'=>$customer->customername,'mobile'=>$customer->customermobile,'id'=>$customer->loginid,'monthlypayment'=>$customer->monthlyrent];
             CommonFx::sentsmscustomer($smsinfo);
          }
+         else{
+            Bill::create(
+                ['customer_id' => $customer->id,
+                 'monthlyrent' => $customer->monthlyrent?:0,
+                 'due' => $customer->due?:0,
+                 'addicrg' => $customer->addicrg?:0,
+                 'discount' => $customer->discount?:0,
+                 'advance' => $customer->advance?:0,
+                  'vat' => $customer->vat?:0,
+                 'total' => $customer->total?:0,
+                 'admin_id' => $customer->admin_id?:0,
+                 'user_id' => $customer->user_id?:0
+              
+            ]);
+         }
     }
 
     /**
@@ -43,22 +58,8 @@ class CustomerObserver
      */
     public function updated(Customer $customer)
     {
-        
-       $check= Bill::wherecustomer_id($customer->id)->first();
-        if(!$check){
-            Bill::create(
-                ['customer_id' => $customer->id,
-                'monthlyrent' => $customer->monthlyrent?:0,
-                 'due' => $customer->due?:0,
-                 'addicrg' => $customer->addicrg?:0,
-                 'discount' => $customer->discount?:0,
-                 'advance' => $customer->advance?:0,
-                  'vat' => $customer->vat?:0,
-                 'total' => $customer->total?:0,
-                 'admin_id' => $customer->admin_id,
-                 'user_id' => $customer->user_id
-              
-            ]);
+        if($customer->status==1){
+            
             $smsinfo=['name'=>$customer->customername,'mobile'=>$customer->customermobile,'id'=>$customer->loginid,'monthlypayment'=>$customer->monthlyrent];
             CommonFx::sentsmscustomer($smsinfo);
           

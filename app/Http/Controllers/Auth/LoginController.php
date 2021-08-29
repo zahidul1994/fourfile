@@ -167,7 +167,7 @@ class LoginController extends Controller
     {
 
         $this->validate($request, [
-            'email'   => 'required|email',
+            'email'   => 'required|email|exists:admins,email',
             'password' => 'required|min:6'
         ]);
         $remember = (!empty($request->remember)) ? TRUE : FALSE;

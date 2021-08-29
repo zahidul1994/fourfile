@@ -107,7 +107,7 @@
                                             <li style="border: 1px solid"></li>
                                             <li class="display-flex justify-content-between">
                                                 <span class="invoice-subtotal-title">Sum with vat</span>
-                                                <span>{{(((@$customer->bill[0]->monthlyrent+@$customer->bill[0]->addicrg)*(@$customer->bill[0]->vat))/100)+(@$customer->bill[0]->monthlyrent+@$customer->bill[0]->addicrg)}}</span>
+                                                <span>{{(((@$customer->bill[0]->monthlyrent+@$customer->bill[0]->addicrg)*(@$customer->bill[0]->vat))/100)+((@$customer->bill[0]->monthlyrent+@$customer->bill[0]->addicrg)-@$customer->bill[0]->discount)}}</span>
                                             </li>
                                             <li class="display-flex justify-content-between">
                                                 <span class="invoice-subtotal-title">Previous DUE</span>
@@ -317,7 +317,7 @@
                                             <li style="border: 1px solid"></li>
                                             <li class="display-flex justify-content-between">
                                                 <span class="invoice-subtotal-title">Sum with vat</span>
-                                                <span>{{(((@$customer->bill[0]->monthlyrent+@$customer->bill[0]->addicrg)*(@$customer->bill[0]->vat))/100)+(@$customer->bill[0]->monthlyrent+@$customer->bill[0]->addicrg)}}</span>
+                                                <span>{{(((@$customer->bill[0]->monthlyrent+@$customer->bill[0]->addicrg)*(@$customer->bill[0]->vat))/100)+((@$customer->bill[0]->monthlyrent+@$customer->bill[0]->addicrg)-@$customer->bill[0]->discount)}}</span>
                                             </li>
                                             <li class="display-flex justify-content-between">
                                                 <span class="invoice-subtotal-title">Previous DUE</span>
@@ -1745,7 +1745,7 @@
                                                 <li style="border: 1px solid"></li>
                                                 <li class="display-flex justify-content-between">
                                                     <span class="invoice-subtotal-title">Sum with vat</span>
-                                                    <span>{{(((@$customer->bill[0]->monthlyrent+@$customer->bill[0]->addicrg)*(@$customer->bill[0]->vat))/100)+(@$customer->bill[0]->monthlyrent+@$customer->bill[0]->addicrg)}}</span>
+                                                    <span>{{(((@$customer->bill[0]->monthlyrent+@$customer->bill[0]->addicrg)*(@$customer->bill[0]->vat))/100)+((@$customer->bill[0]->monthlyrent+@$customer->bill[0]->addicrg)-@$customer->bill[0]->discount)}}</span>
                                                 </li>
                                                 <li class="display-flex justify-content-between">
                                                     <span class="invoice-subtotal-title">Previous DUE</span>
@@ -1851,7 +1851,7 @@
                                                 <li style="border: 1px solid"></li>
                                                 <li class="display-flex justify-content-between">
                                                     <span class="invoice-subtotal-title">Sum with vat</span>
-                                                    <span>{{(((@$customer->bill[0]->monthlyrent+@$customer->bill[0]->addicrg)*(@$customer->bill[0]->vat))/100)+(@$customer->bill[0]->monthlyrent+@$customer->bill[0]->addicrg)}}</span>
+                                                    <span>{{(((@$customer->bill[0]->monthlyrent+@$customer->bill[0]->addicrg)*(@$customer->bill[0]->vat))/100)+((@$customer->bill[0]->monthlyrent+@$customer->bill[0]->addicrg)-@$customer->bill[0]->discount)}}</span>
                                                 </li>
                                                 <li class="display-flex justify-content-between">
                                                     <span class="invoice-subtotal-title">Previous DUE</span>
