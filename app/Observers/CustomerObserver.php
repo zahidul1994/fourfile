@@ -58,12 +58,7 @@ class CustomerObserver
      */
     public function updated(Customer $customer)
     {
-        if($customer->status==1){
-            
-            $smsinfo=['name'=>$customer->customername,'mobile'=>$customer->customermobile,'id'=>$customer->loginid,'monthlypayment'=>$customer->monthlyrent];
-            CommonFx::sentsmscustomer($smsinfo);
-          
-        }
+        
     }
 
     /**

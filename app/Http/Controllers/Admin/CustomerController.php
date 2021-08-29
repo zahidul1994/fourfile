@@ -35,19 +35,19 @@ class CustomerController extends Controller
           $button .= '&nbsp;&nbsp;';
           $button .= '<a title="Edit Customer" href="/admin/editcustomer/' . $data->id . '" class="invoice-action-view"><i class="material-icons">edit</i></a>';
           $button .= '&nbsp;&nbsp;';
-          $button .= '<a target="_blank" href="' . url('admin/customerprofile', $data->id) . '" class="invoice-action-view"><i class="material-icons ">remove_red_eye</i></a>';
+          $button .= '<a target="_blank" href="' . url('admin/customerprofile', $data->id) . '" class="invoice-action-view" title="See Preview"><i class="material-icons ">remove_red_eye</i></a>';
          $button .= '&nbsp;&nbsp;';
           $button .= '<button type="button" title="Delete Customer" name="delete" id="deleteBtn" rid="' . $data->id . '" class="invoice-action-view btn-sm "><i class="material-icons ">delete_forever</i></button>';
           return $button;
         })
         ->addColumn('status', function($data){
           if($data->status==1){
-         $button = '<button type="button" rid="'.$data->id.'" class="btn-sm Approved"><i class="material-icons">beenhere</i></button>';
+         $button = '<button type="button" rid="'.$data->id.'" class="btn-sm Approved" title="Update Status"><i class="material-icons">beenhere</i></button>';
         return $button;
     }
     
     else {
-        $button = '<button type="button"  class=" btn-sm Notapproved" rid="'.$data->id.'"><i class="material-icons">block</i> </button>';
+        $button = '<button type="button" title="Update Status" class=" btn-sm Notapproved" rid="'.$data->id.'"><i class="material-icons">block</i> </button>';
         return $button;
     }})
       ->addColumn('monthlyrent' ,function($data){
@@ -95,9 +95,9 @@ class CustomerController extends Controller
         ->addColumn('action', function ($data) {
           $button ='<button type="button" id="UpdateBillBtn" uid="' . $data->bill[0]->id . '" class="invoice-action-view btn-sm" title="Update Bill"><i class="material-icons ">update</i></button>'; 
           $button .= '&nbsp;&nbsp;';
-          $button .= '<a title="Edit Customer" href="/admin/editcustomer/' . $data->id . '" class="invoice-action-view"><i class="material-icons">edit</i></a>';
+          $button .= '<a title="Edit Customer" href="/admin/editcustomer/' . $data->id . '" class="invoice-action-view" title="Edit Customer"><i class="material-icons">edit</i></a>';
           $button .= '&nbsp;&nbsp;';
-          $button .= '<a target="_blank" href="' . url('admin/customerprofile', $data->id) . '" class="invoice-action-view"><i class="material-icons ">remove_red_eye</i></a>';
+          $button .= '<a target="_blank" href="' . url('admin/customerprofile', $data->id) . '" class="invoice-action-view" title="See Preview"><i class="material-icons ">remove_red_eye</i></a>';
 
           $button .= '&nbsp;&nbsp;';
           $button .= '<button type="button" title="Delete Customer" name="delete" id="deleteBtn" rid="' . $data->id . '" class="invoice-action-view btn-sm"><i class="material-icons ">delete_forever</i></button>';
@@ -105,12 +105,12 @@ class CustomerController extends Controller
         })
         ->addColumn('status', function($data){
           if($data->status==1){
-         $button = '<button type="button" rid="'.$data->id.'" class="btn-sm Approved"><i class="material-icons">beenhere</i></button>';
+         $button = '<button type="button" title="Update Status" rid="'.$data->id.'" class="btn-sm Approved"><i class="material-icons">beenhere</i></button>';
         return $button;
     }
     
     else {
-        $button = '<button type="button"  class=" btn-sm Notapproved" rid="'.$data->id.'"><i class="material-icons">block</i> </button>';
+        $button = '<button type="button" title="Update Status" class=" btn-sm Notapproved" rid="'.$data->id.'"><i class="material-icons">block</i> </button>';
         return $button;
     }})
         ->addColumn('monthlyrent' ,function($data){
@@ -534,7 +534,8 @@ class CustomerController extends Controller
     }
     if($request->action=="deny"){
         $roomapproval->status=1;
-
+        $smsinfo=['name'=>$roomapproval->customername,'mobile'=>$roomapproval->customermobile,'id'=>$roomapproval->loginid,'monthlypayment'=>$roomapproval->monthlyrent];
+        CommonFx::sentsmscustomer($smsinfo);
 
     }
         $roomapproval->update();

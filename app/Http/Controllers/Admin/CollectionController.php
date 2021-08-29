@@ -108,7 +108,7 @@ class CollectionController extends Controller
          $pay->admin_id =Auth::id();
           $pay->save();
            }
-           $smsinfo=['name'=>$cus->customername,'mobile'=>$cus->customermobile,'id'=>$cus->loginid,'paid'=>$request->paid,'due'=>$cus->total];
+           $smsinfo=['name'=>$cus->customername,'mobile'=>$cus->customermobile,'id'=>$cus->loginid,'paid'=>$request->paid,'due'=>$info->total];
            CommonFx::sentsmscustomerbillpaid($smsinfo);
      if($pay){
       return response()->json([
@@ -258,7 +258,7 @@ return response()->json([
     
       }
 
-      public function collectiondelete(Request $request,$id){
+   public function collectiondelete(Request $request,$id){
 $info=Collection::whereadmin_id(Auth::id())->find($id);
 if($info){
   $pa=Bill::find($info->bill_id);

@@ -49,7 +49,7 @@
                                         <th>Discount</th>
                                         <th>Advance</th>
                                         <th>Add <br>Charge</th>
-                                        <th>Vat</th>
+                                        <th>Vat %</th>
                                         <th>Bill <br>Amount</th>
                                         <th>Collection <br>Amount</th>
                                         <th>Total <br>Due</th>
@@ -417,7 +417,7 @@
 
 
 $(document).on('click','.Approved', function(){
-        $(".Approved").click(function(){
+      
                 //alert(5);
                 $statusid = $(this).attr('rid');
                 //console.log($statusid);
@@ -436,29 +436,9 @@ $(document).on('click','.Approved', function(){
                     }
                 });
         
-            });
+            
         });
-        $(document).on('click','.Notapproved', function(){
-            $(".Notapproved").click(function(){
-                $statusid = $(this).attr('rid');
-                $.ajax({
-                    type: "post",
-                    url:url+'/admin/customerstatus',
-                    data: {
-                        id:$statusid,
-                        action:"deny"
-                    },
-                    dataType: "json",
-                    success: function (d) {
-                        toastr.success(d.message);
-                        $('#dataTable').DataTable().ajax.reload();
         
-                    }
-                });
-        
-            });  
-             }); 
-
         });
     </script>
 
