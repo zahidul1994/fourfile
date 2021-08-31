@@ -16,17 +16,11 @@
                                         {!! Form::model($info, array('url' =>['admin/updatecustomer',$info->id], 'method'=>'PATCH','files'=>true)) !!}
                                         <h4 class="card-title">Personal Information</h4>
                                         <div class="row">
-                                            {{-- <div class="input-field col m6 s12">
-                                                {!! Form::text('customerid', null, ['id' => 'customerid', 'required']) !!}
-                                                {!! Form::label('customerid', ' * Customer ID') !!}
-                                        
-                                            </div> --}}
-                                        
-                                            {{-- <div class="input-field col m12 s12">
+                                            <div class="input-field col m12 s12">
                                                 {!! Form::text('loginid', null, ['id' => 'loginid', 'required']) !!}
-                                                {!! Form::label('loginid', '* Login ID') !!}
+                                                {!! Form::label('loginid', '* Login ID (Customer ID)') !!}
                                         
-                                            </div> --}}
+                                            </div>
                                         
                                         </div>
                                        

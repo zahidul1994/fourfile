@@ -33,7 +33,7 @@
                                     </label>
                                 </div>
 
-                                <div class="mt-8" style="padding: 10px; border: 1px solid #ddd;">
+                                {{-- <div class="mt-8" style="padding: 10px; border: 1px solid #ddd;">
                                     <h6 class="mt-0">Without Header</h6>
                                     <label>
                                         <input class="with-gap" name="papersetting" value="oneheadin" type="radio"  {{ ($printset->papersetting=="oneheadin")? "checked" : "" }} />
@@ -54,7 +54,7 @@
                                         <input class="with-gap" name="papersetting" type="radio" value="padheadin" type="radio"  {{ ($printset->papersetting=="padheadin")? "checked" : "" }} />
                                         <span>Pad</span>
                                     </label>
-                                </div>
+                                </div> --}}
 
 
                                 <div class="row">

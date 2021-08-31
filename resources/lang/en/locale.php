@@ -157,7 +157,7 @@ return [
 	"Print Locationwise"=> "Print Locationwise",
     "Medicineinfo List"=> "Medicineinfo List",
     "Monthly Print"=> "Monthly Print",
-	"Create DiseaseMedicines"=> "Create DiseaseMedicines", 
+	"Inactive Customer"=> "Inactive Customer", 
 	"Customer"=> "Customer",
     "Customer List"=> "Customer List",
     "Pending Customer List"=> "Pending Customer List",

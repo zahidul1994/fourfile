@@ -281,7 +281,7 @@
                     data: {},
                     success: function(data) {
                         if (data) {
-                            toastr.warning('customer delete');
+                            toastr.warning('customer Inactive');
                             //location.reload();
                             $('#dataTable').DataTable().ajax.reload();
 

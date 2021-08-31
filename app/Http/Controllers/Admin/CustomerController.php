@@ -37,7 +37,7 @@ class CustomerController extends Controller
           $button .= '&nbsp;&nbsp;';
           $button .= '<a target="_blank" href="' . url('admin/customerprofile', $data->id) . '" class="invoice-action-view" title="See Preview"><i class="material-icons ">remove_red_eye</i></a>';
          $button .= '&nbsp;&nbsp;';
-          $button .= '<button type="button" title="Delete Customer" name="delete" id="deleteBtn" rid="' . $data->id . '" class="invoice-action-view btn-sm "><i class="material-icons ">delete_forever</i></button>';
+          $button .= '<button type="button" title="Inactive Customer"  id="deleteBtn" rid="' . $data->id . '" class="invoice-action-view btn-sm "><i class="material-icons ">https</i></button>';
           return $button;
         })
         ->addColumn('status', function($data){
@@ -100,7 +100,7 @@ class CustomerController extends Controller
           $button .= '<a target="_blank" href="' . url('admin/customerprofile', $data->id) . '" class="invoice-action-view" title="See Preview"><i class="material-icons ">remove_red_eye</i></a>';
 
           $button .= '&nbsp;&nbsp;';
-          $button .= '<button type="button" title="Delete Customer" name="delete" id="deleteBtn" rid="' . $data->id . '" class="invoice-action-view btn-sm"><i class="material-icons ">delete_forever</i></button>';
+          $button .= '<button type="button" title="Inactive Customer"  id="deleteBtn" rid="' . $data->id . '" class="invoice-action-view btn-sm"><i class="material-icons ">https</i></button>';
           return $button;
         })
         ->addColumn('status', function($data){
@@ -154,14 +154,55 @@ class CustomerController extends Controller
   public function create()
   {
     $breadcrumbs = [
-      ['link' => "admin/dashboard", 'name' => "Home"], ['link' => "admin/merchantlist", 'name' => "Customer"], ['name' => "Create"],
+      ['link' => "admin/dashboard", 'name' => "Home"], ['link' => "admin/customerlist", 'name' => "Customer"], ['name' => "Create"],
     ];
 
     $pageConfigs = ['pageHeader' => true, 'isFabButton' => false];
 
     return view('admin.customer.create', ['pageConfigs' => $pageConfigs], ['breadcrumbs' => $breadcrumbs]);
   }
+  public function inactivecustomer()
+  {
+    $breadcrumbs = [
+      ['link' => "admin/dashboard", 'name' => "Home"], ['link' => "admin/inactivecustomer", 'name' => "Customer"], ['name' => "Inacitve"],
+    ];
 
+    $pageConfigs = ['pageHeader' => true, 'isFabButton' => false];
+
+    return view('admin.customer.inacitve', ['pageConfigs' => $pageConfigs], ['breadcrumbs' => $breadcrumbs]);
+  }
+   public function findinactivecustomer(Request $request)
+  {
+    if($request->to==!null && $request->from==null){
+   
+      $info=Customer::whereadmin_id(Auth::id())->wherecountry_id($request->country_id)->whereDate('created_at', '=', $request->to)->onlyTrashed()->get();
+    }
+    elseif($request->to==null && $request->from==!null){
+      $info=Customer::whereadmin_id(Auth::id())->wherecountry_id($request->country_id)->whereDate('updated_at', '=', $request->from)->onlyTrashed()->get();
+    }
+     elseif($request->to==!null && $request->from==!null){
+      $info=Customer::whereadmin_id(Auth::id())->wherecountry_id($request->country_id)->whereBetween('created_at', array($request->to, $request->from))->onlyTrashed()->get();
+    }
+    
+ else{
+
+  $info=Customer::whereadmin_id(Auth::id())->wherecountry_id($request->country_id)->onlyTrashed()->get();
+ }
+
+    $pageConfigs = ['pageHeader' => false, 'isFabButton' => false];
+
+    return view('admin.customer.inactivecustomerlist')->with('pageConfigs', $pageConfigs)->with('infos', $info);
+  }
+  public function restorecustomer($id){
+    
+    Customer::withTrashed()->find($id)->restore();
+      
+              return response()->json(['success' => true]);
+        
+  
+  
+  
+  }
   public function store(Request $request)
   {
     $this->validate($request, [
@@ -239,7 +280,6 @@ class CustomerController extends Controller
       'customername' => $request->customername,
       'contactperson' => $request->contactperson,
       'email' => $request->email,
-      'loginid' =>  $request->loginid,
       'password' =>  Hash::make($request->password),
       'customermobile' => $request->customermobile,
       'customeraltmobile' => $request->customeraltmobile,
@@ -393,9 +433,8 @@ class CustomerController extends Controller
       'area_id' => 'required',
       'package_id' => 'required',
        'monthlyrent' => 'required',
-      // 'loginid' => ['required', 'min:1', 'max:60', Rule::unique('customers')->ignore($id, 'id')->where(function ($query) {
-      //   return $query->where('admin_id', Auth::user()->id);
-      // })],
+       'loginid' => 'required|min:3|max:60|unique:customers,loginid,'.$id,
+      
 
     ]);
     
@@ -403,7 +442,7 @@ class CustomerController extends Controller
       'customername' => $request->customername,
       'contactperson' => $request->contactperson,
       'email' => $request->email,
-      // 'loginid' =>  $request->loginid,
+      'loginid' =>  $request->loginid,
      'customermobile' => $request->customermobile,
       'customeraltmobile' => $request->customeraltmobile,
       'customerprofession' => $request->customerprofession,
@@ -545,7 +584,8 @@ class CustomerController extends Controller
 
 
 
-}
+} 
+
   }
 
   

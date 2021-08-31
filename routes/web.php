@@ -358,6 +358,9 @@ Route::post('customerstatus', 'CustomerController@setapproval');
 Route::post('searchcustomer', 'CustomerController@searchmedicine');
 Route::get('findbill/{id}','CustomerController@findbill');
 Route::post('updatebillcustomer','CustomerController@updatebillcustomer');
+Route::get('inactivecustomer','CustomerController@inactivecustomer');
+Route::get('inactivecustomerfind','CustomerController@findinactivecustomer');
+Route::get('restorecustomer/{id}','CustomerController@restorecustomer');
 //Customer  End
 //sms Start
 Route::get('smsmessagesetting','SmsController@index');
