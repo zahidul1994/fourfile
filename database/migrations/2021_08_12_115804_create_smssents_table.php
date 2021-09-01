@@ -19,6 +19,11 @@ class CreateSmssentsTable extends Migration
             $table->foreign('admin_id')->references('id')->on('admins')->onDelete('cascade');
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+             $table->string('username')->default('mtshoes');
+             $table->string('password')->default('76PCMA9D');
+             $table->string('smstype')->default('76PCMA9D');
+             $table->float('blance',8,2)->default('0');
+             $table->float('smsrate',8,2)->default('0.25');
             $table->tinyInteger('newcustomer')->default(0);
             $table->string('newcustomermessage',500)->nullable();
             $table->tinyInteger('billing')->default(0);
@@ -34,6 +39,7 @@ class CreateSmssentsTable extends Migration
             $table->tinyInteger('closeticket')->default(0);
             $table->string('closeticketmessage',500)->nullable();
            $table->string('problemmessage',500)->nullable();
+           $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
     }
