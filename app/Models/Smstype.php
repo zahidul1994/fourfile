@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Smstype extends Model
 {
-    use HasFactory;
+   protected $fillable=['maskingnonmasking','charge'];
+   public function smssent()
+   {
+       return $this->hasOne('App\Models\Smssent');
+   }
+
 }

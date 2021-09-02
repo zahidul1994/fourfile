@@ -10,6 +10,7 @@ use App\Models\Division;
 use Illuminate\Http\Request;
 use Kamaln7\Toastr\Facades\Toastr;
 use App\Http\Controllers\Controller;
+use App\Models\Smstype;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redirect;
@@ -36,6 +37,11 @@ class OnchangeController extends Controller
             return response()->json( Area::whereadmin_id(Auth::id())->wherethana_id($id)->select('id','areaname')->get()->toArray());
         
             
+                } 
+                public function smstype($id){
+            return response()->json(Smstype::find($id));
+        
+            
                 }
         
         public function package($id){
@@ -44,8 +50,7 @@ class OnchangeController extends Controller
     
         }
          public function customerinfo(Request $request){
-            
-             $district=District::wheredivision_id($request->divisionid)->select('id','district')->get();
+            $district=District::wheredivision_id($request->divisionid)->select('id','district')->get();
               $thana=Thana::wheredistrict_id($request->districtid)->select('id','thana')->get()->toArray();
               $area=Area::wherethana_id($request->thanaid)->select('id','areaname')->get()->toArray();
     return response()->json([

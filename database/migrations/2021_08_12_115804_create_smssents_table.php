@@ -21,7 +21,7 @@ class CreateSmssentsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
              $table->string('username')->default('mtshoes');
              $table->string('password')->default('76PCMA9D');
-             $table->string('smstype')->default('76PCMA9D');
+             $table->unsignedBigInteger('smstype_id')->default(2);
              $table->float('blance',8,2)->default('0');
              $table->float('smsrate',8,2)->default('0.25');
             $table->tinyInteger('newcustomer')->default(0);

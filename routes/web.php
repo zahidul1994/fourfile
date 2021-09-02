@@ -20,8 +20,7 @@ Route::get('getthana/{id}', 'OnchangeController@thana');
 Route::get('getarea/{id}', 'OnchangeController@area');
 Route::get('gettpackageinfo/{id}', 'OnchangeController@package');
 Route::get('getcustomerinfo', 'OnchangeController@customerinfo');
-
-
+Route::get('gettsmstypeinfo/{id}', 'OnchangeController@smstype');
 
 
 Route::get('/sitemap.xml', 'SitemapController@index');
@@ -108,8 +107,6 @@ Route::group([ 'prefix'=>'superadmin',
    //AccountRole End
 
   
-
-
    //Accountcreate Start
    Route::get('adminlist','AdminController@index');
    Route::post('searchadmin','AdminController@adminsearch');
@@ -119,76 +116,49 @@ Route::group([ 'prefix'=>'superadmin',
    Route::get('editadmin/{id}','AdminController@edit');
    Route::put('updateadmin/{id}','AdminController@update');
   Route::delete('deleteteadmin/{id}','AdminController@destroy');
-  Route::post('adminstatus', 'AdminController@setapproval'); //for inactive account status
-//   Route::post('adminsetstatusactive/{id}', 'AdminController@adminsetstatusactive');//for active account status
-
-
+  Route::post('adminstatus', 'AdminController@setapproval'); 
    //Accountcreate  End
 
-   //Deseagse Start
-   Route::get('diseaselist','DiseaseController@index');
-   Route::get('createdisease','DiseaseController@create');
-   Route::post('createdisease','DiseaseController@store');
-   Route::get('editdisease/{id}','DiseaseController@edit');
-    Route::patch('updatedisease/{id}','DiseaseController@update');
-    Route::delete('deletedisease/{id}','DiseaseController@destroy');
-Route::post('diseasestatus', 'DiseaseController@setapproval');
-   Route::post('searchdisease', 'DiseaseController@searchdisease');
-  //Deseagse  End
 
-    //Deseagsemedicineinformation Start
-    Route::get('disemedicinelist','DisemedicineController@index');
-    Route::get('createdisemedicinelist','DisemedicineController@create');
-    Route::post('createdisemedicinelist','DisemedicineController@store');
-    Route::get('editdisemedicinelist/{id}','DisemedicineController@edit');
-     Route::patch('updatedisemedicinelist/{id}','DisemedicineController@update');
-     Route::delete('deletedisemedicinelist/{id}','DisemedicineController@destroy');
- Route::post('disemedicineliststatus', 'DisemedicineController@setapproval');
-    Route::post('searchdisemedicinelist', 'DisemedicineController@searchdisemedicine');
-     
-    //Deseagsemedicineinformation  End
-  
+//smssettinglist Start 
 
-//Medisine Start
-Route::get('medicinelist','MedicineController@index');
-Route::get('createmedicinelist','MedicineController@create');
-Route::post('createmedicinelist','MedicineController@store');
-Route::get('editmedicinelist/{id}','MedicineController@edit');
- Route::patch('updatemedicinelist/{id}','MedicineController@update');
- Route::delete('deletemedicinelist/{id}','MedicineController@destroy');
-Route::post('medicinestatus', 'MedicineController@setapproval');
-Route::post('searchmedicine', 'MedicineController@searchmedicine');
-//Medisine  End
+Route::get('smssettinglist','SmsController@index');
+Route::get('editsmssetting/{id}','SmsController@edit');
+ Route::patch('updatesmssetting/{id}','SmsController@update');
+Route::post('searchsmssetting', 'SmsController@searchmedicine');
+Route::get('smstypelist', 'SmsController@smstype');
+Route::get('createsmstype', 'SmsController@createsmstype');
+Route::post('createsmstype', 'SmsController@smstypestore');
+Route::get('editsmstype/{id}', 'SmsController@editsmstype');
+Route::patch('updatesmstype/{id}', 'SmsController@smstypeupdate');
 
-//Medicineinfo Start 
+//smssettinglist  End
 
-Route::get('medicineinformationlist','MedicineinformationController@index');
-Route::get('createmedicineinformation','MedicineinformationController@create');
-Route::post('createmedicineinformation','MedicineinformationController@store');
-Route::get('editmedicineinformation/{id}','MedicineinformationController@edit');
- Route::patch('updatemedicineinformation/{id}','MedicineinformationController@update');
- Route::delete('deletemedicineinformation/{id}','MedicineinformationController@destroy');
-Route::post('medicineinfostatus', 'MedicineinformationController@setapproval');
-Route::post('searchmedicine', 'MedicineinformationController@searchmedicine');
+//salesms Start 
 
-//Medisineinfo  End
+Route::get('salesmslist','BuysmsController@index');
+Route::get('createsalesms','BuysmsController@create');
+Route::post('createsalesms','BuysmsController@store');
+Route::get('editsalesms/{id}','BuysmsController@edit');
+Route::patch('updatesalesms/{id}','BuysmsController@update');
+Route::post('searchsalesms', 'BuysmsController@searchmedicine');
+Route::get('aprovesalesms', 'BuysmsController@setapproval');
+Route::delete('deletesalesms/{id}','BuysmsController@destroy');
+//smssettinglist  End
+
+//payment Start 
+
+Route::get('paymentlist','PaymentController@index');
+Route::get('createpayment','PaymentController@create');
+Route::post('createpayment','PaymentController@store');
+Route::get('editpayment/{id}','PaymentController@edit');
+ Route::patch('updatepayment/{id}','PaymentController@update');
+ Route::delete('deletepayment/{id}','PaymentController@destroy');
+
+//payment  End
 
 
-//Blog Start 
-
-Route::get('bloglist','BlogController@index');
-Route::get('createblog','BlogController@create');
-Route::post('createblog','BlogController@store');
-Route::get('editblog/{id}','BlogController@edit');
- Route::patch('updateblog/{id}','BlogController@update');
- Route::get('deleteblog/{id}','BlogController@destroy');
-Route::post('blogstatus', 'BlogController@setapproval');
-Route::post('searchblog', 'BlogController@searchblog');
-
-//Blog  End
-
-
-//countryy 
+//countryy
 Route::get('countrylist','CountryController@index');
 Route::post('searchcountry','CountryController@search');
 Route::get('createcountry','CountryController@create');

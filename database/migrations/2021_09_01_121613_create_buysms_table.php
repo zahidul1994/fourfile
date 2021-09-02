@@ -20,6 +20,8 @@ class CreateBuysmsTable extends Migration
             $table->foreign('admin_id')->references('id')->on('admins')->onDelete('cascade');
             $table->unsignedBigInteger('payment_id')->nullable();
             $table->float('payamount',8,2)->default('0');
+            $table->string('phone')->nullable();
+            $table->string('transections')->nullable();
             $table->string('note')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
