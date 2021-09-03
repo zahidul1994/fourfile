@@ -192,15 +192,18 @@
                     }, {
                         data: 'status',
                         name: 'status',
-                       
+                        orderable: false,
+                        searchable: false
                     },
 
 
 
                     {
+                        
                         data: 'action',
                         name: 'action',
-                        orderable: false
+                        orderable: false,
+                        searchable: false
                     }
 
                 ]
@@ -210,9 +213,9 @@
             $(document).on('click', '#deleteBtn', function() {
 
                 if (!confirm('Sure?')) return;
-                $customerid = $(this).attr('rid');
+                $id = $(this).attr('rid');
                 //console.log($roomid);
-                $info_url = url + '/admin/deletecustomer/' + $customerid;
+                $info_url = url + '/superadmin/deletesalesms/' + $id;
                 $.ajax({
                     url: $info_url,
                     method: "DELETE",
@@ -232,128 +235,17 @@
                 });
             });
 
-            //Delete Admin end
-
-
-            $(document).on('click', '#UpdateBillBtn', function() {
-
-                $billid = $(this).attr('uid');
-                //console.log($roomid);
-                $info_url = url + '/admin/findbill/' + $billid;
-                $.ajax({
-                    url: $info_url,
-                    method: "get",
-                    type: "GET",
-                    data: {},
-                    success: function(data) {
-                        if (data) {
-                            //   console.log(data);
-
-                            $("#payamount").val(data.info.id);
-                            $("#customerid").val(data.info.customer_id);
-                            $("#monthlyrent").val(data.info.monthlyrent);
-                            $("#addicrg").val(data.info.addicrg);
-                            $("#discount").val(data.info.discount);
-                            $("#due").val(data.info.due);
-                            $("#advance").val(data.info.advance);
-                            $("#vat").val(data.info.vat);
-                            $("#total").val(data.info.total);
-                            $('#UpdateBill').modal('open');
-                        }
-                    },
-                    error: function(data) {
-                        console.log(data);
-                    }
-                });
-            });
            
-            $(document).on('click', '#Updatemodal', function() {
-                if ($("#payamount").val() == '') {
-
-                    alert('Monthly Charge Is Required');
-                    $("#monthlyrent").focus();
-                    return false;
-
-                }
-                if ($("#addicrg").val() == '') {
-                    alert('Additional Charge Is Required');
-                    $("#addicrg").focus();
-                    return false;
-
-                }
-                if ($("#discount").val() == '') {
-                    alert('discount  Is Required');
-                    $("#discount").focus();
-                    return false;
-
-                }
-                if ($("#due").val() == '') {
-                    alert('due  Is Required');
-                    $("#due").focus();
-                    return false;
-
-                }
-                if ($("#advance").val() == '') {
-                    alert('advance  Is Required');
-                    $("#advance").focus();
-                    return false;
-
-                }
-                if ($("#vat").val() == '') {
-                    alert('vat  Is Required');
-                    $("#vat").focus();
-                    return false;
-
-                }
-                if ($("#total").val() == '') {
-                    alert('total  Is Required');
-                    $("#total").focus();
-                    return false;
-
-                }
-                $info_url = url + '/admin/updatebillcustomer';
-                $.ajax({
-                    url: $info_url,
-                    method: "POST",
-                    type: "POST",
-                    data: {
-                        customerid: $("#customerid").val(),
-                        billid: $("#billid").val(),
-                        payamount: $("#payamount").val(),
-                        addicrg: $("#addicrg").val(),
-                        due: $("#due").val(),
-                        discount: $("#discount").val(),
-                        advance: $("#advance").val(),
-                        vat: $("#vat").val(),
-                        total: $("#total").val(),
-                    },
-                    success: function(data) {
-                        if (data) {
-                            toastr.warning('Update Successfully');
-                            $('#UpdateBill').modal('close');
-                            $('#dataTable').DataTable().ajax.reload();
-
-                        }
-                    },
-                    error: function(data) {
-                        console.log(data);
-                    }
-                });
-            });
-// admin status active in active
-
-
 $(document).on('click','.Approved', function(){
       
-                //alert(5);
+             
                 $statusid = $(this).attr('rid');
                 //console.log($statusid);
                 $.ajax({
                     type: "post",
-                    url:url+'/admin/customerstatus',
+                    url:url+'/superadmin/aprovesalesms/'+ $statusid ,
                     data: {
-                        id:$statusid,
-                        action:"allow"
+                       
                     },
                     dataType: "json",
                     success: function (d) {

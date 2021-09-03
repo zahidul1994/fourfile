@@ -142,7 +142,7 @@ Route::post('createsalesms','BuysmsController@store');
 Route::get('editsalesms/{id}','BuysmsController@edit');
 Route::patch('updatesalesms/{id}','BuysmsController@update');
 Route::post('searchsalesms', 'BuysmsController@searchmedicine');
-Route::get('aprovesalesms', 'BuysmsController@setapproval');
+Route::post('aprovesalesms/{id}', 'BuysmsController@setapproval');
 Route::delete('deletesalesms/{id}','BuysmsController@destroy');
 //smssettinglist  End
 
