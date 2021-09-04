@@ -86,7 +86,30 @@
 
             ]
         },
-       
+        {
+            "url": "javascript:void(0)",
+            "name": "Buy SMS",
+            "i18n": "Buy SMS",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "sms",
+            "icon": "sms",
+            "submenu": [{
+                    "url": "admin/buysmslist",
+                    "name": "SMS List",
+                    "i18n": "SMS List",
+                    "slug": "admin/buysmslist"
+                },
+                {
+                    "url": "admin/createbuysms",
+                    "name": "SMS Create",
+                    "i18n": "SMS Create",
+                    "slug": "admin/createbuysms"
+                }
+                
+                
+
+            ]
+        },
         {
             "url": "javascript:void(0)",
             "name": "Setting",

@@ -193,14 +193,20 @@ class BuysmsController extends Controller
      */
     public function destroy($id)
     {
-        return response(Buysms::findOrFail($id)->delete()); 
+        $data = [
+            
+            'admindata' =>'<a class="black-text"  href="'. url('/admin/buysmslist/') . '"> Superadmin Delete  Your Buy SMS Request</a>',
+    ];
+      $info=Buysms::findOrFail($id);
+      Admin::find($info->admin_id)->notify(new Adminupdatenotification($data));
+      return response(Buysms::findOrFail($id)->delete()); 
     }
 
     
   public function setapproval($id){
    
     $roomapproval = Buysms::find($id);
-    $roomapproval->status=0;
+    $roomapproval->status=1;
     $roomapproval->save();
     
     if($roomapproval){

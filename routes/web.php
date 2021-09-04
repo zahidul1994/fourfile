@@ -21,6 +21,7 @@ Route::get('getarea/{id}', 'OnchangeController@area');
 Route::get('gettpackageinfo/{id}', 'OnchangeController@package');
 Route::get('getcustomerinfo', 'OnchangeController@customerinfo');
 Route::get('gettsmstypeinfo/{id}', 'OnchangeController@smstype');
+Route::get('getpaymentmessage/{id}', 'OnchangeController@payment');
 
 
 Route::get('/sitemap.xml', 'SitemapController@index');
@@ -228,12 +229,6 @@ Route::post('searchthana', 'ThanaController@searchblog');
  Route::get('allsitemap','SitemapController@allsitemap');
 
 
-// Route::get('editblog/{id}','SitemapController@edit');
-//  Route::patch('updateblog/{id}','SitemapController@update');
-//  Route::get('deleteblog/{id}','SitemapController@destroy');
-// Route::post('blogstatus', 'SitemapController@setapproval');
-// Route::post('searchblog', 'SitemapController@searchblog');
-
 //Sitemap  End
 
 //Contact Start 
@@ -244,10 +239,6 @@ Route::post('fdgfcreateblog','ContactController@store');
 Route::get('replymail/{id}','ContactController@edit');
 Route::post('replyemail','ContactController@store');
 
- //Route::patch('updateblog/{id}','ContactController@update');
- //Route::get('deleteblog/{id}','ContactController@destroy');
-//Route::post('blogstatus', 'ContactController@setapproval');
-//Route::post('searchblog', 'ContactController@searchblog');
 
 //Contact  End
 
@@ -363,7 +354,17 @@ Route::get('cancelcollection', 'CollectionController@cancelcollection');
 Route::delete('cancelcollection/{id}', 'CollectionController@collectiondelete');
 //Collection  End
 
+//buysms Start 
 
+Route::get('buysmslist','BuysmsController@index');
+Route::get('createbuysms','BuysmsController@create');
+Route::post('createbuysms','BuysmsController@store');
+Route::get('editbuysms/{id}','BuysmsController@edit');
+Route::patch('updatebuysms/{id}','BuysmsController@update');
+Route::post('searchbuysms', 'BuysmsController@searchmedicine');
+Route::get('showsalesms/{id}', 'BuysmsController@show');
+Route::get('downloadesmsinvoice/{id}','PdfController@buysmsinvoice');
+//buysms  End
        
     }
 );

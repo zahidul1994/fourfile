@@ -1,51 +1,39 @@
 
 @extends('layouts.adminMaster')
-@section('title', "Sms Setting")
 
 @section('content')
-
-{{-- @can('Medicineinformation-Create')  --}}
-<div class="section">
-  <!-- Snow Editor start -->
-  <section class="snow-editor">
+@section('title', "Create Customer")
+{{-- @can('Package-Create') --}}
 @include('partial.formerror')
                             <!-- Form Advance -->
                             <div class="col s12 m12 l12">
                                
                                 <div id="Form-advance" class="card card card-default scrollspy">
                                     <div class="card-content">
-                                        <h4 class="card-title">SMS Message</h4>
-                                        <h5 class="card-title">Total Amount: {{$smsmessage->blance}} TK</h5>
-                                        <h5 class="card-title">Total SMS: {{$smsmessage->blance/$smsmessage->smsrate}}, Per SMS {{$smsmessage->smsrate}} TK</h5>
-                                     
-                                        {!! Form::model($smsmessage, array('url' =>['admin/updatesmssetting/'.$smsmessage->id], 'method'=>'PATCH','id'=>'theform','files'=>true)) !!}
+                                                                       
+                                        {!! Form::open(array('url' => 'admin/createbuysms','method'=>'POST','files'=>true )) !!}
                                     
-                                            @include('admin.smsmessage.form')
+                                            @include('admin.buysms.form')
                                                 <div class="row">
                                                     <div class="input-field col s12">
-                                                        <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Update
+                                                        <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Submit
                                                             <i class="material-icons right">send</i>
                                                         </button>
                                                     </div>
                                                 </div>
+                                                
                                             </div>
                                      {!! Form::close() !!}
                                     </div>
                                 </div>
                             </div>
-          </div>
 {{-- @endcan --}}
 @endsection
 
-
 @section('page-script')
 <script> 
- 
 
  $(document).ready(function() {
-  $('input#input_text, textarea#metadescription').characterCounter();
-
-  
 
   $(".card .Close").click(function () {
 	
@@ -59,6 +47,33 @@ $(".card-alert .close").click(function () {
     $(this).closest(".card-alert")
         .fadeOut("slow");
 });
+
+
+
+
+// for  change 
+        $('#payment_id').change(function(){
+            $('#showtransectionmessage').empty();
+
+    var id = $(this).val();
+
+    $.ajax({
+        type: "GET",
+        url: url + '/getpaymentmessage/'+id,
+        data:{},
+        dataType: "JSON",
+        success:function(data) {
+           if(data){
+                     $('#showtransectionmessage').html(data.note);
+                   
+                                   }
+
+            },
+    });
+
+});
+
+
 });
 
   </script>

@@ -10,6 +10,7 @@ use App\Models\Division;
 use Illuminate\Http\Request;
 use Kamaln7\Toastr\Facades\Toastr;
 use App\Http\Controllers\Controller;
+use App\Models\Payment;
 use App\Models\Smstype;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -46,6 +47,11 @@ class OnchangeController extends Controller
         
         public function package($id){
     return response()->json(Package::select('id','packageprice')->find($id));
+
+    
+        }     
+        public function payment($id){
+    return response()->json(Payment::select('id','note')->find($id));
 
     
         }
