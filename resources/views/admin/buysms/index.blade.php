@@ -28,7 +28,7 @@
                     <div class="col s12 m3 l3 input-field">
 
                         <a href="{{ url('admin/createbuysms') }}" class="waves-effect waves-light  btn"><i
-                                class="material-icons right">gps_fixed</i> Create New</a>
+                                class="material-icons right">gps_fixed</i>Buy SMS </a>
                     </div>
 
                     <div class="row">

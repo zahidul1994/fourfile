@@ -26,7 +26,7 @@
                 
                 <div class="col s12 m3 l3 input-field">
                   
-                    <a href="{{url('admin/createmerchant')}}" class="waves-effect waves-light  btn "><i class="material-icons right">gps_fixed</i> Create New</a>
+                    <a href="{{url('admin/createmerchant')}}" class="waves-effect waves-light  btn "><i class="material-icons right">gps_fixed</i> Create  Merchant</a>
                 </div>
                
                 <div class="row">
