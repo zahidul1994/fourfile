@@ -61,7 +61,7 @@
               {!! Form::open(array('url' => 'admin/updateprofilephoto','method'=>'POST','id'=>'theform','files'=>true )) !!}
               <div class="col  s12 file-field input-field">
                 <div class="btn float-right">
-                    <span>Photo</span>
+                    <span>Photo [150*150]</span>
                     {!!Form::file('photo', ['accept'=>".jpg,.jpeg,.png"])!!}
                    
                 </div>

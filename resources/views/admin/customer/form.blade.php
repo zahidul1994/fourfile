@@ -135,7 +135,36 @@
 
 <div class="row">
     <div class="input-field col m4 s12">
-        {!! Form::select('floor', ['L' => 'First', 'S' => 'Second'], null, ['id' => 'floor_id', 'required', 'class' => '']) !!}
+        {!! Form::select('floor', [ 'Ground Floor' => 'Ground Floor',
+        '1st Floor' => '1st Floor',
+        '2nd Floor' => '2nd Floor',
+        '3rd Floor' => '3rd Floor',
+        '4th Floor' => '4th Floor',
+        '5th Floor' => '5th Floor',
+        '6th Floor' => '6th Floor',
+        '7th Floor' => '7th Floor',
+        '8th Floor' => '8th Floor',
+        '9th Floor' => '9th Floor',
+        '10th Floor' => '10th Floor',
+        '11th Floor' => '11th Floor',
+        '12th Floor' => '12th Floor',
+        '13th Floor' => '13th Floor',
+        '14th Floor' => '15th Floor',
+        '16th Floor' => '16th Floor',
+        '17th Floor' => '17th Floor',
+        '18th Floor' => '18th Floor',
+        '19th Floor' => '19th Floor',
+        '20th Floor' => '20th Floor',
+        '21th Floor' => '21th Floor',
+        '22th Floor' => '22th Floor',
+        '23th Floor' => '23th Floor',
+        '24th Floor' => '24th Floor',
+        '25th Floor' => '25th Floor',
+        '26th Floor' => '26th Floor',
+        '27th Floor' => '27th Floor',
+        '28th Floor' => '28th Floor',
+        '29th Floor' => '29th Floor',
+        '30th Floor' => '30th Floor'], null, ['id' => 'floor_id', 'required', 'class' => '']) !!}
         {!! Form::label('floor', 'Floor *') !!}
     </div>
     <div class="input-field col m4 s12">
@@ -262,7 +291,7 @@
 
 <div class="row">
 <div class="input-field col m6 s12">
-{!! Form::select('package_id', \App\Helpers\CommonFx::Packageame(), null, ['id' => 'package_id', 'placeholder' => 'Select One']) !!}
+{!! Form::select('package_id', CommonFx::Packageame(), null, ['id' => 'package_id', 'placeholder' => 'Select One']) !!}
 {!! Form::label('package_id', '* Package') !!}
 </div>
 

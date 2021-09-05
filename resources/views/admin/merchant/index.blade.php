@@ -36,7 +36,7 @@
                         
                                 <tr>
                                    <td>SL</td>
-                                    <th>Date</th>
+                                 
                                     <th>Merchant</th>
                                     {{-- <th>Status</th> --}}
                                     <th>Edit</th>
@@ -49,7 +49,7 @@
                                  
                                 <tr>
                                   <td>{{ ++$i }}</td>
-                                    <td>{{$info->created_at->diffForHumans()}}</td>
+                                   
                                     <td>{{$info->merchantname}}</td>
                                    {{-- <td>@if($info->status==1)
                                       <button type="button"  class="btn-floating mb-1 waves-effect waves-light approved" rid="{{$info->id}}"><i class="material-icons">beenhere</i></button> @else

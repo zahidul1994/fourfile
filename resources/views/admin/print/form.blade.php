@@ -381,9 +381,8 @@
                                     </div>
                                 </div>
                                 <!-- product details table-->
-
-                                <p>Note: Please take money receipt while payingmoney. You might need to show this
-                                    money receipt if we ask for
+                                Note:
+                                <p class="dd"> 
                                 <p>
 
                                 <p class="right">
@@ -566,9 +565,9 @@
                                             <div class="col m6 s12">
                                                 <h6 style="font-weight: 700;">TERMS & CONDITIONS</h6>
                                                 <ul>
-                                                    <li>*Payment shall be made within 7 days from the date of invoice.
-                                                    </li>
-                                                    <li>*ক্যাশ পেমেন্ট এর ক্ষেত্রে অবশ্যই সিগনেচার করুন।</li>
+                                                    <li>  Note:
+                                                        <p class="dd"> 
+                                                        <p></li>
                                                 </ul>
                                             </div>
                                             <div class="col m6 s12">
@@ -890,11 +889,9 @@
                                         </div>
                                         <!-- product details table-->
 
-                                        <p>Note: Please take money receipt while payingmoney. You might need to show
-                                            this
-                                            money receipt if we ask for
+                                        Note:
+                                        <p class="dd"> 
                                         <p>
-
                                     </div>
                                 </div>
                             </div>
@@ -1207,9 +1204,8 @@
                                         </div>
                                         <!-- product details table-->
 
-                                        <p>Note: Please take money receipt while payingmoney. You might need to show
-                                            this
-                                            money receipt if we ask for
+                                        Note:
+                                        <p class="dd"> 
                                         <p>
 
                                     </div>
@@ -1418,9 +1414,9 @@
 
                                         <div class="row">
                                             <div class="col m6 s12">
+                                                Note:
+                                                <p class="dd"> 
                                                 <p>
-                                                    Note: ক্যাশ পেমেন্ট এর ক্ষেত্রে অবশ্যই সিগনেচার করুন।
-                                                </p>
                                             </div>
                                             <div class="col m6 s12">
 
@@ -1637,9 +1633,9 @@
 
                                         <div class="row">
                                             <div class="col m6 s12">
+                                                Note:
+                                                <p class="dd"> 
                                                 <p>
-                                                    Note: ক্যাশ পেমেন্ট এর ক্ষেত্রে অবশ্যই সিগনেচার করুন।
-                                                </p>
                                             </div>
                                             <div class="col m6 s12">
 
@@ -1855,9 +1851,9 @@
 
                                         <div class="row">
                                             <div class="col m6 s12">
-                                                <p>
-                                                    Note: ক্যাশ পেমেন্ট এর ক্ষেত্রে অবশ্যই সিগনেচার করুন।
-                                                </p>
+                                                 Note:
+                                <p class="dd"> 
+                                <p>
                                             </div>
                                             <div class="col m6 s12">
 

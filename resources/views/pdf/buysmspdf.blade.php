@@ -1,94 +1,96 @@
 <!DOCTYPE html>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- Meta, title, CSS, favicons, etc. -->
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en">
 
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
- {{-- csrf token tag --}}
-<meta name="csrf-token"   content="{{csrf_token()}}">
+<head>
+    <meta charset="UTF-8">
+    <title>invoice</title>
+    <style>
+        table,
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    </style>
+</head>
+
+<body style="width:210mm">
+    <div class="main-invoice" >
+        <h2 style="text-align: center; margin-bottom: 50px;">
+            Payment Receipt
+        </h2>
 
 
-    
-  </head>
-  <body>
-      
-<div class="container">
+        <div style="display: flex;">
+            <div style="width: 70%;">
+                <p style="margin: 10px 0;">
+                    Receipt Number: #00{{$infos->id}}
+                </p>
+                <p style="margin: 10px 0;">
+                    Date:Date: {{ date('M-d-Y', strtotime(@Carbon\Carbon::now())) }}
+                </p>
+                <p style="margin: 10px 0;">
+                    Company Name:  {{Auth::user()->company}}
+                </p>
+                <p style="margin: 10px 0;">
+                    Name:  {{Auth::user()->name}}
+                </p>
+                <p style="margin: 10px 0;">
+                    Email: {{Auth::user()->email}}
+                </p>
+                <p style="margin: 10px 0;">
+                    Address and phone:  {{Auth::user()->address}} . <br> {{Auth::user()->phone}}
+                </p>
 
-          <div class="col-md-9">
-            
-              <strong class="pull-right">Date:{{@$infos->created_at}}</strong>
-              <address>
-                
-              <strong> Receipt Number  #00{{$infos->id}}</strong> <br>
-              <strong>Date: {{ date('M-d-Y', strtotime(@Carbon\Carbon::now())) }} <br>
-                  <strong>Name:  {{Auth::user()->name}}</strong><br>
-                  <strong>Email:  {{Auth::user()->email}}</strong><br>
-                  <strong>Address & phone.   {{Auth::user()->address}} . <br> {{Auth::user()->phone}}</strong>
-                   
-                  
-              </address>  
-            
-  
-          </div>
-          <div class="col md-3 text-right">
-            <img src="data:image/png;base64,{{ DNS2D::getBarcodePNG(Request::url(), 'QRCODE') }}" />
 
+
+
+            </div>
+
+            <div style="width: 70%; text-align: right;">
+                <img src="data:image/png;base64,{{ DNS2D::getBarcodePNG(Request::url(), 'QRCODE') }}" />
+            </div>
         </div>
-    
 
-      
-              <table class="table ">
-               
-                  <tbody>
-                                          
-                    <tr>
-                        <th data-field="id">Amount</th>
-                        <th data-field="name">{{$infos->payamount}}</th>
-                        
-                    </tr>
-                    <tr>
-                        <th data-field="id">Pay By</th>
-                        <th data-field="name">{{@$infos->payment->paymentname}}</th>
-                        
-                    </tr>
-                    <tr>
-                      <th data-field="id">Status</th>
-                      <th data-field="name"> @if ($infos->status==0)
-                        Peding
-                        @else
-                        Aproved
-                    @endif</th>
-                     
-                        
-                    </tr>
 
-                </tbody>
-                    
-                  </tr>
-                  
-                
-                  <tfoot>
+
+
+        <div class="table">
+            <table style="width: 80%; border: 1px solid">
+                <tbody>
                     <tr>
-                      <td colspan="6"><strong> Authorized Signature</strong></td>
-                     
-                      
-                   
+                        <td>Amount</td>
+                        <td>{{$infos->payamount}}</td>
                     </tr>
-                  </tfoot>
+                    <tr>
+                        <td>Pay By</td>
+                        <td>{{@$infos->payment->paymentname}}</td>
+                    </tr>
+                    <tr>
+                        <td>Status</td>
+                        <td>@if ($infos->status==0)
+                          Peding
+                          @else
+                          Aproved
+                      @endif</td>
+                    </tr>
                 </tbody>
-              </table>
+            </table>
+            <!-- DivTable.com -->
             
-          </div>
-<!-- /page content -->
+        <div>
+          
+          <p>Authorized Signature</p>
+         
+      </div>
+        </div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+    </div>
 
 </body>
+
 </html>

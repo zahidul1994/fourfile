@@ -339,12 +339,18 @@ class CustomerController extends Controller
     ));
 
     if ($customerinfo) {
-     
+     if($request->status==1){
       Toastr::success("Customer Create Successfully", "Well Done");
       return Redirect::to('admin/customerlist');
+     }
+     else{
+      Toastr::success("Customer Create Successfully", "Well Done");
+      return Redirect::to('admin/pendingcustomerlist');
+     }
+      
     } else {
       Toastr::warning("Customer Create Fail", "Sorry");
-      return Redirect::to('admin/createmerchant');
+      return Redirect::to('admin/customerlist');
     }
   }
 
@@ -500,8 +506,16 @@ class CustomerController extends Controller
       'infoimage' => $infoname,
     ));
     if ($info) {
-      Toastr::success("Customer Update Successfully", "Well Done");
-      return Redirect::to('admin/customerlist');
+      if($request->status==1){
+        Toastr::success("Customer Update Successfully", "Well Done");
+        return Redirect::to('admin/customerlist');
+       }
+       else{
+        Toastr::success("Customer Update Successfully", "Well Done");
+        return Redirect::to('admin/pendingcustomerlist');
+       }
+     
+     
     } else {
       Toastr::warning("Customer Create Fail", "Sorry");
       return Redirect::to('admin/customerlist');

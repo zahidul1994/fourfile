@@ -29,7 +29,7 @@
                                               
                                                       <tr>
                                                          <th>SL</th>
-                                                          <th>Date</th>
+                                                       
                                                           <th>District</th>
                                                             <th>Thana</th>
                                                           <th>Action</th>
@@ -41,8 +41,7 @@
                                                     @foreach ($thanas as $tha)
                                                        <tr>
                                                        <td>  {{++$i}}</td>
-                                                    <td>{{$tha->created_at->diffForHumans()}}</td>
-                                                       <td>{{$tha->district->district}}</td>
+                                                   <td>{{$tha->district->district}}</td>
                                                           <td>{{$tha->thana}}</td>
                                                           <td>
                                                         

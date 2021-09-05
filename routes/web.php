@@ -269,7 +269,7 @@ Route::post('createarea','AreaController@store');
 Route::get('editarea/{id}','AreaController@edit');
  Route::patch('updatearea/{id}','AreaController@update');
  Route::delete('deletearea/{id}','AreaController@destroy');
-Route::post('searcharea', 'AreaController@searchblog');
+Route::post('searcharea', 'AreaController@search');
 
    //Merchant Start
    Route::get('merchantlist','MerchantController@index');

@@ -25,6 +25,7 @@
             </div>
     </div>
     </div>
+   
     {{-- @endcan --}}
 @endsection
 
@@ -32,6 +33,7 @@
 @section('page-script')
     <script>
         $(document).ready(function() {
+            $('.dd').html('{{$printset->customtext}}');
             $('#padbillid').hide();
             $('#twobillid').hide();
             $('#threebillid').hide();
@@ -60,6 +62,16 @@
                 
 
             });
+
+            $('#otheridtype').on('keyup',function(){
+
+                $('.dd').html($('#otheridtype').val());
+
+
+});
+  
+
+
         });
     </script>
 @endsection

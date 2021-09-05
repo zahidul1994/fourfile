@@ -32,8 +32,8 @@
                                                    
                                                           <th>Package </th>
                                                          <th>Price</th>
-                                                         <th>Merchant</th>
-                                                         <th>Description</th>
+                                                        <th>Description</th>
+                                                        <th>Merchant Company</th>
                                                          <th>Edit</th>
                                                           <th>Delete</th>
                                                       </tr>
@@ -46,9 +46,8 @@
                                                          
                                                           <td>{{$info->packagename}}</td>
                                                           <td>{{$info->packageprice}}</td>
-                                                          <td>{{$info->merchant->merchantname}}</td>
                                                           <td>{{@$info->description}}</td>
-                                                         
+                                                          <td>{{$info->merchant->merchantname}}</td>
                                                           
                                                          <td>
                                                           <a href="{{url('admin/editpackage/'.$info->id) }}" class="btn-floating mb-1 waves-effect waves-light">

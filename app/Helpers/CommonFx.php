@@ -289,7 +289,7 @@ public static function Divisionname(){
     
     }
     public static function Packageame(){
-        return Package::whereadmin_id(Auth::guard('admin')->user()->id)->pluck('packagename','id');
+        return Package::whereadmin_id(Auth::guard('admin')->user()->id)->pluck('packageprice','id');
         
         }
         public static function Payname(){
