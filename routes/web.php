@@ -322,6 +322,7 @@ Route::post('updatebillcustomer','CustomerController@updatebillcustomer');
 Route::get('inactivecustomer','CustomerController@inactivecustomer');
 Route::get('inactivecustomerfind','CustomerController@findinactivecustomer');
 Route::get('restorecustomer/{id}','CustomerController@restorecustomer');
+Route::post('sendsmscustomer','CustomerController@sendsmscustomer');
 //Customer  End
 //sms Start
 Route::get('smsmessagesetting','SmsController@index');

@@ -20,15 +20,20 @@
         <div class="col s12">
             <div class="card">
                 <div class="card-content">
-                    <div class="input-field col s12 m9">
+                    <div class="input-field col s12 m6">
 
                     </div>
 
 
                     <div class="col s12 m3 l3 input-field">
-
+                  
                         <a href="{{ url('admin/createcustomer') }}" class="waves-effect waves-light  btn"><i
-                                class="material-icons right">gps_fixed</i> Create New Customer</a>
+                                class="material-icons right">gps_fixed</i> Create  Customer</a>
+                               
+                    </div> <div class="col s12 m3 l3 input-field">
+                  
+                        <button data-target="SendSms" class="btn modal-trigger"> Sent Sms <i
+                            class="material-icons right">sms</i></button>
                     </div>
 
                     <div class="row">
@@ -74,8 +79,6 @@
             </div>
         </div>
     </div>
-
-
     <div id="UpdateBill" class="modal">
         <div class="modal-content">
 
@@ -136,6 +139,35 @@
 
         </div>
         <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
+    </div>
+
+
+    <div id="SendSms" class="modal">
+        <div class="modal-content">
+
+
+            <div class="row">
+                <div class="input-field col m12 s12">
+                    {!!Form::textarea('problemmessage',CommonFx::sentallcustomersms()->problemmessage, array('id'=>'problemmessage','class'=>'materialize-textarea', 'data-length'=>'160','rows' => 4, 'cols' => 54,'required'))!!}
+           
+                    {!! Form::label('active', 'Sent Message All Active Customer') !!}
+
+                </div>
+                
+
+            
+                  
+                </div>
+
+
+            </div>
+
+        <div class="modal-footer">
+            <button class="btn cyan waves-effect waves-light right" type="button" id="Sendsmssubmit">Send
+                <i class="material-icons right">send</i>
+            </button>
             <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
         </div>
     </div>
@@ -294,7 +326,33 @@
             });
 
             //Delete Admin end
+//sent sms
+$(document).on('click', '#Sendsmssubmit', function() {
 
+if (!confirm('Are You Confirm  ?')) return;
+;
+$info_url = url + '/admin/sendsmscustomer';
+$.ajax({
+    url: $info_url,
+    method: "post",
+    type: "POST",
+    data: {
+        smsmessage:$('#problemmessage').val()
+    },
+    success: function(data) {
+        if (data) {
+            toastr.info('Request Process');
+            $('#SendSms').modal('close');
+        }
+    },
+    error: function(data) {
+        console.log(data);
+    }
+});
+});
+
+
+//sent sms
 
             $(document).on('click', '#UpdateBillBtn', function() {
 

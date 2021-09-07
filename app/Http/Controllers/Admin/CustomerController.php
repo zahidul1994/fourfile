@@ -3,15 +3,19 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Bill;
+use App\Models\Smssent;
 use App\Models\Customer;
 use App\Helpers\CommonFx;
 use Illuminate\Support\Str;
+use App\Events\SendsmsEvent;
 use Illuminate\Http\Request;
+use App\Jobs\Sendcustomersms;
 use Illuminate\Validation\Rule;
 use Kamaln7\Toastr\Facades\Toastr;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Event;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
@@ -536,7 +540,6 @@ class CustomerController extends Controller
     return response()->json([
       'suceess'=>true,
     'info'=>$info,
-   
     'customer'=>$customer,
     ],201);
    
@@ -587,8 +590,8 @@ class CustomerController extends Controller
     }
     if($request->action=="deny"){
         $roomapproval->status=1;
-        $smsinfo=['name'=>$roomapproval->customername,'mobile'=>$roomapproval->customermobile,'id'=>$roomapproval->loginid,'monthlypayment'=>$roomapproval->monthlyrent];
-        CommonFx::sentsmscustomer($smsinfo);
+        $smsinfo=['name'=>$roomapproval->customername,'mobile'=>$roomapproval->customermobile,'id'=>$roomapproval->loginid,'ip'=>$roomapproval->ip,'oppusername'=>$roomapproval->secretname,'opppassword'=>$roomapproval->scrtnamepass,'monthlypayment'=>$roomapproval->monthlyrent];
+         CommonFx::sentsmscustomer($smsinfo);
 
     }
         $roomapproval->update();
@@ -599,6 +602,35 @@ class CustomerController extends Controller
 
 
 } 
+public function sendsmscustomer(Request $request){
+  $customers=Customer::whereadmin_id(Auth::id())->wherestatus(2)->get();
+foreach($customers as $customer){
+
+$data = [
+  'admin_id'=>Auth::id(),
+  'message' =>$request->smsmessage,
+  'name'=>$customer->customername,
+  'number'=>$customer->customermobile,
+  'id'=>$customer->loginid,
+  'ip'=>$customer->ip,
+  'opppassword'=>$customer->opppasswordip,
+  'oppusername'=>$customer->oppusername,
+  'companyname'=>Auth::user()->company,
+  'companynumber'=>Auth::user()->phone,
+  'billamount'=>$customer->total,
+  'expeirydate'=>$customer->atd_day,
+  'exmonth'=>$customer->atd_month
+ 
+];
+
+Sendcustomersms::dispatch($data);
+}
+
+ return response()->json(['success' => true]);
+
+  }
+
+
 
   }
 

@@ -33,14 +33,14 @@ class SmsController extends Controller
     //and OTC #OTC#  and #PACKAGE#.Account Will Be Active Until #EXPIRY_DATE#. #OTC# = Installation Charge/OTC (One Time Charge)
     $smssetting = Smssent::firstOrCreate(
       ['admin_id' => Auth::guard('admin')->user()->id],
-      ['newcustomermessage' => 'Welcom to #CUSTOMER_NAME#, Your  ID #CUSTOMER_ID#.Your Monthly Bill #RATE# TK .Thanks To billing.com',
-      'billingmessage' => ' প্রিয় #CUSTOMER_NAME# আপনার লাইন #EXPIRY_DATE# তারিখে মেয়াদউত্তীর্ণ হবে। অনুগ্রহ করে আপনার বিল পরিশোধ করুন। বিকাশ। 017.... . Ref ID #CUSTOMER_ID#',
-      'paymentmessage' => 'Dear User, We have received #AMOUNT#Tk for #CUSTOMER_ID#. Your account will be active until #EXPIRY_DATE#  also Due #DUE#. Visit: portal.maxim-billing.com',
-      'openticketmessage' => 'Ticket#  #TKTNO#. Complain: #TOPIC#. #USERNAME#, #MOBILE#, Addr= #ADDRESS#, details:  #DETAIL#, mobile no #MOBILE#',
-      'assignticketmessage' => ' Ticket#  #TKTNO#. Complain: #TOPIC#. #USERNAME#, #MOBILE#, Addr= #ADDRESS#, details:  #DETAIL#',
+      ['newcustomermessage' => 'Dear #CUSTOMER_NAME# , your ID is: #CUSTOMER_ID# , ip: #IP# , Username : #PPPOE_USERNAME# , password : #PPPOE_PASSWORD# . Enjoy your new connection. Thanks - #COMPANY_NAME#',
+      'billingmessage' => 'Dear #CUSTOMER_NAME# , Your #MONTH# s bill is #BILL_AMOUNT# Tk. Your id #CUSTOMER_ID# . Please pay before #LAST_DAY_OF_PAY_BILL# . Thanks - #COMPANY_NAME#',
+      'paymentmessage' => 'Dear #CUSTOMER_NAME# , We got #AMOUNT# Tk. for #IP_OR_USER_NAME_OR_ID# . Your Due #DUE_AMOUNT# Tk. Thanks -#COMPANY_NAME#',
+      'openticketmessage' => 'Hello #CUSTOMER_NAME# , Your complain is: #COMPLAINS# , #COMMENT# just arised. Our stuff #EMPLOYEE_NAME# , #EMPLOYEE_MOBILE# will contact with you soon. - Thanks, #COMPANY_NAME# , #COMPANY_MOBILE# .',
+      'assignticketmessage' => 'New Complain for #CUSTOMER_NAME# , IP: #IP# , PPPoE Username : #PPPOE_USERNAME# , Mob : #CUSTOMER_MOBILE# , Complain : #COMPLAINS# , Comment : #COMMENT# , Address : #CUSTOMER_ADDRESS# . Solve it quickly.',
       'updateticketmessage' => 'Ticket # #TKTNO# Update:  topic #TOPIC#. #TKT_MSG#',
-      'closeticketmessage' => ' Ticket # #TKTNO# closed:  topic #TOPIC#. #TKT_MSG#',
-      'problemmessage' => 'Dear Custoer  #name# Our ..... Line '
+      'closeticketmessage' => 'Dear #CUSTOMER_NAME# , Your problem has been resolved. If needed give us a call #COMPANY_MOBILE# . - Thanks, #COMPANY_NAME# .',
+      'problemmessage' => 'Dear #CUSTOMER_NAME# , thanks for being with us. Your ID is #CUSTOMER_ID# , IP #IP# , PPPoE Username #PPPOE_USERNAME# . If you have any query let us know. - #COMPANY_NAME# , #COMPANY_MOBILE# --or-- Your #MONTH# s bill is #BILL_AMOUNT# Tk. Please pay before #LAST_DAY_OF_PAY_BILL# . - #COMPANY_NAME# , #COMPANY_MOBILE#'
     
     ],
 
