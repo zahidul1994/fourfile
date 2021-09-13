@@ -112,7 +112,7 @@
                 serverSide: true,
                 ajax: {
                    
-                    url: "{{ url('admin/createcomplainsetting') }}",
+                    url: "{{ url('admin/complainsetting') }}",
 
                 },
 
@@ -176,7 +176,7 @@
 if ($(this).val() == 'Save') {
  
     $.ajax({
-        url:"{{ url('/admin/createcomplainsetting') }}",
+        url:"{{ url('/admin/complainsetting') }}",
         method: "POST",
         data: {
           complaintitle: $("#complaintitle").val(),

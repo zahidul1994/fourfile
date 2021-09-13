@@ -125,15 +125,15 @@
                 },
                 {
                     "url": "admin/createcomplain",
-                    "name": "Complain Create",
-                    "i18n": "Complain Create",
+                    "name": "Create Complain",
+                    "i18n": "Create Complain",
                     "slug": "admin/createcomplain"
                 },
                 {
-                    "url": "admin/createcomplainsetting",
+                    "url": "admin/complainsetting",
                     "name": "Complain Setting",
                     "i18n": "Complain Setting",
-                    "slug": "admin/createcomplainsetting"
+                    "slug": "admin/complainsetting"
                 }
                 
                 

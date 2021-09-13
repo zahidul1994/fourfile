@@ -194,5 +194,9 @@ return [
     "Command List"=> "Command List",
     "File Manager"=> "File Manager",
     "Site Monitor"=> "Site Monitor",
+    "Complain"=> "Complain",
+	"Complain List"=> "Complain List",
+	"Create Complain"=> "Create Complain",
+	"Complain Setting"=> "Complain Setting",
 ];
 ?>
