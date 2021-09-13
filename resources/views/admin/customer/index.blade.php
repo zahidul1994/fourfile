@@ -32,7 +32,7 @@
                                
                     </div> <div class="col s12 m3 l3 input-field">
                   
-                        <button data-target="SendSms" class="btn modal-trigger"> Sent Sms <i
+                        <button data-target="SendSms" class="btn modal-trigger"> Send Sms <i
                             class="material-icons right">sms</i></button>
                     </div>
 

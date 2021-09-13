@@ -112,22 +112,28 @@
         }, 
          {
             "url": "javascript:void(0)",
-            "name": "Buy SMS",
-            "i18n": "Buy SMS",
+            "name": "Complain",
+            "i18n": "Complain",
             "class": "collapsible-header waves-effect waves-cyan",
-            "slug": "sms",
-            "icon": "sms",
+            "slug": "complain",
+            "icon": "compare_arrows",
             "submenu": [{
-                    "url": "admin/buysmslist",
-                    "name": "SMS List",
-                    "i18n": "SMS List",
-                    "slug": "admin/buysmslist"
+                    "url": "admin/complainlist",
+                    "name": "Complain List",
+                    "i18n": "Complain List",
+                    "slug": "admin/complainlist"
                 },
                 {
-                    "url": "admin/createbuysms",
-                    "name": "SMS Create",
-                    "i18n": "SMS Create",
-                    "slug": "admin/createbuysms"
+                    "url": "admin/createcomplain",
+                    "name": "Complain Create",
+                    "i18n": "Complain Create",
+                    "slug": "admin/createcomplain"
+                },
+                {
+                    "url": "admin/createcomplainsetting",
+                    "name": "Complain Setting",
+                    "i18n": "Complain Setting",
+                    "slug": "admin/createcomplainsetting"
                 }
                 
                 

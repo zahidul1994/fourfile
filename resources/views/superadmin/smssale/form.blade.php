@@ -16,14 +16,19 @@
 </div>
 
 <div class="row">
-    <div class="input-field col m6 s12">
+    <div class="input-field col m4 s12">
         {!! Form::number('payamount', null, ['id' => 'payamount', 'required']) !!}
         {!! Form::label('payamount', ' * Amount') !!}
 
     </div>
 
-    <div class="input-field col m6 s12">
+    <div class="input-field col m4 s12">
         {!! Form::text('transections', null, ['id' => 'transections']) !!}
+        {!! Form::label('transections', 'Transections') !!}
+
+    </div>
+    <div class="input-field col m4 s12">
+        {!! Form::select('status',['0'=>'Pending','1'=>'Aproved'], null, ['id' => 'transections']) !!}
         {!! Form::label('transections', 'Transections') !!}
 
     </div>

@@ -341,19 +341,41 @@ Route::get('printbylocation','PrintController@printbylocation');
 
 //print end
 //Collection Start 
-
 Route::get('collection','CollectionController@index');
 Route::get('createcollection','CollectionController@create');
 Route::post('createcollection','CollectionController@store');
 Route::get('editcollect/{id}','CollectionController@edit');
  Route::put('updatecollection/{id}','CollectionController@update');
- Route::get('deleteblog/{id}','CollectionController@destroy');
-Route::post('blogstatus', 'CollectionController@setapproval');
+ Route::post('blogstatus', 'CollectionController@setapproval');
 Route::post('searchsinglecustomer', 'CollectionController@searchsinglecustomer');
 Route::post('searchsinglecustomerbill', 'CollectionController@singlecustomerbill');
 Route::get('cancelcollection', 'CollectionController@cancelcollection');
 Route::delete('cancelcollection/{id}', 'CollectionController@collectiondelete');
 //Collection  End
+
+
+//Complain Start 
+Route::get('complainlist','ComplainController@index');
+Route::get('createcomplain','ComplainController@create');
+Route::post('createcomplain','ComplainController@store');
+Route::get('editcomplain/{id}','ComplainController@edit');
+Route::get('replycomplain/{id}','ComplainController@show');
+Route::post('replycomplaintext','ComplainController@replycomplain');
+Route::post('addcomplaintext','ComplainController@addcomplaintext');
+ Route::put('updatecomplain/{id}','ComplainController@update');
+ Route::delete('deletecomplain/{id}','ComplainController@destroy');
+ Route::post('closecomplain/{id}','ComplainController@closecomplain');
+
+Route::post('searchsinglecustomer', 'ComplainController@searchsinglecustomer');
+Route::post('searchsinglecustomerbill', 'ComplainController@singlecustomerbill');
+Route::get('cancelcollection', 'ComplainController@cancelcollection');
+Route::delete('cancelcollection/{id}', 'ComplainController@collectiondelete');
+Route::get('createcomplainsetting', 'ComplainController@opencomplainsetting');
+Route::post('createcomplainsetting', 'ComplainController@storecomplainsetting');
+Route::get('editcomplainsetting/{id}', 'ComplainController@editcomplainsetting');
+Route::put('editcomplainsetting/{id}', 'ComplainController@updatecomplainsetting');
+Route::delete('deletecomplainsetting/{id}', 'ComplainController@deletecomplainsetting');
+//Complain  End
 
 //buysms Start 
 
@@ -363,7 +385,7 @@ Route::post('createbuysms','BuysmsController@store');
 Route::get('editbuysms/{id}','BuysmsController@edit');
 Route::patch('updatebuysms/{id}','BuysmsController@update');
 Route::post('searchbuysms', 'BuysmsController@searchmedicine');
-Route::get('showsalesms/{id}', 'BuysmsController@show');
+Route::get('showbuysmsdetails/{id}', 'BuysmsController@show');
 Route::get('downloadesmsinvoice/{id}','PdfController@buysmsinvoice');
 //buysms  End
        

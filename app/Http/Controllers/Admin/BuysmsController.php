@@ -31,7 +31,7 @@ class BuysmsController extends Controller
                 ->addColumn('action', function ($data) {
                   $button = '<a title="Edit Sale SMS" href="/admin/editbuysms/' . $data->id . '" class="invoice-action-view"><i class="material-icons">edit</i></a>';
                   $button .= '&nbsp;&nbsp;';
-                   $button .= '<a title="Print Sale SMS Invoice" href="/admin/showsalesms/' . $data->id . '" class="invoice-action-view"><i class="material-icons">print</i></a>';
+                   $button .= '<a title="Print Sale SMS Invoice" href="/admin/showbuysmsdetails/' . $data->id . '" class="invoice-action-view"><i class="material-icons">print</i></a>';
                   $button .= '&nbsp;&nbsp;';
                  $button .= '<a href="/admin/downloadesmsinvoice/'.$data->id.'"  title="Download Invoice As Pdf"  class="invoice-action-view btn-sm"><i class="material-icons ">file_download</i></a>';
                   return $button;
@@ -91,7 +91,7 @@ class BuysmsController extends Controller
                 if($info){
                     $data = [
             
-                        'superadminboady' =>'<a class="black-text"  href="'. url('/superadmin/salesmslist') . '">'. Auth::user()->name. ' Want To Buy SMS ' .$info->payamount .'TK</a>',
+                        'superadminboady' =>'<a class="black-text"  href="'. url('/superadmin/editsalesms/'.$info->id) . '">'. Auth::user()->name. ' Want To Buy SMS ' .$info->payamount .'TK</a>',
                 ];
                   
                   Superadmin::first()->notify(new Superadminnotification($data));
@@ -160,12 +160,12 @@ class BuysmsController extends Controller
             'payamount' => 'required',
             ]);
     
-           $info= Buysms::create($request->all()+['admin_id'=>Auth::id()]);
+           $info= Buysms::find($id)->update($request->all()+['admin_id'=>Auth::id()]);
                 
                 if($info){
                     $data = [
             
-                        'superadminboady' =>'<a class="black-text"  href="'. url('/superadmin/salesmslist') . '">'. Auth::user()->name. ' Change  Buy SMS Info</a>',
+                        'superadminboady' =>'<a class="black-text"  href="'. url('/superadmin/editsalesms'.$id) . '">'. Auth::user()->name. ' Change  Buy SMS Info </a>',
                 ];
                   
                   Superadmin::first()->notify(new Superadminnotification($data));

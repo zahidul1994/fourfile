@@ -173,7 +173,7 @@ class LoginController extends Controller
         $remember = (!empty($request->remember)) ? TRUE : FALSE;
         if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password, 'status' => 1,], $remember)) {
             $data = [
-                'superadminboady' => $request->email . 'Email address Now Login',
+                'superadminboady' => $request->email . ' Just Login',
             ];
 
 

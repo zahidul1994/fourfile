@@ -25,6 +25,7 @@ class Smssent extends Model
         'updateticketmessage',
         'closeticket',
         'closeticketmessage',
+        'problem',
         'problemmessage',
         'username',
         'password',

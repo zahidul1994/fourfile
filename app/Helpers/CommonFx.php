@@ -1,16 +1,18 @@
 <?php
 namespace App\Helpers;
 use App\Models\Area;
+use App\Models\Admin;
+use App\Models\Payby;
 use App\Models\Country;
 use App\Models\Package;
 use App\Models\Smssent;
 use App\Models\District;
 use App\Models\Division;
 use Illuminate\Support\Str;
-use App\Http\Controllers\Controller;
-use App\Models\Admin;
-use App\Models\Payby;
 use App\Models\Printsetting;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
+use App\Models\Complaintext;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Request; 
 
@@ -305,13 +307,35 @@ public static function Divisionname(){
    public static function sentallcustomersms(){
                 return Smssent::whereadmin_id(Auth::guard('admin')->user()->id)->first();
                 
+                } public static function Complaintitle(){
+                return Complaintext::whereadmin_id(Auth::guard('admin')->user()->id)->get();
+                
+                }
+  public static function Smscount($text){
+               $countlength=strlen($text);
+               if(($countlength >= 0) && ($countlength <= 147)){
+                   return 1;
+               }
+                elseif(($countlength >= 148) && ($countlength <=296)){
+                   return 2;
+               }
+               elseif(($countlength >= 297) && ($countlength <=444)){
+                return 3;
+            }
+                  elseif(($countlength >=445) && ($countlength <=591)){
+                return 4;
+            }
+            else{
+                return 5;
+            }
+                
                 }
 
         public static function sentsmscustomer($smsinfo){
             $smssetting=Smssent::whereadmin_id(Auth::id())->firstOrFail();
          
             $text= str_replace(['#CUSTOMER_NAME#', '#CUSTOMER_ID#','#RATE#','#IP#','#PPPOE_USERNAME#','#PPPOE_PASSWORD#','#COMPANY_NAME#'], [$smsinfo['name'], $smsinfo['id'],$smsinfo['monthlypayment'],$smsinfo['ip'],$smsinfo['oppusername'],$smsinfo['opppassword'], Auth::user()->company], $smssetting->newcustomermessage);
-            if($smssetting->newcustomer==1 && $smssetting->blance>1){
+            if(($smssetting->newcustomer==1) && ($smssetting->blance>1)){
                 // $number=$smsinfo->phone;
                 $number=$smsinfo['mobile'];
                $dataall= array(
@@ -320,7 +344,7 @@ public static function Divisionname(){
                  'number'=>$number,
                  'message'=>$text
                  );
-                 $smssetting->blance -=$smssetting->smsrate;
+                 $smssetting->blance -=$smssetting->smsrate *(CommonFx::Smscount($text));
                  $smssetting->save();
    
     
@@ -337,11 +361,9 @@ public static function Divisionname(){
         }
         public static function sentsmscustomerbillpaid($smsinfo){
             $smssetting=Smssent::whereadmin_id(Auth::id())->firstOrFail();
-         
-            $text= str_replace(['#CUSTOMER_NAME#', '#AMOUNT#','#IP_OR_USER_NAME_OR_ID#','#DUE#','#COMPANY_NAME#'], [$smsinfo['name'], $smsinfo['id'],$smsinfo['paid'],$smsinfo['due'],Auth::user()->company], $smssetting->paymentmessage);
+         $text= str_replace(['#CUSTOMER_NAME#', '#AMOUNT#','#IP_OR_USER_NAME_OR_ID#','#DUE#','#COMPANY_NAME#'], [$smsinfo['name'], $smsinfo['id'],$smsinfo['paid'],$smsinfo['due'],Auth::user()->company], $smssetting->paymentmessage);
      
-   
-      if($smssetting->payment==1 && $smssetting->blance>1){
+      if(($smssetting->payment==1) && ($smssetting->blance>1)){
       // $number=$smsinfo->phone;
       $number=$smsinfo['mobile'];
      $dataall= array(
@@ -350,7 +372,7 @@ public static function Divisionname(){
        'number'=>$number,
        'message'=>$text
        );
-       $smssetting->blance -=$smsinfo->smsrate;
+       $smssetting->blance -=$smssetting->smsrate *(CommonFx::Smscount($text));
        $smssetting->save();
    $url = "http://66.45.237.70/api.php";
        $ch = curl_init(); // Initialize cURL
@@ -360,6 +382,7 @@ public static function Divisionname(){
        $smsresult = curl_exec($ch);
        $p = explode("|",$smsresult);
        $sendstatus = $p[0];
+   //Log::info($sendstatus);
     
    }
         }
@@ -368,7 +391,7 @@ public static function Divisionname(){
             $smssetting=Smssent::whereadmin_id($smsinfo['adminid'])->firstOrFail();
          $companyinfo=Admin::find($smsinfo['adminid'])->select('id','company');
             $text= str_replace(['#CUSTOMER_NAME#','#MONTH#','#BILL_AMOUNT#', '#CUSTOMER_ID#','#LAST_DAY_OF_PAY_BILL#','#COMPANY_NAME#'], [$smsinfo['name'],date('M-Y'),$smsinfo['billamount'], $smsinfo['id'],$smsinfo['expeirydate'], $companyinfo->company], $smssetting->billingmessage);
-            if($smssetting->billing==1 && $smssetting->blance>1){
+            if(($smssetting->billing==1) && ($smssetting->blance>1)){
                 // $number=$smsinfo->phone;
                 $number=$smsinfo['mobile'];
                $dataall= array(
@@ -377,7 +400,7 @@ public static function Divisionname(){
                  'number'=>$number,
                  'message'=>$text
                  );
-                 $smssetting->blance -=$smssetting->smsrate;
+                 $smssetting->blance -=$smssetting->smsrate *(CommonFx::Smscount($text));
                  $smssetting->save();
    
       
@@ -391,6 +414,90 @@ public static function Divisionname(){
        $sendstatus = $p[0];
 
    }
+        }
+         public static function Sendsmsopencomplain($smsinfo){
+            $smssetting=Smssent::whereadmin_id(Auth::id())->firstOrFail();
+            if(($smssetting->openticket==1) && ($smssetting->blance>1)){
+           $text= str_replace(['#CUSTOMER_NAME#','#COMPLAINS#','#COMMENT#', '#EMPLOYEE_NAME#','#EMPLOYEE_MOBILE#','#COMPANY_NAME#', '#COMPANY_MOBILE#'], [$smsinfo['name'],$smsinfo['complain'], $smsinfo['message'],Auth::user()->name,Auth::user()->phone,Auth::user()->company,Auth::user()->phone], $smssetting->openticketmessage);
+          
+                // $number=$smsinfo->phone;
+                $number=$smsinfo['mobile'];
+               $dataall= array(
+                 'username'=>$smssetting->username,
+                 'password'=>$smssetting->password,
+                 'number'=>$number,
+                 'message'=>$text
+                 );
+                 $smssetting->blance -=$smssetting->smsrate *(CommonFx::Smscount($text));
+                 $smssetting->save();
+   
+      
+   $url = "http://66.45.237.70/api.php";
+       $ch = curl_init(); // Initialize cURL
+       curl_setopt($ch, CURLOPT_URL,$url);
+       curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($dataall));
+       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+       $smsresult = curl_exec($ch);
+       $p = explode("|",$smsresult);
+       $sendstatus = $p[0];
+
+   }
+        }
+     public static function Sendsmsopencomplainupdate($smsinfo){
+            $smssetting=Smssent::whereadmin_id(Auth::id())->firstOrFail();
+            if(($smssetting->updateticket==1) && ($smssetting->blance>1)){
+           $text= str_replace(['#CUSTOMER_NAME#','#TKTNO#','#TOPIC#','#TKT_MSG#'], [$smsinfo['name'],$smsinfo['tktno'],$smsinfo['complain'][0], $smsinfo['message']], $smssetting->updateticketmessage);
+          
+                // $number=$smsinfo->phone;
+                $number=$smsinfo['mobile'];
+               $dataall= array(
+                 'username'=>$smssetting->username,
+                 'password'=>$smssetting->password,
+                 'number'=>$number,
+                 'message'=>$text
+                 );
+                 $smssetting->blance -=$smssetting->smsrate *(CommonFx::Smscount($text));
+                 $smssetting->save();
+   
+      
+   $url = "http://66.45.237.70/api.php";
+       $ch = curl_init(); // Initialize cURL
+       curl_setopt($ch, CURLOPT_URL,$url);
+       curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($dataall));
+       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+       $smsresult = curl_exec($ch);
+       $p = explode("|",$smsresult);
+       $sendstatus = $p[0];
+
+   }
+   }
+   public static function Sendsmsopencomplainclose($smsinfo){
+    $smssetting=Smssent::whereadmin_id(Auth::id())->firstOrFail();
+    if(($smssetting->closeticket==1) && ($smssetting->blance>1)){
+   $text= str_replace(['#CUSTOMER_NAME','#COMPANY_MOBILE#','#COMPANY_NAME#'], [$smsinfo['name'],Auth::user()->phone,Auth::user()->company,Auth::user()->phone], $smssetting->closeticketmessage);
+  
+        // $number=$smsinfo->phone;
+        $number=$smsinfo['mobile'];
+       $dataall= array(
+         'username'=>$smssetting->username,
+         'password'=>$smssetting->password,
+         'number'=>$number,
+         'message'=>$text
+         );
+         $smssetting->blance -=$smssetting->smsrate *(CommonFx::Smscount($text));
+         $smssetting->save();
+
+
+$url = "http://66.45.237.70/api.php";
+$ch = curl_init(); // Initialize cURL
+curl_setopt($ch, CURLOPT_URL,$url);
+curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($dataall));
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$smsresult = curl_exec($ch);
+$p = explode("|",$smsresult);
+$sendstatus = $p[0];
+
+}
         }
     
 }

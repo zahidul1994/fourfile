@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Jobs;
+
+use App\Helpers\CommonFx;
 use App\Models\Smssent;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\Log;
@@ -37,7 +39,7 @@ protected $data;
              'number'=>$number,
              'message'=>$text
              );
-             $smssetting->blance -=$smssetting->smsrate *(strlen($text)/157);
+             $smssetting->blance -=$smssetting->smsrate *(CommonFx::Smscount($text));
              $smssetting->save();
 
 
@@ -51,9 +53,9 @@ $url = "http://66.45.237.70/api.php";
    $sendstatus = $p[0];
 
  
-
+//    Log::info($sendstatus);
 }
-//Log::info($smssetting->smsrate *(strlen('আমার সোনার বাংলা')/157));
+
 // Log::info((strlen('আমার সোনার')));
 
 }

@@ -173,6 +173,24 @@ class BuysmsController extends Controller
                     $buy->save();
                 }
                 }
+                else{
+                    if($request->status==1){
+                         $buy=Smssent::whereadmin_id($info->admin_id)->first();
+                    $buy->blance +=trim($request->payamount);
+                    $buy->save();
+if($buy){
+    
+    $data = [
+            
+        'admindata' =>'<a class="black-text"  href="'. url('/admin/showbuysmsdetails/'.$id) . '"> SMS Application Approved </a>',
+];
+  
+  Admin::find($info->admin_id)->notify(new Adminupdatenotification($data));
+
+
+                    }
+                    }
+                }
                 Buysms::find($id)->update($request->all()+['superdmin_id'=>Auth::id()]);
                 if($info){
                     Toastr::info("Buysms Create Successfully", "Done");
@@ -217,7 +235,7 @@ if($buy){
     
     $data = [
             
-        'admindata' =>'<a class="black-text"  href="'. url('/admin/buysmsdetails/'.$roomapproval->id) . '"> SMS Application Approved </a>',
+        'admindata' =>'<a class="black-text"  href="'. url('/admin/showbuysmsdetails/'.$roomapproval->id) . '"> SMS Application Approved </a>',
 ];
   
   Admin::find($roomapproval->admin_id)->notify(new Adminupdatenotification($data));

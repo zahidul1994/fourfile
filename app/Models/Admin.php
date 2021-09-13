@@ -28,9 +28,9 @@ class Admin extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('App\Models\User');
     } 
    
-    public function blog()
+    public function complain()
     {
-        return $this->hasMany('App\Models\Blog')->select('admin_id','title','slug','metadescription','photo');
+        return $this->hasMany('App\Models\Complain');
     }
      public function medicineinformation()
     {
