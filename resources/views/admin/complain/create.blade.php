@@ -110,7 +110,7 @@
                                             {{ Form::text('complainmessage', null, array('class' => '')) }}
                                        </td></tr> 
                                           <tr>
-                                        <td></td>
+                                        <td>Select User     {!!FORM::select('users[]', CommonFx::Connect(), null, array('required','id'=>'users', 'class'=>'select2 browser-default','multiple'=>true))!!}    </td>
                                         <td>
                                             <input type="submit" id="addBtn" value="Save" class="btn cyan waves-effect waves-light right">
                                         </tr>        

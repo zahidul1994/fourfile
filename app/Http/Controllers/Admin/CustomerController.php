@@ -433,6 +433,8 @@ class CustomerController extends Controller
     } else {
       $infoname = 'not-found.jpg';
     };
+    if($request->oldpassword==null){
+     $password=$customer->password;
     $this->validate($request, [
       'customername' => 'required|min:3|max:190',
       'customermobile' => 'required|min:10|max:30',
@@ -447,11 +449,30 @@ class CustomerController extends Controller
       
 
     ]);
-    
+  }
+  else{
+    $this->validate($request, [
+      'customername' => 'required|min:3|max:190',
+      'customermobile' => 'required|min:10|max:30',
+      'houseno' => 'required|min:1|max:160',
+      'floor' => 'required|min:1|max:160',
+      'district_id' => 'required',
+      'thana_id' => 'required',
+      'area_id' => 'required',
+      'package_id' => 'required',
+       'monthlyrent' => 'required',
+       'loginid' => 'required|min:3|max:60|unique:customers,loginid,'.$id,
+       'oldpassword' => 'required',
+       'repassword' => 'required|same:oldpassword',
+
+    ]);
+    $password=Hash::make($request->oldpassword);
+  }
     $info = Customer::whereadmin_id(Auth::id())->find($id)->update(array(
       'customername' => $request->customername,
       'contactperson' => $request->contactperson,
       'email' => $request->email,
+      'password' =>  $password,
       'loginid' =>  $request->loginid,
      'customermobile' => $request->customermobile,
       'customeraltmobile' => $request->customeraltmobile,

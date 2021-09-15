@@ -13,6 +13,7 @@ use App\Models\Printsetting;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Models\Complaintext;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Request; 
 
@@ -285,6 +286,17 @@ public static function Divisionname(){
     }
     public static function Districtname(){
         return District::pluck('district','id');
+        
+        }
+        public static function Connect(){
+            $info=User::whereadmin_id(Auth::id())->first();
+            if($info){
+                return User::pluck('username','id');
+            }
+            else{
+                return Admin::whereid(Auth::id())->pluck('name','id');
+            }
+     
         
         }
     public static function Areaname(){

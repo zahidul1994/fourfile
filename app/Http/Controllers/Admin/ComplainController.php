@@ -4,18 +4,20 @@ namespace App\Http\Controllers\Admin;
 use Validator;
 use App\Models\Area;
 use App\Models\Bill;
+use App\Models\User;
 use App\Models\Thana;
 use App\Models\Complain;
 use App\Models\Customer;
 use App\Helpers\CommonFx;
+use App\Jobs\Sendsuersms;
 use App\Models\Collection;
 use App\Models\Complaintext;
 use Illuminate\Http\Request;
 use App\Models\Complaindetils;
 use Illuminate\Validation\Rule;
+//use Illuminate\Database\Query\Builder;
 use Kamaln7\Toastr\Facades\Toastr;
 use App\Http\Controllers\Controller;
-//use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use GrahamCampbell\ResultType\Success;
@@ -30,7 +32,9 @@ class ComplainController extends Controller
       if (request()->ajax()) {
         return datatables()->of(Complain::with('admin','customer')->whereadmin_id(Auth::id())->latest())
           ->addColumn('action', function ($data) {
-            $button = '<a title="Reply Message" href="/admin/replycomplain/' . $data->id . '" class="iinvoice-action-view btn-sm"><i class="material-icons">reply_all</i></a>';
+            $button = '<a title="Edit Or Aprove Complain" href="/admin/editcomplain/' . $data->id . '" class="invoice-action-view"><i class="material-icons">edit</i></a>';
+            $button .= '&nbsp;&nbsp;';
+            $button .= '<a title="Reply Message" href="/admin/replycomplain/' . $data->id . '" class="iinvoice-action-view btn-sm"><i class="material-icons">reply_all</i></a>';
             $button .= '&nbsp;&nbsp;';
             $button .= '<button type="button" title="Delete Complain"  id="deleteBtn" rid="' . $data->id . '" class="invoice-action-view btn-sm"><i class="material-icons ">delete_forever
             </i></button>';
@@ -178,6 +182,28 @@ class ComplainController extends Controller
          $pay->save();
           
        if($pay){
+         $user=User::whereadmin_id(Auth::id())->get();
+         if(count($user)){
+         $customer= Customer::find($request->customer_id);
+          for ($i = 0; $i < count($user); $i++) {
+          
+        
+              $data = [
+                'admin_id'=>Auth::id(),
+                'message' =>$request->complainheding[0],
+                'name'=>$customer->customername,
+                'number'=>$customer->customermobile,
+                'id'=>$customer->loginid,
+                'ip'=>$customer->ip,
+                'username'=>$user['username'][$i],
+                'userphone'=>$user['phone'][$i],
+                 
+              ];
+              
+              Sendsuersms::dispatch($data);
+              }
+        
+       }
         $info= new Complaindetils();
         $info->complain_id =trim($pay->id);
        $info->messageby =Auth::user()->name;
@@ -203,12 +229,13 @@ $cus=Customer::find($request->customer_id);
 
       public function edit($id){
         $breadcrumbs = [
-               ['link' => "admin", 'name' => "Home"], ['link' => "admin/arealist", 'name' => "Area"], ['name' => "edit"],
+               ['link' => "admin/dashboard", 'name' => "Home"], ['link' => "admin/complainlist", 'name' => "Complain"], ['name' => "edit"],
            ];
-           $thana=Thana::pluck('thana','id');
+          
              $pageConfigs = ['pageHeader' => true, 'isFabButton' => false];
-           $divisioninfo=Area::whereadmin_id(Auth::id())->find($id);
-           return view('admin.area.edit', ['pageConfigs' => $pageConfigs], ['breadcrumbs' => $breadcrumbs])->with('countryinfo',$divisioninfo)->with('thana', $thana);
+           $complain=Complain::whereadmin_id(Auth::id())->find($id);
+           $compiainin=json_decode($complain->complainheding,TRUE);
+           return view('admin.complain.edit', ['pageConfigs' => $pageConfigs], ['breadcrumbs' => $breadcrumbs])->with('info',$complain)->with('complaininfo',$compiainin);
          
            }
 

@@ -4,12 +4,11 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Spatie\Permission\Traits\HasRoles;
 use App\Notifications\AdminResetPasswordNotification;
 class Admin extends Authenticatable implements MustVerifyEmail
 {
  use Notifiable;
-     use HasRoles;
+     
      use SoftDeletes;
      protected $guard = 'admin';
      protected $guard_name = 'superadmin';

@@ -215,6 +215,42 @@
 
 
             ]
+        },
+        {
+            "url": "javascript:void(0)",
+            "name": "User",
+            "i18n": "User",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "user",
+            "icon": "verified_user",
+            "submenu": [{
+                    "url": "admin/userlist",
+                    "name": "User List",
+                    "i18n": "User List",
+                    "slug": "admin/userlist"
+                },
+                {
+                    "url": "admin/createuser",
+                    "name": "Create User",
+                    "i18n": "Create User",
+                    "slug": "admin/createuser"
+                },
+                {
+                    "url": "admin/accountrolelist",
+                    "name": "Role List",
+                    "i18n": "Role List",
+                    "slug": "admin-accountrolelist"
+                },
+                
+                {
+                    "url": "admin/createaccountrole",
+                    "name": "Create Role",
+                    "i18n": "Create Role",
+                    "slug": "admin-createaccountrole"
+                }
+                
+
+            ]
         }
 
 

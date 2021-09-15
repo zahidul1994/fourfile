@@ -32,7 +32,7 @@
                       <p>Sms</p>
                    </div>
                    <div class="col s5 m5 right-align">
-                      <h5 class="mb-0 white-text">Blance: </h5>
+                      <h5 class="mb-0 white-text">Balance: </h5>
                       <p class="no-margin">{{@$smsinfo->blance}} Tk</p>
                       <p>Rate: <br>{{@$smsinfo->smsrate}} Tk</p>
                    </div>
@@ -50,7 +50,7 @@
                     <p>Sms</p>
                  </div>
                  <div class="col s5 m5 right-align">
-                    <h5 class="mb-0 white-text">Blance: </h5>
+                    <h5 class="mb-0 white-text">Balance: </h5>
                     <p class="no-margin">{{@$smsinfo->blance}} Tk</p>
                     <p>Rate: <br>{{@$smsinfo->smsrate}} Tk</p>
                  </div>

@@ -198,5 +198,9 @@ return [
 	"Complain List"=> "Complain List",
 	"Create Complain"=> "Create Complain",
 	"Complain Setting"=> "Complain Setting",
+    "Complain List"=> "Complain List",
+	"Create User"=> "Create User",
+	"User List"=> "User List",
+	"Create Role"=> "Create Role",
 ];
 ?>
