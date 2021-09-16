@@ -36,6 +36,8 @@ class CreateSmssentsTable extends Migration
             $table->string('assignticketmessage',500)->nullable();
             $table->tinyInteger('updateticket')->default(0);
             $table->string('updateticketmessage',500)->nullable();
+            $table->tinyInteger('employee')->default(0);
+            $table->string('employeemessage',500)->nullable();
             $table->tinyInteger('closeticket')->default(0);
             $table->string('closeticketmessage',500)->nullable();
             $table->tinyInteger('problem')->default(0);

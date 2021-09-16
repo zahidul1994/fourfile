@@ -162,6 +162,29 @@
 
 </div>
 <div class="row card">
+ 
+    <div class="col m12 s12 file-field input-field">
+        Complain sms to employee
+        <p>
+            <label>
+                <input class="with-gap" name="employee" value="1" type="radio" {{ ($smsmessage->employee=="1")? "checked" : "" }} />
+                <span>Yes</span>
+                </label>
+                <label>
+                <input class="with-gap" name="employee" value="0" type="radio" {{ ($smsmessage->employee=="0")? "checked" : "" }}  />
+                <span>No</span>
+                </label>
+        </p>
+        </div>
+        <div class="input-field col s12">
+    
+            {!!Form::textarea('employeemessage',null, array('id'=>'employeemessage','class'=>'materialize-textarea', 'data-length'=>'160','rows' => 4, 'cols' => 54,'required'))!!}
+           
+          
+</div>
+
+</div>
+<div class="row card">
     <div class="col m12 s12 file-field input-field">
         Any Other   SMS 
         <p>

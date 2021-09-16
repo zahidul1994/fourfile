@@ -167,7 +167,7 @@ $(".card-alert .close").click(function () {
                 $search = $('#search').val();
                 $.ajax({
                     type: "post",
-                    url: url + '/admin/searchsinglecustomer',
+                    url: url + '/admin/searchsinglecustomerforcomplain',
                     data: {
                         id: $search
 
@@ -193,80 +193,7 @@ $(".card-alert .close").click(function () {
                     }
                 });
             }, 900));
-            $("#collection").keyup(function() {
-                //console.log($('#collectionid').val());
-
-
-                var ttotal = $("#totall").val() - $("#collection").val();
-              //  console.log($("#collection").val());
-                $("#paybleamount").html('<strong>' + ttotal.toFixed(2) + '</strong>');
-
-            });
-
-            $("#collectionsubmit").on('click', function() {
-                // console.log($("#payby").val());
-                if ($("#collection").val() == '') {
-
-                    alert('Collected Amount (Paid) Is Required');
-                    $("#collection").focus();
-                    return false;
-
-                }
-                if ($("#payby").val() == '') {
-                    // console.log($("#collection").val());
-                    alert('Select Minimum One collection Amount');
-                    $("#payby").focus();
-                    return false;
-
-                }
-                $.ajax({
-                    //url:url+'/admin/updatecollection/'+$("#collectionid").val(),
-                    url: url + '/admin/createcollection',
-                    method: "POST",
-                    type: "POST",
-                    data: {
-                        billid: $("#collectionid").val(),
-                        paid: $("#collection").val(),
-                        invoice: $("#invoicesl").val(),
-                        payby: $("#payby").val(),
-                        note: $("#note").val(),
-                        totall: $("#totall").val(),
-                        
-                       
-
-                    },
-                    success: function(d) {
-
-                        if (d) {
-                            $("#search").focus();
-                            swal({
-                                title: "Collection Done",
-                                text: "collection submit successfully",
-                                timer: 2000,
-                                buttons: false
-                            });
-
-                            $('#userid').html(null);
-                            $('#name').html(null);
-                            $('#ppusername').html(null);
-                            $('#adress').html(null);
-                           
-                        } else {
-                            $.each(d.errors, function(key, value) {
-                                $("#collection").focus();
-                                toastr.warning(value);
-                            });
-                        }
-
-                    },
-                    error: function(d) {
-
-                        toastr.warning('Bii Allready Paid');
-                    }
-                });
-
-            });
-            //Update shift end
+          
 
 
 

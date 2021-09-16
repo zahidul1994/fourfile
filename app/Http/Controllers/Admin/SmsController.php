@@ -40,6 +40,7 @@ class SmsController extends Controller
       'assignticketmessage' => 'New Complain for #CUSTOMER_NAME# , IP: #IP# , PPPoE Username : #PPPOE_USERNAME# , Mob : #CUSTOMER_MOBILE# , Complain : #COMPLAINS# , Comment : #COMMENT# , Address : #CUSTOMER_ADDRESS# . Solve it quickly.',
       'updateticketmessage' => 'Ticket  #TKTNO# Update:  topic #TOPIC# . #TKT_MSG# ',
       'closeticketmessage' => 'Dear #CUSTOMER_NAME# , Your problem has been resolved. If needed give us a call #COMPANY_MOBILE# . - Thanks, #COMPANY_NAME# .',
+      'employeemessage' => 'New Complain for {CUSTOMER_NAME}, IP: {IP}, PPPoE Username : {PPPOE_USERNAME}, Mob : {CUSTOMER_MOBILE}, Complain : {COMPLAINS}, Comment : {COMMENT}, Address : {CUSTOMER_ADDRESS}. Solve it quickly',
       'problemmessage' => 'Dear #CUSTOMER_NAME# , thanks for being with us. Your ID is #CUSTOMER_ID# , IP #IP# , PPPoE Username #PPPOE_USERNAME# . If you have any query let us know. - #COMPANY_NAME# , #COMPANY_MOBILE# --or-- Your #MONTH# s bill is #BILL_AMOUNT# Tk. Please pay before #LAST_DAY_OF_PAY_BILL# . - #COMPANY_NAME# , #COMPANY_MOBILE#'
     
     ],

@@ -238,7 +238,7 @@ $(document).on('click','#Closepomplain', function(){
           dataType: "json",
           success: function (d) {
               toastr.success("Complain Colse");
-              window.history.back();
+              window.location.href = url+'/admin/complainlist';
 
           }
       });

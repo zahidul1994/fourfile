@@ -95,7 +95,7 @@
                                   <tr>
                                    
                                  <td id="check"> <label>
-                                    {{-- {{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false, array('class' => 'filled-in')) }} --}}
+                                  
                                     {{ Form::checkbox('complainheding[]', $value->complaintitle, in_array($value->complaintitle, $complaininfo) ? true : false, array('class' => 'filled-in')) }}
                                     <span></span>
                                   </label></td>
@@ -112,9 +112,9 @@
                                             {{ Form::text('complainmessage', null, array('class' => '')) }}
                                        </td></tr> 
                                           <tr>
-                                        <td>Select User     {!!FORM::select('users[]', CommonFx::Connect(), null, array('required','id'=>'users', 'class'=>'select2 browser-default','multiple'=>true))!!}    </td>
+                                        <td>  </td>
                                         <td>
-                                            <input type="submit" id="addBtn" value="Save" class="btn cyan waves-effect waves-light right">
+                                            <input type="submit" id="addBtn" value="Update" class="btn cyan waves-effect waves-light right">
                                         </tr>        
                                 </tbody>
                               </table>
@@ -169,7 +169,7 @@ $(".card-alert .close").click(function () {
                 $search = $('#search').val();
                 $.ajax({
                     type: "post",
-                    url: url + '/admin/searchsinglecustomer',
+                    url: url + '/admin/searchsinglecustomerforcomplain',
                     data: {
                         id: $search
 
@@ -195,80 +195,49 @@ $(".card-alert .close").click(function () {
                     }
                 });
             }, 900));
-            $("#collection").keyup(function() {
-                //console.log($('#collectionid').val());
+        
 
-
-                var ttotal = $("#totall").val() - $("#collection").val();
-              //  console.log($("#collection").val());
-                $("#paybleamount").html('<strong>' + ttotal.toFixed(2) + '</strong>');
-
-            });
-
-            $("#collectionsubmit").on('click', function() {
-                // console.log($("#payby").val());
-                if ($("#collection").val() == '') {
-
-                    alert('Collected Amount (Paid) Is Required');
-                    $("#collection").focus();
-                    return false;
-
-                }
-                if ($("#payby").val() == '') {
-                    // console.log($("#collection").val());
-                    alert('Select Minimum One collection Amount');
-                    $("#payby").focus();
-                    return false;
-
-                }
+            function delay(callback, ms) {
+                var timer = 0;
+                return function() {
+                    var context = this,
+                        args = arguments;
+                    clearTimeout(timer);
+                    timer = setTimeout(function() {
+                        callback.apply(context, args);
+                    }, ms || 0);
+                };
+            };
+           
+                $search = '{{$info->customer_id}}';
                 $.ajax({
-                    //url:url+'/admin/updatecollection/'+$("#collectionid").val(),
-                    url: url + '/admin/createcollection',
-                    method: "POST",
-                    type: "POST",
+                    type: "post",
+                    url: url + '/admin/searchsinglecustomerforcomplain',
                     data: {
-                        billid: $("#collectionid").val(),
-                        paid: $("#collection").val(),
-                        invoice: $("#invoicesl").val(),
-                        payby: $("#payby").val(),
-                        note: $("#note").val(),
-                        totall: $("#totall").val(),
-                        
-                       
+                        id: $search
 
                     },
-                    success: function(d) {
 
-                        if (d) {
-                            $("#search").focus();
-                            swal({
-                                title: "Collection Done",
-                                text: "collection submit successfully",
-                                timer: 2000,
-                                buttons: false
-                            });
-
-                            $('#userid').html(null);
-                            $('#name').html(null);
-                            $('#ppusername').html(null);
-                            $('#adress').html(null);
+                    success: function(data) {
+                        //console.log(data.result.collection[0]);
+                        $('#userid').html(null);
+                         $('#name').html(null);
+                        $('#ppusername').html(null);
+                        $('#adress').html(null);
+                        $('#customer_id').removeAttr('value');
+                        $('#customer_id').val(data.result.id);
+                        $('#userid').append('<span>' + data.result.loginid + '</span>');
+                        $('#name').append('<span>' + data.result.customername + '</span>');
+                        $('#ppusername').append('<span>' + data.result.secretname +
+                            '</span>');
+                        $('#adress').append('<span> House No # '+ data.result.houseno + ','+ data.result.floor + ','  + data.result.district.district + ',' +
+                            data.result.thana.thana + ',' + data.result.area.areaname +
+                            ',' + data.result.customermobile + '</span>');
                            
-                        } else {
-                            $.each(d.errors, function(key, value) {
-                                $("#collection").focus();
-                                toastr.warning(value);
-                            });
-                        }
 
-                    },
-                    error: function(d) {
-
-                        toastr.warning('Bii Allready Paid');
                     }
                 });
-
-            });
-            //Update shift end
+          
 
 
 
