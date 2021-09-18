@@ -86,6 +86,7 @@ class CustomerController extends Controller
     })
         ->addIndexColumn()
         ->rawColumns(['action','duetotal','status','address'])
+        
         ->make(true);
     }
     $pageConfigs = ['pageHeader' => false, 'isFabButton' => false];

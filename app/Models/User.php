@@ -10,7 +10,7 @@ class User extends Authenticatable
     use Notifiable;
     use SoftDeletes;
     use HasRoles;
-    protected $guard_name = 'admin';
+ 
         protected $dates = ['deleted_at'];
          protected $guard = 'user';
         protected $fillable = ['admin_id',

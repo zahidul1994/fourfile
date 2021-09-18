@@ -225,9 +225,7 @@
                     {
                         data: 'address',
                         name: 'area.areaname',
-                        name: 'thana.thana',
-                         name: 'district.district',
-                         name: 'houseno',
+                       
                       
                     },
 
