@@ -323,7 +323,13 @@
                                         
                                         <div class="row">
                                         <div class="input-field col m6 s12">
-                                        {!! Form::select('package_id', \App\Helpers\CommonFx::Packageame(), null, ['id' => 'package_id', 'placeholder' => 'Select One']) !!}
+                                        {{-- {!! Form::select('package_id', \App\Helpers\CommonFx::Packageame(), null, ['id' => 'package_id', 'placeholder' => 'Select One']) !!} --}}
+                                        
+                                        <select name="package_id" id="package_id" placeholder="Select One">
+                                        @foreach (CommonFx::Packageame() as  $value)
+                                            <option value="{{$value->id}}" {{ ( $value->id == $info->package_id) ? 'selected' : ''}}>{{$value->packagename}} &nbsp; &nbsp; {{$value->packageprice}}</option>
+                                        @endforeach
+                                        </select>
                                         {!! Form::label('package_id', '* Package') !!}
                                         </div>
                                         
@@ -497,7 +503,7 @@
                                         </div>
                                         <div class="row">
                                         <div class="input-field col m4 s12">
-                                        {!! Form::select('connectedby', CommonFx::Connect(), null, ['id' => 'connectedby', 'class' => '']) !!}
+                                        {!! Form::select('connectedby', CommonFx::Connect(), null, ['id' => 'connectedby', 'placeholder' => 'Select Employee']) !!}
                                         {!! Form::label('connectedby', 'Connected By') !!}
                                         </div>
                                         

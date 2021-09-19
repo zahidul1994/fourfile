@@ -304,8 +304,8 @@ public static function Divisionname(){
     
     }
     public static function Packageame(){
-        return Package::whereadmin_id(Auth::guard('admin')->user()->id)->pluck('packageprice','id');
-        
+        return Package::whereadmin_id(Auth::guard('admin')->user()->id)->select('packageprice','id','packagename')->get();
+
         }
         public static function Payname(){
             return Payby::whereadmin_id(Auth::guard('admin')->user()->id)->pluck('paybyname','id');
