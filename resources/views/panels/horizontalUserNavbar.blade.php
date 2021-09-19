@@ -187,8 +187,8 @@
     <div class="nav-wrapper">
       <ul class="left hide-on-med-and-down" id="ul-horizontal-nav" data-menu="menu-navigation">
         {{-- Foreach menu item starts --}}
-        @if(!empty($AdminmenuData[1]) && isset($AdminmenuData[1]))
-          @foreach ($AdminmenuData[1]->menu as $menu)
+        @if(!empty($UsermenuData[1]) && isset($UsermenuData[1]))
+          @foreach ($UsermenuData[1]->menu as $menu)
             @php
             $custom_classes="";
             if(isset($menu->class))

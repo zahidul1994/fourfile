@@ -2,7 +2,7 @@
   class="{{$configData['sidenavMain']}} @if(!empty($configData['activeMenuType'])) {{$configData['activeMenuType']}} @else {{$configData['activeMenuTypeClass']}}@endif @if(($configData['isMenuDark']) === true) {{'sidenav-dark'}} @elseif(($configData['isMenuDark']) === false){{'sidenav-light'}}  @else {{$configData['sidenavMainColor']}}@endif">
   <div class="brand-sidebar">
     <h1 class="logo-wrapper">
-      <a class="brand-logo darken-1" href="{{asset('/')}}">
+      <a class="brand-logo darken-1" href="{{asset('/user/dashboard')}}">
         @if(!empty($configData['mainLayoutType']) && isset($configData['mainLayoutType']))
           @if($configData['mainLayoutType']=== 'vertical-modern-menu')
           <img class="hide-on-med-and-down" src="{{asset($configData['largeScreenLogo'])}}" alt="materialize logo" />
@@ -27,7 +27,7 @@
           @if(!empty ($configData['templateTitle']) && isset($configData['templateTitle']))
           {{$configData['templateTitle']}}
           @else
-          Admin
+          User
           @endif
         </span>
       </a>

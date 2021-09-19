@@ -15,8 +15,8 @@
                                 <div id="Form-advance" class="card card card-default scrollspy">
                                     <div class="card-content">
                                         <h4 class="card-title">SMS Message</h4>
-                                        <h5 class="card-title">Total Amount: {{$smsmessage->blance}} TK</h5>
-                                        <h5 class="card-title">Total SMS: {{$smsmessage->blance/$smsmessage->smsrate}}, Per SMS {{$smsmessage->smsrate}} TK</h5>
+                                        <h5 class="card-title">Total Amount: {{@$smsmessage->blance}} TK</h5>
+                                        <h5 class="card-title">Total SMS: {{@$smsmessage->blance/$smsmessage->smsrate}}, Per SMS {{@$smsmessage->smsrate}} TK</h5>
                                      
                                         {!! Form::model($smsmessage, array('url' =>['admin/updatesmssetting/'.$smsmessage->id], 'method'=>'PATCH','id'=>'theform','files'=>true)) !!}
                                     

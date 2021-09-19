@@ -347,7 +347,7 @@ Route::post('createcollection','CollectionController@store');
 Route::get('editcollect/{id}','CollectionController@edit');
  Route::put('updatecollection/{id}','CollectionController@update');
  Route::post('blogstatus', 'CollectionController@setapproval');
-Route::post('searchsinglecustomerfor', 'CollectionController@searchsinglecustomer');
+Route::post('searchsinglecustomer', 'CollectionController@searchsinglecustomer');
 Route::post('searchsinglecustomerbill', 'CollectionController@singlecustomerbill');
 Route::get('cancelcollection', 'CollectionController@cancelcollection');
 Route::delete('cancelcollection/{id}', 'CollectionController@collectiondelete');
