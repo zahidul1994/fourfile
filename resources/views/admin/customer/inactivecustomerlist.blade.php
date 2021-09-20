@@ -55,8 +55,9 @@
                                         <td>{{$info->monthlyrent}}</td>
                                          <td>{{$info->due}}</td>
                                          <td>{{ date('d-m-Y', strtotime(@$info->created_at)) }}</td>
+                                        
                                          <td>
-                                             <button  rid="{{$info->id}}" class="btn-floating mb-1 waves-effect waves-light inactive">  <i class="material-icons">edit</i></button>
+                                             <a   href="{{url('admin/editcustomer/'.$info->id)}}" class="btn-floating mb-1 waves-effect waves-light ">  <i class="material-icons">edit</i></a>
                                             
                                     </td>
                                        

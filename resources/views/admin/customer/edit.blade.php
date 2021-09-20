@@ -513,7 +513,7 @@
                                         
                                         </div>
                                         <div class="input-field col m4 s12">
-                                            {!! Form::select('status', ['1' => 'Active', '2' => 'Pending'], null, ['id' => 'status', 'class' => '']) !!}
+                                            {!! Form::select('status', ['1' => 'Active', '2' => 'Pending','3' => 'Inactive'], null, ['id' => 'status', 'class' => '']) !!}
                                             {!! Form::label('status', '* Customer Status ') !!}
                                             </div>
                                         </div>  

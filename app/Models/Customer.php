@@ -107,6 +107,10 @@ public function bill()
 	return $this->hasMany('App\Models\Bill')->whereMonth('created_at', date('m'))
 	->whereYear('created_at', date('Y'));
 }
+public function bills()
+{
+	return $this->hasMany('App\Models\Bill');
+}
 public function complain()
 {
 	return $this->hasMany('App\Models\Complain');

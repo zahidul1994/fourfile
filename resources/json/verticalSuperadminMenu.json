@@ -16,12 +16,7 @@
                     "i18n": "Permission  List",
                     "slug": "superadmin-permissionlist"
                 },
-                {
-                    "url": "superadmin/accountrolelist",
-                    "name": "Role List",
-                    "i18n": "Role List",
-                    "slug": "superadmin-accountrolelist"
-                },
+              
                 {
                     "url": "superadmin/adminlist",
                     "name": "Admin List",
