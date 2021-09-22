@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Admin;
@@ -11,7 +10,6 @@ use Kamaln7\Toastr\Facades\Toastr;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
-
 use App\Notifications\Superadminnotification;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -46,6 +44,7 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
         $this->middleware('guest:admin')->except('logout');
+        $this->middleware('guest:customer')->except('logout');
         $this->middleware('guest:superadmin')->except('logout');
     }
 
@@ -66,6 +65,7 @@ class LoginController extends Controller
             'pageConfigs' => $pageConfigs
         ]);
     }
+
 
     public function adminverifyemail(Request $request)
     {
@@ -245,5 +245,30 @@ class LoginController extends Controller
             return redirect()->intended('/superadmin/dashboard');
         }
         return back()->withInput($request->only('email', 'remember'));
+    }
+
+
+    public function showLogincustomerForm()
+    {
+        $pageConfigs = ['bodyCustomClass' => 'login-bg', 'isCustomizer' => false];
+
+        return view('auth.loginuser', [
+            'pageConfigs' => $pageConfigs
+        ]);
+    }
+    public function customerLogin(Request $request)
+    {
+        // return $request->all();
+        $this->validate($request, [
+            'loginid'   => 'required|exists:customers,loginid',
+            'password' => 'required|min:6'
+        ]);
+        $remember = (!empty($request->remember)) ? TRUE : FALSE;
+        if (Auth::guard('customer')->attempt(['loginid' => $request->loginid, 'password' => $request->password], $remember)) {
+
+            Toastr::success("Welcome  Adminstration Panel");
+            return redirect()->intended('/customer/dashboard');
+        }
+        return back()->withInput($request->only('loginid', 'remember'));
     }
 }

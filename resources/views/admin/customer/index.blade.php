@@ -14,7 +14,6 @@
     <style>
 td{
     border: 1px solid #ddd;
-    word-wrap: anywhere;
     white-space: normal !important;
     padding: 5px !important;
     text-align: center;
@@ -25,10 +24,26 @@ table.dataTable thead th, table.dataTable thead td{
 th{
     border: 1px solid #ddd;
     padding: 5px !important;
-    text-align: center;
+    text-align: left;
 }
 .card-content{
     padding: 10px !important;
+}
+
+table.dataTable thead .sorting{
+    background-image: none;
+}
+table.dataTable thead .sorting_asc{
+    background-image: none;
+}
+.sorting-icon{
+    display: flex;
+    align-items: center;
+    
+}
+.sorting-icon i{
+    font-size: 15px !important;
+    margin-left: auto
 }
 
 
@@ -63,24 +78,24 @@ th{
                     <div class="row">
                         <div class="col s12" style="">
                             <table id="dataTable" class="display table table-striped table-bordered nowrap"
-                                style="width: 100%; font-size: 13px; font-family: serif;">
+                            style="width: 100%; font-size: 13px; font-family: serif;">
                                 <thead>
 
                                     <tr>
-                                        <td>SL</td>
-                                        <td>ID</td>
-                                        <th>Name</th>
-                                        <th>Address</th>
+                                        <td><span class="sorting-icon">SL <i class="material-icons dp48">arrow_downward</i></span></td>
+                                        <td><span class="sorting-icon">ID <i class="material-icons dp48">swap_vert</i></span></td>
+                                        <th><span class="sorting-icon">Name <i class="material-icons dp48">swap_vert</i></span></th>
+                                        <th><span class="sorting-icon">Address <i class="material-icons dp48">swap_vert</i></span></th>
                                         <th>Mobile</th>
                                         <th>IP/<br>Username</th>
-                                        <th>Monthly <br>Rent</th>
-                                        <th>Previus <br>Due</th>
-                                        <th>Discount</th>
-                                        <th>Advance</th>
-                                        <th>Add <br>Charge</th>
-                                        <th>Vat %</th>
-                                        <th>Bill <br>Amount</th>
-                                        <th>Collection <br>Amount</th>
+                                        <th><span class="sorting-icon">Monthly <br>Rent <i class="material-icons dp48">swap_vert</i></span></th>
+                                        <th> <span class="sorting-icon">Previus <br>Due <i class="material-icons dp48">swap_vert</i></span></th>
+                                        <th><span class="sorting-icon">Discount <i class="material-icons dp48">swap_vert</i></span></th>
+                                        <th><span class="sorting-icon">Advance <i class="material-icons dp48">swap_vert</i></span></th>
+                                        <th><span class="sorting-icon">Add <br>Charge  <i class="material-icons dp48">swap_vert</i></span></th>
+                                        <th><span class="sorting-icon">Vat % <i class="material-icons dp48">swap_vert</i></span></th>
+                                        <th><span class="sorting-icon">Bill <br>Amount <i class="material-icons dp48">swap_vert</i></span></th>
+                                        <th><span class="sorting-icon">Collection <br>Amount <i class="material-icons dp48">swap_vert</i></span></th>
                                         <th>Total <br>Due</th>
                                         {{-- <th>Status</th> --}}
                                         <th>Action</th>
@@ -92,7 +107,7 @@ th{
 
                                 </tbody>
                                 <tfoot>
-                                    <tr role="row"><td class="sorting_asc" rowspan="1" colspan="1" style="width: 18px;" aria-label="SL">SL</td><td class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 67px;" aria-label="ID: activate to sort column ascending">ID</td><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 77px;" aria-label="Name: activate to sort column ascending">Name</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 104px;" aria-label="Address">Address</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 83px;" aria-label="Mobile">Mobile</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 72px;" aria-label="IP/Username">IP/<br>Username</th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 57px;" aria-label="Monthly Rent: activate to sort column ascending">Monthly <br>Rent
+                                    <tr role="row" style="position: sticky; bottom: 0; background: #fff;"><td class="sorting_asc" rowspan="1" colspan="1" style="width: 18px;" aria-label="SL">SL</td><td class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 67px;" aria-label="ID: activate to sort column ascending">ID</td><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 77px;" aria-label="Name: activate to sort column ascending">Name</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 104px;" aria-label="Address">Address</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 83px;" aria-label="Mobile">Mobile</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 72px;" aria-label="IP/Username">IP/<br>Username</th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 57px;" aria-label="Monthly Rent: activate to sort column ascending">Monthly <br>Rent
                                       <span style="color: slateblue; display: block">{{CommonFx::Totalcustomerinfo()->sum('monthlyrent')}}</span>
                                     </th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 52px;" aria-label="Previus Due: activate to sort column ascending">Previus <br>Due
                                       <span style="color: slateblue; display: block">{{CommonFx::Totalcustomerinfo()->sum('due')}}</span>
@@ -238,7 +253,11 @@ th{
 
             $('#dataTable').DataTable({
                 // responsive: true,
-
+                dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+   
                 processing: true,
                 serverSide: true,
                 ajax: {

@@ -202,5 +202,6 @@ return [
 	"Create User"=> "Create User",
 	"User List"=> "User List",
 	"Create Role"=> "Create Role",
+	"Import Customer"=> "Import Customer",
 ];
 ?>

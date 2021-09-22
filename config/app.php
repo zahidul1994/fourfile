@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Homeobari'),
+    'name' => env('APP_NAME', 'Ebilling'),
 
     /*
     |--------------------------------------------------------------------------
@@ -177,7 +177,7 @@ return [
         // App\Providers\TelescopeServiceProvider::class,
         App\Providers\MenuServiceProvider::class,
          Milon\Barcode\BarcodeServiceProvider::class,
-       
+         Maatwebsite\Excel\ExcelServiceProvider::class,
     ],
 
     /*
@@ -234,6 +234,7 @@ return [
         'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
        'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
        'PDF' => Barryvdh\DomPDF\Facade::class,
+       'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];

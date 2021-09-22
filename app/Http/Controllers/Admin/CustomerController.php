@@ -35,11 +35,11 @@ class CustomerController extends Controller
     if (request()->ajax()) {
       return datatables()->of(Customer::with('district','thana','area','bill.collection')->whereadmin_id(Auth::guard('admin')->user()->id)->wherestatus(1))
         ->addColumn('action', function ($data) {
-          $button ='<button type="button" id="UpdateBillBtn" style="border:0; background: none; padding: 0 !important; margin: 0 !important" uid="' . $data->bill[0]->id . '" class="invoice-action-view btn-sm" title="Update Bill"><i class="material-icons" style="font-size: 16px; color: green;">publish</i></button>'; 
-          $button .= '<br>';
-          $button .= '<a title="Edit Customer" href="/admin/editcustomer/' . $data->id . '" class="btn-sm" style="border:0; background: none; padding: 0 !important"><i class="material-icons" style="font-size: 16px; color: green;">edit</i></a>';
-          $button .= '<br>';
-          $button .= '<a target="_blank" style="border:0; background: none; padding: 0 !important" href="' . url('admin/customerprofile', $data->id) . '" class="btn-sm" title="See Preview"><i class="material-icons " style="font-size: 16px; color: green;">remove_red_eye</i></a>';
+          $button ='<button type="button" id="UpdateBillBtn" style="border:0; background: none; padding: 0 !important; margin: 0 !important" uid="' . $data->bill[0]->id . '" class="invoice-action-view btn-sm" title="Update Bill"><i class="material-icons" style="font-size: 16px; color: #F77B00;">sync</i></button>'; 
+          $button .= '&nbsp;&nbsp;';
+          $button .= '<a title="Edit Customer" href="/admin/editcustomer/' . $data->id . '" class="btn-sm" style="border:0; background: none; padding: 0 !important"><i class="material-icons" style="font-size: 16px; color: #9B01BA;">edit</i></a>';
+          $button .= '&nbsp;&nbsp;';
+          $button .= '<a target="_blank" style="border:0; background: none; padding: 0 !important" href="' . url('admin/customerprofile', $data->id) . '" class="btn-sm" title="See Preview"><i class="material-icons " style="font-size: 16px; color: #16A66C;">remove_red_eye</i></a>';
         //  $button .= '&nbsp;&nbsp;';
         //   $button .= '<button type="button" title="Inactive Customer"  id="deleteBtn" rid="' . $data->id . '" class="invoice-action-view btn-sm "><i class="material-icons ">https</i></button>';
           return $button;

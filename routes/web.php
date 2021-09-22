@@ -47,6 +47,10 @@ Route::get('/login/user', 'Auth\LoginController@showLoginuserForm');
 Route::post('/login/superadmin', 'Auth\LoginController@superadminLogin');
 Route::post('/register/admin', 'Auth\RegisterController@createAdmin');
 
+
+
+
+
 Route::prefix('admin')->group(function () {
 
         //admin password reset routes
@@ -83,6 +87,8 @@ Route::group([ 'prefix'=>'superadmin',
 
     ], function() {
         Route::get('dashboard', 'DashboardController@index');
+        Route::get('importcustomer', 'DashboardController@impotercustomer');
+        Route::post('impotercustomer', 'DashboardController@customerimporter');
         Route::post('deletenotification', 'DashboardController@deletenotification');
         Route::post('seennotification', 'DashboardController@seennotification');
   //AccountPermission Start
@@ -420,6 +426,21 @@ Route::get('downloadesmsinvoice/{id}','PdfController@buysmsinvoice');
 Route::group([ 'prefix'=>'user',
     'namespace'=>'User',
     'middleware'=> 'auth',
+   
+
+    ], function() {
+        Route::get('dashboard', 'DashboardController@index');
+       
+       
+    }
+);
+
+Route::post('/login/customer', 'Auth\LoginController@customerLogin');
+Route::get('/login/customer', 'Auth\LoginController@showLogincustomerForm');
+
+Route::group([ 'prefix'=>'customer',
+    'namespace'=>'Customer',
+    'middleware'=> 'auth:customer',
    
 
     ], function() {

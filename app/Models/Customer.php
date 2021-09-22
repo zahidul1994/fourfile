@@ -6,9 +6,10 @@ use Illuminate\Notifications\Notifiable;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-
-class Customer extends Model
+use Illuminate\Foundation\Auth\User as Authenticatable;
+class Customer extends  Authenticatable  
 {
+	protected $guard = 'customer';
 	use SoftDeletes, Notifiable;
 	protected $fillable=[
 	'loginid',
