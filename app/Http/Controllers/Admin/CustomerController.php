@@ -84,7 +84,7 @@ class CustomerController extends Controller
     return (($data->bill[0]->total));
 })
       ->addColumn('address' ,function($data){
-        return 'House No- '. $data->houseno.'<br/>'. $data->district->district.'<br/>'.$data->thana->thana.'<br/>'.$data->area->areaname;
+        return 'House No- '. @$data->houseno.'<br/>'. @$data->district->district.'<br/>'.@$data->thana->thana.'<br/>'.@$data->area->areaname;
     })
         ->addIndexColumn()
         ->rawColumns(['action','duetotal','status','address'])
@@ -148,7 +148,7 @@ class CustomerController extends Controller
     return ($data->bills[0]->total);
 })
       ->addColumn('address' ,function($data){
-        return 'House No- '. $data->houseno.'<br/>'. $data->district->district.'<br/>'.$data->thana->thana.'<br/>'.$data->area->areaname;
+        return 'House No- '. @$data->houseno.'<br/>'. @$data->district->district.'<br/>'.@$data->thana->thana.'<br/>'.@$data->area->areaname;
     })
         ->addIndexColumn()
         ->rawColumns(['action','duetotal','status','address'])

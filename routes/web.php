@@ -266,7 +266,8 @@ Route::group([ 'prefix'=>'admin',
         Route::post('updateprofilephoto', 'AdminController@updateprofilephoto');
         Route::patch('updateprofileinfo/{id}', 'AdminController@updateprofileinfo');
         Route::post('updatepassword', 'AdminController@updatepassword');
-       
+        Route::get('customerexcelform', 'DashboardController@customerexcel');
+        Route::post('makecusomerexcel', 'DashboardController@makecusomerexcelform');
 //area list
 
 Route::get('arealist','AreaController@index');

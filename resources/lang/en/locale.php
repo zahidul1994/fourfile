@@ -203,5 +203,6 @@ return [
 	"User List"=> "User List",
 	"Create Role"=> "Create Role",
 	"Import Customer"=> "Import Customer",
+	"Customer Excel Form"=> "Customer Excel Form",
 ];
 ?>
