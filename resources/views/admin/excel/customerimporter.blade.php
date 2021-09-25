@@ -65,6 +65,26 @@
  </div>
 
 </div>
+<div class="row">
+    <div class="input-field col m4 s12">
+        {!! Form::text('contactperson', null, ['id' => 'contactperson']) !!}
+        {!! Form::label('contactperson', 'Contact Person') !!}
+    </div>
+
+  
+    <div class="input-field col m4 s12">
+        {!! Form::text('customeraltmobile', null, ['id' => 'customeraltmobile']) !!}
+        {!! Form::label('customeraltmobile', 'Alternative Mobile / Phone No.') !!}
+
+    </div>
+    <div class="input-field col m4 s12">
+        {!! Form::date('connectiondate', null, ['id' => 'connectiondate','required']) !!}
+        {!! Form::label('connectiondate', '* Connection Date') !!}
+  
+    </div>
+  
+
+</div>   
 <h4 class="card-title">Address</h4>
 <div class="row">
   <div class="input-field col m4 s12">
@@ -151,17 +171,26 @@
 
   <div class="row">
 
-<div class="input-field col m6 s12">
+<div class="input-field col m3 s12">
 {!! Form::text('secretname', null, ['id' => 'secretname']) !!}
 {!! Form::label('secretname', '* Secrets > Name') !!}
 
 </div>
-<div class="input-field col m6 s12">
+<div class="input-field col m3 s12">
 {!! Form::text('scrtnamepass', null, ['id' => 'scrtnamepass']) !!}
-{!! Form::label('scrtnamepass', 'Password') !!}
+{!! Form::label('scrtnamepass', 'Secrets Password') !!}
 
 </div>
+<div class="input-field col m3 s12">
+    {!! Form::text('ip', null, ['id' => 'ipname']) !!}
+    {!! Form::label('ipname', '* IP') !!}
 
+</div>
+<div class="input-field col m3 s12">
+    {!! Form::text('mac', null, ['id' => 'mac']) !!}
+    {!! Form::label('mac', ' MAC') !!}
+    
+    </div>
 </div>
 
 
@@ -230,7 +259,7 @@
 
 
 <div class="row">
-<div class="input-field col m6 s12">
+<div class="input-field col m4 s12">
 {!! Form::select('clienttype_id', [ 'Home' => 'Home',
 'Corporate' => 'Corporate',
 'BWA' => '2nd Floor',
@@ -249,10 +278,14 @@
 ], null, ['id' => 'clienttype_id', 'class' => '']) !!}
 {!! Form::label('clienttype_id', 'Type of Client') !!}
 </div>
+<div class="input-field col m4 s12">
+    {!! Form::text('bandwidth', null, ['id' => 'bandwidth']) !!}
+    {!! Form::label('bandwidth', '* Bandwidth') !!}
+    
+    </div>
 
-
-<div class="input-field col m6 s12">
-  {!! Form::select('status', ['1' => 'Active', '2' => 'Pending'], 2, ['id' => 'status', 'class' => '']) !!}
+<div class="input-field col m4 s12">
+  {!! Form::select('status', ['2' => 'Pending'], 2, ['id' => 'status', 'class' => '']) !!}
   {!! Form::label('status', '* Customer Status ') !!}
   </div>
 </div>  
@@ -295,8 +328,6 @@ $(".card-alert .close").click(function () {
     $(this).closest(".card-alert")
         .fadeOut("slow");
 });
-
-
 
 // for random value
 

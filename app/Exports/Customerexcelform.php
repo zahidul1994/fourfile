@@ -19,6 +19,9 @@ class Customerexcelform implements FromView
         $this->idnumbertype= $request->idnumbertype;
         $this->email= $request->email;
         $this->customermobile= $request->customermobile;
+        $this->contactperson= $request->contactperson;
+        $this->customeraltmobile= $request->customeraltmobile;
+        $this->connectiondate= $request->connectiondate;
         $this->idnumber= $request->idnumber;
         $this->country_id= $request->country_id;
         $this->division_id= $request->division_id;
@@ -38,6 +41,9 @@ class Customerexcelform implements FromView
         $this->total= $request->total;
         $this->secretname= $request->secretname;
         $this->scrtnamepass= $request->scrtnamepass;
+        $this->ip= $request->ip;
+        $this->mac= $request->mac;
+        $this->bandwidth= $request->bandwidth;
         $this->clienttype_id= $request->clienttype_id;
         $this->status= $request->status;
         $this->admin_id=Auth::id();
@@ -50,6 +56,9 @@ class Customerexcelform implements FromView
             'password' =>  $this->password,
             'email' =>  $this->email,
             'customermobile' =>  $this->customermobile,
+            'contactperson' =>  $this->contactperson,
+            'customeraltmobile' =>  $this->customeraltmobile,
+            'connectiondate' =>  $this->connectiondate,
             'idnumber' =>  $this->idnumber,
             'idnumbertype' =>  $this->idnumbertype,
             'country_id' =>  $this->country_id,
@@ -63,6 +72,9 @@ class Customerexcelform implements FromView
             'clienttype_id' =>  $this->clienttype_id,
             'secretname' =>  $this->secretname,
             'scrtnamepass' =>  $this->scrtnamepass,
+            'ip' =>  $this->ip,
+            'mac' =>  $this->mac,
+            'bandwidth' =>  $this->bandwidth,
             'package_id' =>  $this->package_id,
             'monthlyrent' =>  $this->monthlyrent,
             'due' =>  $this->due,

@@ -76,6 +76,7 @@ class DashboardController extends Controller
         Excel::import(new CustomerImport, request()->file('customers'));
         Toastr::success("Importe Create Successfully", "Well Done");
                return Redirect::to('superadmin/importcustomer'); 
+              
     }
 
 }

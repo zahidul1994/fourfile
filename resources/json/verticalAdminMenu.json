@@ -85,8 +85,8 @@
                 },
                 {
                     "url": "admin/printlocationwise",
-                    "name": "Print Locationwise",
-                    "i18n": "Print Locationwise",
+                    "name": "By Location",
+                    "i18n": "By Location",
                     "slug": "admin/printlocationwise"
                 }
 

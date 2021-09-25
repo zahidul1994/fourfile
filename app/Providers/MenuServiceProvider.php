@@ -48,7 +48,7 @@ class MenuServiceProvider extends ServiceProvider
         $verticalCustomerMenuJson = file_get_contents(base_path('resources/json/verticalCustomerMenu.json'));
         $verticalCustomerMenuData= json_decode($verticalCustomerMenuJson);
       
-        View::share('UsermenuData',[$verticalCustomerMenuData]);
+        View::share('CustomermenuData',[$verticalCustomerMenuData]);
     }); 
 	
     view()->composer('superadmin/*', function ($view) {

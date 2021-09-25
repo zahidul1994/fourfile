@@ -1,11 +1,14 @@
 <table>
     <thead>
     <tr>
-        <th>adminid</th>
+        <th>admin_id</th>
         <th>customername</th>
         <th>password</th>
           <th>email</th>
         <th>customermobile</th>
+        <th>contactperson</th>
+        <th>customeraltmobile</th>
+        <th>connectiondate</th>
         <th>idnumber</th>
         <th>idnumbertype</th>
         <th>country_id</th>
@@ -18,9 +21,13 @@
         <th>floor</th>
         <th>secretname</th>
         <th>scrtnamepass</th>
+        <th>ip</th>
+        <th>mac</th>
+        <th>bandwidth</th>
         <th>package_id</th>
         <th>monthlyrent</th>
         <th>addicrg</th>
+        <th>due</th>
         <th>discount</th>
         <th>advance</th>
         <th>vat</th>
@@ -37,6 +44,10 @@
             <td>{{$password}}</td>
             <td>{{$email}}</td>
             <td>{{$customermobile}}</td>
+            <td>{{$contactperson}}</td>
+            <td>{{$customeraltmobile}}</td>
+            <td>2021/01/20</td>
+            {{-- <td>{{$connectiondate}}</td> --}}
             <td>{{$idnumber}}</td>
             <td>{{$idnumbertype}}</td>
             <td>{{$country_id}}</td>
@@ -49,9 +60,13 @@
             <td>{{$floor}}</td>
             <td>{{$secretname}}</td>
             <td>{{$scrtnamepass}}</td>
+            <td>{{$ip}}</td>
+            <td>{{$mac}}</td>
+            <td>{{$bandwidth}}</td>
             <td>{{$package_id}}</td>
             <td>{{$monthlyrent}}</td>
             <td>{{$addicrg}}</td>
+            <td>{{$due}}</td>
             <td>{{$discount}}</td>
             <td>{{$advance}}</td>
             <td>{{$vat}}</td>

@@ -44,25 +44,19 @@ class CustomerImport implements ToModel,WithHeadingRow,WithValidation
             'password' =>  Hash::make($row['password']),
             'customermobile' => $row['customermobile'],
             'customeraltmobile' => $row['customeraltmobile'],
-            'customerprofession' => $row['customerprofession'],
-            'customerprofession' => $row['customerprofession'],
-            'country_id' => $row['country_id'],
+             'connectiondate' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['connectiondate'])->format('Y-m-d'),
+           'country_id' => $row['country_id'],
             'division_id' => $row['division_id'],
             'district_id' => $row['district_id'],
             'idnumber' => $row['idnumber'],
             'idnumbertype' => $row['idnumbertype'],
-            'otheridtype' => $row['otheridtype'],
-            'thana_id' => $row['thana_id'],
+             'thana_id' => $row['thana_id'],
             'area_id' => $row['area_id'],
             'buildingname' => $row['buildingname'],
             'houseno' => $row['houseno'],
             'floor' => $row['floor'],
-            'post' => $row['post'],
-            'apt' => $row['apt'],
-            'mikrotic_id' => $row['mikrotic_id'],
-            'ip' => $row['ip'],
-            'type_id' => $row['type_id'],
-               'mac' => $row['mac'],
+             'ip' => $row['ip'],
+            'mac' => $row['mac'],
             'secretname' => $row['secretname'],
             'scrtnamepass' => $row['scrtnamepass'],
             'bandwidth' => $row['bandwidth'],
@@ -74,9 +68,10 @@ class CustomerImport implements ToModel,WithHeadingRow,WithValidation
             'advance' => $row['advance'],
             'vat' => $row['vat'],
             'total' => $row['total'],
-           
             'admin_id' =>$row['admin_id'],
             'path' => date('Y/m'),
+            'status' =>2
+            // 'status' =>$row['status'],
         
         ]);
 
@@ -86,8 +81,8 @@ class CustomerImport implements ToModel,WithHeadingRow,WithValidation
     }
     public function columnFormats(): array {
         return [
-            'date' => NumberFormat::FORMAT_DATE_DDMMYYYY,
-            'update' => NumberFormat::FORMAT_DATE_DDMMYYYY
+            'connectiondate' => NumberFormat::FORMAT_DATE_YYYYMMDD
+          
         ];
     }
 }

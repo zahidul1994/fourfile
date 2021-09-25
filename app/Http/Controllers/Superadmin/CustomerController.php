@@ -33,7 +33,7 @@ class CustomerController extends Controller
   public function index(Request $request)
   {
     if (request()->ajax()) {
-      return datatables()->of(Customer::with('admin','district','thana','area','bill.collection')->wherestatus(1))
+      return datatables()->of(Customer::with('admin','district','thana','area','bill.collection'))
         ->addColumn('action', function ($data) {
           $button ='<button type="button" id="UpdateBillBtn" style="border:0; background: none; padding: 0 !important; margin: 0 !important" uid="' . $data->bill[0]->id . '" class="invoice-action-view btn-sm" title="Update Bill"><i class="material-icons" style="font-size: 16px; color: #F77B00;">sync</i></button>'; 
           $button .= '&nbsp;&nbsp;';

@@ -42,7 +42,7 @@
             "icon": "filter_vintage",
 
             "submenu": [{
-                    "url": "customer/collection",
+                    "url": "customer/complain",
                     "name": "Collection Search",
                     "i18n": "Collection Search",
                     "slug": "customer-collection"
@@ -66,23 +66,31 @@
         },
         {
             "url": "javascript:void(0)",
-            "name": "Print",
-            "i18n": "Print",
+            "name": "Complain",
+            "i18n": "Complain",
             "class": "collapsible-header waves-effect waves-cyan",
-            "slug": "print",
-            "icon": "print",
+            "slug": "complain",
+            "icon": "compare_arrows",
             "submenu": [{
-                "url": "customer/monthlyprint",
-                "name": "Monthly Print",
-                "i18n": "Monthly Print",
-                "slug": "customer/monthlyprint"
+                    "url": "customer/complainlist",
+                    "name": "Complain List",
+                    "i18n": "Complain List",
+                    "slug": "customer/complainlist"
                 },
                 {
-                    "url": "customer/printlocationwise",
-                    "name": "Print Locationwise",
-                    "i18n": "Print Locationwise",
-                    "slug": "customer/printlocationwise"
+                    "url": "customer/createcomplain",
+                    "name": "Create Complain",
+                    "i18n": "Create Complain",
+                    "slug": "customer/createcomplain"
+                },
+                {
+                    "url": "customer/complainsetting",
+                    "name": "Complain Setting",
+                    "i18n": "Complain Setting",
+                    "slug": "customer/complainsetting"
                 }
+                
+                
 
             ]
         }

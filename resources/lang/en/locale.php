@@ -168,7 +168,7 @@ return [
     "Create Collection"=> "Create Collection", 
     "Cancel Collection"=> "Cancel Collection", 
 	"Print"=> "Print",
-	"Print Locationwise"=> "Print Locationwise",
+	"By Location"=> "By Location",
     "Medicineinfo List"=> "Medicineinfo List",
     "Monthly Print"=> "Monthly Print",
 	"Inactive Customer"=> "Inactive Customer", 
