@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\Customer;
 use App\Models\Superadmin;
 use Illuminate\Http\Request;
 use Kamaln7\Toastr\Facades\Toastr;
@@ -167,12 +168,21 @@ class LoginController extends Controller
 
                 return $this->loggedOut($request) ?: redirect('/login/user');
             }
-        } else {
+        } elseif ($request->user == 'customer') {
+            //$info = Customer::find(Auth::id())->update(array('remember_token' => null));
+
+                $this->guard()->logout();
+
+                $request->session()->invalidate();
+
+                return $this->loggedOut($request) ?: redirect('/login/customer');
+            }
+         else {
             $this->guard()->logout();
 
             $request->session()->invalidate();
 
-            return $this->loggedOut($request) ?: redirect('/superadmin');
+            return $this->loggedOut($request) ?: redirect('/');
         }
     }
 
@@ -252,7 +262,7 @@ class LoginController extends Controller
     {
         $pageConfigs = ['bodyCustomClass' => 'login-bg', 'isCustomizer' => false];
 
-        return view('auth.loginuser', [
+        return view('auth.logincustomer', [
             'pageConfigs' => $pageConfigs
         ]);
     }

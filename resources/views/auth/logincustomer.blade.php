@@ -19,7 +19,7 @@
                                                                 
                                                             @endif</h5>
                                                          
-               <form  class="login-form"  method="POST" action="{{ url('login/customer') }}" aria-label="{{ __('Login') }}">
+                                                            <form  class="login-form"  method="POST" action="{{ url('login/customer') }}" aria-label="{{ __('Login') }}">
                                                       
                          
                       @csrf
@@ -31,10 +31,10 @@
         <div class="row margin">
           <div class="input-field col s12">
             <i class="material-icons prefix pt-2">person_outline</i>
-            <input id="email" type="email" class=" @error('email') is-invalid @enderror" name="email"
-              value="{{ old('email') }}" required autocomplete="email" autofocus>
-            <label for="email" class="center-align">{{ __('Email') }}</label>
-            @error('email')
+            <input id="email" type="text" class=" @error('loginid') is-invalid @enderror" name="loginid"
+              value="{{ old('loginid') }}" required autocomplete="loginid" autofocus>
+            <label for="email" class="center-align">{{ __('Login ID') }}</label>
+            @error('loginid')
             <small class="red-text ml-10" role="alert">
               {{ $message }}
             </small>

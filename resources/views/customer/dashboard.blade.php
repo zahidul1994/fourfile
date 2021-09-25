@@ -1,4 +1,4 @@
-@extends('layouts.userMaster')
+@extends('layouts.customerMaster')
 @section('content')
 @section('title', "Hello User")
 
