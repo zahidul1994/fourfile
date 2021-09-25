@@ -12,7 +12,7 @@
                                
                                 <div id="Form-advance" class="card card card-default scrollspy">
                                     <div class="card-content">
-                                        <h4 class="card-title">Select XIsx File </h4>
+                                        <h4 class="card-title">Select Info To Generate XIsx  </h4>
                                      
                                         {!! Form::open(array('url' => 'admin/makecusomerexcel','method'=>'POST','id'=>'theform','files'=>true )) !!}
                                     
@@ -38,7 +38,7 @@
 
 </div>
 <div class="row">
-  <div class="input-field col m6 s12">
+  <div class="input-field col m4 s12">
       {!! Form::text('customermobile', 88, ['id' => 'customermobile', 'required']) !!}
       {!! Form::label('customermobile', '* Mobile No.') !!}
 
@@ -82,36 +82,37 @@
              </select>
    </div>
        
-  
-       <div class="input-field col m6 s12">
-          <select class="select2 browser-default" id="thana_id" name="thana_id" required>
-               <option value="">Select Thana *</option>
-             </select>
-   
-       </div>
-       <div class="input-field col m6 s12">
-          <select class="select2 browser-default" id="area_id" name="area_id" required>
-               <option value="">Select Area *</option>
-             </select>
-   
-       </div>
- 
 </div>
+      
+ <div id="row">
+
+    <div class="input-field col m6 s12">
+        <select class="select2 browser-default" id="thana_id" name="thana_id" required>
+             <option value="">Select Thana *</option>
+           </select>
+ 
+     </div>
+     <div class="input-field col m6 s12">
+        <select class="select2 browser-default" id="area_id" name="area_id" required>
+             <option value="">Select Area *</option>
+           </select>
+ 
+     </div>
+     </div>
+
 
 
 <div class="row">
- 
-  <div class="input-field col m6 s12">
+    
+  <div class="input-field col m4 s12">
       {!! Form::text('buildingname', null, ['id' => 'buildingname']) !!}
       {!! Form::label('buildingname', 'Building Name') !!}
   </div>
-  <div class="input-field col m6 s12">
+  <div class="input-field col m4 s12">
       {!! Form::text('houseno', null, ['id' => 'houseno', 'required']) !!}
       {!! Form::label('houseno', '* House No.') !!}
   </div>
-</div>
 
-<div class="row">
   <div class="input-field col m4 s12">
       {!! Form::select('floor', [ 'Ground Floor' => 'Ground Floor',
       '1st Floor' => '1st Floor',
@@ -145,11 +146,10 @@
       '30th Floor' => '30th Floor'], null, ['id' => 'floor_id', 'required', 'class' => '']) !!}
       {!! Form::label('floor', 'Floor *') !!}
   </div>
+  </div>
 
 
-
-
-<div class="row static-hide">
+  <div class="row">
 
 <div class="input-field col m6 s12">
 {!! Form::text('secretname', null, ['id' => 'secretname']) !!}
@@ -166,9 +166,9 @@
 
 
 <div class="row">
-<div class="input-field col m6 s12">
+<div class="input-field col m4 s12">
 {{-- {!! Form::select('package_id', , null, ['id' => 'package_id', 'placeholder' => 'Select One']) !!} --}}
-<select name="package_id" id="package_id" placeholder="Select One">
+<select name="package_id" id="package_id" placeholder="Select One" required>
   <option  selected disabled>Select One</option>
 @foreach (CommonFx::Packageame() as  $value)
   <option value="{{$value->id}}">{{$value->packagename}} &nbsp; &nbsp; {{$value->packageprice}}</option>
@@ -179,19 +179,14 @@
 </div>
 
 
-</div>
-
-<h4 class="card-title">Billing</h4>
-
-<div class="row">
-<div class="input-field col m6 s12">
+<div class="input-field col m4 s12">
 {!! Form::number('monthlyrent', null, ['id' => 'monthlyrent', 'required','placeholder'=>'select package']) !!}
 {!! Form::label('monthlyrent', '* Monthly Rent',['class' => 'active']) !!}
 
 </div>
 
-<div class="input-field col m6 s12">
-{!! Form::number('due', null, ['id' => 'due']) !!}
+<div class="input-field col m4 s12">
+{!! Form::number('due', 0, ['id' => 'due']) !!}
 {!! Form::label('due', 'Due') !!}
 
 </div>
@@ -200,36 +195,33 @@
 
 
 <div class="row">
-<div class="input-field col m6 s12">
-{!! Form::number('addicrg', null, ['id' => 'addicrg']) !!}
+<div class="input-field col m4 s12">
+{!! Form::number('addicrg', 0, ['id' => 'addicrg']) !!}
 {!! Form::label('addicrg', 'Additional Charge') !!}
 
 </div>
 
-<div class="input-field col m6 s12">
-{!! Form::number('discount', null, ['id' => 'discount']) !!}
+<div class="input-field col m4 s12">
+{!! Form::number('discount', 0, ['id' => 'discount']) !!}
 {!! Form::label('discount', 'Discount') !!}
 
 </div>
 
-</div>
-<div class="row">
-<div class="input-field col m6 s12">
-{!! Form::number('advance', null, ['id' => 'advance']) !!}
+<div class="input-field col m4 s12">
+{!! Form::number('advance', 0, ['id' => 'advance']) !!}
 {!! Form::label('advance', 'Advance') !!}
 
 </div>
 
 <div class="input-field col m6 s12">
-{!! Form::number('vat', null, ['id' => 'vat']) !!}
+{!! Form::number('vat', 0, ['id' => 'vat']) !!}
 {!! Form::label('vat', 'VAT (%)') !!}
 
 </div>
 
-</div>
-<div class="row">
+
 <div class="input-field col m6 s12">
-{!! Form::number('totalshow', null, ['id' => 'total','disabled','step'=>'any']) !!}
+{!! Form::number('totalshow', 0, ['id' => 'total','disabled','step'=>'any']) !!}
 <input type="hidden" name="total"  id="intotal" value="">
 {{-- {!! Form::label('total', 'Total') !!} --}}
 
@@ -258,14 +250,8 @@
 {!! Form::label('clienttype_id', 'Type of Client') !!}
 </div>
 
+
 <div class="input-field col m6 s12">
-{!! Form::text('dlp', null, ['id' => 'dlp']) !!}
-{!! Form::label('dlp', 'Distribution Location Point') !!}
-
-</div>
-
-
-<div class="input-field col m4 s12">
   {!! Form::select('status', ['1' => 'Active', '2' => 'Pending'], 2, ['id' => 'status', 'class' => '']) !!}
   {!! Form::label('status', '* Customer Status ') !!}
   </div>
@@ -278,7 +264,7 @@
            
                                                 <div class="row">
                                                     <div class="input-field col s12">
-                                                        <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Submit
+                                                        <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Generate 
                                                             <i class="material-icons right">send</i>
                                                         </button>
                                                     </div>

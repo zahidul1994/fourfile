@@ -85,6 +85,10 @@ public static function boot()
        $model->loginid = IdGenerator::generate(['table' => 'customers','field'=>'loginid', 'length' => 8, 'prefix' =>'NAQW']);
     });
 }
+public function admin()
+{
+	return $this->belongsTo('App\Models\Admin');
+}
 public function package()
 {
 	return $this->belongsTo('App\Models\Package');

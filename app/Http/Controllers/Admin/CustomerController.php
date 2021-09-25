@@ -86,6 +86,7 @@ class CustomerController extends Controller
       ->addColumn('address' ,function($data){
         return 'House No- '. @$data->houseno.'<br/>'. @$data->district->district.'<br/>'.@$data->thana->thana.'<br/>'.@$data->area->areaname;
     })
+   
         ->addIndexColumn()
         ->rawColumns(['action','duetotal','status','address'])
         

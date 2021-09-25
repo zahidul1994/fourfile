@@ -76,10 +76,9 @@ class DashboardController extends Controller
     }
 
     public function makecusomerexcelform(Request $request){
-      
-        // dd($request->file('customers'));
-         return  Excel::download(new Customerexcelform($request),'blogs.xlsx');
-                Toastr::success("Importe Create Successfully", "Well Done");
+    
+         return  Excel::download(new Customerexcelform($request),'customer.xlsx');
+
                        return Redirect::to('admin/customerexcelform'); 
             }
 

@@ -1,15 +1,64 @@
 <table>
     <thead>
     <tr>
-        <th>Name</th>
-        <th>Email</th>
+        <th>adminid</th>
+        <th>customername</th>
+        <th>password</th>
+          <th>email</th>
+        <th>customermobile</th>
+        <th>idnumber</th>
+        <th>idnumbertype</th>
+        <th>country_id</th>
+        <th>division_id</th>
+        <th>district_id</th>
+        <th>thana_id</th>
+        <th>area_id</th>
+        <th>buildingname</th>
+        <th>houseno</th>
+        <th>floor</th>
+        <th>secretname</th>
+        <th>scrtnamepass</th>
+        <th>package_id</th>
+        <th>monthlyrent</th>
+        <th>addicrg</th>
+        <th>discount</th>
+        <th>advance</th>
+        <th>vat</th>
+        <th>total</th>
+        <th>clienttype_id</th>
+        <th>status</th>
     </tr>
     </thead>
     <tbody>
  
         <tr>
-            <td>{{ $infos}}</td>
-     
+            <td>{{$admin_id}}</td>
+            <td>{{$customername}}</td>
+            <td>{{$password}}</td>
+            <td>{{$email}}</td>
+            <td>{{$customermobile}}</td>
+            <td>{{$idnumber}}</td>
+            <td>{{$idnumbertype}}</td>
+            <td>{{$country_id}}</td>
+            <td>{{$division_id}}</td>
+            <td>{{$district_id}}</td>
+            <td>{{$thana_id}}</td>
+            <td>{{$area_id}}</td>
+            <td>{{$buildingname}}</td>
+            <td>{{$houseno}}</td>
+            <td>{{$floor}}</td>
+            <td>{{$secretname}}</td>
+            <td>{{$scrtnamepass}}</td>
+            <td>{{$package_id}}</td>
+            <td>{{$monthlyrent}}</td>
+            <td>{{$addicrg}}</td>
+            <td>{{$discount}}</td>
+            <td>{{$advance}}</td>
+            <td>{{$vat}}</td>
+            <td>{{$total}}</td>
+            <td>{{$clienttype_id}}</td>
+            <td>{{$status}}</td>
+           
         </tr>
   
     </tbody>

@@ -248,6 +248,30 @@ Route::post('replyemail','ContactController@store');
 
 //Contact  End
 
+
+
+//Customer Start
+Route::get('customerlist','CustomerController@index');
+Route::get('pendingcustomerlist','CustomerController@pendingcustomer');
+Route::get('createcustomer','CustomerController@create');
+Route::post('createcustomer','CustomerController@store');
+Route::get('editcustomer/{id}','CustomerController@edit');
+Route::get('customerprofile/{id}','CustomerController@show');
+ Route::patch('updatecustomer/{id}','CustomerController@update');
+ Route::delete('deletecustomer/{id}','CustomerController@destroy');
+Route::post('customerstatus', 'CustomerController@setapproval');
+Route::post('searchcustomer', 'CustomerController@searchmedicine');
+Route::get('findbill/{id}','CustomerController@findbill');
+Route::post('updatebillcustomer','CustomerController@updatebillcustomer');
+Route::get('inactivecustomer','CustomerController@inactivecustomer');
+Route::get('inactivecustomerfind','CustomerController@findinactivecustomer');
+Route::get('restorecustomer/{id}','CustomerController@restorecustomer');
+Route::post('sendsmscustomer','CustomerController@sendsmscustomer');
+//Customer  End
+
+
+
+
     }
 
 );

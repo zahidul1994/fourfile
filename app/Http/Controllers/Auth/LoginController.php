@@ -261,7 +261,7 @@ class LoginController extends Controller
         // return $request->all();
         $this->validate($request, [
             'loginid'   => 'required|exists:customers,loginid',
-            'password' => 'required|min:6'
+            'password' => 'required|min:2|max:198'
         ]);
         $remember = (!empty($request->remember)) ? TRUE : FALSE;
         if (Auth::guard('customer')->attempt(['loginid' => $request->loginid, 'password' => $request->password], $remember)) {

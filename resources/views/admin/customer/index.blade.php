@@ -6,7 +6,9 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('vendors/data-tables/css/jquery.dataTables.min.css') }}">
     <link rel="stylesheet" type="text/css"
         href="{{ asset('vendors/data-tables/extensions/responsive/css/responsive.dataTables.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('vendors/data-tables/css/select.dataTables.min.css') }}">
+   
+    <link href="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css" rel="stylesheet">
+   
 @endsection
 {{-- page style --}}
 @section('page-style')
@@ -242,7 +244,13 @@ table.dataTable thead .sorting_asc{
 
 
 @section('page-script')
-    <script src="{{ asset('app-assets/js/scripts/data-tables.js') }}"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.4/js/dataTables.buttons.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>  
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.print.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.colVis.min.js "></script>
     <script>
         $(document).ready(function() {
             $(".sidenav-main").addClass("nav-collapsed");
@@ -252,10 +260,16 @@ table.dataTable thead .sorting_asc{
             });
 
             $('#dataTable').DataTable({
+                
                 // responsive: true,
                 dom: 'Bfrtip',
+                exportOptions: {
+                stripHtml: false,
+				columns: ':visible'
+            },
         buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
+            
+            'copy', 'csv', 'pdf', 'print','colvis'
         ],
    
                 processing: true,
@@ -286,10 +300,7 @@ table.dataTable thead .sorting_asc{
                     },
                     {
                         data: 'address',
-                        name: 'area.areaname',
-                       
-                      
-                    },
+                      },
 
                     {
                         data: 'customermobile',
