@@ -5,14 +5,33 @@
     <style>
 
 @media print  {
-  html, body,section {
+  .sectionone {
     width: 210mm;
     height: 297mm;
     page-break-after: always;
   }
   /* ... the rest of the rules ... */
 }
-
+@media print  {
+ .sectiontwo {
+     width: 210mm;
+    height: 146.5mm !important;
+   
+  }
+  #footer{
+    page-break-after: always;
+}
+}
+@media print  {
+ .sectionthree {
+     width: 210mm;
+    height: 99mm !important;
+   
+  }
+  #footer{
+    page-break-after: always;
+}
+}
     </style>
 @endsection
 
@@ -24,8 +43,9 @@
     <span>Print</span>
 </a>
 @if (CommonFx::printsetting()->papersetting == 'onewithheadin')
+
     @foreach ($customers as $customer)
-        <section class="invoice-view-wrapper sectionone">
+        <section class="invoice-view-wrapper section sectionone">
             <div class="row">
                 <!-- invoice view page -->
                 <div class="col xl12 m12 s12">
@@ -389,12 +409,12 @@
             <!-- invoice action  -->
 
             </div>
-           <span id="footer"></span>
+         
         </section>
     @endforeach
 @elseif (CommonFx::printsetting()->papersetting=='twowithheadin')
     @foreach ($customers as $customer)
-        <section class="invoice-view-wrapper section">
+        <section class="invoice-view-wrapper section sectiontwo">
 
             <div class="row">
                 <!-- invoice view page -->
@@ -505,6 +525,22 @@
                                                             <span>{{ @$customer->bill[0]->total }}</span>
                                                         </li>
                                                     </ul>
+                                                    <div class="row">
+                                                        <div class="col m6 s12">
+                                                            <p>
+                                                                Note: {{ CommonFx::printsetting()->customtext }}
+                                                            </p>
+                                                        </div>
+                                                        <div class="col m6 s12">
+        
+                                                            <p class="right">
+                                                                <img
+                                                                    src="{{ @url('storage/app/files/shares/singnaturephoto/thumbs/' . CommonFx::printsetting()->singnature) }}" alt="">
+                                                                <br>
+                                                                Authorized Signature
+                                                            </p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <!-- product details table-->
@@ -718,12 +754,26 @@
                                                             <span>{{ @$customer->bill[0]->total }}</span>
                                                         </li>
                                                     </ul>
+                                                    <div class="row">
+                                                        <div class="col m6 s12">
+                                                            <p>
+                                                                Note: {{ CommonFx::printsetting()->customtext }}
+                                                            </p>
+                                                        </div>
+                                                        <div class="col m6 s12">
+        
+                                                            <p class="right">
+                                                                <img
+                                                                    src="{{ @url('storage/app/files/shares/singnaturephoto/thumbs/' . CommonFx::printsetting()->singnature) }}" alt="">
+                                                                <br>
+                                                                Authorized Signature
+                                                            </p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <!-- product details table-->
-                                            <p>
-                                                {{ CommonFx::printsetting()->customtext }}
-                                            <p>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -738,13 +788,16 @@
                     </div>
                 </div>
             </div>
-           
+            @if($loop->iteration  % 2 == 0)
+            <div id="footer"></div>
+        @endif
+          
 
         </section>
     @endforeach
 @elseif (CommonFx::printsetting()->papersetting=='threewithheadin')
     @foreach ($customers as $customer)
-        <section class="invoice-view-wrapper section">
+        <section class="invoice-view-wrapper section sectionthree">
 
             <div class="row">
                 <!-- invoice view page -->
@@ -800,7 +853,7 @@
                                                         Billing Month :
                                                         {{ date('M-Y', strtotime(@Carbon\Carbon::now())) }}
                                                     </p>
-                                                    // mark:2
+                                                  
 
                                                 </div>
                                                 <div class="col m6 s12">
@@ -954,25 +1007,26 @@
                                                             <span>{{ @$customer->bill[0]->total }}</span>
                                                         </li>
                                                     </ul>
+                                                    <div class="row">
+                                                        <div class="col m6 s12">
+                                                            <p>
+                                                                Note: {{ CommonFx::printsetting()->customtext }}
+                                                            </p>
+                                                        </div>
+                                                        <div class="col m6 s12">
+        
+                                                            <p class="right">
+                                                                <img
+                                                                    src="{{ @url('storage/app/files/shares/singnaturephoto/thumbs/' . CommonFx::printsetting()->singnature) }}" alt="">
+                                                                <br>
+                                                                Authorized Signature
+                                                            </p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
 
-                                            <div class="row">
-                                                <div class="col m6 s12">
-                                                    <p>
-                                                        Note: {{ CommonFx::printsetting()->customtext }}
-                                                    </p>
-                                                </div>
-                                                <div class="col m6 s12">
-
-                                                    <p class="right">
-                                                        <img
-                                                            src="{{ @url('storage/app/files/shares/singnaturephoto/thumbs/' . CommonFx::printsetting()->singnature) }}">
-                                                        <br>
-                                                        Authorized Signature
-                                                    </p>
-                                                </div>
-                                            </div>
+                                           
 
                                         </div>
                                     </div>
@@ -990,13 +1044,15 @@
                 </div>
             </div>
             <!-- invoice action  -->
-
+            @if($loop->iteration % 3 == 0)
+            <div id="footer"></div>
+        @endif
 
         </section>
     @endforeach
 @elseif (CommonFx::printsetting()->papersetting=='padwithheadin')
     @foreach ($customers as $customer)
-        <section class="invoice-view-wrapper section">
+        <section class="invoice-view-wrapper section sectionone">
             <div class="row">
                 <!-- invoice view page -->
                 <div class="col xl12 m12 s12">

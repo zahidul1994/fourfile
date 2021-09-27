@@ -1,5 +1,5 @@
 {{-- layout extend --}}
-@extends('layouts.adminMaster')
+@extends('layouts.customerMaster')
 
 {{-- Page title --}}
 @section('title','Complaindetails')
@@ -21,7 +21,7 @@
     <div class="content-area content-right">
       <div class="app-wrapper">
         <!-- Sidebar menu for small screen -->
-        <a href="{{url('admin/complainlist')}}" data-target="chat-sidenav" class="sidenav-trigger hide-on-large-only">
+        <a href="{{url('customer/complainlist')}}" data-target="chat-sidenav" class="sidenav-trigger hide-on-large-only">
           <i class="material-icons">back</i>
         </a>
         <!--/ Sidebar menu for small screen -->
@@ -46,12 +46,12 @@
                 </div>
                 <span class="option-icon">
                   <span class="favorite">
-                    <a href="{{url('admin/complainlist')}}" title="Click for Back" >
+                    <a href="{{url('customer/complainlist')}}" title="Click for Back" >
                     <i class="material-icons">arrow_back</i>
                     </a>
                   </span>
                   
-                  <i class="material-icons" id="Closepomplain" title="Click for Close Complain " >done_all</i>
+                  <i class="material-icons" id="Closepomplain">done_all</i>
                   <i class="material-icons">more_vert</i>
                 </span>
               </div>
@@ -83,16 +83,12 @@
                     <div class="chat">
                       <div class="chat-avatar">
                         <a class="avatar">
-                          <img src="{{@asset('storage/app/files/shares/profileimage/'.Auth::user()->image)}}"  class="circle" alt="avatar" />
+                          <img src="{{@asset('storage/app/files/shares/profileimage/'.$infos->admin->image)}}"  class="circle" alt="avatar" />
                         </a>
                       </div>
                       <div class="chat-body">
                         <div class="chat-text"> 
-                          <p>{{@$info->replymessage}}   @if (empty(@$info->replymessage
-
-                          ))
-                              <span  title="Click For Reply" rid="{{$info->id}}" id="Replysms"><i class="material-icons app-header-icon text-top">reply</i></span>
-                          @endif </p>
+                          <p>{{@$info->replymessage}}  </p>
                         </div>
                        
                       </div>
@@ -160,7 +156,7 @@
                 }
                 $.ajax({
                     
-                    url: url + '/admin/addcomplaintext',
+                    url: url + '/customer/addcomplaintext',
                     method: "POST",
                     type: "POST",
                     data: {
@@ -193,7 +189,7 @@
                     },
                     error: function(d) {
 
-                        toastr.warning('Bii Allready Paid');
+                        toastr.warning('Sorry Paid');
                     }
                 });
 
@@ -226,25 +222,9 @@ $(document).on('click','#addBtn', function(){
   
 });
 
-$(document).on('click','#Closepomplain', function(){
-     
-      $.ajax({
-          type: "post",
-          url:url+'/admin/closecomplain/'+'{{$infos->id}}',
-          data: {
-             
-              
-          },
-          dataType: "json",
-          success: function (d) {
-              toastr.success("Complain Colse");
-              window.history.back();
-
-          }
-      });
 
   
-});
+
 
             
 

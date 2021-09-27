@@ -540,5 +540,16 @@ $sendstatus = $p[0];
 
 }
         }
+
+
+//customer area
+public static function CustomerComplaintitle(){
+    return Complaintext::whereadmin_id(Auth::guard('customer')->user()->admin_id)->get();
+    
+    
+
+} 
+
+
     
 }

@@ -46,7 +46,7 @@ $("#seennotify").click(function(){
 
  $.ajax({
      type: "post",
-     url:url+'/user/seennotification',
+     url:url+'/customer/seennotification',
 
  });
 
@@ -56,7 +56,7 @@ $("#notificationsdropdown").click(function(){
 
 $.ajax({
     type: "post",
-    url:url+'/user/deletenotification',
+    url:url+'/customer/deletenotification',
        success: function (d) {
             M.toast({
     html: 'Your Seen Your Notifcation'

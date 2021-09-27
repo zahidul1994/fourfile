@@ -471,6 +471,24 @@ Route::group([ 'prefix'=>'customer',
     ], function() {
         Route::get('dashboard', 'DashboardController@index');
        
+//Complain Start 
+Route::get('complainlist','ComplainController@index');
+Route::get('createcomplain','ComplainController@create');
+Route::post('createcomplain','ComplainController@store');
+Route::get('editcomplain/{id}','ComplainController@edit');
+Route::get('replycomplain/{id}','ComplainController@show');
+Route::post('replycomplaintext','ComplainController@replycomplain');
+Route::post('addcomplaintext','ComplainController@addcomplaintext');
+ Route::patch('updatecomplain/{id}','ComplainController@update');
+ Route::delete('deletecomplain/{id}','ComplainController@destroy');
+ Route::post('closecomplain/{id}','ComplainController@closecomplain');
+Route::post('searchsinglecustomerforcomplain', 'ComplainController@searchsinglecustomer');
+Route::get('complainsetting', 'ComplainController@opencomplainsetting');
+Route::post('complainsetting', 'ComplainController@storecomplainsetting');
+Route::get('editcomplainsetting/{id}', 'ComplainController@editcomplainsetting');
+Route::put('editcomplainsetting/{id}', 'ComplainController@updatecomplainsetting');
+Route::delete('deletecomplainsetting/{id}', 'ComplainController@deletecomplainsetting');
+//Complain  End
        
     }
 );

@@ -1,4 +1,4 @@
-@extends('layouts.adminMaster')
+@extends('layouts.customerMaster')
 
 @section('content')
 @section('title', 'Create Payment')
@@ -12,84 +12,22 @@
     {{-- @can('Merchant-List') --}}
     <section class="invoice-view-wrapper section">
         <div class="row">
-            <div class="col xl3 m4 s12">
-                <div class="card invoice-action-wrapper">
-                    <div class="card-content" id="dd">
-                        <form>
-                            <input placeholder="Customer id/Name/Phone" id="search" type="text"
-                                class="search-box validate white search-circle">
-                        </form>
-                        <div class="invoice-action-btn">
-                            <a href="#"
-                                class="btn indigo waves-effect waves-light display-flex align-items-center justify-content-center">
-                                <i class="material-icons mr-4">check</i>
-                                <span class="text-nowrap">Search </span>
-                            </a>
-                        </div>
-                      
-
-
-                    </div>
-                </div>
-            </div>
-            {!! Form::open(array('url' => 'admin/createcomplain','method'=>'POST','files'=>true )) !!}
+           
+            {!! Form::open(array('url' => 'customer/createcomplain','method'=>'POST','files'=>true )) !!}
             <!-- invoice view page -->
-            <div class="col xl9 m8 s12">
+            <div class="col xl12 m12 s12">
                 <div class="card">
                     <div class="card-content invoice-print-area">
                         @include('partial.formerror')
-                        {!! Form::hidden('customer_id', '', ['id' => 'customer_id']) !!}
-                        <!-- invoice address and contact -->
-                        <div class="row invoice-info">
-                            <h3 class="invoice-from center ">Customer Information</h3>
-                            <div class="col m6 s12">
-
-                                <div class="invoice-address">
-                                    <span>ID</span>
-                                </div>
-                                <div class="invoice-address">
-                                    <span>Name</span>
-                                </div>
-                                <div class="invoice-address">
-                                    <span>PPPoE Username</span>
-                                </div>
-                                <div class="invoice-address">
-                                    <span>Address</span>
-                                </div>
-                            </div>
-                            <div class="col m6 s12">
-                                <div class="divider show-on-small hide-on-med-and-up mb-3"></div>
-
-                                <div class="invoice-address">
-                                    <div id="userid"></div>
-
-                                </div>
-                                <div class="invoice-address" id="name">
-
-                                </div>
-                                <div class="invoice-address" id="ppusername">
-
-                                </div>
-                                <div class="invoice-address" id="adress">
-
-                                </div>
-                                <div class="invoice-address" id="total">
-
-                                </div>
-                            </div>
-                        </div>
+                      
                         <div class="divider mb-3 mt-3"></div>
                         <!-- product details table-->
                         <div class="invoice-product-details">
                             <table  class="table table-striped table-hover">
-                                <thead>
-                                 
-                                </thead>
-                        
-                        
+                              
                                 <tbody>
-                                  @if(count(CommonFx::Complaintitle())>0)
-                                  @foreach(CommonFx::Complaintitle() as $value)
+                                  @if(count(CommonFx::CustomerComplaintitle())>0)
+                                  @foreach(CommonFx::CustomerComplaintitle() as $value)
                                        
                                   <tr>
                                    
@@ -124,6 +62,7 @@
                 <!-- invoice action  -->
 
             </div>
+        </div>
     </section>
 
 
@@ -167,7 +106,7 @@ $(".card-alert .close").click(function () {
                 $search = $('#search').val();
                 $.ajax({
                     type: "post",
-                    url: url + '/admin/searchsinglecustomer',
+                    url: url + '/customer/searchsinglecustomer',
                     data: {
                         id: $search
 

@@ -1,5 +1,5 @@
-@extends('layouts.adminMaster')
-@section('title', 'Complainsettin')
+@extends('layouts.customerMaster')
+@section('title', 'Complain List')
 {{-- vendor styles --}}
 @section('vendor-style')
     <link rel="stylesheet" type="text/css" href="{{ asset('vendors/flag-icon/css/flag-icon.min.css') }}">
@@ -26,7 +26,7 @@
 
 
                     <div class="col s12 m3 l3 input-field">
-                   <a href="{{url('admin/createcomplain')}}" class="btn ">Create Complain</a>
+                   <a href="{{url('customer/createcomplain')}}" class="btn ">Create Complain</a>
                     </div>
 
                     <div class="row">
@@ -68,7 +68,7 @@
     <div id="Complanemodal" class="modal">
       <div class="modal-content">
         <h5> @include('partial.ajaxformerror')</h5>
-        {!! Form::open(['url' => 'admin/', 'class' => 'form', 'id' => 'ccccc']) !!}
+        {!! Form::open(['url' => 'customer/createcomplain', 'class' => 'form', 'id' => 'ccccc']) !!}
         {!! Form::hidden('complainid', '', ['id' => 'complainid']) !!}
           <div class="row">
               <div class="input-field col m12 s12">
@@ -123,7 +123,7 @@
                 serverSide: true,
                 ajax: {
                    
-                    url: "{{ url('admin/complainlist') }}",
+                    url: "{{ url('customer/complainlist') }}",
 
                 },
 
@@ -199,7 +199,7 @@
                 if (!confirm('Sure?')) return;
                 $id = $(this).attr('rid');
                 //console.log($roomid);
-                $info_url = url + '/admin/deletecomplain/' + $id;
+                $info_url = url + '/customer/deletecomplain/' + $id;
                 $.ajax({
                     url: $info_url,
                     method: "DELETE",
@@ -224,7 +224,7 @@
 if ($(this).val() == 'Save') {
  
     $.ajax({
-        url:"{{ url('/admin/createcomplainsetting') }}",
+        url:"{{ url('/customer/createcomplainsetting') }}",
         method: "POST",
         data: {
           complaintitle: $("#complaintitle").val(),
@@ -261,7 +261,7 @@ $("#Complanemodal").on('click', '#addBtn', function() {
 if ($(this).val() == 'Update') {
 
     $.ajax({
-        url: url + '/admin/editcomplainsetting/' + $("#complainid").val(),
+        url: url + '/customer/editcomplainsetting/' + $("#complainid").val(),
         method: "PUT",
         type: "PUT",
         data: {
@@ -294,7 +294,7 @@ $("#dataTable").on('click', '#editBtn', function() {
 
 $paybyid = $(this).attr('rid');
 
-$info_url = url + '/admin/editcomplainsetting/' + $paybyid ;
+$info_url = url + '/customer/editcomplainsetting/' + $paybyid ;
 //console.log($info_url);
 // return;
 $.get($info_url, {}, function(d) {

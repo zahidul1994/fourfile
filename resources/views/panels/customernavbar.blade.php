@@ -19,14 +19,15 @@
         <li>
           <a class="waves-effect waves-block waves-light notification-button" href="javascript:void(0);"
             data-target="notifications-dropdown" id="seennotify">
-            <i class="material-icons">notifications_none<small class="notification-badge">{{ auth()->user()->unreadNotifications->count() }}</small></i>
+            <i class="material-icons">notifications_none<small class="notification-badge">{{ auth()->user()->unreadNotifications->count()}}</small></i>
           </a>
         </li>
         <li>
           <a class="waves-effect waves-block waves-light profile-button" href="javascript:void(0);"
             data-target="profile-dropdown">
             <span class="avatar-status avatar-online">
-              <img src="{{@asset('storage/app/files/shares/profileimage/'.Auth::user()->image)}}" alt="avatar"><i></i>
+              
+              <img  src="{{@url('storage/app/files/shares/uploads/'.Auth::guard('customer')->user()->path.'/thumbs/'.Auth::guard('customer')->user()->photo)}}" alt="avatar"><i></i>
             </span>
           </a>
         </li>

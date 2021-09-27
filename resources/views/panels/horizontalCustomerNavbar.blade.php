@@ -11,7 +11,7 @@
                 @if(!empty ($configData['templateTitle']))
                 {{$configData['templateTitle']}}
                 @else
-                Employee
+                Customer
                 @endif
               </span>
             </a>
