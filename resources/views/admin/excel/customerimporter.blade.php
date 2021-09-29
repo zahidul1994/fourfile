@@ -66,23 +66,23 @@
 
 </div>
 <div class="row">
-    <div class="input-field col m4 s12">
+    <div class="input-field col m6 s12">
         {!! Form::text('contactperson', null, ['id' => 'contactperson']) !!}
         {!! Form::label('contactperson', 'Contact Person') !!}
     </div>
 
   
-    <div class="input-field col m4 s12">
+    <div class="input-field col m6 s12">
         {!! Form::text('customeraltmobile', null, ['id' => 'customeraltmobile']) !!}
         {!! Form::label('customeraltmobile', 'Alternative Mobile / Phone No.') !!}
 
     </div>
-    <div class="input-field col m4 s12">
-        {!! Form::date('connectiondate', null, ['id' => 'connectiondate','required']) !!}
+    {{-- <div class="input-field col m4 s12">
+        {!! Form::date('connectiondate', date('d/m/Y'), ['id' => 'connectiondate','required']) !!}
         {!! Form::label('connectiondate', '* Connection Date') !!}
   
     </div>
-  
+   --}}
 
 </div>   
 <h4 class="card-title">Address</h4>

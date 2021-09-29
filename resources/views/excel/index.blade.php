@@ -46,7 +46,7 @@
             <td>{{$customermobile}}</td>
             <td>{{$contactperson}}</td>
             <td>{{$customeraltmobile}}</td>
-            <td>2021/01/20</td>
+            <td>month/day/year</td>
             {{-- <td>{{$connectiondate}}</td> --}}
             <td>{{$idnumber}}</td>
             <td>{{$idnumbertype}}</td>

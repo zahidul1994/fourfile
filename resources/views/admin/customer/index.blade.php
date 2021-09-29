@@ -313,43 +313,43 @@ table.dataTable thead .sorting_asc{
                         orderable: false
                     },
                     {
-                        data: 'monthlyrent',
-                        name: 'monthlyrent',
+                        data: 'totalmonthlyrent',
+                        name: 'totalmonthlyrent',
 
                     },
                     {
-                        data: 'due',
-                        name: 'due',
+                        data: 'totaldue',
+                        name: 'totaldue',
 
                     },
                     {
-                        data: 'discount',
-                        name: 'discount',
+                        data: 'totaldiscount',
+                        name: 'totaldiscount',
 
                     },
                     {
-                        data: 'advance',
-                        name: 'advance',
+                        data: 'totaladvance',
+                        name: 'totaladvance',
 
                     },
                     {
-                        data: 'addicrg',
-                        name: 'addicrg',
+                        data: 'totaladdicrg',
+                        name: 'totaladdicrg',
 
                     },
                     {
-                        data: 'vat',
-                        name: 'vat',
+                        data: 'totalvat',
+                        name: 'totalvat',
 
                     },
                     {
-                        data: 'billamount',
-                        name: 'billamount',
+                        data: 'totalbillamount',
+                        name: 'totalbillamount',
 
                     },
                     {
-                        data: 'collection',
-                        name: 'collection',
+                        data: 'totalcollection',
+                        name: 'totalcollection',
 
                     },
                     {

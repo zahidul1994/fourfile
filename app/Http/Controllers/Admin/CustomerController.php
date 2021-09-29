@@ -55,29 +55,29 @@ class CustomerController extends Controller
         return $button;
     }})
     
-      ->addColumn('monthlyrent' ,function($data){
+      ->addColumn('totalmonthlyrent' ,function($data){
        
         return $data->bill[0]->monthlyrent;
     })  
-        ->addColumn('due' ,function($data){
+        ->addColumn('totaldue' ,function($data){
         return $data->bill[0]->due;
     }) 
-      ->addColumn('discount' ,function($data){
+      ->addColumn('totaldiscount' ,function($data){
         return $data->bill[0]->discount;
     }) 
-        ->addColumn('advance' ,function($data){
+        ->addColumn('totaladvance' ,function($data){
         return $data->bill[0]->advance;
     }) 
-    ->addColumn('addicrg' ,function($data){
+    ->addColumn('totaladdicrg' ,function($data){
         return $data->bill[0]->addicrg;
     })
-     ->addColumn('vat' ,function($data){
+     ->addColumn('totalvat' ,function($data){
         return $data->bill[0]->vat;
     }) 
-      ->addColumn('billamount' ,function($data){
+      ->addColumn('totalbillamount' ,function($data){
         return $data->bill[0]->total;
     })
-    ->addColumn('collection' ,function($data){
+    ->addColumn('totalcollection' ,function($data){
       return $data->bill[0]->collection->sum('paid');
   })
   ->addColumn('duetotal' ,function($data){
@@ -88,7 +88,7 @@ class CustomerController extends Controller
     })
    
         ->addIndexColumn()
-        ->rawColumns(['action','duetotal','status','address'])
+        ->rawColumns(['action','duetotal','status','address','totalmonthlyrent','totaldue','totaldiscount','totaladvance','totaladdicrg','totalvat','totalbillamount','totalcollection'])
         
         ->make(true);
     }

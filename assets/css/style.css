@@ -1,0 +1,255 @@
+* {
+    padding: 0;
+    margin: 0;
+    outline: 0;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+a {
+    text-decoration: none
+}
+body{
+    font-family: 'Raleway', sans-serif;
+}
+/* end of basic css*/
+
+.menu-item .nav-link{
+    padding-right: 20px !important;
+    padding-left: 20px !important;
+    font-size: 14px;
+      text-transform: uppercase;
+    font-weight: 700;
+}
+
+#banner{
+    padding: 150px 0 0 0;
+    background: linear-gradient(45deg, #303f9f, #7b1fa2) !important;
+    position: relative;
+}
+.main-menu{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    padding: 20px 0;
+}
+#banner .banner-text {
+  color: #fff;
+  font-size: 42px;
+  font-weight: 400;
+}
+#banner .banner-text span{
+    font-weight: 700;
+}
+.banner-text-col{
+    align-self: center;
+}
+
+.navbar-light .navbar-nav .nav-link{
+    color: #fff
+}
+
+#dashboard-demo{
+    padding: 75px 0;
+}
+.dashboard-demo-tittle{
+    text-align: center;
+    font-size: 38px;
+    font-weight: 400;
+    margin-bottom: 0 !important;
+    padding-bottom: 15px;
+   
+}
+.dashboard-demo-text{
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 0 !important;
+    padding-bottom: 55px;
+     width: 75%;
+    margin: auto;
+    color: #666
+}
+.dash-demo-name{
+    margin-bottom: 0 !important;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: #444
+}
+
+#dashboard-demo .card{
+    border-color: #5556fd;
+     -webkit-box-shadow: 0 0 5px 2px #dfdfdf;
+    -moz-box-shadow: 0 0 5px 2px #dfdfdf;
+    box-shadow: 0 0 5px 2px #dfdfdf;
+    transition: all .2s linear;
+}
+#dashboard-demo .card img{
+    border-bottom: 1px solid #5556fd
+}
+
+
+#footer{
+    padding: 60px 0 0 0;
+    background-color: #212b35
+}
+
+.footer-logo h1{
+    color: #fff;
+}
+
+.footer-menu-head{
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+}
+.footer-menu-item{
+    margin-bottom: 0;
+    padding-left: 0;
+}
+.footer-menu-item li{
+    padding: 3px 0;
+    list-style: none;
+}
+.footer-menu-item li a{
+    color: #ddd;
+    font-size: 14px;
+}
+.navbar-brand{
+    color: #fff !important;
+}
+
+.banner-btn{
+    border: 1px solid #fff;
+    text-transform: uppercase;
+    padding: 7px 30px;
+    color: #fff;
+    margin-top: 25px;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+   
+}
+.banner-btn:before{
+    position: absolute;
+    content: "";
+    width: 5px;
+    height: 100%;
+    background-color: #fff;
+    left: 0;
+    top: 0;
+    transition: all .3s linear;
+    z-index: -1;
+}
+.banner-btn:hover:before{
+    width: 100%;
+}
+
+
+.all-rights {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.created {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  font-weight: 300;
+    float: right
+}
+.created a {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  font-weight: 300;
+    text-decoration: underline
+}
+
+.copy-right-area{
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 18px 0;
+    margin-top: 40px;
+}
+
+
+.navbar-light .navbar-nav .nav-link:hover{
+    color: #4bdedb;
+}
+
+
+
+
+#pricing-section h2{
+    color: #fff;
+}
+
+#pricing-section p{
+    color: #fff;
+}
+#pricing-section .card{
+   border: 1px solid #ddd !important;
+   box-shadow: 0 0 0 0 transparent !important;
+   
+}
+#pricing-section .card ul li i{
+    font-size: 12px;
+    padding-right: 3px;
+}
+.pricing .card-body{
+    padding-top: 30px;
+}
+
+.pricing-btn{
+    display: block;
+    border: 1px solid #0277bd;
+  
+    color: #fff;
+    text-align: center;
+    padding: 7px;
+    border-radius: 5px;
+    transition: all .3s linear;
+    background: #0277bd;
+}
+.pricing-btn:hover{
+    background: transparent;
+    color: #0277bd;
+}
+
+#pricing-section{
+    padding: 75px 0;
+    background: linear-gradient(45deg, #303f9f, #7b1fa2) !important;
+}
+
+#contact{
+    padding: 75px 0;
+}
+
+#dashboard-demo .card:hover{
+    -webkit-box-shadow: 0 0 8px 8px #dfdfdf;
+ -moz-box-shadow: 0 0 8px 8px #dfdfdf;
+ box-shadow: 0 0 8px 8px #dfdfdf;
+}
+
+
+.footer-menu{
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 0 !important;
+    padding-left: 0 !important;
+    text-align: center;
+   
+}
+
+.footer-menu li{
+display: inline-block;
+padding: 5px 10px;
+
+}
+.footer-menu li a{
+    color: #fff;
+}
+

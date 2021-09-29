@@ -7,11 +7,11 @@ use App\Http\Controllers\LanguageController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 
-// Route::get('/', function () {
-//        // return view('welcome');
-//     }
+Route::get('/', function () {
+        return view('welcome');
+    }
 
-// );
+);
 
 //gobal location 
 Route::get('/location', 'OnchangeController@index');
@@ -29,7 +29,6 @@ Route::get('/blog.xml', 'SitemapController@blog');
 Route::get('/homeoinfo.xml', 'SitemapController@homeoinfo');
 Route::get('/disease.xml', 'SitemapController@disease');
 
-Route::get('/', 'Auth\LoginController@showAdminLoginForm');
 Route::get('/login/user', 'Auth\LoginController@showAdminLoginForm');
 Auth::routes(['verify'=> true]);
 Route::get('/login/admin', 'Auth\LoginController@showAdminLoginForm');
