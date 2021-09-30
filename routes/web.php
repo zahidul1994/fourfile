@@ -289,6 +289,7 @@ Route::group([ 'prefix'=>'admin',
         Route::post('updateprofilephoto', 'AdminController@updateprofilephoto');
         Route::patch('updateprofileinfo/{id}', 'AdminController@updateprofileinfo');
         Route::post('updatepassword', 'AdminController@updatepassword');
+        Route::get('customerreportexcel/{id}', 'DashboardController@customerreportexcel');
         Route::get('customerexcelform', 'DashboardController@customerexcel');
         Route::post('makecusomerexcel', 'DashboardController@makecusomerexcelform');
 //area list
@@ -370,6 +371,8 @@ Route::get('printbylocation','PrintController@printbylocation');
 
 
 //print end
+
+
 //Collection Start 
 Route::get('collection','CollectionController@index');
 Route::get('createcollection','CollectionController@create');
@@ -442,6 +445,21 @@ Route::get('downloadesmsinvoice/{id}','PdfController@buysmsinvoice');
   Route::delete('deleteuser/{id}','UserController@destroy');
   Route::post('userstatus', 'UserController@setapproval'); 
    //user create  End
+
+
+   //Report Area 
+Route::get('customerreport','ReportController@index');
+ Route::post('customerreportinfo','ReportController@findcustomer');
+// Route::post('createcollection','CollectionController@store');
+// Route::get('editcollect/{id}','CollectionController@edit');
+//  Route::put('updatecollection/{id}','CollectionController@update');
+//  Route::post('blogstatus', 'CollectionController@setapproval');
+// Route::post('searchsinglecustomer', 'CollectionController@searchsinglecustomer');
+// Route::post('searchsinglecustomerbill', 'CollectionController@singlecustomerbill');
+// Route::get('cancelcollection', 'CollectionController@cancelcollection');
+// Route::delete('cancelcollection/{id}', 'CollectionController@collectiondelete');
+//Report  End
+
        
     }
 );

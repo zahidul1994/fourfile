@@ -10,6 +10,7 @@ use App\Models\Complain;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Exports\Customerexcelform;
+use App\Exports\Customerreport;
 use Kamaln7\Toastr\Facades\Toastr;
 use App\Models\Medicineinformation;
 use App\Http\Controllers\Controller;
@@ -78,6 +79,12 @@ class DashboardController extends Controller
     public function makecusomerexcelform(Request $request){
     
          return  Excel::download(new Customerexcelform($request),'customer.xlsx');
+
+                       return Redirect::to('admin/customerexcelform'); 
+            }
+ public function customerreportexcel(Request $request){
+$id=$request->id;
+    return  Excel::download(new Customerreport($id),'customereport.xlsx');
 
                        return Redirect::to('admin/customerexcelform'); 
             }

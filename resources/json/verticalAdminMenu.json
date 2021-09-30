@@ -92,18 +92,19 @@
 
             ]
         },
+        
         {
             "url": "javascript:void(0)",
-            "name": "Buy SMS",
-            "i18n": "Buy SMS",
+            "name": "Report",
+            "i18n": "Report",
             "class": "collapsible-header waves-effect waves-cyan",
             "slug": "sms",
             "icon": "sms",
             "submenu": [{
-                    "url": "admin/buysmslist",
-                    "name": "SMS List",
-                    "i18n": "SMS List",
-                    "slug": "admin/buysmslist"
+                    "url": "admin/customerreport",
+                    "name": "Customer Report",
+                    "i18n": "Customer Report",
+                    "slug": "admin/customerreport"
                 },
                 {
                     "url": "admin/createbuysms",

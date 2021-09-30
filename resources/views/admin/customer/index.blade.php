@@ -260,7 +260,10 @@ table.dataTable thead .sorting_asc{
             });
 
             $('#dataTable').DataTable({
-                
+                fixedHeader: {
+        header: false,
+        footer: true
+    },
                 // responsive: true,
                 dom: 'Bfrtip',
                 exportOptions: {

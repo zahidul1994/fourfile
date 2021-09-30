@@ -204,5 +204,7 @@ return [
 	"Create Role"=> "Create Role",
 	"Import Customer"=> "Import Customer",
 	"Customer Excel Form"=> "Customer Excel Form",
+	"Report"=> "Report",
+	"Customer Report"=> "Customer Report",
 ];
 ?>
