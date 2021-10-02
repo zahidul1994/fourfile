@@ -183,7 +183,7 @@ class ComplainController extends Controller
           
        if($pay){
         $info=User::whereadmin_id(Auth::id())->first();
-        if($info){
+        if($info && $request->has('users')){
          $customer= Customer::with('area')->find($request->customer_id);
          $requestuser= $request->users;
           for ($i = 0; $i < count($requestuser); $i++) {

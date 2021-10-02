@@ -728,7 +728,8 @@ $('#thana_id').change(function(){
         success:function(data) {
            if(data){
                  $('#monthlyrent').val(data.packageprice);
-                   
+                      var total=isNaN((Number($("#monthlyrent").val()) + Number($("#due").val()) + Number($("#addicrg").val()))-(Number($("#advance").val())+Number($("#discount").val())))? 0 :((Number($("#monthlyrent").val()) + (Number($("#due").val()) + Number($("#addicrg").val()))-(Number($("#advance").val())+Number($("#discount").val()))))+((Number($("#monthlyrent").val())+Number($("#addicrg").val())) *  Number($("#vat").val()))/100;
+        $("#total").val(total);
                 }
 
             },
@@ -770,14 +771,24 @@ $(function() {
         } 
     });
 });
+    function delay(callback, ms) {
+                var timer = 0;
+                return function() {
+                    var context = this,
+                        args = arguments;
+                    clearTimeout(timer);
+                    timer = setTimeout(function() {
+                        callback.apply(context, args);
+                    }, ms || 0);
+                };
+            };
 //mark:val
-    $("#monthlyrent,#due,#addicrg,#discount,#advance,#vat").keyup(function(){
+    $("#monthlyrent,#due,#addicrg,#discount,#advance,#vat").keydown(delay(function(e) {
 
         var total=isNaN((Number($("#monthlyrent").val()) + Number($("#due").val()) + Number($("#addicrg").val()))-(Number($("#advance").val())+Number($("#discount").val())))? 0 :((Number($("#monthlyrent").val()) + (Number($("#due").val()) + Number($("#addicrg").val()))-(Number($("#advance").val())+Number($("#discount").val()))))+((Number($("#monthlyrent").val())+Number($("#addicrg").val())) *  Number($("#vat").val()))/100;
         $("#total").val(total);
-       
-    });
-
+  
+   }, 900));
 
 
 });

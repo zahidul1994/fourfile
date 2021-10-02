@@ -26,8 +26,8 @@
                <p class="card-stats-title"><i class="material-icons">sms</i> Balance</p>
                <h4 class="card-stats-number white-text">{{@$smsinfo->blance}} Tk</h4>
                <p class="card-stats-compare">
-                  <i class="material-icons">keyboard_arrow_up</i> {{@$smsinfo->smsrate}} Tk
-                  <span class="cyan text text-lighten-5"> Per SMS</span>
+                  <i class="material-icons">keyboard_arrow_up</i> {{@$smsinfo->smsrate}} Tk  Per SMS
+                  <span class="cyan text text-lighten-5"></span>
                </p>
             </div>
            
@@ -42,7 +42,7 @@
              <h4 class="card-stats-number white-text">{{@$customer->where('status',1)->count('id')}} </h4>
              <p class="card-stats-compare">
                 <i class="material-icons">keyboard_arrow_up</i>Inactive {{@$customer->where('status',2)->count('id')}}
-                <span class="cyan text text-lighten-5">Customer</span>
+                 Customer<span class="cyan text text-lighten-5"></span>
              </p>
           </div>
          
@@ -56,7 +56,7 @@
              <h4 class="card-stats-number white-text">{{@$complain->count('id')}} </h4>
              <p class="card-stats-compare">
                 <i class="material-icons">keyboard_arrow_up</i>Pending {{@$complain->where('status',2)->count('id')}}
-                <span class="cyan text text-lighten-5">Complain</span>
+                Complain <span class="cyan text text-lighten-5"></span>
              </p>
           </div>
          

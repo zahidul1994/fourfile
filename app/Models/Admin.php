@@ -11,7 +11,7 @@ class Admin extends Authenticatable implements MustVerifyEmail
      
      use SoftDeletes;
      protected $guard = 'admin';
-     protected $guard_name = 'superadmin';
+   
     protected $dates = ['deleted_at'];
     // protected $connection = 'mongodb';
 

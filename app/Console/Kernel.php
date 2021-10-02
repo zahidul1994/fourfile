@@ -14,7 +14,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-    'App\Console\Commands\Billgenerate'
+    'App\Console\Commands\Billgenerate',
+    'App\Console\Commands\Billcalculation'
     ];
 
     /**
@@ -27,7 +28,8 @@ class Kernel extends ConsoleKernel
     {
           $schedule->command('telescope:prune')->daily();
         //$schedule->command('work:billgenerate')->everyMinute();
-         $schedule->command('work:billgenerate')->monthlyOn(date('t'), '6:00');
+        $schedule->command('work:Billcalculation')->monthlyOn(1, '0:00');
+         $schedule->command('work:billgenerate')->monthlyOn(1, '1:00');
     }
 
     /**

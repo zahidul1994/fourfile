@@ -69,34 +69,9 @@ class CollectionController extends Controller
          'errors'=>$validator->errors()->all()]);
     }
          $collectioninfo = Bill::find($request->billid);
-        // return response($collectioninfo);
-
-
-         
-         if($collectioninfo->total>$request->paid){
-           // return response('hi');exit;
-          
-            $due=$collectioninfo->total-$request->paid;
-           $advance=$collectioninfo->advance;
-         }
-         if($collectioninfo->total<=$request->paid){
-         // return response('hi2');exit;
-          $advance=$request->paid-$collectioninfo->total;
-          $due=$collectioninfo->due;
-          
-        }
-       
-           $cus=Customer::find($collectioninfo->customer_id);
-           $cus->discount =0;
-           $cus->vat =0;
-           $cus->addicrg =0;
-           $cus->advance =$advance;
-           $cus->due =$due;
-          // $cus->total =$collectioninfo->monthlyrent+$due)-$advance;
-           $cus->save();
-           if($cus){
+      
            $info= Bill::find($request->billid);
-          //  $info->paid=$request->paid;
+            $info->paid+=$request->paid;
            $info->total=$request->totall-$request->paid;
            $info->save();
           $pay= new Collection();
@@ -107,7 +82,7 @@ class CollectionController extends Controller
          $pay->invoice =trim($request->invoicesl);
          $pay->admin_id =Auth::id();
           $pay->save();
-           }
+           
            $smsinfo=['name'=>$cus->customername,'mobile'=>$cus->customermobile,'id'=>$cus->loginid,'paid'=>$request->paid,'due'=>$info->total];
            CommonFx::sentsmscustomerbillpaid($smsinfo);
      if($pay){
@@ -260,14 +235,11 @@ $info=Collection::whereadmin_id(Auth::id())->find($id);
 if($info){
   $pa=Bill::find($info->bill_id);
   $pa->total=$pa->total+$request->payamount;
+   $pa->paid-=$request->payamount;
+   
   $pa->save();
 }
-if($pa){
-$q=Customer::find($pa->customer_id);
-$q->total=$q->total+$request->payamount;
-$q->due=$q->due-$request->payamount;
-$q->save();
-}
+
 $info->delete();
 return response()->json([
   'success'=>true

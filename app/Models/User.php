@@ -12,7 +12,8 @@ class User extends Authenticatable
     use HasRoles;
  
         protected $dates = ['deleted_at'];
-         protected $guard = 'user';
+       
+		  protected $guard_name = 'admin';
         protected $fillable = ['admin_id',
             'username','phone','email','image','remember_token','status','password' ];
 

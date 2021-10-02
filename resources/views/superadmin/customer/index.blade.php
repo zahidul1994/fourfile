@@ -109,23 +109,7 @@ table.dataTable thead .sorting_asc{
 
                                 </tbody>
                                 <tfoot>
-                                    <tr role="row" style="position: sticky; bottom: 0; background: #fff;"><td class="sorting_asc" rowspan="1" colspan="1" style="width: 18px;" aria-label="SL">SL</td><td class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 67px;" aria-label="ID: activate to sort column ascending">ID</td><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 77px;" aria-label="Name: activate to sort column ascending">Name</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 104px;" aria-label="Address">Address</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 83px;" aria-label="Mobile">Mobile</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 72px;" aria-label="IP/Username">IP/<br>Username</th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 57px;" aria-label="Monthly Rent: activate to sort column ascending">Monthly <br>Rent
-                                      <span style="color: slateblue; display: block">{{CommonFx::Totalcustomerinfo()->sum('monthlyrent')}}</span>
-                                    </th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 52px;" aria-label="Previus Due: activate to sort column ascending">Previus <br>Due
-                                      <span style="color: slateblue; display: block">{{CommonFx::Totalcustomerinfo()->sum('due')}}</span>
-                                    </th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 62px;" aria-label="Discount: activate to sort column ascending">Discount
-                                      <span style="color: slateblue; display: block">{{CommonFx::Totalcustomerinfo()->sum('discount')}}</span>
-                                    </th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 62px;" aria-label="Advance: activate to sort column ascending">Advance
-                                      <span style="color: slateblue; display: block">{{CommonFx::Totalcustomerinfo()->sum('advance')}}</span>
-                                    </th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 52px;" aria-label="Add Charge: activate to sort column ascending">Add <br>Charge
-                                      <span style="color: slateblue; display: block">{{CommonFx::Totalcustomerinfo()->sum('addicrg')}}</span>
-                                    </th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 42px;" aria-label="Vat %: activate to sort column ascending">Vat %</th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 57px;" aria-label="Bill Amount: activate to sort column ascending">Bill <br>Amount
-                                      <span style="color: slateblue; display: block">{{CommonFx::Totalcustomerinfo()->sum('total')}}</span>
-                                    </th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 69px;" aria-label="Collection Amount: activate to sort column ascending">Collection <br>Amount
-                                      <span style="color: slateblue; display: block">{{CommonFx::Totalcustomercollection()->sum('paid')}}</span>
-                                    </th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 35px;" aria-label="Total Due">Total <br>Due
-                                      <span style="color: slateblue; display: block">{{CommonFx::Totalcustomerinfo()->sum('total')- CommonFx::Totalcustomercollection()->sum('paid')}}</span>
-                                    </th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 128px;" aria-label="Action">Action</th></tr>
+                                    
                                    
                                        
                                       

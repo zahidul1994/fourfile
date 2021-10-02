@@ -403,7 +403,7 @@ public static function Divisionname(){
         }
         public static function sentsmscustomerbillpaid($smsinfo){
             $smssetting=Smssent::whereadmin_id(Auth::id())->firstOrFail();
-         $text= str_replace(['#CUSTOMER_NAME#', '#AMOUNT#','#IP_OR_USER_NAME_OR_ID#','#DUE#','#COMPANY_NAME#'], [$smsinfo['name'], $smsinfo['id'],$smsinfo['paid'],$smsinfo['due'],Auth::user()->company], $smssetting->paymentmessage);
+         $text= str_replace(['#CUSTOMER_NAME#', '#AMOUNT#','#IP_OR_USER_NAME_OR_ID#','#DUE#','#COMPANY_NAME#'], [$smsinfo['name'],$smsinfo['paid'], $smsinfo['id'],$smsinfo['due'],Auth::user()->company], $smssetting->paymentmessage);
      
       if(($smssetting->payment==1) && ($smssetting->blance>1)){
       // $number=$smsinfo->phone;
