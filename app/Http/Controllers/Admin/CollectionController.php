@@ -82,7 +82,7 @@ class CollectionController extends Controller
          $pay->invoice =trim($request->invoicesl);
          $pay->admin_id =Auth::id();
           $pay->save();
-           
+          $cus=Customer::find($collectioninfo->customer_id);
            $smsinfo=['name'=>$cus->customername,'mobile'=>$cus->customermobile,'id'=>$cus->loginid,'paid'=>$request->paid,'due'=>$info->total];
            CommonFx::sentsmscustomerbillpaid($smsinfo);
      if($pay){

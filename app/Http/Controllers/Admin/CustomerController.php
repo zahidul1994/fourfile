@@ -99,13 +99,11 @@ class CustomerController extends Controller
   public function pendingcustomer(Request $request)
   {
     if (request()->ajax()) {
-      return datatables()->of(Customer::with('district','thana','area','bills.collection')->whereadmin_id(Auth::guard('admin')->user()->id)->wherestatus(2))
+      return datatables()->of(Customer::with('district','thana','area')->whereadmin_id(Auth::guard('admin')->user()->id)->wherestatus(2))
         ->addColumn('action', function ($data) {
-          $button ='<button type="button" id="UpdateBillBtn" uid="' . $data->bills[0]->id . '" class="invoice-action-view btn-sm" title="Update Bill"><i class="material-icons ">update</i></button>'; 
+          $button = '<a title="Edit Customer" href="/admin/editcustomer/' . $data->id . '" class="btn-sm" style="border:0; background: none; padding: 0 !important"><i class="material-icons" style="font-size: 16px; color: #9B01BA;">edit</i></a>';
           $button .= '&nbsp;&nbsp;';
-          $button .= '<a title="Edit Customer" href="/admin/editcustomer/' . $data->id . '" class="invoice-action-view" title="Edit Customer"><i class="material-icons">edit</i></a>';
-          $button .= '&nbsp;&nbsp;';
-          $button .= '<a target="_blank" href="' . url('admin/customerprofile', $data->id) . '" class="invoice-action-view" title="See Preview"><i class="material-icons ">remove_red_eye</i></a>';
+          $button .= '<a target="_blank" style="border:0; background: none; padding: 0 !important" href="' . url('admin/customerprofile', $data->id) . '" class="btn-sm" title="See Preview"><i class="material-icons " style="font-size: 16px; color: #16A66C;">remove_red_eye</i></a>';
 
           // $button .= '&nbsp;&nbsp;';
           // $button .= '<button type="button" title="Inactive Customer"  id="deleteBtn" rid="' . $data->id . '" class="invoice-action-view btn-sm"><i class="material-icons ">https</i></button>';
@@ -113,46 +111,20 @@ class CustomerController extends Controller
         })
         ->addColumn('status', function($data){
           if($data->status==1){
-         $button = '<button type="button" title="Update Status" rid="'.$data->id.'" class="btn-sm Approved"><i class="material-icons">beenhere</i></button>';
+         $button = '<button  style="border:0; background: none; padding: 0 !important" type="button" title="Update Status" rid="'.$data->id.'" class="btn-sm Approved"><i class="material-icons">beenhere</i></button>';
         return $button;
     }
     
     else {
-        $button = '<button type="button" title="Update Status" class=" btn-sm Notapproved" rid="'.$data->id.'"><i class="material-icons">block</i> </button>';
+        $button = '<button type="button"  style="border:0; background: none; padding: 0 !important" title="Update Status" class=" btn-sm Notapproved" rid="'.$data->id.'"><i class="material-icons">block</i> </button>';
         return $button;
     }})
-        ->addColumn('monthlyrent' ,function($data){
-          return $data->bills[0]->monthlyrent;
-      })  
-      ->addColumn('due' ,function($data){
-        return $data->bills[0]->due;
-    }) 
-      ->addColumn('discount' ,function($data){
-        return $data->bills[0]->discount;
-    }) 
-        ->addColumn('advance' ,function($data){
-        return $data->bills[0]->advance;
-    }) 
-    ->addColumn('addicrg' ,function($data){
-        return $data->bills[0]->addicrg;
-    })
-     ->addColumn('vat' ,function($data){
-        return $data->bills[0]->vat;
-    }) 
-      ->addColumn('billamount' ,function($data){
-        return $data->bills[0]->total;
-    })
-    ->addColumn('collection' ,function($data){
-      return $data->bills[0]->collection->sum('paid');
-  })
-  ->addColumn('duetotal' ,function($data){
-    return ($data->bills[0]->total);
-})
+       
       ->addColumn('address' ,function($data){
         return 'House No- '. @$data->houseno.'<br/>'. @$data->district->district.'<br/>'.@$data->thana->thana.'<br/>'.@$data->area->areaname;
     })
         ->addIndexColumn()
-        ->rawColumns(['action','duetotal','status','address'])
+        ->rawColumns(['action','status','address'])
         ->make(true);
     }
     $pageConfigs = ['pageHeader' => false, 'isFabButton' => false];

@@ -52,9 +52,9 @@ class Billcalculation extends Command
                     $advance=0;
                 }
                $in=Customer::find($customer->id);
-               $in->due += $due;
-               $in->advance += $advance;
-               $in->total +=$due-$advance;
+               $in->due = $due;
+               $in->advance = $advance;
+               $in->total =$customer->total+$due-$advance;
                $in->save();
             }
         

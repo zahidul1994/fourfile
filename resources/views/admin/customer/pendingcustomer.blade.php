@@ -34,7 +34,7 @@
                     <div class="row">
                         <div class="col s12" style="overflow-x: scroll; scrollbar-width: thin;">
                             <table id="dataTable" class="display table table-striped table-bordered nowrap"
-                                style="width: 100%;">
+                            style="width: 100%; font-size: 13px; font-family: serif;">
                                 <thead>
 
                                     <tr>
@@ -45,14 +45,12 @@
                                         <th>Mobile</th>
                                         <th>IP/<br>Username</th>
                                         <th>Monthly <br>Rent</th>
-                                        <th>Previus <br>Due</th>
+                                        <th>Due</th>
                                         <th>Discount</th>
                                         <th>Advance</th>
-                                        <th>Add <br>Charge</th>
+                                        <th>Charge</th>
                                         <th>Vat %</th>
-                                        <th>Bill <br>Amount</th>
-                                        <th>Collection <br>Amount</th>
-                                        <th>Total <br>Due</th>
+                                        <th>Total</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -239,21 +237,12 @@
 
                     },
                     {
-                        data: 'billamount',
-                        name: 'billamount',
+                        data: 'total',
+                        name: 'total',
 
                     },
-                    {
-                        data: 'collection',
-                        name: 'collection',
-
-                    },
-                    {
-                        data: 'duetotal',
-                        name: 'duetotal',
-                        orderable: false
-                    },
- {
+                   
+                              {
                         data: 'status',
                         name: 'status',
                         orderable: false
