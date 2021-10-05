@@ -45,9 +45,10 @@ class CustomerObserver
      */
     public function updated(Customer $customer)
     {
+        if($customer->status==1){
         $bill=Bill::wherecustomer_id($customer->id)->whereMonth('created_at', date('m'))
         ->whereYear('created_at', date('Y'))->first();
-        if(!$bill && $customer->stattus==1){
+        if(!$bill){
             Bill::create(
                 ['customer_id' => $customer->id,
                  'monthlyrent' => $customer->monthlyrent?:0,
@@ -63,6 +64,7 @@ class CustomerObserver
             ]);
          
         }
+    }
     }
 
     /**

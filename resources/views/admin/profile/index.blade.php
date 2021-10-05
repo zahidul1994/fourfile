@@ -175,8 +175,16 @@
                     </div>
                   </div>
                    <div class="row margin">
-                    <div class="input-field col s12">    
-                    
+                    <div class="input-field col s12"> 
+                      <i class="material-icons prefix pt-2">gamepad</i>   
+                      <input id="customerprefix" type="text" class="@error('customerprefix') is-invalid @enderror" name="customerprefix"  value="{{$admininfoid->customerprefix }}"
+                      required autocomplete="customerprefix" autofocus>
+                    <label for="customerprefix" class="center-align"> Customer Prefix *</label>
+                    @error('customerprefix')
+                    <small class="red-text ml-10" role="alert">
+                      {{ $message }}
+                    </small>
+                    @enderror
              
       </div>
       

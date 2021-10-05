@@ -31,7 +31,7 @@ class AdminController extends Controller
      public function updateprofilephoto(Request $request){
           $this->validate($request,[
        'photo' => 'mimes:jpeg,jpg,png|required|max:500',
-       
+      
             
     
         ]);
@@ -71,11 +71,11 @@ class AdminController extends Controller
 
 
      public function updateprofileinfo(Request $request,$id){
-
+//dd($request->all());
         $this->validate($request,[
        //'email' => 'required|email|unique:admins,email,'.$id,
        'phone' => 'required|unique:admins,phone,'.$id,
-            
+       'customerprefix'=>'required|min:1|max:4|unique:admins,customerprefix,'.$id, 
     
         ]);
         $userinfo = Admin::find(Auth::user()->id)->update(

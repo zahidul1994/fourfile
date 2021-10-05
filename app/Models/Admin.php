@@ -16,7 +16,7 @@ class Admin extends Authenticatable implements MustVerifyEmail
     // protected $connection = 'mongodb';
 
     protected $fillable = [
-      'email_verified_at', 'superadmin_id','phone','name','image', 'email', 'password','status','gender','remember_token','company','package','web','otp','country','address','actype'
+      'email_verified_at', 'superadmin_id','phone','name','image', 'email', 'password','status','gender','remember_token','company','package','web','otp','country','address','actype','customerprefix',
     ];
 
     protected $hidden = [

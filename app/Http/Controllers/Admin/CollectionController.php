@@ -68,8 +68,7 @@ class CollectionController extends Controller
         (['success' =>false,
          'errors'=>$validator->errors()->all()]);
     }
-         $collectioninfo = Bill::find($request->billid);
-      
+        
            $info= Bill::find($request->billid);
             $info->paid+=$request->paid;
            $info->total=$request->totall-$request->paid;
@@ -82,10 +81,10 @@ class CollectionController extends Controller
          $pay->invoice =trim($request->invoicesl);
          $pay->admin_id =Auth::id();
           $pay->save();
-          $cus=Customer::find($collectioninfo->customer_id);
+          $cus=Customer::find($info->customer_id);
            $smsinfo=['name'=>$cus->customername,'mobile'=>$cus->customermobile,'id'=>$cus->loginid,'paid'=>$request->paid,'due'=>$info->total];
            CommonFx::sentsmscustomerbillpaid($smsinfo);
-     if($pay){
+     if($cus){
       return response()->json([
         'suceess'=>true,
       ],201);

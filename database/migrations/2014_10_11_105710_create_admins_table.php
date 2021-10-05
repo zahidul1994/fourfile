@@ -20,6 +20,7 @@ class CreateAdminsTable extends Migration
             $table->string('name');
             $table->string('image')->nullable();
             $table->string('phone')->unique();
+            $table->string('customerprefix',10)->unique();
             $table->string('email')->unique();
              $table->string('password');
              $table->string('company')->nullable();

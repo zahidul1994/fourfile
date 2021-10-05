@@ -23,6 +23,7 @@ class CreateBillsTable extends Migration
             $table->float('discount',8,2)->nullable();
             $table->float('advance',20,2)->nullable();
             $table->float('vat',8,2)->nullable();
+            $table->double('paid',20,4)->default(0);
             $table->float('total',20,2)->nullable();
             $table->timestamps();
         });

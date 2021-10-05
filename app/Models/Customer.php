@@ -3,7 +3,7 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
-use Haruncpi\LaravelIdGenerator\IdGenerator;
+// use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -69,7 +69,8 @@ class Customer extends  Authenticatable
 	'infoimage',
 	'path',
 	'status',
-	'password'
+	'password',
+	
 	];
 	protected $hidden = [
 		'password', 'remember_token',
@@ -78,13 +79,13 @@ class Customer extends  Authenticatable
 	protected $casts = [
 		'created_at' => 'datetime:M d Y',
 	];
-public static function boot()
-{
-    parent::boot();
-    self::creating(function ($model) {
-       $model->loginid = IdGenerator::generate(['table' => 'customers','field'=>'loginid', 'length' => 8, 'prefix' =>'NAQW']);
-    });
-}
+// public static function boot()
+// {
+//     parent::boot();
+//     self::creating(function ($model) {
+//        $model->loginid = IdGenerator::generate(['table' => 'customers','field'=>'loginid', 'length' => 8, 'prefix' =>'NAQW']);
+//     });
+// }
 public function admin()
 {
 	return $this->belongsTo('App\Models\Admin');

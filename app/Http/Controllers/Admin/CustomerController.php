@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Event;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Support\Facades\Redirect;
 use Yajra\DataTables\Contracts\DataTable;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -256,9 +257,13 @@ class CustomerController extends Controller
     } else {
       $infoname = 'not-found.jpg';
     };
+    $prefix=Auth::guard('admin')->user()->customerprefix;
+    $id = IdGenerator::generate(['table' => 'customers','field'=>'loginid', 'length' => 8, 'prefix' => $prefix,'reset_on_prefix_change'=>true]);
+//output: A00001,A00002,B00001,B00002
     $customerinfo = Customer::create(array(
       'customername' => $request->customername,
       'contactperson' => $request->contactperson,
+      'loginid' => $id,
       'email' => $request->email,
       'password' =>  Hash::make($request->password),
       'customermobile' => $request->customermobile,

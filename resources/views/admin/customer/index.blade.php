@@ -253,11 +253,11 @@ table.dataTable thead .sorting_asc{
 <script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.colVis.min.js "></script>
     <script>
         $(document).ready(function() {
-            $(".sidenav-main").addClass("nav-collapsed");
-            $("#main").addClass("main-full");
-            $(".sidenav-main").hover(function() {
-                $(".sidenav-main").toggleClass("nav-collapsed");
-            });
+            // $(".sidenav-main").addClass("nav-collapsed");
+            // $("#main").addClass("main-full");
+            // $(".sidenav-main").hover(function() {
+            //     $(".sidenav-main").toggleClass("nav-collapsed");
+            // });
 
             $('#dataTable').DataTable({
                 fixedHeader: {
