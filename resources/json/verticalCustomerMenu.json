@@ -2,23 +2,23 @@
     "menu": [
         {
             "url": "javascript:void(0)",
-            "name": "Collection",
-            "i18n": "Collection",
+            "name": "Payment",
+            "i18n": "Payment",
             "class": "collapsible-header waves-effect waves-cyan",
-            "slug": "collection",
+            "slug": "payment",
             "icon": "filter_vintage",
 
             "submenu": [{
-                    "url": "customer/complain",
-                    "name": "Collection Search",
-                    "i18n": "Collection Search",
-                    "slug": "customer-collection"
+                    "url": "customer/pyamentlist",
+                    "name": "Payment List",
+                    "i18n": "Payment List",
+                    "slug": "paymentlist"
                 },
                 {
-                    "url": "customer/createcollection",
-                    "name": "Create Collection",
-                    "i18n": "Create Collection",
-                    "slug": "createcollection"
+                    "url": "customer/createpayment",
+                    "name": "Create Payment",
+                    "i18n": "Create Payment",
+                    "slug": "paymentcreate"
                 }
                  ]
 
@@ -41,12 +41,6 @@
                     "name": "Create Complain",
                     "i18n": "Create Complain",
                     "slug": "customer/createcomplain"
-                },
-                {
-                    "url": "customer/complainsetting",
-                    "name": "Complain Setting",
-                    "i18n": "Complain Setting",
-                    "slug": "customer/complainsetting"
                 }
                 
                 

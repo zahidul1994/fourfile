@@ -18,4 +18,8 @@ class Payby extends Model
     {
         return $this->hasOne('App\Models\Collection');
     }
+    public function paybill()
+    {
+        return $this->hasOne('App\Models\Paybill');
+    }
 }

@@ -207,13 +207,16 @@
                         $('#intotal').append('<input type="hidden" value="' + data.result
                             .bill[0].total +
                             '" id="totall"/><input type="hidden" value="' + data.result
-                            .bill[0].id + '" id="collectionid" />' + '<span>' + data
-                            .result.bill[0].total + '</span>');
+                            .bill[0].id + '" id="collectionid" />' + '<span>' + (data
+                            .result.bill[0].total-data
+                            .result.bill[0].paid) + '</span>');
                             $('#collection').val( data
-                            .result.bill[0].total);
+                            .result.bill[0].total- data
+                            .result.bill[0].paid);
                             $('#collection').focus();
-                            $("#paybleamount").html('<strong>' + data
-                            .result.bill[0].total + '</strong>');
+                            $("#paybleamount").html('<strong>' + (data
+                            .result.bill[0].total-data
+                            .result.bill[0].paid) + '</strong>');
 
                     }
                 });
@@ -239,7 +242,7 @@
                 }
                 if ($("#payby").val() == '') {
                     // console.log($("#collection").val());
-                    alert('Select Minimum One collection Amount');
+                    alert('Select Minimum One Payby Type');
                     $("#payby").focus();
                     return false;
 

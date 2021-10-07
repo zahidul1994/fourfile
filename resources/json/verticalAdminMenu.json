@@ -95,16 +95,17 @@
         
         {
             "url": "javascript:void(0)",
-            "name": "Report",
-            "i18n": "Report",
+            "name": "SMS",
+            "i18n": "SMS",
             "class": "collapsible-header waves-effect waves-cyan",
             "slug": "sms",
             "icon": "sms",
-            "submenu": [{
-                    "url": "admin/customerreport",
-                    "name": "Customer Report",
-                    "i18n": "Customer Report",
-                    "slug": "admin/customerreport"
+            "submenu": [
+                {
+                    "url": "admin/buysmslist",
+                    "name": "SMS List",
+                    "i18n": "SMS List",
+                    "slug": "admin/buysmslist"
                 },
                 {
                     "url": "admin/createbuysms",
@@ -112,6 +113,27 @@
                     "i18n": "SMS Create",
                     "slug": "admin/createbuysms"
                 }
+                
+                
+
+            ]
+        }, 
+        
+        
+        {
+            "url": "javascript:void(0)",
+            "name": "Report",
+            "i18n": "Report",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "report",
+            "icon": "report",
+            "submenu": [{
+                    "url": "admin/customerreport",
+                    "name": "Customer Report",
+                    "i18n": "Customer Report",
+                    "slug": "admin/customerreport"
+                }
+               
                 
                 
 

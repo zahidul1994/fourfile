@@ -121,4 +121,8 @@ public function complain()
 {
 	return $this->hasMany('App\Models\Complain');
 }
+public function paybill()
+{
+	return $this->hasMany('App\Models\Paybill');
+}
 }

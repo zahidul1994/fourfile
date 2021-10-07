@@ -154,12 +154,12 @@ $(document).ready(function () {
                             ', ' + data.result.customermobile + '</span>');
           $.each(data.result.bill, function(key, value){
                        // alert(key);
-                        $('#dd').append('<td>' + value.created_at + '</td><td>' + value.monthlyrent + '</td><td>' + value.addicrg + '</td><td>' + value.discount + '</td><td>' + value.advance + '</td><td>' + value.vat + '</td><td>' + value.due + '</td><td></td><td></td><td>' +((value.total).toFixed(2)) + '</td>'
+                        $('#dd').append('<td>' + value.created_at + '</td><td>' + value.monthlyrent + '</td><td>' + value.addicrg + '</td><td>' + value.discount + '</td><td>' + value.advance + '</td><td>' + value.vat + '</td><td>' + value.due + '</td><td></td><td></td><td>' +((value.total).toFixed(2)-(value.paid)) + '</td>'
                         );
                       //  console.log(value.collection.length);
                         if(value.collection.length>0){
                         $.each(value.collection, function(key, newvalue){
-                        $('#dt').append('<tr><td>' + newvalue.updated_at + '</td><td></td><td></td><td></td><td></td><td></td><td></td><td>Collection By </br>' + newvalue.admin['name'] + ' Paymenent method </br>' + newvalue.payby['paybyname'] +  '</td><td>' + newvalue.paid + '</td><td></td></tr>'
+                        $('#dt').append('<tr><td>' + newvalue.created_at + '</td><td></td><td></td><td></td><td></td><td></td><td></td><td>Collection By </br>' + newvalue.admin['name'] + ' Paymenent method </br>' + newvalue.payby['paybyname'] +  '</td><td>' + newvalue.paid + '</td><td></td></tr>'
                         );
 
                     });

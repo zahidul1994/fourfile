@@ -71,8 +71,7 @@ class CollectionController extends Controller
         
            $info= Bill::find($request->billid);
             $info->paid+=$request->paid;
-           $info->total=$request->totall-$request->paid;
-           $info->save();
+            $info->save();
           $pay= new Collection();
           $pay->paid =trim($request->paid);
          $pay->bill_id =trim($request->billid);
@@ -82,7 +81,7 @@ class CollectionController extends Controller
          $pay->admin_id =Auth::id();
           $pay->save();
           $cus=Customer::find($info->customer_id);
-           $smsinfo=['name'=>$cus->customername,'mobile'=>$cus->customermobile,'id'=>$cus->loginid,'paid'=>$request->paid,'due'=>$info->total];
+           $smsinfo=['name'=>$cus->customername,'mobile'=>$cus->customermobile,'id'=>$cus->loginid,'paid'=>$request->paid,'due'=>$info->total-$info->paid];
            CommonFx::sentsmscustomerbillpaid($smsinfo);
      if($cus){
       return response()->json([
@@ -183,37 +182,93 @@ class CollectionController extends Controller
             }
              }
 
+             public function searchsinglecustomer(Request $request){
+              if(! $request->id==null){
+              $searchvalue = Customer::with('district','thana','area','bill.collection')->wherestatus(1)->whereadmin_id(Auth::id())->Where('loginid','LIKE','%'.$request->id."%")->first();
+              
+              if(!empty($searchvalue))
+      {
+      return response()->json([
+        'result'=>$searchvalue
+      
+      ],200);
+      }
+              $searchvalue = Customer::with('district','thana','area','bill.collection')->wherestatus(1)->whereadmin_id(Auth::id())->where('customermobile','LIKE','%'.$request->id."%")->first();
+              
+              if(!empty($searchvalue))
+      {
+      return response()->json([
+        'result'=>$searchvalue
+      
+      ],200);
+      }
+      $searchvalue = Customer::with('district','thana','area','bill.collection')->wherestatus(1)->whereadmin_id(Auth::id())->where('customername','LIKE','%'.$request->id."%")->first();
+              
+              if(!empty($searchvalue))
+      {
+      return response()->json([
+        'result'=>$searchvalue
+      
+      ],200);
+      }
+      $searchvalue = Customer::with('district','thana','area','bill.collection')->wherestatus(1)->whereadmin_id(Auth::id())->where('secretname','LIKE','%'.$request->id."%")->first();
+              
+              if(!empty($searchvalue))
+      {
+      return response()->json([
+        'result'=>$searchvalue
+      
+      ],200);
+      }
+      }
+         else{
+          return response()->json([
+            'success'=>false
+          
+          ],204 );
+         }
+          
+            }
+    
 
-      public function searchsinglecustomer(Request $request){
+
+
+
+
+      
+      public function singlecustomerbill(Request $request){
         if(! $request->id==null){
-        $searchvalue = Customer::with('district','thana','area','bill.collection')->whereadmin_id(Auth::id())->Where('loginid','LIKE','%'.$request->id."%")->orwhere('customermobile','LIKE','%'.$request->id."%")->orwhere('customername','LIKE','%'.$request->id."%")->orwhere('secretname','LIKE','%'.$request->id."%")->first();
+        $searchvalue = Customer::with('district','thana','area','bill.collection.admin','bill.collection.payby')->wherestatus(1)->whereadmin_id(Auth::id())->Where('loginid','LIKE','%'.$request->id."%")->first();
         
-        if($searchvalue)
+        if(!empty($searchvalue))
 {
 return response()->json([
   'result'=>$searchvalue
 
 ],200);
 }
-}
-   else{
-    return response()->json([
-      'success'=>false
-    
-    ],204 );
-   }
-    
-      }
-
-
-      public function singlecustomerbill(Request $request){
-        $output = "";
-        if(! $request->id==null){
-        $searchvalue = Customer::with('district','thana','area','bill.collection.admin','bill.collection.payby')->whereadmin_id(Auth::id())->Where('loginid','LIKE','%'.$request->id."%")->orwhere('customermobile','LIKE','%'.$request->id."%")->orwhere('customername','LIKE','%'.$request->id."%")->orwhere('secretname','LIKE','%'.$request->id."%")->first();
+        $searchvalue = Customer::with('district','thana','area','bill.collection.admin','bill.collection.payby')->wherestatus(1)->whereadmin_id(Auth::id())->where('customermobile','LIKE','%'.$request->id."%")->first();
         
-        if($searchvalue)
+        if(!empty($searchvalue))
 {
-  
+return response()->json([
+  'result'=>$searchvalue
+
+],200);
+}
+$searchvalue = Customer::with('district','thana','area','bill.collection.admin','bill.collection.payby')->wherestatus(1)->whereadmin_id(Auth::id())->where('customername','LIKE','%'.$request->id."%")->first();
+        
+        if(!empty($searchvalue))
+{
+return response()->json([
+  'result'=>$searchvalue
+
+],200);
+}
+$searchvalue = Customer::with('district','thana','area','bill.collection.admin','bill.collection.payby')->wherestatus(1)->whereadmin_id(Auth::id())->where('secretname','LIKE','%'.$request->id."%")->first();
+        
+        if(!empty($searchvalue))
+{
 return response()->json([
   'result'=>$searchvalue
 
@@ -233,10 +288,8 @@ return response()->json([
 $info=Collection::whereadmin_id(Auth::id())->find($id);
 if($info){
   $pa=Bill::find($info->bill_id);
-  $pa->total=$pa->total+$request->payamount;
-   $pa->paid-=$request->payamount;
-   
-  $pa->save();
+  $pa->paid-=$request->payamount;
+   $pa->save();
 }
 
 $info->delete();

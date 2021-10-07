@@ -161,7 +161,7 @@ table.dataTable thead .sorting_asc{
 
                 </div>
                 <div class="input-field col m6 s12">
-                    {!! Form::number('due', null, ['id' => 'due', 'class' => 'validate', 'placeholder' => 'placeholder']) !!}
+                    {!! Form::number('due', null, ['id' => 'due', 'class' => 'validate', 'placeholder' => 'placeholder','disabled']) !!}
                     {!! Form::label('due', 'Due') !!}
 
                 </div>
@@ -184,7 +184,7 @@ table.dataTable thead .sorting_asc{
             </div>
             <div class="row">
                 <div class="input-field col m6 s12">
-                    {!! Form::number('total', null, ['id' => 'total', 'step' => 'any']) !!}
+                    {!! Form::number('total', null, ['id' => 'total', 'step' => 'any','disabled']) !!}
 
                 </div>
                 <div class="input-field col m6 s12">
@@ -253,11 +253,18 @@ table.dataTable thead .sorting_asc{
 <script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.colVis.min.js "></script>
     <script>
         $(document).ready(function() {
-            // $(".sidenav-main").addClass("nav-collapsed");
-            // $("#main").addClass("main-full");
-            // $(".sidenav-main").hover(function() {
-            //     $(".sidenav-main").toggleClass("nav-collapsed");
-            // });
+            $(".sidenav-main").addClass("nav-collapsed");
+            $("#main").addClass("main-full");
+            $(".sidenav-main").hover(function() {
+                $(".sidenav-main").toggleClass("nav-collapsed");
+            });
+            var $containerHeight = $(window).height();
+            if ($containerHeight <= 500) {
+                $(".sidenav-main").hover(function() {
+                    $(".sidenav-main").addClass("nav-collapsed");
+
+                });
+            };
 
             $('#dataTable').DataTable({
                 fixedHeader: {

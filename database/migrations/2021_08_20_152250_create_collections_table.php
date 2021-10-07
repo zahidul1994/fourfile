@@ -21,7 +21,7 @@ class CreateCollectionsTable extends Migration
            $table->bigInteger('bill_id')->unsigned()->nullable();
             $table->foreign('bill_id')->references('id')->on('bills')->onDelete('cascade');    
             $table->unsignedBigInteger('payby_id')->nullable();
-            $table->float('paid',20,2)->nullable();
+            $table->decimal('paid',20,2)->nullable();
             $table->string('note',500)->nullable();
             $table->string('invoice')->nullable();
             $table->timestamps();

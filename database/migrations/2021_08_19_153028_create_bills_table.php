@@ -17,14 +17,14 @@ class CreateBillsTable extends Migration
             $table->id();
             $table->bigInteger('customer_id')->unsigned()->nullable();
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
-            $table->float('monthlyrent',8,2)->nullable();
-            $table->float('due',20,2)->nullable();
-            $table->float('addicrg',8,2)->nullable();
-            $table->float('discount',8,2)->nullable();
-            $table->float('advance',20,2)->nullable();
-            $table->float('vat',8,2)->nullable();
-            $table->double('paid',20,4)->default(0);
-            $table->float('total',20,2)->nullable();
+            $table->decimal('monthlyrent',8,2)->nullable();
+            $table->decimal('due',20,2)->nullable();
+            $table->decimal('addicrg',8,2)->nullable();
+            $table->decimal('discount',8,2)->nullable();
+            $table->decimal('advance',20,2)->nullable();
+            $table->decimal('vat',8,2)->nullable();
+            $table->decimal('paid',20,4)->default(0);
+            $table->decimal('total',20,2)->nullable();
             $table->timestamps();
         });
     }

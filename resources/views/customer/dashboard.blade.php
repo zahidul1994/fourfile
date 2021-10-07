@@ -114,7 +114,7 @@
 
 <div class="row">
   <div class="col m4 s12">
-      <a href="#">
+      <a href="{{url('customer/createpayment')}}">
           
               <div class="card-panel mt-0 center" style="padding: 16px 13px;">
                   <i class="medium material-icons">payment</i>

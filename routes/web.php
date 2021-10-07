@@ -22,6 +22,7 @@ Route::get('gettpackageinfo/{id}', 'OnchangeController@package');
 Route::get('getcustomerinfo', 'OnchangeController@customerinfo');
 Route::get('gettsmstypeinfo/{id}', 'OnchangeController@smstype');
 Route::get('getpaymentmessage/{id}', 'OnchangeController@payment');
+Route::get('getadminpaybyinfo/{id}', 'OnchangeController@adminpaybyinfo');
 
 
 Route::get('/sitemap.xml', 'SitemapController@index');
@@ -506,6 +507,9 @@ Route::get('editcomplainsetting/{id}', 'ComplainController@editcomplainsetting')
 Route::put('editcomplainsetting/{id}', 'ComplainController@updatecomplainsetting');
 Route::delete('deletecomplainsetting/{id}', 'ComplainController@deletecomplainsetting');
 //Complain  End
-       
+Route::get('pyamentlist','PaybillController@index');
+Route::get('createpayment','PaybillController@create');
+Route::get('editbillpay/{id}','PaybillController@edit');
+Route::post('createpayment','PaybillController@store');
     }
 );

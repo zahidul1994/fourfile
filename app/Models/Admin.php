@@ -51,6 +51,10 @@ class Admin extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany('App\Models\Buysms');
     }
+    public function paybill()
+{
+	return $this->hasMany('App\Models\Paybill');
+}
       protected $casts = [
         'email_verified_at' => 'datetime',
     ];

@@ -82,7 +82,7 @@ class CustomerController extends Controller
       return $data->bill[0]->collection->sum('paid');
   })
   ->addColumn('duetotal' ,function($data){
-    return (($data->bill[0]->total));
+    return (($data->bill[0]->total)-($data->bill[0]->paid));
 })
       ->addColumn('address' ,function($data){
         return 'House No- '. @$data->houseno.'<br/>'. @$data->district->district.'<br/>'.@$data->thana->thana.'<br/>'.@$data->area->areaname;

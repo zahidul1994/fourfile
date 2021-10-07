@@ -158,7 +158,13 @@
             $(".sidenav-main").hover(function() {
                 $(".sidenav-main").toggleClass("nav-collapsed");
             });
+            var $containerHeight = $(window).height();
+            if ($containerHeight <= 500) {
+                $(".sidenav-main").hover(function() {
+                    $(".sidenav-main").addClass("nav-collapsed");
 
+                });
+            };
             $('#dataTable').DataTable({
                 // responsive: true,
 

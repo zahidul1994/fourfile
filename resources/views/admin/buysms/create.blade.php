@@ -28,3 +28,48 @@
                             </div>
 {{-- @endcan --}}
 @endsection
+@section('page-script')
+<script> 
+ $(document).ready(function() {
+
+
+  $(".card .Close").click(function () {
+	
+    $(this).closest(".card")
+        .fadeOut("slow");
+});
+
+
+$(".card-alert .close").click(function () {
+
+    $(this).closest(".card-alert")
+        .fadeOut("slow");
+});
+
+$('#payment_id').change(function(){
+    alert();
+            $('#showtransectionmessage').empty();
+
+    var payid = $(this).val();
+
+    $.ajax({
+        type: "GET",
+        url: url + '/getpaymentmessage/'+payid,
+        data:{},
+        dataType: "JSON",
+        success:function(data) {
+           if(data){
+                   
+                      
+                        $('#showtransectionmessage').append('<strong> Info: '+ data.note + '</strong>');
+
+                }
+
+            },
+    });
+
+});
+});
+
+  </script>
+  @endsection

@@ -38,12 +38,10 @@
                                     <tr>
                                         <td>SL</td>
                                         <td>Date</td>
-                                        <td>ID</td>
-                                        <td>Cutomer <br> Name</td>
-                                        <td>Mobile</td>
-                                        <td>Complain </td>
-                                        <td>Message</td>
-                                        <td>Created/ <br> Updated</td>
+                                        <td>Payby</td>
+                                        <td>Amount</td>
+                                        <td>Payment Number</td>
+                                        <td>Transection </td>
                                         <td>status</td>
                                        <th>Action</th>
                                     </tr>
@@ -65,7 +63,34 @@
             </div>
         </div>
     </div>
-   
+    <div id="Complanemodal" class="modal">
+      <div class="modal-content">
+        <h5> @include('partial.ajaxformerror')</h5>
+        {!! Form::open(['url' => 'customer/createcomplain', 'class' => 'form', 'id' => 'ccccc']) !!}
+        {!! Form::hidden('complainid', '', ['id' => 'complainid']) !!}
+          <div class="row">
+              <div class="input-field col m12 s12">
+                
+                  {!!Form::text('complaintitle',null, array('id'=>'complaintitle','class'=>'validate', 'placeholder'=>'type some complate title','required'))!!}
+                  {!! Form::label('complaintitle', 'Complain Title') !!}
+              </div>
+              
+
+          
+                
+              </div>
+
+
+          </div>
+
+      <div class="modal-footer">
+          
+          <input type="button" id="addBtn" value="Save" class="btn cyan waves-effect waves-light right">
+          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" id="close">Close</a>
+      </div>
+      {!! Form::close() !!}
+  </div>
+
 
    
 
@@ -96,7 +121,7 @@
                 serverSide: true,
                 ajax: {
                    
-                    url: "{{ url('customer/complainlist') }}",
+                    url: "{{ url('customer/pyamentlist') }}",
 
                 },
 
@@ -117,39 +142,31 @@
                     },
 
                     {
-                        data: 'customerid',
-                        name: 'customerid',
+                        data: 'payby',
+                        name: 'payby',
 
                     },
 
                     {
-                        data: 'name',
-                        name: 'name',
+                        data: 'paid',
+                        name: 'paid',
 
                     },
 
                     {
-                        data: 'phone',
-                        name: 'phone',
+                        data: 'paymentnumber',
+                        name: 'paymentnumber',
 
                     }, {
-                        data: 'complaintitle',
-                        name: 'complaintitle',
-
-                    },{
-                        data: 'complainmessage',
-                        name: 'complainmessage',
+                        data: 'transection',
+                        name: 'transection',
 
                     },
-
-                    {
-                        data: 'adminname',
-                        name: 'adminname',
-
-                    },
- {
+                     {
                         data: 'status',
                         name: 'status',
+                        orderable: false,
+                        searchable: false
 
                     },
 
@@ -228,9 +245,86 @@ if ($(this).val() == 'Save') {
 });
 //Create end shift
 
+//Update shift
+$("#Complanemodal").on('click', '#addBtn', function() {
+
+if ($(this).val() == 'Update') {
+
+    $.ajax({
+        url: url + '/customer/editcomplainsetting/' + $("#complainid").val(),
+        method: "PUT",
+        type: "PUT",
+        data: {
+           complaintitle: $("#complaintitle").val(),
+        },
+        success: function(d) {
+            if (d.success) {
+                $("#Complanemodal").modal("close");
+                $('#dataTable').DataTable().ajax.reload();
+                 clearform();
+
+
+
+            }
+        },
+        error: function(d) {
+            console.log(d);
+        }
+    });
+}
+});
+//Update shift end
+
+
+
+
+
+//Edit shift
+$("#dataTable").on('click', '#editBtn', function() {
+
+$paybyid = $(this).attr('rid');
+
+$info_url = url + '/customer/editcomplainsetting/' + $paybyid ;
+//console.log($info_url);
+// return;
+$.get($info_url, {}, function(d) {
+    
+    populateForm(d);
+    location.hash = "ccccc";
+    $("#Complanemodal").modal("open");
+});
+});
+//Edit shift end
+
+
+
+
+
+
+
+//form populatede
+
+function populateForm(data) {
+$("#complaintitle").val(data.complaintitle);
+
+$("#note").val(data.note);
+
+$("#complainid").val(data.id);
+$("#addBtn").val('Update');
+
+
+}
+
+function clearform() {
+$('#ccccc')[0].reset();
+$("#addBtn").val('Save');
+}
+
+$("#close").click(function() {
+clearform();
+});
 
         
-        });
         });
     </script>
 

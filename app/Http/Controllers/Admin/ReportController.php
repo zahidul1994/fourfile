@@ -29,31 +29,62 @@ class ReportController extends Controller
         }
       
       
-
-
-      public function findcustomer(Request $request){
-        if(! $request->id==null){
-        $searchvalue = Customer::with('district','thana','area')->whereadmin_id(Auth::id())->Where('loginid','LIKE','%'.$request->id."%")->orwhere('customermobile','LIKE','%'.$request->id."%")->orwhere('customername','LIKE','%'.$request->id."%")->orwhere('secretname','LIKE','%'.$request->id."%")->wherestatus(1)->first();
-        
-        if($searchvalue)
-{
-  $bill=Bill::wherecustomer_id($searchvalue->id)->get();
+        public function findcustomer(Request $request){
+          if(! $request->id==null){
+          $searchvalue = Customer::with('district','thana','area')->wherestatus(1)->whereadmin_id(Auth::id())->Where('loginid','LIKE','%'.$request->id."%")->first();
+          
+          if(!empty($searchvalue))
+  {
+    $bill=Bill::wherecustomer_id($searchvalue->id)->get();
 return response()->json([
   'result'=>$searchvalue,
   'bill'=>$bill,
-
-],200);
-}
-}
-   else{
+  
+  ],200);
+  }
+          $searchvalue = Customer::with('district','thana','area')->wherestatus(1)->whereadmin_id(Auth::id())->where('customermobile','LIKE','%'.$request->id."%")->first();
+          
+          if(!empty($searchvalue))
+  {
+    $bill=Bill::wherecustomer_id($searchvalue->id)->get();
+return response()->json([
+  'result'=>$searchvalue,
+  'bill'=>$bill,
+  
+  ],200);
+  }
+  $searchvalue = Customer::with('district','thana','area')->wherestatus(1)->whereadmin_id(Auth::id())->where('customername','LIKE','%'.$request->id."%")->first();
+          
+          if(!empty($searchvalue))
+  {
+    $bill=Bill::wherecustomer_id($searchvalue->id)->get();
+return response()->json([
+  'result'=>$searchvalue,
+  'bill'=>$bill,
+  
+  ],200);
+  }
+  $searchvalue = Customer::with('district','thana','area')->wherestatus(1)->whereadmin_id(Auth::id())->where('secretname','LIKE','%'.$request->id."%")->first();
+          
+          if(!empty($searchvalue))
+  {
+    $bill=Bill::wherecustomer_id($searchvalue->id)->get();
     return response()->json([
-      'success'=>false
-    
-    ],204 );
-   }
-    
-      }
+      'result'=>$searchvalue,
+      'bill'=>$bill,
+  ],200);
+  }
+  }
+     else{
+      return response()->json([
+        'success'=>false
+      
+      ],204 );
+     }
+      
+        }
 
+      
 
   
 }

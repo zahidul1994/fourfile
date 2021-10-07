@@ -10,6 +10,7 @@ use App\Models\Division;
 use Illuminate\Http\Request;
 use Kamaln7\Toastr\Facades\Toastr;
 use App\Http\Controllers\Controller;
+use App\Models\Payby;
 use App\Models\Payment;
 use App\Models\Smstype;
 use Illuminate\Support\Facades\Auth;
@@ -69,7 +70,11 @@ class OnchangeController extends Controller
     
         }
       
-      
+        public function adminpaybyinfo($id){
+            return response()->json(Payby::select('id','description')->find($id));
+        
+            
+                }
      
 
 

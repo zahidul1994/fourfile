@@ -20,7 +20,10 @@
 
         <nav class="navbar navbar-expand-lg navbar-light bg-transparent main-menu sticky-nav">
             <div class="container">
-                <a class="navbar-brand" href="#">Navbar</a>
+                <a class="navbar-brand" href="#">
+                    <img src="{{ url('assets/image/ibilling-logo.png') }}" class="w-100" alt="no">
+
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -92,7 +95,8 @@
                     <h2 class="banner-text mb-0">
                         Free dashboard template for your <span>user experiences.</span>
                     </h2>
-                    <a href="{{ url('/register/admin') }}" class="btn banner-btn">Register Now</button>
+                    
+                    <a href="{{ url('/admin/register') }}" class="banner-btn">Register Now</a>
 
                 </div>
                 <div class="col-md-2"></div>
@@ -400,10 +404,8 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="footer-logo">
-                        <h1 class="mb-4">
-                            Logo
-                        </h1>
-                        <p>
+                        <img src="{{ url('assets/image/ibilling-logo.png') }}" class="w-50" alt="no">
+                        <p class="mt-3">
                             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laboriosam, sed!
                         </p>
                     </div>
@@ -474,5 +476,3 @@
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
 </body>
-
-</html>

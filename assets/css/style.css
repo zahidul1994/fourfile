@@ -54,7 +54,7 @@ body{
 }
 
 #dashboard-demo{
-    padding: 75px 0;
+    padding: 110px 0;
 }
 .dashboard-demo-tittle{
     text-align: center;
@@ -128,10 +128,11 @@ body{
     text-transform: uppercase;
     padding: 7px 30px;
     color: #fff;
-    margin-top: 25px;
     font-weight: 700;
     position: relative;
     z-index: 1;
+    display: inline-block;
+    margin-top: 25px;
    
 }
 .banner-btn:before{
@@ -220,12 +221,12 @@ body{
 }
 
 #pricing-section{
-    padding: 75px 0;
+    padding: 110px 0;
     background: linear-gradient(45deg, #303f9f, #7b1fa2) !important;
 }
 
 #contact{
-    padding: 75px 0;
+    padding: 110px 0;
 }
 
 #dashboard-demo .card:hover{
@@ -252,4 +253,48 @@ padding: 5px 10px;
 .footer-menu li a{
     color: #fff;
 }
+#unique{
+    padding: 110px 0 0 0;
+}
+.unique-card{
+    text-align: center;
+    margin-bottom: 30px;
+}
+.main-unique{
+    margin-top: 40px;
+}
 
+.main-unique h4{
+    font-size: 22px;
+}
+.icon{
+    padding-bottom: 20px;
+}
+.icon i{
+    font-size: 60px;
+    color: #0277bd;
+}
+
+.footer-logo p{
+    font-weight: 300;
+    color: #dfdfdf;
+}
+.footer-element{
+    padding-bottom: 20px;
+}
+.footer-element h4{
+    color: #fff;
+}
+.footer-element ul{
+    padding-top: 10px;
+}
+.footer-element ul li{
+    padding: 10px 0;
+}
+.footer-element ul li a{
+    font-weight: 300;
+    color: #dfdfdf;
+}
+.footer-element ul li a:hover{
+    border-bottom: 1px solid #dfdfdf;
+}
