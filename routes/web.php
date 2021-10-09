@@ -385,6 +385,9 @@ Route::post('searchsinglecustomer', 'CollectionController@searchsinglecustomer')
 Route::post('searchsinglecustomerbill', 'CollectionController@singlecustomerbill');
 Route::get('cancelcollection', 'CollectionController@cancelcollection');
 Route::delete('cancelcollection/{id}', 'CollectionController@collectiondelete');
+Route::get('paybillinfo', 'CollectionController@paybillinfo');
+Route::post('conframpayment/{id}', 'CollectionController@conframpayment');
+Route::post('cancelpayment/{id}', 'CollectionController@cancelpayment');
 //Collection  End
 
 
@@ -488,7 +491,8 @@ Route::group([ 'prefix'=>'customer',
 
     ], function() {
         Route::get('dashboard', 'DashboardController@index');
-       
+        Route::post('seennotification', 'DashboardController@seennotification');
+        Route::post('deletenotification', 'DashboardController@deletenotification');
 //Complain Start 
 Route::get('complainlist','ComplainController@index');
 Route::get('createcomplain','ComplainController@create');

@@ -64,6 +64,12 @@
                     "name": "Cancel Collection",
                     "i18n": "Cancel Collection",
                     "slug": "cancelcollection"
+                },
+                {
+                    "url": "admin/paybillinfo",
+                    "name": "Customer Pay",
+                    "i18n": "Customer Pay",
+                    "slug": "admin/paybillinfo"
                 }
 
 

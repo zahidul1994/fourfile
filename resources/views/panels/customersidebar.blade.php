@@ -27,7 +27,7 @@
           @if(!empty ($configData['templateTitle']) && isset($configData['templateTitle']))
           {{$configData['templateTitle']}}
           @else
-          User
+          Customer
           @endif
         </span>
       </a>

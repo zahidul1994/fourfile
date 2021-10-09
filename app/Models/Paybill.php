@@ -32,4 +32,8 @@ class Paybill extends Model
     {
         return $this->belongsTo('App\Models\Payby');
     }
+    public function bill()
+    {
+        return $this->belongsTo('App\Models\Bill');
+    }
 }

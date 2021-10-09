@@ -158,7 +158,7 @@
 
     <script>
         $(document).ready(function() {
-            // clearform();
+            $("#search").focus();
             function delay(callback, ms) {
                 var timer = 0;
                 return function() {
@@ -242,7 +242,7 @@
                 }
                 if ($("#payby").val() == '') {
                     // console.log($("#collection").val());
-                    alert('Select Minimum One Payby Type');
+                    alert('Select Minimum One Collection  Type');
                     $("#payby").focus();
                     return false;
 
@@ -273,7 +273,7 @@
                                 timer: 2000,
                                 buttons: false
                             });
-
+                            location.reload();
                             $('#userid').html(null);
                             $('#name').html(null);
                             $('#ppusername').html(null);

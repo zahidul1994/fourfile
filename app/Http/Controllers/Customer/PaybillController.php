@@ -51,13 +51,13 @@ class PaybillController extends Controller
           return $button;
       }
       elseif($data->status==1){
-        $button = '<a href="#" disabled  class="btn-sm Approved" title="Pending"><i class="material-icons">done_all</i></a>';
+        $button = '<a href="#" disabled  class="btn-sm Approved" title="Aprove"><i class="material-icons">done_all</i></a>';
        return $button;
    }
    
       
       else {
-          $button = '<a href="#" disabled title="Close" class=" btn-sm" ><i class="material-icons">done_all</i> </a>';
+          $button = '<a href="#" disabled title="Payent cancel" class=" btn-sm" ><i class="material-icons">cancel</i> </a>';
           return $button;
       }})
      
@@ -121,7 +121,7 @@ class PaybillController extends Controller
       
        $data = [
             
-        'admindata' =>'<a class="black-text"  href="'. url('/admin/paybilldetail/'.$pay->id) . '">'. Auth::guard('customer')->user()->customername. 'Sent a Payment request </a>',
+        'admindata' =>'<a class="black-text"  href="'. url('/admin/paybillinfo') . '">'. Auth::guard('customer')->user()->customername. ' Sent a Payment request </a>',
 ];
 
 Admin::find(Auth::guard('customer')->user()->admin_id)->notify(new Adminupdatenotification($data));

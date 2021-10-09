@@ -30,7 +30,7 @@
                                   <div class="center">
                                       <p class="customername">{{@Auth::guard('customer')->user()->customername}}</p>
                                       <p>{{@Auth::guard('customer')->user()->customermobile}}</p>
-                                      <a class="mb-6 mt-6 btn waves-effect waves-light green darken-1" href="{{url('customer/paybill')}}">Pay Bill</a>
+                                      <a class="mb-6 mt-6 btn waves-effect waves-light green darken-1" href="{{url('customer/createpayment')}}">Pay Bill</a>
                                       <div>
 <a href="#">
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
@@ -235,13 +235,35 @@
 
 @endsection
 
+
+
 @section('page-script')
 
 <script>
- $(".sidenav-main").addClass("nav-collapsed");
+$(".sidenav-main").addClass("nav-collapsed");
             $("#main").addClass("main-full");
            
 
+$( window ).on("load", function() {
+
+ 
+  $.ajax({
+          type: "post",
+          url:url+'/customer/checkprofile',
+              
+          success: function (data) {
+            //console.log(data)
+           if(data<100){
+          $("#name").val(data);
+            $('#dd').html(data);
+            $('#ProfileModal').modal('open');
+          }
+          }
+     
+      });
+  
+ 
+});
 </script>
 
 

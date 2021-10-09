@@ -206,5 +206,6 @@ return [
 	"Customer Excel Form"=> "Customer Excel Form",
 	"Report"=> "Report",
 	"Customer Report"=> "Customer Report",
+    "Customer Pay"=>"Customer Pay"
 ];
 ?>

@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers\Admin;
 use Validator;
+use datatables;
 use App\Models\Area;
 use App\Models\Bill;
 use App\Models\Thana;
+use App\Models\Paybill;
 use App\Models\Customer;
 use App\Helpers\CommonFx;
 use App\Models\Collection;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
+use App\Notifications\Customernotification;
 use Kamaln7\Toastr\Facades\Toastr;
 use App\Http\Controllers\Controller;
-use GrahamCampbell\ResultType\Success;
-use Illuminate\Support\Facades\Auth;
 //use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use GrahamCampbell\ResultType\Success;
 use Illuminate\Support\Facades\Redirect;
  use Illuminate\Database\Eloquent\Builder;
 
@@ -291,11 +293,141 @@ if($info){
   $pa->paid-=$request->payamount;
    $pa->save();
 }
+$infos=Paybill::wherebill_id($info->bill_id)->first();
+if($infos){
+  $infos->status=0;
+  $infos->save();
+$data = [
+            
+  'customerdata' =>'<a class="black-text"  href="'. url('/customer/pyamentlist') . '">'. Auth::user()->name. ' Delete Your Payment </a>',
+];
 
+Customer::find($infos->customer_id)->notify(new Customernotification($data));
+}  
 $info->delete();
 return response()->json([
   'success'=>true
 ],200);
       }
+
+
+
+      public function paybillinfo(){
+       // dd(Paybill::with('payby')->whereadmin_id(Auth::id())->latest()->get());
+        if (request()->ajax()) {
+          return datatables()->of(Paybill::with('customer','payby')->whereadmin_id(Auth::id())->whereMonth('created_at', date('m'))
+          ->whereYear('created_at', date('Y'))->latest())
+            
+        ->addColumn('payby' ,function($data){
+            return $data->payby->paybyname;
+        }) 
+      
+            ->addColumn('status', function($data){
+              if($data->status==0){
+             $button = '<a href="#" rid="'.$data->id.'"  class="btn-sm Pending" title="Pending"><i class="material-icons">block</i></a>';
+             $button .= '<a href="#"  rid="'.$data->id.'"  class="btn-sm Cancel" title="Cancel"><i class="material-icons">cancel</i></a>';
+            return $button;
+        }
+        elseif($data->status==1){
+          $button = '<a href="#"  rid="'.$data->id.'"  class="btn-sm Approved" title="Aprove"><i class="material-icons">done_all</i></a>';
+         return $button;
+     }
+     
+        
+        else {
+            $button = '<a href="#" disabled title="Payment Cancel" class=" btn-sm" ><i class="material-icons">cancel</i> </a>';
+            return $button;
+        }})
+       
+            ->addIndexColumn()
+            ->rawColumns(['action','status','paybyname'])
+            ->make(true);
+        }
+        $pageConfigs = ['pageHeader' => false, 'isFabButton' => false];
+    
+        return view('admin.collection.paybillinfo')->with('pageConfigs', $pageConfigs);
+  
+       
+          }
+        
+          public function conframpayment($id){
+            
+           $infos=Paybill::find($id);
+           $info= Bill::find($infos->bill_id);
+           if($info->paid>0){
+            return response()->json([
+              'success'=>false
+            
+            ],404 );
+           }
+              
+                
+                  $info->paid=$info->total;
+                  $info->save();
+                $pay= new Collection();
+                $pay->paid =trim($info->total);
+               $pay->bill_id =trim($infos->bill_id);
+               $pay->payby_id =trim($infos->payby_id);
+               $pay->admin_id =Auth::id();
+                $pay->save();
+                $cus=Customer::find($infos->customer_id);
+                 $smsinfo=['name'=>$cus->customername,'mobile'=>$cus->customermobile,'id'=>$cus->loginid,'paid'=>$infos->paid,'due'=>$info->total-$info->paid];
+                 CommonFx::sentsmscustomerbillpaid($smsinfo);
+                 $infos->status=1;
+                 $infos->save();
+           if($cus){
+            return response()->json([
+              'suceess'=>true,
+            ],201);
+            }
+            
+               else{
+                return response()->json([
+                  'success'=>false
+                
+                ],404 );
+               
+              } 
+           
+                        
+          
+                
+            } 
+
+
+            
+          public function cancelpayment($id){
+            
+            $infos=Paybill::find($id);
+               $infos->status=2;
+                  $infos->save();
+                   
+       $data = [
+            
+        'customerdata' =>'<a class="black-text"  href="'. url('/customer/pyamentlist') . '">'. Auth::user()->name. ' Cancel Your Payment </a>',
+];
+
+Customer::find($infos->customer_id)->notify(new Customernotification($data));
+          
+      
+            if($infos){
+
+             return response()->json([
+               'suceess'=>true,
+             ],201);
+             }
+             
+                else{
+                 return response()->json([
+                   'success'=>false
+                 
+                 ],404 );
+                
+               } 
+            
+                         
+           
+                 
+             } 
   
 }

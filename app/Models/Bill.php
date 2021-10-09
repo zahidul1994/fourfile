@@ -30,4 +30,8 @@ class Bill extends Model
     {
         return $this->belongsTo('App\Models\Customer');
     }
+    public function paybill()
+    {
+        return $this->hasOne('App\Models\Paybill');
+    }
 }
