@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use App\Mail\Custommail;
 use App\Models\Bill;
 use App\Models\Smssent;
 use App\Models\Customer;
@@ -22,7 +22,7 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Support\Facades\Redirect;
 use Yajra\DataTables\Contracts\DataTable;
 use Illuminate\Pagination\LengthAwarePaginator;
-
+use Illuminate\Support\Facades\Mail;
 
 class CustomerController extends Controller
 {
@@ -41,8 +41,8 @@ class CustomerController extends Controller
           $button .= '<a title="Edit Customer" href="/admin/editcustomer/' . $data->id . '" class="btn-sm" style="border:0; background: none; padding: 0 !important"><i class="material-icons" style="font-size: 16px; color: #9B01BA;">edit</i></a>';
           $button .= '&nbsp;&nbsp;';
           $button .= '<a target="_blank" style="border:0; background: none; padding: 0 !important" href="' . url('admin/customerprofile', $data->id) . '" class="btn-sm" title="See Preview"><i class="material-icons " style="font-size: 16px; color: #16A66C;">remove_red_eye</i></a>';
-        //  $button .= '&nbsp;&nbsp;';
-        //   $button .= '<button type="button" title="Inactive Customer"  id="deleteBtn" rid="' . $data->id . '" class="invoice-action-view btn-sm "><i class="material-icons ">https</i></button>';
+          $button .= '<br/>';
+           $button .= '<button type="button" title="Send Email Customer" style="border:0; background: none; padding: 0 !important"  cid="' . $data->id . '" email="' . $data->email . '" class="invoice-action-view btn-sm Sendemail"><i class="material-icons " style="font-size: 16px; color: #16A66C;">email</i></button>';
           return $button;
         })
         ->addColumn('status', function($data){
@@ -635,7 +635,20 @@ Sendcustomersms::dispatch($data);
 
   }
 
+public function customeremail(Request $request){
+  $info=Customer::select('id','customername','loginid')->find($request->id);
+  $data= array(
+    'loginid'=> $info->loginid,
+   'name'=> $info->customername,
+   'email'=> $request->email,
+   'subject'=> $request->subject,
+   'message'=> $request->message,
+    );
 
+Mail::to($request->email)->send(new Custommail($data));
+return response()->json(['success' => true]);
+
+}
 
   }
 

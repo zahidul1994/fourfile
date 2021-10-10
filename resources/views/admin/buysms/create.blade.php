@@ -47,7 +47,7 @@ $(".card-alert .close").click(function () {
 });
 
 $('#payment_id').change(function(){
-    alert();
+   
             $('#showtransectionmessage').empty();
 
     var payid = $(this).val();

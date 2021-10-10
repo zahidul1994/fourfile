@@ -137,8 +137,34 @@
 <script>
 
 $( window ).on("load", function() {
+   var smsamount='{{@$smsinfo->blance}}';
+   let data=new Date();
+   let dateinfo= data.getDate();
+   var smsalertinfo= localStorage.getItem("smsalertinfo");
+  // console.log(dateinfo);
+ if((smsamount<100) && (smsalertinfo != dateinfo)){
+   localStorage.clear();
+   swal({
+    title: "Recharge Now",
+    text: "Your Sms Balance Low",
+    icon: 'warning',
+    dangerMode: true,
+    buttons: {
+      cancel: 'Buy Now',
+      delete: 'Dely'
+    }
+  }).then(function (willDelete) {
+    if (willDelete) {
+      swal(" We Will Remember Tomorrow", {
+        icon: "success",
+      });
+      localStorage.setItem("smsalertinfo", dateinfo);
 
- 
+    } else {
+      window.location.href = url+'/admin/createbuysms';
+    }
+  });
+ };
   $.ajax({
           type: "post",
           url:url+'/admin/checkprofile',

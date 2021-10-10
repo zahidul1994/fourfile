@@ -231,6 +231,46 @@ table.dataTable thead .sorting_asc{
             <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
         </div>
     </div>
+<div id="SentEmail" class="modal">
+        <div class="modal-content">
+
+
+            <div class="row">
+              <div class="input-field col m12 s12">
+                    {!!Form::email('email',null, array('id'=>'email','class' => 'validate', 'placeholder' => 'placeholder', 'required'))!!}
+           
+                    {!! Form::label('email', 'Customer Email *') !!}
+                    {!! Form::hidden('id',null, array('id'=>'id')) !!}
+
+                </div>
+                <div class="input-field col m12 s12">
+                    {!!Form::text('subject',"Hi", array('id'=>'subject','class' => 'validate', 'placeholder' => 'Email Subject'))!!}
+                    {!! Form::label('subject', 'Email Subject*') !!}
+                  
+
+                </div>
+                <div class="input-field col m12 s12">
+                    {!!Form::textarea('message',null, array('id'=>'message','class'=>'materialize-textarea', 'data-length'=>'160','rows' => 4, 'cols' => 54,'required'))!!}
+           
+                    {!! Form::label('message', 'Message *') !!}
+
+                </div>
+                
+
+            
+                  
+                </div>
+
+
+            </div>
+
+        <div class="modal-footer">
+            <button class="btn cyan waves-effect waves-light right" type="button" id="SendEmailToCustomer">Send
+                <i class="material-icons right">send</i>
+            </button>
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
+    </div>
 
 
     {{-- @endcan --}}
@@ -574,6 +614,52 @@ $(document).on('click','.Approved', function(){
                     success: function (d) {
                         toastr.success(d.message);
                         $('#dataTable').DataTable().ajax.reload();
+        
+                    }
+                });
+        
+            
+        });
+        
+        $(document).on('click','.Sendemail', function(){
+      
+                        $("#id").val($(this).attr('cid'));
+                            $("#email").val($(this).attr('email'));
+                            $('#SentEmail').modal('open');
+
+                
+        
+            
+        }); 
+        $(document).on('click','#SendEmailToCustomer', function(){
+             if ($("#email").val() == '') {
+                    alert('Email Address Is Required');
+                    $("#email").focus();
+                    return false;
+
+                }
+                if ($("#message").val() == '') {
+                    alert('Message  Is Required');
+                    $("#message").focus();
+                    return false;
+
+                }
+                $.ajax({
+                    type: "post",
+                    url:url+'/admin/customeremail',
+                    data: {
+                        id:$("#id").val(),
+                        email:$("#email").val(),
+                        message:$("#message").val(),
+                        subject:$("#subject").val(),
+                    },
+                    dataType: "json",
+                    success: function (d) {
+                        toastr.success("email Send Successfully");
+                        $("#message").html(null);
+                        $("#email").html(null);
+                        $("#subject").html(null);
+                         $('#SentEmail').modal('close');
         
                     }
                 });

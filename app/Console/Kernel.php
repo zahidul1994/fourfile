@@ -15,7 +15,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
     'App\Console\Commands\Billgenerate',
-    'App\Console\Commands\Billcalculation'
+    'App\Console\Commands\Billcalculation',
+    'App\Console\Commands\Smsbalance',
     ];
 
     /**
@@ -30,6 +31,7 @@ class Kernel extends ConsoleKernel
         //$schedule->command('work:billgenerate')->everyMinute();
         $schedule->command('work:Billcalculation')->monthlyOn(1, '0:00');
          $schedule->command('work:billgenerate')->monthlyOn(1, '1:00');
+         $schedule->command('work:smsbalance')->daily();
     }
 
     /**
