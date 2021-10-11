@@ -176,6 +176,7 @@ return [
     "Customer List"=> "Customer List",
     "Pending Customer List"=> "Pending Customer List",
     "Create Customer"=> "Create Customer",
+    "Prosepective"=> "Prosepective",
 	"Contact"=> "Contact",
     "Email List"=> "Email List",
     "Create Email"=> "Create Email",

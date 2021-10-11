@@ -450,7 +450,17 @@ Route::get('downloadesmsinvoice/{id}','PdfController@buysmsinvoice');
    Route::patch('updateuser/{id}','UserController@update');
   Route::delete('deleteuser/{id}','UserController@destroy');
   Route::post('userstatus', 'UserController@setapproval'); 
-   //user create  End
+   //user create  End 
+   
+   //prospectivecustomers create Start
+   Route::get('prospectivecustomerlist','ProspectiveController@index');
+   Route::get('createprospectivecustomer','ProspectiveController@create');
+   Route::post('createprospectivecustomer','ProspectiveController@store');
+  Route::get('editprospectivecustomer/{id}','ProspectiveController@edit');
+   Route::patch('updateprospectivecustomer/{id}','ProspectiveController@update');
+  Route::delete('deleteprospectivecustomer/{id}','ProspectiveController@destroy');
+  Route::post('prospectivecustomersms', 'ProspectiveController@prospectivecustomersms'); 
+   //prospectivecustomers create  End
 
 
    //Report Area 

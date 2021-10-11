@@ -24,6 +24,12 @@
                     "name": "Create Customer",
                     "i18n": "Create Customser",
                     "slug": "admin/createcustomer"
+                }, 
+                {
+                    "url": "admin/prospectivecustomerlist",
+                    "name": "Prosepective",
+                    "i18n": "Prosepective",
+                    "slug": "admin/prospectivecustomerlist"
                 },
                 {
                     "url": "admin/customerexcelform",

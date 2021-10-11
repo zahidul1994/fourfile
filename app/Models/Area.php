@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Area extends Model
 {
     protected $fillable=[
-        'thana_id','areaname','admin_id'
+        'thana_id','areaname','admin_id','id'
     ];
     
     public function thana()
@@ -17,5 +17,9 @@ class Area extends Model
     public function customer()
     {
         return $this->hasMany('App\Models\Customer');
+    }
+    public function prospectivecustomer()
+    {
+        return $this->hasMany('App\Models\Prospectivecustomer');
     }
 }
