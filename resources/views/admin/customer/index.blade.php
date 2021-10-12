@@ -295,7 +295,7 @@ table.dataTable thead .sorting_asc{
         $(document).ready(function() {
             $(".sidenav-main").addClass("nav-collapsed");
             $("#main").addClass("main-full");
-            $(".sidenav-main").click(function() {
+            $(".sidenav-main").hover(function() {
                 $(".sidenav-main").toggleClass("nav-collapsed");
             });
             var $containerHeight = $(window).height();

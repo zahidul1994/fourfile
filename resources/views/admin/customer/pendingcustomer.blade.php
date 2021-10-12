@@ -160,7 +160,7 @@
             });
             var $containerHeight = $(window).height();
             if ($containerHeight <= 500) {
-                $(".sidenav-main").hover(function() {
+                $(".sidenav-main").click(function() {
                     $(".sidenav-main").addClass("nav-collapsed");
 
                 });

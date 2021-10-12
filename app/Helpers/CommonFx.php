@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\Adminupdatenotification;
 use Symfony\Component\HttpFoundation\Request; 
 
 class CommonFx{
@@ -377,7 +378,8 @@ public static function Divisionname(){
             $smssetting=Smssent::whereadmin_id(Auth::id())->firstOrFail();
          
             $text= str_replace(['#CUSTOMER_NAME#', '#CUSTOMER_ID#','#RATE#','#IP#','#PPPOE_USERNAME#','#PPPOE_PASSWORD#','#COMPANY_NAME#'], [$smsinfo['name'], $smsinfo['id'],$smsinfo['monthlypayment'],$smsinfo['ip'],$smsinfo['oppusername'],$smsinfo['opppassword'], Auth::user()->company], $smssetting->newcustomermessage);
-            if(($smssetting->newcustomer==1) && ($smssetting->blance>1)){
+            if($smssetting->newcustomer==1){
+                if($smssetting->blance>1){
                 // $number=$smsinfo->phone;
                 $number=$smsinfo['mobile'];
                $dataall= array(
@@ -400,12 +402,23 @@ public static function Divisionname(){
        $sendstatus = $p[0];
 
    }
+else{
+    $data = [
+            
+        'admindata' =>'<a class="black-text"  href="'. url('/admin/createbuysms').'"> Sms Sent Fail For Low Balance. Your Balance Is '.$smssetting->blance.' TK Please Recharge  </a>',
+];
+
+Admin::find($smssetting->admin_id)->notify(new Adminupdatenotification($data));
+}
+
+}
         }
         public static function sentsmscustomerbillpaid($smsinfo){
             $smssetting=Smssent::whereadmin_id(Auth::id())->firstOrFail();
          $text= str_replace(['#CUSTOMER_NAME#', '#AMOUNT#','#CUSTOMER_ID#','#DUE_AMOUNT#','#COMPANY_NAME#'], [$smsinfo['name'],$smsinfo['paid'], $smsinfo['id'],$smsinfo['due'],Auth::user()->company], $smssetting->paymentmessage);
      
-      if(($smssetting->payment==1) && ($smssetting->blance>1)){
+      if($smssetting->payment==1){
+          if($smssetting->blance>1){
       // $number=$smsinfo->phone;
       $number=$smsinfo['mobile'];
      $dataall= array(
@@ -427,14 +440,23 @@ public static function Divisionname(){
    //Log::info($sendstatus);
     
    }
+   else{
+    $data = [
+            
+        'admindata' =>'<a class="black-text"  href="'. url('/admin/createbuysms').'"> Sms Sent Fail For Low Balance. Your Balance Is '.$smssetting->blance.' TK Please Recharge  </a>',
+];
+
+Admin::find($smssetting->admin_id)->notify(new Adminupdatenotification($data));
+}
+   }
         }
 
         public static function sentsmsbillcreate($smsinfo){
             $smssetting=Smssent::whereadmin_id($smsinfo['adminid'])->firstOrFail();
-            if(($smssetting->billing==1) && ($smssetting->blance>1)){
+            if($smssetting->billing==1){
          $companyinfo=Admin::find($smsinfo['adminid']);
             $text= str_replace(['#CUSTOMER_NAME#','#MONTH#','#BILL_AMOUNT#', '#CUSTOMER_ID#','#LAST_DAY_OF_PAY_BILL#','#COMPANY_NAME#'], [$smsinfo['name'],date('M-Y'),$smsinfo['billamount'], $smsinfo['id'],$smsinfo['expeirydate'], $companyinfo->company], $smssetting->billingmessage);
-          
+            if($smssetting->blance>1){
                 // $number=$smsinfo->phone;
                 $number=$smsinfo['mobile'];
                $dataall= array(
@@ -456,13 +478,22 @@ public static function Divisionname(){
        $p = explode("|",$smsresult);
        $sendstatus = $p[0];
 
+   }
+   else{
+    $data = [
+            
+        'admindata' =>'<a class="black-text"  href="'. url('/admin/createbuysms').'"> Sms Sent Fail For Low Balance. Your Balance Is '.$smssetting->blance.' TK Please Recharge  </a>',
+];
+
+Admin::find($smssetting->admin_id)->notify(new Adminupdatenotification($data));
+}
    }
         }
          public static function Sendsmsopencomplain($smsinfo){
             $smssetting=Smssent::whereadmin_id(Auth::id())->firstOrFail();
-            if(($smssetting->openticket==1) && ($smssetting->blance>1)){
+            if($smssetting->openticket==1){
            $text= str_replace(['#CUSTOMER_NAME#','#COMPLAINS#','#COMMENT#', '#EMPLOYEE_NAME#','#EMPLOYEE_MOBILE#','#COMPANY_NAME#', '#COMPANY_MOBILE#'], [$smsinfo['name'],$smsinfo['complain'], $smsinfo['message'],Auth::user()->name,Auth::user()->phone,Auth::user()->company,Auth::user()->phone], $smssetting->openticketmessage);
-          
+          if($smssetting->blance>1){
                 // $number=$smsinfo->phone;
                 $number=$smsinfo['mobile'];
                $dataall= array(
@@ -484,13 +515,22 @@ public static function Divisionname(){
        $p = explode("|",$smsresult);
        $sendstatus = $p[0];
 
+   }
+   else{
+    $data = [
+            
+        'admindata' =>'<a class="black-text"  href="'. url('/admin/createbuysms').'"> Sms Sent Fail For Low Balance. Your Balance Is '.$smssetting->blance.' TK Please Recharge  </a>',
+];
+
+Admin::find($smssetting->admin_id)->notify(new Adminupdatenotification($data));
+}
    }
         }
      public static function Sendsmsopencomplainupdate($smsinfo){
             $smssetting=Smssent::whereadmin_id(Auth::id())->firstOrFail();
-            if(($smssetting->updateticket==1) && ($smssetting->blance>1)){
+            if($smssetting->updateticket==1){
            $text= str_replace(['#CUSTOMER_NAME#','#TKTNO#','#TOPIC#','#TKT_MSG#'], [$smsinfo['name'],$smsinfo['tktno'],$smsinfo['complain'][0], $smsinfo['message']], $smssetting->updateticketmessage);
-          
+          if($smssetting->blance>1){
                 // $number=$smsinfo->phone;
                 $number=$smsinfo['mobile'];
                $dataall= array(
@@ -513,12 +553,21 @@ public static function Divisionname(){
        $sendstatus = $p[0];
 
    }
+   else{
+    $data = [
+            
+        'admindata' =>'<a class="black-text"  href="'. url('/admin/createbuysms').'"> Sms Sent Fail For Low Balance. Your Balance Is '.$smssetting->blance.' TK Please Recharge  </a>',
+];
+
+Admin::find($smssetting->admin_id)->notify(new Adminupdatenotification($data));
+}
+   }
    }
    public static function Sendsmsopencomplainclose($smsinfo){
     $smssetting=Smssent::whereadmin_id(Auth::id())->firstOrFail();
-    if(($smssetting->closeticket==1) && ($smssetting->blance>1)){
+    if($smssetting->closeticket==1){
    $text= str_replace(['#CUSTOMER_NAME','#COMPANY_MOBILE#','#COMPANY_NAME#'], [$smsinfo['name'],Auth::user()->phone,Auth::user()->company,Auth::user()->phone], $smssetting->closeticketmessage);
-  
+  if($smssetting->blance>1){
         // $number=$smsinfo->phone;
         $number=$smsinfo['mobile'];
        $dataall= array(
@@ -541,8 +590,51 @@ $p = explode("|",$smsresult);
 $sendstatus = $p[0];
 
 }
-        }
+else{
+    $data = [
+            
+        'admindata' =>'<a class="black-text"  href="'. url('/admin/createbuysms').'"> Sms Sent Fail For Low Balance. Your Balance Is '.$smssetting->blance.' TK Please Recharge  </a>',
+];
 
+Admin::find($smssetting->admin_id)->notify(new Adminupdatenotification($data));
+}
+}
+        }
+        public static function Prospectivesms($smsinfo){
+            $smssetting=Smssent::whereadmin_id(Auth::id())->firstOrFail();
+            if($smssetting->blance>1){
+           $text=$smsinfo['message'];
+                $number=$smsinfo['mobile'];
+               $dataall= array(
+                 'username'=>$smssetting->username,
+                 'password'=>$smssetting->password,
+                 'number'=>$number,
+                 'message'=>$text
+                 );
+                 $smssetting->blance -=$smssetting->smsrate *(CommonFx::Smscount($text));
+                 $smssetting->save();
+        
+        
+        $url = "http://66.45.237.70/api.php";
+        $ch = curl_init(); // Initialize cURL
+        curl_setopt($ch, CURLOPT_URL,$url);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($dataall));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $smsresult = curl_exec($ch);
+        $p = explode("|",$smsresult);
+        $sendstatus = $p[0];
+        
+        }
+        else{
+            $data = [
+                    
+                'admindata' =>'<a class="black-text"  href="'. url('/admin/createbuysms').'"> Sms Sent Fail For Low Balance. Your Balance Is '.$smssetting->blance.' TK Please Recharge  </a>',
+        ];
+        
+        Admin::find($smssetting->admin_id)->notify(new Adminupdatenotification($data));
+        }
+        
+                }
 
 //customer area
 public static function CustomerComplaintitle(){

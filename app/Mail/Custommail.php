@@ -28,6 +28,6 @@ class Custommail extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->from('mjahid1990@gmail.com')->subject($this->data['subject'])->view('email.custommail')->with('data', $this->data);
+        return $this->from('14e2d491ce-b286d1@inbox.mailtrap.io')->subject($this->data['subject'])->view('email.custommail')->with('data', $this->data);
     }
 }

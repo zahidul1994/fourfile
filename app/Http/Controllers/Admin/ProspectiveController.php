@@ -24,6 +24,7 @@ use GrahamCampbell\ResultType\Success;
 use Illuminate\Support\Facades\Redirect;
 use App\Notifications\Customernotification;
  use Illuminate\Database\Eloquent\Builder;
+use Tymon\JWTAuth\Claims\Custom;
 
 class ProspectiveController extends Controller
 {
@@ -148,6 +149,14 @@ public function update(Request $request,$id){
             ],201);
              }
 
-
+public function prospectivecustomersms(Request $request){
+  $cus=Prospectivecustomer::whereadmin_id(Auth::id())->findOrFail($request->id);
+  $smsinfo=['name'=>$cus->name,'mobile'=>$cus->phone,'message'=>$request->message];
+  CommonFx::Prospectivesms($smsinfo);
+  return response()->json([
+   'success'=>true,
+    
+ ],201);
+}
    
 }

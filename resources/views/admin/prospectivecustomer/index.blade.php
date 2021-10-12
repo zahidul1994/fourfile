@@ -72,7 +72,7 @@
                 <div class="input-field col m12 s12">
                     {!!Form::textarea('message',null, array('id'=>'message','class'=>'materialize-textarea', 'data-length'=>'160','rows' => 4, 'cols' => 54,'required'))!!}
                     {!! Form::hidden('id',null, array('id'=>'id')) !!}
-                    {!! Form::label('active', 'Sent Message ') !!}
+                    {!! Form::label('message', 'Sent Message (Name Add Automatic)') !!}
 
                 </div>
                 
@@ -229,7 +229,7 @@ $.ajax({
   },
   dataType: "json",
   success: function (d) {
-      toastr.success("email Send Successfully");
+      toastr.success("SMS Send Successfully");
       $("#message").html(null);
       $("#id").html(null);
      $('#SendSmsModal').modal('close');
