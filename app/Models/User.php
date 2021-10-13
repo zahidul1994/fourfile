@@ -24,25 +24,25 @@ class User extends Authenticatable
             return $this->belongsTo('App\Gender');
         }
          public function admin(){
-            return $this->belongsTo('App\Admin','admin_id','id');
+            return $this->belongsTo('App\Models\Admin','admin_id','id');
         }
         
-        public function accessories(){
-            return $this->hasMany('App\Accessories');
-        }
-
+     
      
         public function status(){
-            return $this->belongsTo('App\Status');
+            return $this->belongsTo('App\Models\Status');
         }
         
         public function accounttype()
         {
-            return $this->belongsTo('App\Accounttype');
+            return $this->belongsTo('App\Models\Accounttype');
         }
      
         public function userreview(){
-            return $this->hasOne('App\Userreview');
+            return $this->hasOne('App\Models\Userreview');
+            }
+               public function todotaskuser(){
+            return $this->hasOne('App\Models\Todotaskuser');
             }
         
         protected $casts = [

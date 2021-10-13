@@ -288,6 +288,13 @@
                     "name": "Create Role",
                     "i18n": "Create Role",
                     "slug": "admin-createaccountrole"
+                },
+                
+                {
+                    "url": "admin/todolist",
+                    "name": "Todo List",
+                    "i18n": "Todo List",
+                    "slug": "todolist"
                 }
                 
 

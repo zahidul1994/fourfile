@@ -322,7 +322,7 @@ public static function Divisionname(){
         public static function Connect(){
             $info=User::whereadmin_id(Auth::id())->first();
             if($info){
-                return User::pluck('username','id');
+                return User::whereadmin_id(Auth::id())->pluck('username','id');
             }
             else{
                 return Admin::whereid(Auth::id())->pluck('name','id');

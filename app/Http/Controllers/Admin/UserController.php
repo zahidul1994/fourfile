@@ -42,7 +42,7 @@ class UserController extends Controller
       $this->validate($request,[
      'email' => 'required|email|unique:users',
      'username' => 'required|min:2|max:198',
-     'phone' => 'required',
+     'phone' => 'required|unique:users',
      'password' => 'required|min:6|max:30', 
      'retypepassword' => 'required|same:password', 
           

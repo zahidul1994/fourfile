@@ -462,6 +462,15 @@ Route::get('downloadesmsinvoice/{id}','PdfController@buysmsinvoice');
   Route::post('prospectivecustomersms', 'ProspectiveController@prospectivecustomersms'); 
    //prospectivecustomers create  End
 
+ //Todolist create Start
+ Route::get('todolist','TodolistController@index');
+ Route::get('createtodo','TodolistController@create');
+ Route::post('createtodo','TodolistController@store');
+Route::get('edittodo/{id}','TodolistController@edit');
+ Route::patch('updatetodo/{id}','TodolistController@update');
+Route::delete('deletetodo/{id}','TodolistController@destroy');
+
+ //Todolist create  End
 
    //Report Area 
 Route::get('customerreport','ReportController@index');

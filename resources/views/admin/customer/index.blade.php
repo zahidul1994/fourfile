@@ -71,7 +71,8 @@ table.dataTable thead .sorting_asc{
                         <a href="{{ url('admin/createcustomer') }}" class="waves-effect waves-light  btn"><i
                                 class="material-icons right">gps_fixed</i> Create  Customer</a>
                                
-                    </div> <div class="col s12 m3 l3 input-field">
+                    </div>
+                     <div class="col s12 m3 l3 input-field">
                   
                         <button data-target="SendSms" class="btn modal-trigger"> Send Sms <i
                             class="material-icons right">sms</i></button>
