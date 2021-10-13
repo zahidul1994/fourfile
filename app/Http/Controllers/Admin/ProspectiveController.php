@@ -31,7 +31,7 @@ class ProspectiveController extends Controller
     public function index(){
      // dd(Prospectivecustomer::with('area')->whereadmin_id(Auth::id())->latest());
       if (request()->ajax()) {
-        return datatables()->of(Prospectivecustomer::with('area')->whereadmin_id(Auth::id())->latest())
+        return datatables()->of(Prospectivecustomer::whereadmin_id(Auth::id())->latest())
           ->addColumn('action', function ($data) {
             $button = '<a title="Edit" style="border:0; background: none; padding: 0 !important"  href="/admin/editprospectivecustomer/' . $data->id . '" class="invoice-action-view"><i class="material-icons">edit</i></a>';
             $button .= '&nbsp;&nbsp;';
@@ -76,8 +76,7 @@ class ProspectiveController extends Controller
         ];
       
           $pageConfigs = ['pageHeader' => true, 'isFabButton' => false];
-        $thana=Thana::pluck('thana','id');
-        return view('admin.prospectivecustomer.create', ['pageConfigs' => $pageConfigs], ['breadcrumbs' => $breadcrumbs])->with('thana',$thana);
+   return view('admin.prospectivecustomer.create', ['pageConfigs' => $pageConfigs], ['breadcrumbs' => $breadcrumbs]);
       
         }
 
@@ -89,8 +88,8 @@ class ProspectiveController extends Controller
           
           'name' => 'required|min:1',
           'phone' => 'required|max:60',
-           'thana_id' => 'required',
-           'area_id' => 'required',
+           'comment' => 'max:198',
+           'address' => 'max:498',
          ]);
          Prospectivecustomer::create($request->all()+['admin_id'=>Auth::id()]);
        

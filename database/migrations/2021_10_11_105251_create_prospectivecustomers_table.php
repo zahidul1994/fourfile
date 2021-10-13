@@ -18,12 +18,11 @@ class CreateProspectivecustomersTable extends Migration
             $table->bigInteger('admin_id')->unsigned()->nullable();
             $table->foreign('admin_id')->references('id')->on('admins')->onDelete('cascade');
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('thana_id')->nullable();
-            $table->unsignedBigInteger('area_id')->nullable();
             $table->string('name')->nullable();
             $table->string('phone',60)->nullable();
-            $table->string('message')->nullable();
-            $table->string('replymessage')->nullable();
+            $table->string('address',500)->nullable();
+            $table->string('email')->nullable();
+            $table->string('comment')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });

@@ -26,7 +26,7 @@
 
 
                     <div class="col s12 m3 l3 input-field">
-                   <a href="{{url('admin/createprospectivecustomer')}}" class="btn ">Create Complain</a>
+                   <a href="{{url('admin/createprospectivecustomer')}}" class="btn ">Create New</a>
                     </div>
 
                     <div class="row">
@@ -40,9 +40,9 @@
                                         <td>Date</td>
                                         <td>Name</td>
                                         <td>Mobile</td>
-                                        <td>Area </td>
-                                        <td>Message</td>
-                                        <td>Reply</td>
+                                        <td>Address </td>
+                                        <td>Comment</td>
+                                        
                                         <td>status</td>
                                        <th>Action</th>
                                     </tr>
@@ -146,18 +146,14 @@
                         name: 'phone',
 
                     }, 
-                    {
-                        data: 'area.areaname',
-                        name: 'areaname',
-
-                    },
+                   
                      {
-                        data: 'message',
-                        name: 'message',
+                        data: 'address',
+                        name: 'address',
 
                     },{
-                        data: 'replymessage',
-                        name: 'replymessage',
+                        data: 'comment',
+                        name: 'comment',
 
                     },
 

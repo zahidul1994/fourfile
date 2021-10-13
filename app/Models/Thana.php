@@ -25,8 +25,5 @@ class Thana extends Model
     {
         return $this->hasMany('App\Models\Customer');
     }
-    public function prospectivecustomer()
-    {
-        return $this->hasMany('App\Models\Prospectivecustomer');
-    }
+    
 }

@@ -152,19 +152,25 @@
 @section('page-script')
     <script src="{{ asset('app-assets/js/scripts/data-tables.js') }}"></script>
     <script>
-        $(document).ready(function() {
-            $(".sidenav-main").addClass("nav-collapsed");
+	$( document ).ready(function() {
+    $(".sidenav-main").addClass("nav-collapsed");
             $("#main").addClass("main-full");
             $(".sidenav-main").hover(function() {
                 $(".sidenav-main").toggleClass("nav-collapsed");
-            });
-            var $containerHeight = $(window).height();
-            if ($containerHeight <= 500) {
-                $(".sidenav-main").click(function() {
-                    $(".sidenav-main").addClass("nav-collapsed");
 
-                });
-            };
+            });
+
+            if ($(window).width() < 992) {
+    $(".sidenav-main").removeClass("nav-collapsed");
+    $(".sidenav-main").hover(function() {
+                $(".sidenav-main").removeClass("nav-collapsed");
+
+            });
+}
+});
+
+        $(document).ready(function() {
+         
             $('#dataTable').DataTable({
                 // responsive: true,
 

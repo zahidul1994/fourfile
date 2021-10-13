@@ -292,19 +292,25 @@ table.dataTable thead .sorting_asc{
 <script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.print.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.colVis.min.js "></script>
     <script>
-        $(document).ready(function() {
-            $(".sidenav-main").addClass("nav-collapsed");
+        $( document ).ready(function() {
+    $(".sidenav-main").addClass("nav-collapsed");
             $("#main").addClass("main-full");
             $(".sidenav-main").hover(function() {
                 $(".sidenav-main").toggleClass("nav-collapsed");
-            });
-            var $containerHeight = $(window).height();
-            if ($containerHeight <= 500) {
-                $(".sidenav-main").click(function() {
-                    $(".sidenav-main").addClass("nav-collapsed");
 
-                });
-            };
+            });
+
+            if ($(window).width() < 992) {
+    $(".sidenav-main").removeClass("nav-collapsed");
+    $(".sidenav-main").hover(function() {
+                $(".sidenav-main").removeClass("nav-collapsed");
+
+            });
+}
+});
+
+        $(document).ready(function() {
+           
 
             $('#dataTable').DataTable({
                 fixedHeader: {
