@@ -120,7 +120,8 @@ class AreaController extends Controller
 
       public function search(Request $request){
         $output="";
-        $searchvalue = Area::Where('areaname','LIKE','%%%'.$request->id."%%%")->orwhere('id','LIKE','%'.$request->id."%")->latest()->get();
+        if(!empty($request->id)){
+        $searchvalue = Area::whereadmin_id(Auth::id())->Where('areaname','LIKE','%%%'.$request->id."%%%")->latest()->get();
         if(count($searchvalue))
 {
 foreach ($searchvalue as $key => $searchval) {
@@ -146,5 +147,6 @@ return Response($output);
     
    }
       }
+    }
   
 }

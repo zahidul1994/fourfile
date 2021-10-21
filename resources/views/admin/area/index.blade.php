@@ -119,7 +119,7 @@ function timer(){
             
             $('.modal').modal('open');
             $('#dd').html(data);
-            $('#search').val(' ');
+            // $('#search').val(' ');
           }
      
       });

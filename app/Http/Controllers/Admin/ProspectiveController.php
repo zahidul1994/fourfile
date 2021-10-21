@@ -101,7 +101,7 @@ class ProspectiveController extends Controller
 
       public function edit($id){
         $breadcrumbs = [
-               ['link' => "admin/dashboard", 'name' => "Home"], ['link' => "admin/complainlist", 'name' => "Complain"], ['name' => "edit"],
+               ['link' => "admin/dashboard", 'name' => "Home"], ['link' => "admin/prospectivecustomerlist", 'name' => "Prospectivecustomer"], ['name' => "edit"],
            ];
           
              $pageConfigs = ['pageHeader' => true, 'isFabButton' => false];
@@ -130,9 +130,7 @@ public function update(Request $request,$id){
   $this->validate($request,[
     'name' => 'required|min:1',
     'phone' => 'required|max:60',
-     'thana_id' => 'required',
-     'area_id' => 'required',
-   ]);
+     ]);
    Prospectivecustomer::find($id)->update($request->all()+['admin_id'=>Auth::id()]);
  
  Toastr::success("Prospective Customer Update Successfully", "Well Done");

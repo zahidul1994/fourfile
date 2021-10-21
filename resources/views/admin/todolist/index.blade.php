@@ -64,11 +64,8 @@
     </div>
    
     <div id="TodoList" class="modal">
-       
-
-        <div class="modal-content">
-           
-            <div class="row">
+       <div class="modal-content">
+           <div class="row">
                 <div class="input-field col m12 s12">
                     {!!Form::text('title',null, array('id'=>'title','class'=>'', 'required'))!!}
                   {!! Form::label('title', 'Title *') !!}
@@ -103,8 +100,58 @@
             <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
         </div>
     </div>
+ <div id="TodoListEdit" class="modal">
+       <div class="modal-content">
+           <div class="row">
+              
+                    {!!Form::hidden('todolistid',null, array('id'=>'todolistid'))!!}
+                
+                <div class="input-field col m12 s12">
+                    {!!Form::textarea('editdescription',null, array('id'=>'editdescription','class'=>'materialize-textarea validate', 'data-length'=>'160','rows' => 4, 'cols' => 54,'required', 'placeholder'=>'placeholder'))!!}
+                  {!! Form::label('editdescription', 'Description') !!}
 
-    {!! Form::close() !!}
+                </div>
+                  <div class="input-field col m12 s12">
+                    {!!Form::textarea('editcomment',null, array('id'=>'editcomment','class'=>'materialize-textarea validate','placeholder'=>'placeholder', 'data-length'=>'160','rows' => 4, 'cols' => 54))!!}
+                  {!! Form::label('editcomment', 'Comment') !!}
+
+                </div>
+           
+                 <div class="input-field col m6 s12">
+                    {!! Form::select('users[]', CommonFx::Connect(), null, array('id'=>'users', 'class'=>'','multiple'=>true)) !!} 
+
+                  {!! Form::label('user', 'Select User') !!}
+
+                </div>
+
+                <div class="input-field col m6 s12">
+                    {!! Form::select('users[]', CommonFx::Connect(), null, array('id'=>'users', 'class'=>'','multiple'=>true)) !!} 
+
+                  {!! Form::label('user', 'Select User') !!}
+
+                </div>
+                
+                </div>
+
+            </div>
+
+            <table class="striped responsive-table">
+                <thead>
+                  <th>Description</th>
+                  <th>Comment</th>
+                </thead>
+                <tbody id="dt">
+               </tbody>
+              </table>
+
+        <div class="modal-footer">
+            <button class="btn cyan waves-effect waves-light right" type="button" id="Sendsmssubmit">Send
+                <i class="material-icons right">send</i>
+            </button>
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat Closemodal">Close</a>
+        </div>
+    </div>
+
    
 
     {{-- @endcan --}}
@@ -190,7 +237,7 @@
                 if (!confirm('Sure?')) return;
                 $id = $(this).attr('rid');
                 //console.log($roomid);
-                $info_url = url + '/admin/deleteprospectivecustomer/' + $id;
+                $info_url = url + '/admin/deletetodo/' + $id;
                 $.ajax({
                     url: $info_url,
                     method: "DELETE",
@@ -198,7 +245,7 @@
                     data: {},
                     success: function(data) {
                         if (data) {
-                            toastr.warning('Prospective Customer Delete Successfully');
+                            toastr.warning('Todolist  Delete Successfully');
                             //location.reload();
                             $('#dataTable').DataTable().ajax.reload();
 
@@ -237,16 +284,45 @@ $.ajax({
   dataType: "json",
   success: function (d) {
       toastr.success("Task Create Successfully");
-      $("#users").val(null);
-      $("#title").val(null);
-      $("#description").html(null);
-      $("#comment").val(null);
-     $('#TodoList').modal('close');
-     $('#dataTable').DataTable().ajax.reload();
+      location.reload();
+    //   $("#users").removeAttr('value');
+    //   $("#title").val('');
+    //   $("#description").val('');
+    //   $("#comment").val('');
+    //  $('#TodoList').modal('close');
+    //  $('#dataTable').DataTable().ajax.reload();
   }
 });
 
 
+});
+
+
+$(document).on('click','.UpdateTodoList', function(){
+    $id = $(this).attr('rid');
+              
+$.ajax({
+  type: "get",
+  url:url+'/admin/edittodo/'+$id,
+  dataType: "json",
+  success: function (d) {
+      console.log(d);
+        // $("#users").remove();
+      $("#todolistid").val(d.infos.title);
+      
+
+     $.each(d.infos.todotaskdetails, function(key, newvalue){
+      $('#dt').append('<tr><td>' + newvalue.description + '</td><td>' + newvalue.comment +'</td></tr>')});
+     $('#TodoListEdit').modal('open');
+    
+  }
+});
+
+
+});
+$(document).on('click','.Closemodal', function(){
+    $('#todolistid').removeAttr('value');
+    $('#dt').html(null);
 });
         
         });

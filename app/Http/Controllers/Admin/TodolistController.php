@@ -26,7 +26,7 @@ class TodolistController extends Controller
       if (request()->ajax()) {
         return datatables()->of(Todotask::with('todotaskuser.user')->whereadmin_id(Auth::id())->latest())
           ->addColumn('action', function ($data) {
-            $button = '<button type="button" title="Delete Complain" style="border:0; background: none; padding: 0 !important"  rid="' . $data->id . '" class="invoice-action-view btn-sm deleteBtn"><i class="material-icons ">update
+            $button = '<button type="button" title="Update Todolist" style="border:0; background: none; padding: 0 !important"  rid="' . $data->id . '" class="invoice-action-view btn-sm UpdateTodoList"><i class="material-icons ">wc
             </i></button>';
             $button .= '&nbsp;&nbsp;';
             $button .= '<button type="button" title="Delete Complain" style="border:0; background: none; padding: 0 !important"  rid="' . $data->id . '" class="invoice-action-view btn-sm deleteBtn"><i class="material-icons ">delete_forever
@@ -67,11 +67,11 @@ class TodolistController extends Controller
       
        public function create(){
      $breadcrumbs = [
-            ['link' => "admin/dashboard", 'name' => "Home"], ['link' => "admin/prospectivecustomerlist", 'name' => "Prospectivecustomer"], ['name' => "Create"],
+            ['link' => "admin/dashboard", 'name' => "Home"], ['link' => "admin/todolist", 'name' => "Todolist"], ['name' => "Create"],
         ];
       
           $pageConfigs = ['pageHeader' => true, 'isFabButton' => false];
-   return view('admin.prospectivecustomer.create', ['pageConfigs' => $pageConfigs], ['breadcrumbs' => $breadcrumbs]);
+   return view('admin.todolist.create', ['pageConfigs' => $pageConfigs], ['breadcrumbs' => $breadcrumbs]);
       
         }
 
@@ -131,14 +131,14 @@ User::find($requestuser[$i])->notify(new Usernotification($data));
 
 
       public function edit($id){
-        $breadcrumbs = [
-               ['link' => "admin/dashboard", 'name' => "Home"], ['link' => "admin/complainlist", 'name' => "Complain"], ['name' => "edit"],
-           ];
-          
-             $pageConfigs = ['pageHeader' => true, 'isFabButton' => false];
-           $infos=Prospectivecustomer::whereadmin_id(Auth::id())->find($id);
-           $thana=Thana::pluck('thana','id');
-           return view('admin.prospectivecustomer.edit', ['pageConfigs' => $pageConfigs], ['breadcrumbs' => $breadcrumbs])->with('infos',$infos)->with('thana',$thana);
+        $infos=Todotask::with('todotaskdetails')->whereadmin_id(Auth::id())->find($id);
+           $user=Thana::pluck('thana','id');
+           return response()->json([
+            'success'=>true,
+             'infos'=>$infos,
+             'user'=>$user,
+          ],201);
+
          
            }
 
@@ -171,22 +171,13 @@ public function update(Request $request,$id){
 }
 
          public function destroy($id){
-         
-             $divisioninfo=Prospectivecustomer::whereadmin_id(Auth::id())->findOrFail($id)->delete();
+         Todotask::whereadmin_id(Auth::id())->findOrFail($id)->delete();
              return response()->json([
-              'success'=>false
+              'success'=>true
             
             ],201);
              }
 
-public function prospectivecustomersms(Request $request){
-  $cus=Prospectivecustomer::whereadmin_id(Auth::id())->findOrFail($request->id);
-  $smsinfo=['name'=>$cus->name,'mobile'=>$cus->phone,'message'=>$request->message];
-  CommonFx::Prospectivesms($smsinfo);
-  return response()->json([
-   'success'=>true,
-    
- ],201);
-}
+
    
 }

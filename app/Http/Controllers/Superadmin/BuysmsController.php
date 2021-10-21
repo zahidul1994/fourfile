@@ -182,7 +182,7 @@ if($buy){
     
     $data = [
             
-        'admindata' =>'<a class="black-text"  href="'. url('/admin/showbuysmsdetails/'.$id) . '"> SMS Application Approved </a>',
+        'admindata' =>'<a class="black-text"  href="'. url('/admin/showbuysmsdetails/'.$id) . '"> SMS Application Approved Tk'.$request->payamount .'</a>',
 ];
   
   Admin::find($info->admin_id)->notify(new Adminupdatenotification($data));
@@ -235,7 +235,7 @@ if($buy){
     
     $data = [
             
-        'admindata' =>'<a class="black-text"  href="'. url('/admin/showbuysmsdetails/'.$roomapproval->id) . '"> SMS Application Approved </a>',
+        'admindata' =>'<a class="black-text"  href="'. url('/admin/showbuysmsdetails/'.$roomapproval->id) . '"> SMS Balance Add Tk '.$roomapproval->payamount.' </a>',
 ];
   
   Admin::find($roomapproval->admin_id)->notify(new Adminupdatenotification($data));
