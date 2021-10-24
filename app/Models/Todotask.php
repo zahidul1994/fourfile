@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 class Todotask extends Model
 {
     protected $fillable = [
-        'id','title','admin_id'
+        'id','title','admin_id','status'
      ];
      
 	protected $casts = [

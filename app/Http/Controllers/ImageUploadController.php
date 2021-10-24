@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Models\Disease;
-use App\Models\Medicineinformation;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
+use App\Models\Medicineinformation;
+use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\File\File;
+
 class ImageUploadController extends Controller
 {
   
@@ -46,6 +48,7 @@ public function newindex(Request $request){
    $response->link= "https://bikebd.com/den/storage/app/files/shares/".date('Y/m').'/' . $name; 
          echo stripslashes(json_encode($response));
   }
+  }
 // public function index(Request $request){
    
 //  $rand = mt_rand(100000, 999999);
@@ -60,84 +63,84 @@ public function newindex(Request $request){
 
 
 public function blogpostimageresize(){
-  $blog= Blog::select('id','photo')->get();
+//   $blog= Blog::select('id','photo')->get();
   
-    for ($i = 0; $i <count($blog); $i++) {
-            //$full_image_path =Image::make(storage_path().'/app/files/shares/images/productimages/'.$blog[$i]['featureimage']);
+//     for ($i = 0; $i <count($blog); $i++) {
+//             //$full_image_path =Image::make(storage_path().'/app/files/shares/images/productimages/'.$blog[$i]['featureimage']);
 
-       $full_image_path =storage_path().'/app/files/shares/blog/'.$blog[$i]['photo'];
-       $strpos = strpos($full_image_path,'.');
-    $sub = substr($full_image_path,0,$strpos);
-   $ex = explode('/',$sub)[10];
-  // return response($ex);exit;
-  $img= Image::make($full_image_path);   
-      $uploadpath = storage_path().'/app/files/shares/blog/orginal/';
-  $imgname = $ex.'.'.'webp';
+//        $full_image_path =storage_path().'/app/files/shares/blog/'.$blog[$i]['photo'];
+//        $strpos = strpos($full_image_path,'.');
+//     $sub = substr($full_image_path,0,$strpos);
+//    $ex = explode('/',$sub)[10];
+//   // return response($ex);exit;
+//   $img= Image::make($full_image_path);   
+//       $uploadpath = storage_path().'/app/files/shares/blog/orginal/';
+//   $imgname = $ex.'.'.'webp';
   
-$img->save($uploadpath.$imgname,60);
+// $img->save($uploadpath.$imgname,60);
         
-        $list=Blog::find($blog[$i]['id']);
-         $list->photo =$imgname;
-      $list->save();
+//         $list=Blog::find($blog[$i]['id']);
+//          $list->photo =$imgname;
+//       $list->save();
        
        
-    }
+  //  }
 
 
 
 }
 
 public function diseasepostimageresize(){
-  $blog= Disease::select('id','diseaseimage')->get();
+  // $blog= Disease::select('id','diseaseimage')->get();
   
-    for ($i = 0; $i <count($blog); $i++) {
-            //$full_image_path =Image::make(storage_path().'/app/files/shares/images/productimages/'.$blog[$i]['featureimage']);
+  //   for ($i = 0; $i <count($blog); $i++) {
+  //           //$full_image_path =Image::make(storage_path().'/app/files/shares/images/productimages/'.$blog[$i]['featureimage']);
 
-       $full_image_path =storage_path().'/app/files/shares/diseases/'.$blog[$i]['diseaseimage'];
-       $strpos = strpos($full_image_path,'.');
-    $sub = substr($full_image_path,0,$strpos);
-   $ex = explode('/',$sub)[10];
-  // return response($ex);exit;
-  $img= Image::make($full_image_path);   
-      $uploadpath = storage_path().'/app/files/shares/diseases/orginal/';
-  $imgname = $ex.'.'.'webp';
+  //      $full_image_path =storage_path().'/app/files/shares/diseases/'.$blog[$i]['diseaseimage'];
+  //      $strpos = strpos($full_image_path,'.');
+  //   $sub = substr($full_image_path,0,$strpos);
+  //  $ex = explode('/',$sub)[10];
+  // // return response($ex);exit;
+  // $img= Image::make($full_image_path);   
+  //     $uploadpath = storage_path().'/app/files/shares/diseases/orginal/';
+  // $imgname = $ex.'.'.'webp';
   
-$img->save($uploadpath.$imgname,60);
+// $img->save($uploadpath.$imgname,60);
         
-        $list=Disease::find($blog[$i]['id']);
-         $list->diseaseimage =$imgname;
-      $list->save();
+//         $list=Disease::find($blog[$i]['id']);
+//          $list->diseaseimage =$imgname;
+//       $list->save();
        
        
-    }
+   // }
 
 
 
 }
 
 public function medicinepostimageresize(){
-  $blog= Medicineinformation::select('id','photo')->get();
+//   $blog= Medicineinformation::select('id','photo')->get();
   
-    for ($i = 0; $i <count($blog); $i++) {
-            //$full_image_path =Image::make(storage_path().'/app/files/shares/images/productimages/'.$blog[$i]['featureimage']);
+//     for ($i = 0; $i <count($blog); $i++) {
+//             //$full_image_path =Image::make(storage_path().'/app/files/shares/images/productimages/'.$blog[$i]['featureimage']);
 
-       $full_image_path =storage_path().'/app/files/shares/medicineinformation/'.$blog[$i]['photo'];
-       $strpos = strpos($full_image_path,'.');
-    $sub = substr($full_image_path,0,$strpos);
-   $ex = explode('/',$sub)[10];
-  // return response($ex);exit;
-  $img= Image::make($full_image_path);   
-      $uploadpath = storage_path().'/app/files/shares/medicineinformation/orginal/';
-  $imgname = $ex.'.'.'webp';
+//        $full_image_path =storage_path().'/app/files/shares/medicineinformation/'.$blog[$i]['photo'];
+//        $strpos = strpos($full_image_path,'.');
+//     $sub = substr($full_image_path,0,$strpos);
+//    $ex = explode('/',$sub)[10];
+//   // return response($ex);exit;
+//   $img= Image::make($full_image_path);   
+//       $uploadpath = storage_path().'/app/files/shares/medicineinformation/orginal/';
+//   $imgname = $ex.'.'.'webp';
   
-$img->save($uploadpath.$imgname,60);
+// $img->save($uploadpath.$imgname,60);
         
-        $list=Medicineinformation::find($blog[$i]['id']);
-         $list->photo =$imgname;
-      $list->save();
+//         $list=Medicineinformation::find($blog[$i]['id']);
+//          $list->photo =$imgname;
+//       $list->save();
        
        
-    }
+//     }
 
 
 
@@ -145,23 +148,23 @@ $img->save($uploadpath.$imgname,60);
 
 
 public function blogimageresize(){
-  $blog= Blog::select('id','photo')->get();
+//   $blog= Blog::select('id','photo')->get();
   
-    for ($i = 0; $i <count($blog); $i++) {
+//     for ($i = 0; $i <count($blog); $i++) {
       
-      $full_image_path =storage_path().'/app/files/shares/blog/'.$blog[$i]['photo'];
-    //  return response($full_image_path);exit;
-      $resized_image_path = storage_path().'/app/files/shares/blog/thumb/'.$blog[$i]['photo'];
-$waterMarkUrl = storage_path().'/app/files/shares/backend/watermark.png';
+//       $full_image_path =storage_path().'/app/files/shares/blog/'.$blog[$i]['photo'];
+//     //  return response($full_image_path);exit;
+//       $resized_image_path = storage_path().'/app/files/shares/blog/thumb/'.$blog[$i]['photo'];
+// $waterMarkUrl = storage_path().'/app/files/shares/backend/watermark.png';
 
        
-      $img = Image::make($full_image_path)->resize(330, 232);
-      $img->insert($waterMarkUrl, 'bottom-right', 5, 5);
-      $img->save($resized_image_path,60);
+//       $img = Image::make($full_image_path)->resize(330, 232);
+//       $img->insert($waterMarkUrl, 'bottom-right', 5, 5);
+//       $img->save($resized_image_path,60);
          
             
        
-    }
+//     }
 
 
 

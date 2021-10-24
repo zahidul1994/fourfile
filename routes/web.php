@@ -5,14 +5,17 @@ use UniSharp\LaravelFilemanager\Lfm;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LanguageController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+// locale route
 
 
+
+Auth::routes(['verify' => true]);
 Route::get('/', function () {
         return view('welcome');
     }
 
 );
-
+Route::get('lang/{locale}', [LanguageController::class, 'swap']);
 //gobal location 
 Route::get('/location', 'OnchangeController@index');
 Route::get('getdistrict/{id}', 'OnchangeController@district');
@@ -24,14 +27,6 @@ Route::get('gettsmstypeinfo/{id}', 'OnchangeController@smstype');
 Route::get('getpaymentmessage/{id}', 'OnchangeController@payment');
 Route::get('getadminpaybyinfo/{id}', 'OnchangeController@adminpaybyinfo');
 
-
-Route::get('/sitemap.xml', 'SitemapController@index');
-Route::get('/blog.xml', 'SitemapController@blog');
-Route::get('/homeoinfo.xml', 'SitemapController@homeoinfo');
-Route::get('/disease.xml', 'SitemapController@disease');
-
-Route::get('/login/user', 'Auth\LoginController@showAdminLoginForm');
-Auth::routes(['verify'=> true]);
 Route::get('/login/admin', 'Auth\LoginController@showAdminLoginForm');
 Route::get('/admin/verificationlink/{id}', 'Auth\LoginController@showEmailveirfyForm');
 Route::get('/admin/verificationphone/{id}', 'Auth\LoginController@showOTPveirfyForm');
@@ -44,6 +39,7 @@ Route::get('/register/admin', 'Auth\RegisterController@showAdminRegisterForm');
 
 Route::post('/login/admin', 'Auth\LoginController@adminLogin');
 Route::get('/login/user', 'Auth\LoginController@showLoginuserForm');
+Route::post('/login/user', 'Auth\LoginController@UserLogin');
 Route::post('/login/superadmin', 'Auth\LoginController@superadminLogin');
 Route::post('/register/admin', 'Auth\RegisterController@createAdmin');
 
@@ -239,11 +235,12 @@ Route::post('searchthana', 'ThanaController@searchblog');
 
 //Contact Start 
 
-Route::get('emaillist','ContactController@index');
-Route::get('createemail','ContactController@create');
-Route::post('fdgfcreateblog','ContactController@store');
-Route::get('replymail/{id}','ContactController@edit');
-Route::post('replyemail','ContactController@store');
+
+// Route::get('emaillist','ContactController@index');
+// Route::get('createemail','ContactController@create');
+// Route::post('fdgfcreateblog','ContactController@store');
+// Route::get('replymail/{id}','ContactController@edit');
+// Route::post('replyemail','ContactController@store');
 
 
 //Contact  End
@@ -466,6 +463,7 @@ Route::get('downloadesmsinvoice/{id}','PdfController@buysmsinvoice');
  Route::get('todolist','TodolistController@index');
  Route::get('createtodo','TodolistController@create');
  Route::post('createtodo','TodolistController@store');
+Route::get('edittodolist/{id}','TodolistController@edittodolist');
 Route::get('edittodo/{id}','TodolistController@edit');
  Route::patch('updatetodo/{id}','TodolistController@update');
 Route::delete('deletetodo/{id}','TodolistController@destroy');

@@ -513,20 +513,9 @@ class CustomerController extends Controller
       'infoimage' => $infoname,
     ));
     if ($info) {
-      if($request->status==1){
-        Toastr::success("Customer Update Successfully", "Well Done");
+ Toastr::success("Customer Update Successfully", "Well Done");
         return Redirect::to('admin/customerlist');
-       }
-       else{
-        Toastr::success("Customer Update Successfully", "Well Done");
-        return Redirect::to('admin/pendingcustomerlist');
-       }
-     
-     
-    } else {
-      Toastr::warning("Customer Create Fail", "Sorry");
-      return Redirect::to('admin/customerlist');
-    }
+  }
   }
 
   public function destroy($id)

@@ -266,6 +266,21 @@ class LoginController extends Controller
             'pageConfigs' => $pageConfigs
         ]);
     }
+    public function UserLogin(Request $request)
+    {
+        // return $request->all();
+        $this->validate($request, [
+            'email'   => 'required|exists:users,email',
+            'password' => 'required|min:2|max:198'
+        ]);
+        $remember = (!empty($request->remember)) ? TRUE : FALSE;
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $remember)) {
+
+            Toastr::success("Welcome  Adminstration Panel");
+            return redirect()->intended('/user/dashboard');
+        }
+        return back()->withInput($request->only('email', 'remember'));
+    }
     public function customerLogin(Request $request)
     {
         // return $request->all();

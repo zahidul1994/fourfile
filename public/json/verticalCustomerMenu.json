@@ -1,0 +1,55 @@
+{
+    "menu": [
+        {
+            "url": "javascript:void(0)",
+            "name": "Payment",
+            "i18n": "Payment",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "payment",
+            "icon": "filter_vintage",
+
+            "submenu": [{
+                    "url": "customer/pyamentlist",
+                    "name": "Payment List",
+                    "i18n": "Payment List",
+                    "slug": "paymentlist"
+                },
+                {
+                    "url": "customer/createpayment",
+                    "name": "Create Payment",
+                    "i18n": "Create Payment",
+                    "slug": "paymentcreate"
+                }
+                 ]
+
+        },
+        {
+            "url": "javascript:void(0)",
+            "name": "Complain",
+            "i18n": "Complain",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "complain",
+            "icon": "compare_arrows",
+            "submenu": [{
+                    "url": "customer/complainlist",
+                    "name": "Complain List",
+                    "i18n": "Complain List",
+                    "slug": "customer/complainlist"
+                },
+                {
+                    "url": "customer/createcomplain",
+                    "name": "Create Complain",
+                    "i18n": "Create Complain",
+                    "slug": "customer/createcomplain"
+                }
+                
+                
+
+            ]
+        }
+       
+
+
+
+    ]
+}

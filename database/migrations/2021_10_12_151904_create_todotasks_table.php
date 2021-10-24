@@ -18,6 +18,7 @@ class CreateTodotasksTable extends Migration
             $table->bigInteger('admin_id')->unsigned()->nullable();
             $table->foreign('admin_id')->references('id')->on('admins')->onDelete('cascade');
             $table->string('title',500);
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

@@ -94,48 +94,16 @@
             </div>
 
         <div class="modal-footer">
-            <button class="btn cyan waves-effect waves-light right" type="button" id="Sendsmssubmit">Send
+            <button class="btn cyan waves-effect waves-light right" type="button" id="Sendsmssubmit">Create
                 <i class="material-icons right">send</i>
             </button>
             <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
         </div>
     </div>
  <div id="TodoListEdit" class="modal">
-       <div class="modal-content">
-           <div class="row">
-              
-                    {!!Form::hidden('todolistid',null, array('id'=>'todolistid'))!!}
-                
-                <div class="input-field col m12 s12">
-                    {!!Form::textarea('editdescription',null, array('id'=>'editdescription','class'=>'materialize-textarea validate', 'data-length'=>'160','rows' => 4, 'cols' => 54,'required', 'placeholder'=>'placeholder'))!!}
-                  {!! Form::label('editdescription', 'Description') !!}
-
-                </div>
-                  <div class="input-field col m12 s12">
-                    {!!Form::textarea('editcomment',null, array('id'=>'editcomment','class'=>'materialize-textarea validate','placeholder'=>'placeholder', 'data-length'=>'160','rows' => 4, 'cols' => 54))!!}
-                  {!! Form::label('editcomment', 'Comment') !!}
-
-                </div>
-           
-                 <div class="input-field col m6 s12">
-                    {!! Form::select('users[]', CommonFx::Connect(), null, array('id'=>'users', 'class'=>'','multiple'=>true)) !!} 
-
-                  {!! Form::label('user', 'Select User') !!}
-
-                </div>
-
-                <div class="input-field col m6 s12">
-                    {!! Form::select('users[]', CommonFx::Connect(), null, array('id'=>'users', 'class'=>'','multiple'=>true)) !!} 
-
-                  {!! Form::label('user', 'Select User') !!}
-
-                </div>
-                
-                </div>
-
-            </div>
-
-            <table class="striped responsive-table">
+    <h5  id="todolistid"> </h5>
+    <table class="striped responsive-table">
+       
                 <thead>
                   <th>Description</th>
                   <th>Comment</th>
@@ -145,10 +113,7 @@
               </table>
 
         <div class="modal-footer">
-            <button class="btn cyan waves-effect waves-light right" type="button" id="Sendsmssubmit">Send
-                <i class="material-icons right">send</i>
-            </button>
-            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat Closemodal">Close</a>
+           <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat Closemodal">  <i class="material-icons right">send</i> Close</a>
         </div>
     </div>
 
@@ -214,9 +179,6 @@
                         name: 'status',
 
                     },
-
-
-            
 
 
 
@@ -306,12 +268,10 @@ $.ajax({
   url:url+'/admin/edittodo/'+$id,
   dataType: "json",
   success: function (d) {
-      console.log(d);
+      console.log(d.infos.title);
         // $("#users").remove();
-      $("#todolistid").val(d.infos.title);
-      
-
-     $.each(d.infos.todotaskdetails, function(key, newvalue){
+      $("#todolistid").html(d.infos.title);
+       $.each(d.infos.todotaskdetails, function(key, newvalue){
       $('#dt').append('<tr><td>' + newvalue.description + '</td><td>' + newvalue.comment +'</td></tr>')});
      $('#TodoListEdit').modal('open');
     
@@ -321,7 +281,7 @@ $.ajax({
 
 });
 $(document).on('click','.Closemodal', function(){
-    $('#todolistid').removeAttr('value');
+    $('#todolistid').html(null);
     $('#dt').html(null);
 });
         

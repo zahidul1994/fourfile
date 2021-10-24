@@ -26,21 +26,23 @@ class TodolistController extends Controller
       if (request()->ajax()) {
         return datatables()->of(Todotask::with('todotaskuser.user')->whereadmin_id(Auth::id())->latest())
           ->addColumn('action', function ($data) {
-            $button = '<button type="button" title="Update Todolist" style="border:0; background: none; padding: 0 !important"  rid="' . $data->id . '" class="invoice-action-view btn-sm UpdateTodoList"><i class="material-icons ">wc
+            $button = '<button type="button" title="See Details" style="border:0; background: none; padding: 0 !important" rid="' . $data->id . '" class="invoice-action-view btn-sm UpdateTodoList"><i class="material-icons" style="font-size: 16px; color: #9B01BA;">wc
             </i></button>';
             $button .= '&nbsp;&nbsp;';
-            $button .= '<button type="button" title="Delete Complain" style="border:0; background: none; padding: 0 !important"  rid="' . $data->id . '" class="invoice-action-view btn-sm deleteBtn"><i class="material-icons ">delete_forever
+          $button .= '<a title="Edit Todolist" href="/admin/edittodolist/'.$data->id . '" class="btn-sm" style="border:0; background: none; padding: 0 !important"><i class="material-icons" style="font-size: 16px; color: #9B01BA;">edit</i></a>';
+            $button .= '&nbsp;&nbsp;';
+            $button .= '<button type="button" title="Delete Complain" style="border:0; background: none; padding: 0 !important" rid="' . $data->id . '" class="invoice-action-view btn-sm deleteBtn"><i class="material-icons" style="font-size: 16px; color: #9B01BA;" >delete_forever
             </i></button>';
             return $button;
           })
           ->addColumn('status', function($data){
-            if($data->status==1){
-           $button = '<button  style="border:0; background: none; padding: 0 !important" type="button" title="Update Status" rid="'.$data->id.'" class="btn-sm Approved"><i class="material-icons">beenhere</i></button>';
+            if($data->status==2){
+           $button = '<button  style="border:0; background: none; padding: 0 !important" type="button" title="Todo Task Complete"  class="btn-sm Approved"><i class="material-icons">beenhere</i></button>';
           return $button;
       }
       
       else {
-          $button = '<button type="button"  style="border:0; background: none; padding: 0 !important" title="Update Status" class=" btn-sm Notapproved" rid="'.$data->id.'"><i class="material-icons">block</i> </button>';
+          $button = '<button type="button"  style="border:0; background: none; padding: 0 !important" title="Pending Todolist" class=" btn-sm Notapproved" rid="'.$data->id.'"><i class="material-icons">block</i> </button>';
           return $button;
       }})
       ->addColumn('users' ,function($data){
@@ -78,7 +80,7 @@ class TodolistController extends Controller
        
             
       public function store(Request $request){
-       //  dd($request->title);exit;
+       // dd($requestuser= $request->users);
         $this->validate($request,[
           
           'title' => 'required|min:1|max:198',
@@ -101,6 +103,7 @@ class TodolistController extends Controller
 if($request->has('users')){
 
   $requestuser= $request->users;
+
   for ($i = 0; $i < count($requestuser); $i++) {
   
     $user=Todotaskuser::create([
@@ -111,7 +114,7 @@ if($request->has('users')){
   
        $data = [
             
-        'userdata' =>'<a class="black-text"  href="'. url('/user/todolist') . '">'. $request->title. 'Task For You </a>',
+        'userdata' =>'<a class="black-text"  href="'. url('/user/todolist') . '">'. $request->title. ' Update Task For You </a>',
 ];
 
 User::find($requestuser[$i])->notify(new Usernotification($data));
@@ -131,13 +134,26 @@ User::find($requestuser[$i])->notify(new Usernotification($data));
 
 
       public function edit($id){
-        $infos=Todotask::with('todotaskdetails')->whereadmin_id(Auth::id())->find($id);
-           $user=Thana::pluck('thana','id');
-           return response()->json([
+        $infos=Todotask::with('todotaskdetails','todotaskuser')->whereadmin_id(Auth::id())->find($id);
+       
+        return response()->json([
             'success'=>true,
              'infos'=>$infos,
-             'user'=>$user,
+             
           ],201);
+
+         
+           } 
+              public function edittodolist($id){
+        $infos=Todotask::whereadmin_id(Auth::id())->find($id);
+        $userinfo=Todotaskuser::wheretodotask_id($id)->pluck('user_id','user_id')->all();
+    $breadcrumbs = [
+      ['link' => "admin/dashboard", 'name' => "Home"], ['link' => "admin/todolist", 'name' => "Todolist"], ['name' => "edit"],
+    ];
+
+    $pageConfigs = ['pageHeader' => true, 'isFabButton' => false];
+   
+    return view('admin.todolist.edit', ['pageConfigs' => $pageConfigs], ['breadcrumbs' => $breadcrumbs])->with('infos', $infos)->with('userinfo', $userinfo);
 
          
            }
@@ -159,15 +175,42 @@ else{
 public function update(Request $request,$id){
   // dd($request->all());exit;
   $this->validate($request,[
-    'name' => 'required|min:1',
-    'phone' => 'required|max:60',
-     'thana_id' => 'required',
-     'area_id' => 'required',
+    'title' => 'required|min:1',
+    'users' => 'required|max:60',
+    'comment' => 'max:198',
+   'description' => 'max:498',
    ]);
-   Prospectivecustomer::find($id)->update($request->all()+['admin_id'=>Auth::id()]);
- 
- Toastr::success("Prospective Customer Update Successfully", "Well Done");
- return Redirect::to('admin/prospectivecustomerlist'); 
+   Todotask::find($id)->update(['title'=>$request->title,'status'=>$request->status]);
+ if((!empty($request->comment))||(!empty($request->comment))){
+
+
+ Todotaskdetails::create([
+  'todotask_id'=>$id,
+  'description'=>$request->description,
+  'comment'=>$request->comment,
+  
+   ]);
+  }
+  Todotaskuser::wheretodotask_id($id)->delete();
+  for ($i = 0; $i < count($request->users); $i++) {
+
+    Todotaskuser::create([
+      'user_id'=>$request->users[$i],
+      'todotask_id'=>$id,
+     
+       ]);
+  
+       $data = [
+            
+        'userdata' =>'<a class="black-text"  href="'. url('/user/todolist') . '">'. $request->title. 'Task For You </a>',
+];
+
+User::find($request->users[$i])->notify(new Usernotification($data));
+      }
+    
+
+ Toastr::success("Todolist Update Successfully", "Well Done");
+ return Redirect::to('admin/todolist'); 
 }
 
          public function destroy($id){

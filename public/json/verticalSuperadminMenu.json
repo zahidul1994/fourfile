@@ -1,0 +1,237 @@
+{
+    "menu": [{
+            "url": "javascript:void(0)",
+            "name": "Admin",
+            "i18n": "Admin",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "admin",
+            "icon": "dashboard",
+
+
+            "submenu": [
+
+                {
+                    "url": "superadmin/permissionlist",
+                    "name": "Permission List",
+                    "i18n": "Permission  List",
+                    "slug": "superadmin-permissionlist"
+                },
+              
+                {
+                    "url": "superadmin/adminlist",
+                    "name": "Admin List",
+                    "i18n": "Admin List",
+                    "slug": "superadmin-adminlist"
+                },
+                {
+                    "url": "superadmin/createadmin",
+                    "name": "Create Admin",
+                    "i18n": "Create Admin",
+                    "slug": "createadmin"
+                }
+
+            ]
+        },
+        {
+            "url": "javascript:void(0)",
+            "name": "Payment",
+            "i18n": "Payment",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "payment",
+            "icon": "payment",
+
+
+            "submenu": [{
+                    "url": "superadmin/paymentlist",
+                    "name": "Payment List",
+                    "i18n": "Payment List",
+                    "slug": "payment"
+                },
+                {
+                    "url": "superadmin/createpayment",
+                    "name": "Create Payment",
+                    "i18n": "Create Payment",
+                    "slug": "createpayment"
+                }
+
+            ]
+        },
+        {
+            "url": "javascript:void(0)",
+            "name": "SMS",
+            "i18n": "SMS",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "sms",
+            "icon": "sms",
+            "submenu": [{
+                    "url": "superadmin/smssettinglist",
+                    "name": "SMS Setting List",
+                    "i18n": "SMS Setting List",
+                    "slug": "superadmin/smssettinglist"
+                },
+                {
+                    "url": "superadmin/smstypelist",
+                    "name": "SMS Type List",
+                    "i18n": "SMS Type List",
+                    "slug": "superadmin/smstypelist"
+                },
+                {
+                    "url": "superadmin/createsmstype",
+                    "name": "Create SMS Type",
+                    "i18n": "Create SMS Type",
+                    "slug": "superadmin/createsmstype"
+                },
+                {
+                    "url": "superadmin/salesmslist",
+                    "name": "Sale SMS List",
+                    "i18n": "Sale SMS List",
+                    "slug": "superadmin/salesmslist"
+                },
+                {
+                    "url": "superadmin/createsalesms",
+                    "name": "Custom SMS Sale",
+                    "i18n": "Custom SMS Type",
+                    "slug": "superadmin/createsalesms"
+                }
+                
+                
+
+            ]
+        },
+        
+        {
+            "url": "javascript:void(0)",
+            "name": "Customer",
+            "i18n": "Customer",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "customer",
+            "icon": "pages",
+            "submenu": [
+                {
+                    "url": "superadmin/customerlist",
+                    "name": "Customer List",
+                    "i18n": "Customer List",
+                    "slug": "superadmin/customerlist"
+                },
+                {
+                    "url": "superadmin/importcustomer",
+                    "name": "Import Customer",
+                    "i18n": "Import Customer",
+                    "slug": "superadmin/importcustomer"
+                }
+
+            ]
+        },  {
+            "url": "javascript:void(0)",
+            "name": "Contact",
+            "i18n": "Contact",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "contact",
+            "icon": "pages",
+            "submenu": [{
+                    "url": "superadmin/emaillist",
+                    "name": "Email List",
+                    "i18n": "Email List",
+                    "slug": "superadmin/emaillist"
+                },
+                {
+                    "url": "superadmin/createemail",
+                    "name": "Create Email",
+                    "i18n": "Create Email",
+                    "slug": "superadmin/createemail"
+                }
+
+            ]
+        },
+        {
+            "url": "javascript:void(0)",
+            "name": "Setting",
+            "i18n": "Setting",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "setting",
+            "icon": "settings_applications",
+            "submenu": [{
+                    "url": "superadmin/commandlist",
+                    "name": "Command List",
+                    "i18n": "Command List",
+                    "slug": "superadmin/commandlist"
+                },
+                {
+                    "url": "filemanager",
+                    "name": "File Manager",
+                    "i18n": "File Manager",
+                    "slug": "filemanager"
+                },
+                {
+                    "url": "sitemonitor",
+                    "name": "Site Monitor",
+                    "i18n": "Site Monitor",
+                    "slug": "sitemonitor"
+                }
+
+            ]
+        },
+
+        {
+            "url": "javascript:void(0)",
+            "name": "Location",
+            "i18n": "Location",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "Location",
+            "icon": "add_location",
+            "submenu": [{
+                    "url": "superadmin/countrylist",
+                    "name": "Country List",
+                    "i18n": "Country List",
+                    "slug": "superadmin/countrylist"
+                },
+                {
+                    "url": "superadmin/createcountry",
+                    "name": "Create Country",
+                    "i18n": "Create Country",
+                    "slug": "superadmin/createcountry"
+                },
+                {
+                    "url": "superadmin/divisionlist",
+                    "name": "Division List",
+                    "i18n": "Division List",
+                    "slug": "superadmin/divisionlist"
+                },
+                {
+                    "url": "superadmin/createdivision",
+                    "name": "Create Division",
+                    "i18n": "Create Division",
+                    "slug": "superadmin/createdivision"
+                },
+
+                {
+                    "url": "superadmin/districtlist",
+                    "name": "District List",
+                    "i18n": "District List",
+                    "slug": "superadmin/districtlist"
+                },
+                {
+                    "url": "superadmin/createdistrict",
+                    "name": "Create District",
+                    "i18n": "Create District",
+                    "slug": "superadmin/createdistrict"
+                },
+                {
+                    "url": "superadmin/thanalist",
+                    "name": "Thana List",
+                    "i18n": "Thana List",
+                    "slug": "superadmin/thanalist"
+                },
+                {
+                    "url": "superadmin/createthana",
+                    "name": "Create Thana",
+                    "i18n": "Create Thana",
+                    "slug": "superadmin/createthana"
+                }
+
+            ]
+        }
+
+
+    ]
+}
