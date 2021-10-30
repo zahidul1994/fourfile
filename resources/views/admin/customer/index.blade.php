@@ -33,10 +33,10 @@ th{
 }
 
 table.dataTable thead .sorting{
-    background-image: none;
+    background-image: blod;
 }
 table.dataTable thead .sorting_asc{
-    background-image: none;
+    background-image: blod;
 }
 .sorting-icon{
     display: flex;
@@ -85,20 +85,20 @@ table.dataTable thead .sorting_asc{
                                 <thead>
 
                                     <tr>
-                                        <td><span class="sorting-icon">SL <i class="material-icons dp48">arrow_downward</i></span></td>
-                                        <td><span class="sorting-icon">ID <i class="material-icons dp48">swap_vert</i></span></td>
-                                        <th><span class="sorting-icon">Name <i class="material-icons dp48">swap_vert</i></span></th>
-                                        <th><span class="sorting-icon">Address <i class="material-icons dp48">swap_vert</i></span></th>
+                                        <th>SL</th>
+                                        <th>ID</th>
+                                        <th>Name </th>
+                                        <th>Address</th>
                                         <th>Mobile</th>
                                         <th>IP/<br>Username</th>
-                                        <th><span class="sorting-icon">Monthly <br>Rent <i class="material-icons dp48">swap_vert</i></span></th>
-                                        <th> <span class="sorting-icon">Previus <br>Due <i class="material-icons dp48">swap_vert</i></span></th>
-                                        <th><span class="sorting-icon">Discount <i class="material-icons dp48">swap_vert</i></span></th>
-                                        <th><span class="sorting-icon">Advance <i class="material-icons dp48">swap_vert</i></span></th>
-                                        <th><span class="sorting-icon">Add <br>Charge  <i class="material-icons dp48">swap_vert</i></span></th>
-                                        <th><span class="sorting-icon">Vat % <i class="material-icons dp48">swap_vert</i></span></th>
-                                        <th><span class="sorting-icon">Bill <br>Amount <i class="material-icons dp48">swap_vert</i></span></th>
-                                        <th><span class="sorting-icon">Collection <br>Amount <i class="material-icons dp48">swap_vert</i></span></th>
+                                        <th>Rent </th>
+                                        <th>Previus <br>Due </th>
+                                        <th>Discount </th>
+                                        <th>Advance </th>
+                                        <th>Add </th>
+                                        <th>Vat % </th>
+                                        <th>Bill <br> Amount</th>
+                                        <th>Collection <br>Amount</th>
                                         <th>Total <br>Due</th>
                                         {{-- <th>Status</th> --}}
                                         <th>Action</th>
@@ -318,19 +318,56 @@ table.dataTable thead .sorting_asc{
         header: false,
         footer: true
     },
-                // responsive: true,
-                dom: 'Bfrtip',
-                exportOptions: {
-                stripHtml: false,
-				columns: ':visible'
-            },
-        buttons: [
-            
-            'copy', 'csv', 'pdf', 'print','colvis'
-        ],
-   
+          
+       paging: false,
                 processing: true,
                 serverSide: true,
+                          
+ dom: 'Bfrtip',
+        buttons: [
+            
+		
+        {
+		extend: 'csv',
+            text: 'Excel',
+            exportOptions: {
+                stripHtml: true,
+				columns: ':visible'
+            }
+        },
+        {
+		extend: 'pdf',
+            text: 'PDF',
+            exportOptions: {
+                stripHtml: true,
+				columns: ':visible'
+            }
+        },
+        {
+		extend: 'copy',
+            text: 'Copy',
+            exportOptions: {
+                stripHtml: true,
+				columns: ':visible'
+            }
+        },
+        {
+		extend: 'print',
+            text: 'Print',
+            exportOptions: {
+                stripHtml: true,
+				columns: ':visible'
+            }
+        },
+		'colvis'
+        ],
+		columnDefs: [ {
+            
+        } ], rowCallback: function(row, data, index) {
+        if (data.visible == "0") {
+            $(row).addClass("danger");
+        }
+    },
                 ajax: {
                     // url:"{{ url('admin/pendingcustomerlist') }}",
                     url: "{{ url('admin/customerlist') }}",
@@ -343,7 +380,8 @@ table.dataTable thead .sorting_asc{
                     {
                         data: 'DT_RowIndex',
                         orderable: false,
-                        searchable: false
+                        searchable: false,
+                        
                     },
                     {
                         data: 'loginid',

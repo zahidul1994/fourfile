@@ -428,7 +428,7 @@ Type of Connectivity
 {!! Form::select('clienttype_id', [ 'Home' => 'Home',
 'Corporate' => 'Corporate',
 'BWA' => '2nd Floor',
-'3rd Floor' => 'BWA',
+'BWA' => 'BWA',
 'Category-A' => 'Category-A',
 'Category-B' => 'Category-C',
 'Category-C' => 'Category-C',
@@ -501,7 +501,7 @@ Type of Connectivity
     </div> 
 <div class="col m6 s12 file-field input-field">
     <div class="btn float-right">
-        <span>Customer Info</span>
+        <span>Photo ID</span>
         {!!Form::file('infoimage', ['accept'=>".jpg,.jpeg,.png"])!!}
        
     </div>

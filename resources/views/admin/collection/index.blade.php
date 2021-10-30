@@ -159,7 +159,7 @@ $(document).ready(function () {
                       //  console.log(value.collection.length);
                         if(value.collection.length>0){
                         $.each(value.collection, function(key, newvalue){
-                        $('#dt').append('<tr><td>' + newvalue.created_at + '</td><td></td><td></td><td></td><td></td><td></td><td></td><td>Collection By </br>' + newvalue.admin['name'] + ' Paymenent method </br>' + newvalue.payby['paybyname'] +  '</td><td>' + newvalue.paid + '</td><td></td></tr>'
+                        $('#dt').append('<tr><td>' + newvalue.created_at + '</td><td></td><td></td><td></td><td></td><td></td><td></td><td>Collection By </br>' + newvalue.admin['name'] + ' Payment method </br>' + newvalue.payby['paybyname'] +  '</td><td>' + newvalue.paid + '</td><td></td></tr>'
                         );
 
                     });

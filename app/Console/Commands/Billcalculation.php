@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 use App\Models\Bill;
 use App\Models\Customer;
 use Illuminate\Console\Command;
-
+use Illuminate\Support\Facades\Log;
 class Billcalculation extends Command
 {
     /**
@@ -38,23 +38,26 @@ class Billcalculation extends Command
      */
     public function handle()
     {
-        $users = Customer::wherestatus(1)->get();
+        $users = Customer::wherestatus(1)->select('id','status')->get();
         // dd($users);
          foreach ($users as $customer) {
-             $info=Bill::wherecustomer_id($customer->id)->latest()->first();
+             $info=Bill::wherecustomer_id($customer->id)->find(757);
+            //  $info=Bill::wherecustomer_id($customer->id)->latest()->first();
             if($info){
-                if($info->total>=0){
+                if($info->total<$info->paid){
                     $due=0;
-                    $advance=$info->total;
+                    $advance=$info->paid-$info->total;
+                     Log::info('boro');
                 }
-                if($info->total<0){
-                    $due=$info->total;
+                if($info->paid>$info->total){
+                    $due=$info->total-$info->paid;
                     $advance=0;
+                    Log::info('coto');
                 }
                $in=Customer::find($customer->id);
-               $in->due = $due;
-               $in->advance = $advance;
-               $in->total =$customer->total+$due-$advance;
+               $in->due += $due;
+               $in->advance += $advance;
+               $in->total =($in->total+$due)-$advance;
                $in->save();
             }
         

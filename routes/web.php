@@ -291,6 +291,8 @@ Route::group([ 'prefix'=>'admin',
         Route::get('customerreportexcel/{id}', 'DashboardController@customerreportexcel');
         Route::get('customerexcelform', 'DashboardController@customerexcel');
         Route::post('makecusomerexcel', 'DashboardController@makecusomerexcelform');
+        Route::get('downloadcustomer', 'DashboardController@downloadcustomer');
+       
 //area list
 
 Route::get('arealist','AreaController@index');
@@ -354,6 +356,7 @@ Route::get('inactivecustomerfind','CustomerController@findinactivecustomer');
 Route::get('restorecustomer/{id}','CustomerController@restorecustomer');
 Route::post('sendsmscustomer','CustomerController@sendsmscustomer');
 Route::post('customeremail','CustomerController@customeremail');
+Route::get('deletedara', 'CustomerController@deletedara');
 //Customer  End
 //sms Start
 Route::get('smsmessagesetting','SmsController@index');

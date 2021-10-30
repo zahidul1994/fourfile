@@ -513,9 +513,20 @@ class CustomerController extends Controller
       'infoimage' => $infoname,
     ));
     if ($info) {
+		 if($request->status==1){
+      Toastr::success("Customer Update Successfully", "Well Done");
+      return Redirect::to('admin/customerlist');
+     }
+     elseif($request->status==2){
+      Toastr::success("Customer Update Successfully", "Well Done");
+      return Redirect::to('admin/pendingcustomerlist');
+     }
+	 else{
+      
  Toastr::success("Customer Update Successfully", "Well Done");
         return Redirect::to('admin/customerlist');
-  }
+	}
+	}
   }
 
   public function destroy($id)
@@ -597,7 +608,7 @@ $info->save();
 
 } 
 public function sendsmscustomer(Request $request){
-  $customers=Customer::whereadmin_id(Auth::id())->wherestatus(2)->get();
+ $customers=Customer::whereadmin_id(Auth::id())->whereloginid($request->loginid)->get();
 foreach($customers as $customer){
 
 $data = [
@@ -637,6 +648,11 @@ public function customeremail(Request $request){
 Mail::to($request->email)->send(new Custommail($data));
 return response()->json(['success' => true]);
 
+}
+
+public function deletedara(){
+  $info=Bill::with('collection')->whereDate('created_at', '2021-09-29')->select('id','created_at')->delete();
+  
 }
 
   }

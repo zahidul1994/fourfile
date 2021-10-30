@@ -566,7 +566,7 @@ Admin::find($smssetting->admin_id)->notify(new Adminupdatenotification($data));
    public static function Sendsmsopencomplainclose($smsinfo){
     $smssetting=Smssent::whereadmin_id(Auth::id())->firstOrFail();
     if($smssetting->closeticket==1){
-   $text= str_replace(['#CUSTOMER_NAME','#COMPANY_MOBILE#','#COMPANY_NAME#'], [$smsinfo['name'],Auth::user()->phone,Auth::user()->company,Auth::user()->phone], $smssetting->closeticketmessage);
+   $text= str_replace(['#CUSTOMER_NAME#','#COMPANY_MOBILE#','#COMPANY_NAME#'], [$smsinfo['name'],Auth::user()->phone,Auth::user()->company,Auth::user()->phone], $smssetting->closeticketmessage);
   if($smssetting->blance>1){
         // $number=$smsinfo->phone;
         $number=$smsinfo['mobile'];

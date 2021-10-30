@@ -27,7 +27,7 @@
 
                     <div class="col s12 m3 l3 input-field">
 
-                      <button data-target="Complanemodal" class="btn modal-trigger">Create Complaintitile</button>
+                      <button data-target="Complanemodal" class="btn modal-trigger"> Create Complain Title </button>
                     </div>
 
                     <div class="row">

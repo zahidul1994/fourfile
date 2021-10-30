@@ -9,8 +9,9 @@ use App\Models\Smssent;
 use App\Models\Complain;
 use App\Models\Customer;
 use Illuminate\Http\Request;
-use App\Exports\Customerexcelform;
+use App\Exports\Customerexport;
 use App\Exports\Customerreport;
+use App\Exports\Customerexcelform;
 use Kamaln7\Toastr\Facades\Toastr;
 use App\Models\Medicineinformation;
 use App\Http\Controllers\Controller;
@@ -30,11 +31,7 @@ class DashboardController extends Controller
     { 
        
         $pageConfigs = ['navbarLarge' => false];
-
-           
-            $user=User::whereadmin_id(Auth::id())->select('admin_id','id','status')->get(); 
-       
-      
+         $user=User::whereadmin_id(Auth::id())->select('admin_id','id','status')->get(); 
         $contact= Contact::whereadmin_id(Auth::id())->select('admin_id','id','status')->get();
         $smsinfo= Smssent::whereadmin_id(Auth::id())->select('admin_id','id','blance','smsrate')->first();
         $customer= Customer::whereadmin_id(Auth::id())->select('admin_id','id','status')->get();
@@ -88,5 +85,13 @@ $id=$request->id;
 
                        return Redirect::to('admin/customerexcelform'); 
             }
+
+
+            public function downloadcustomer(){
+                $id=Auth::id();
+                    return  Excel::download(new Customerexport($id),'customer.xlsx');
+                
+                                       return Redirect::to('admin/customerlist'); 
+                            }        
 
 }
