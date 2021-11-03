@@ -6,60 +6,11 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('vendors/data-tables/css/jquery.dataTables.min.css') }}">
     <link rel="stylesheet" type="text/css"
         href="{{ asset('vendors/data-tables/extensions/responsive/css/responsive.dataTables.min.css') }}">
-   
-    <link href="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css" rel="stylesheet">
-   
+    <link rel="stylesheet" type="text/css" href="{{ asset('vendors/data-tables/css/select.dataTables.min.css') }}">
 @endsection
 {{-- page style --}}
 @section('page-style')
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/pages/data-tables.css') }}">
-   
-    <style>
-
-td{
-    border: 1px solid #ddd;
-    white-space: normal !important;
-    padding: 5px !important;
-    text-align: center;
-}
-table.dataTable thead th, table.dataTable thead td{
-    padding: 5px !important;
-}
-th{
-    border: 1px solid #ddd;
-    padding: 5px !important;
-    text-align: left;
-}
-.card-content{
-    padding: 10px !important;
-}
-
-table.dataTable thead .sorting{
-    background-image: blod;
-}
-table.dataTable thead .sorting_asc{
-    background-image: blod;
-}
-.sorting-icon{
-    display: flex;
-    align-items: center;
-    
-}
-.sorting-icon i{
-    font-size: 15px !important;
-    margin-left: auto
-}
-table.dataTable tbody td:nth-child(3){
-    text-align: left
-}
-table.dataTable tbody td:nth-child(4){
-    text-align: left
-}
-
-
-
-
-    </style>
 @endsection
 @section('content')
 
@@ -79,36 +30,35 @@ table.dataTable tbody td:nth-child(4){
                         <a href="{{ url('admin/createcustomer') }}" class="waves-effect waves-light  btn"><i
                                 class="material-icons right">gps_fixed</i> Create  Customer</a>
                                
-                    </div>
-                     <div class="col s12 m3 l3 input-field">
+                    </div> <div class="col s12 m3 l3 input-field">
                   
                         <button data-target="SendSms" class="btn modal-trigger"> Send Sms <i
                             class="material-icons right">sms</i></button>
                     </div>
 
                     <div class="row">
-                        <div class="col s12" style="">
+                        <div class="col s12" style="overflow-x: scroll; scrollbar-width: thin;">
                             <table id="dataTable" class="display table table-striped table-bordered nowrap"
-                            style="width: 100%; font-size: 12px; font-family: serif;">
+                                style="width: 100%;">
                                 <thead>
 
                                     <tr>
-                                        <th>SL</th>
-                                        <th>ID</th>
-                                        <th style="text-align: left !important">Name </th>
-                                        <th style="text-align: left !important">Address</th>
+                                        <td>SL</td>
+                                        <td>ID</td>
+                                        <th>Name</th>
+                                        <th>Address</th>
                                         <th>Mobile</th>
                                         <th>IP/<br>Username</th>
-                                        <th>Rent </th>
-                                        <th>Previus <br>Due </th>
-                                        <th>Discount </th>
-                                        <th>Advance </th>
-                                        <th>Add </th>
-                                        <th>Vat % </th>
-                                        <th>Bill <br> Amount</th>
+                                        <th>Monthly <br>Rent</th>
+                                        <th>Previus <br>Due</th>
+                                        <th>Discount</th>
+                                        <th>Advance</th>
+                                        <th>Add <br>Charge</th>
+                                        <th>Vat %</th>
+                                        <th>Bill <br>Amount</th>
                                         <th>Collection <br>Amount</th>
                                         <th>Total <br>Due</th>
-                                        {{-- <th>Status</th> --}}
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -118,26 +68,7 @@ table.dataTable tbody td:nth-child(4){
 
                                 </tbody>
                                 <tfoot>
-                                    <tr role="row" style="position: sticky; bottom: 0; background: #fff;"><td class="sorting_asc" rowspan="1" colspan="1" style="width: 18px;" aria-label="SL">SL</td><td class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 67px;" aria-label="ID: activate to sort column ascending">ID</td><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 77px;" aria-label="Name: activate to sort column ascending">Name</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 104px;" aria-label="Address">Address</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 83px;" aria-label="Mobile">Mobile</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 72px;" aria-label="IP/Username">IP/<br>Username</th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 57px;" aria-label="Monthly Rent: activate to sort column ascending">Monthly <br>Rent
-                                      <span style="color: slateblue; display: block">{{CommonFx::Totalcustomerinfo()->sum('monthlyrent')}}</span>
-                                    </th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 52px;" aria-label="Previus Due: activate to sort column ascending">Previus <br>Due
-                                      <span style="color: slateblue; display: block">{{CommonFx::Totalcustomerinfo()->sum('due')}}</span>
-                                    </th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 62px;" aria-label="Discount: activate to sort column ascending">Discount
-                                      <span style="color: slateblue; display: block">{{CommonFx::Totalcustomerinfo()->sum('discount')}}</span>
-                                    </th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 62px;" aria-label="Advance: activate to sort column ascending">Advance
-                                      <span style="color: slateblue; display: block">{{CommonFx::Totalcustomerinfo()->sum('advance')}}</span>
-                                    </th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 52px;" aria-label="Add Charge: activate to sort column ascending">Add <br>Charge
-                                      <span style="color: slateblue; display: block">{{CommonFx::Totalcustomerinfo()->sum('addicrg')}}</span>
-                                    </th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 42px;" aria-label="Vat %: activate to sort column ascending">Vat %</th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 57px;" aria-label="Bill Amount: activate to sort column ascending">Bill <br>Amount
-                                      <span style="color: slateblue; display: block">{{CommonFx::Totalcustomerinfo()->sum('total')}}</span>
-                                    </th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 69px;" aria-label="Collection Amount: activate to sort column ascending">Collection <br>Amount
-                                      <span style="color: slateblue; display: block">{{CommonFx::Totalcustomercollection()->sum('paid')}}</span>
-                                    </th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 35px;" aria-label="Total Due">Total <br>Due
-                                      <span style="color: slateblue; display: block">{{CommonFx::Totalcustomerinfo()->sum('total')- CommonFx::Totalcustomercollection()->sum('paid')}}</span>
-                                    </th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 128px;" aria-label="Action">Action</th></tr>
-                                   
-                                       
-                                      
+
                                 </tfoot>
                             </table>
 
@@ -170,7 +101,7 @@ table.dataTable tbody td:nth-child(4){
 
                 </div>
                 <div class="input-field col m6 s12">
-                    {!! Form::number('due', null, ['id' => 'due', 'class' => 'validate', 'placeholder' => 'placeholder','disabled']) !!}
+                    {!! Form::number('due', null, ['id' => 'due', 'class' => 'validate', 'placeholder' => 'placeholder']) !!}
                     {!! Form::label('due', 'Due') !!}
 
                 </div>
@@ -193,7 +124,7 @@ table.dataTable tbody td:nth-child(4){
             </div>
             <div class="row">
                 <div class="input-field col m6 s12">
-                    {!! Form::number('total', null, ['id' => 'total', 'step' => 'any','disabled']) !!}
+                    {!! Form::number('total', null, ['id' => 'total', 'step' => 'any']) !!}
 
                 </div>
                 <div class="input-field col m6 s12">
@@ -219,7 +150,7 @@ table.dataTable tbody td:nth-child(4){
 
             <div class="row">
                 <div class="input-field col m12 s12">
-                    {!!Form::textarea('problemmessage',@CommonFx::sentallcustomersms()->problemmessage, array('id'=>'problemmessage','class'=>'materialize-textarea', 'data-length'=>'160','rows' => 4, 'cols' => 54,'required'))!!}
+                    {!!Form::textarea('problemmessage',CommonFx::sentallcustomersms()->problemmessage, array('id'=>'problemmessage','class'=>'materialize-textarea', 'data-length'=>'160','rows' => 4, 'cols' => 54,'required'))!!}
            
                     {!! Form::label('active', 'Sent Message All Active Customer') !!}
 
@@ -240,46 +171,6 @@ table.dataTable tbody td:nth-child(4){
             <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
         </div>
     </div>
-<div id="SentEmail" class="modal">
-        <div class="modal-content">
-
-
-            <div class="row">
-              <div class="input-field col m12 s12">
-                    {!!Form::email('email',null, array('id'=>'email','class' => 'validate', 'placeholder' => 'placeholder', 'required'))!!}
-           
-                    {!! Form::label('email', 'Customer Email *') !!}
-                    {!! Form::hidden('id',null, array('id'=>'id')) !!}
-
-                </div>
-                <div class="input-field col m12 s12">
-                    {!!Form::text('subject',"Hi", array('id'=>'subject','class' => 'validate', 'placeholder' => 'Email Subject'))!!}
-                    {!! Form::label('subject', 'Email Subject*') !!}
-                  
-
-                </div>
-                <div class="input-field col m12 s12">
-                    {!!Form::textarea('message',null, array('id'=>'message','class'=>'materialize-textarea', 'data-length'=>'160','rows' => 4, 'cols' => 54,'required'))!!}
-           
-                    {!! Form::label('message', 'Message *') !!}
-
-                </div>
-                
-
-            
-                  
-                </div>
-
-
-            </div>
-
-        <div class="modal-footer">
-            <button class="btn cyan waves-effect waves-light right" type="button" id="SendEmailToCustomer">Send
-                <i class="material-icons right">send</i>
-            </button>
-            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
-        </div>
-    </div>
 
 
     {{-- @endcan --}}
@@ -293,82 +184,20 @@ table.dataTable tbody td:nth-child(4){
 
 
 @section('page-script')
-<script src="https://cdn.datatables.net/buttons/1.6.4/js/dataTables.buttons.min.js"></script> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>  
- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.print.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.colVis.min.js "></script>
+    <script src="{{ asset('app-assets/js/scripts/data-tables.js') }}"></script>
     <script>
-        $( document ).ready(function() {
-    $(".sidenav-main").addClass("nav-collapsed");
+        $(document).ready(function() {
+            $(".sidenav-main").addClass("nav-collapsed");
             $("#main").addClass("main-full");
             $(".sidenav-main").hover(function() {
                 $(".sidenav-main").toggleClass("nav-collapsed");
-
             });
-
-            if ($(window).width() < 992) {
-    $(".sidenav-main").removeClass("nav-collapsed");
-    $(".sidenav-main").hover(function() {
-                $(".sidenav-main").removeClass("nav-collapsed");
-
-            });
-}
-});
-
-        $(document).ready(function() {
-           
 
             $('#dataTable').DataTable({
-                fixedHeader: {
-        header: false,
-        footer: true
-    },
-          
-       paging: false,
+                // responsive: true,
+
                 processing: true,
                 serverSide: true,
-                          
- dom: 'Bfrtip',
-        buttons: [
-            
-		
-        {
-		extend: 'csv',
-            text: 'Excel',
-            exportOptions: {
-                stripHtml: true,
-				columns: ':visible'
-            }
-        },
-        {
-		extend: 'pdf',
-            text: 'PDF',
-            exportOptions: {
-                stripHtml: true,
-				columns: ':visible'
-            }
-        },
-       
-        {
-		extend: 'print',
-            text: 'Print',
-            exportOptions: {
-                stripHtml: true,
-				columns: ':visible'
-            }
-        },
-		'colvis'
-        ],
-		columnDefs: [ {
-            
-        } ], rowCallback: function(row, data, index) {
-        if (data.visible == "0") {
-            $(row).addClass("danger");
-        }
-    },
                 ajax: {
                     // url:"{{ url('admin/pendingcustomerlist') }}",
                     url: "{{ url('admin/customerlist') }}",
@@ -381,8 +210,7 @@ table.dataTable tbody td:nth-child(4){
                     {
                         data: 'DT_RowIndex',
                         orderable: false,
-                        searchable: false,
-                        
+                        searchable: false
                     },
                     {
                         data: 'loginid',
@@ -396,7 +224,12 @@ table.dataTable tbody td:nth-child(4){
                     },
                     {
                         data: 'address',
-                      },
+                        name: 'area.areaname',
+                        name: 'thana.thana',
+                         name: 'district.district',
+                         name: 'houseno',
+                      
+                    },
 
                     {
                         data: 'customermobile',
@@ -409,43 +242,43 @@ table.dataTable tbody td:nth-child(4){
                         orderable: false
                     },
                     {
-                        data: 'totalmonthlyrent',
-                        name: 'totalmonthlyrent',
+                        data: 'monthlyrent',
+                        name: 'monthlyrent',
 
                     },
                     {
-                        data: 'totaldue',
-                        name: 'totaldue',
+                        data: 'due',
+                        name: 'due',
 
                     },
                     {
-                        data: 'totaldiscount',
-                        name: 'totaldiscount',
+                        data: 'discount',
+                        name: 'discount',
 
                     },
                     {
-                        data: 'totaladvance',
-                        name: 'totaladvance',
+                        data: 'advance',
+                        name: 'advance',
 
                     },
                     {
-                        data: 'totaladdicrg',
-                        name: 'totaladdicrg',
+                        data: 'addicrg',
+                        name: 'addicrg',
 
                     },
                     {
-                        data: 'totalvat',
-                        name: 'totalvat',
+                        data: 'vat',
+                        name: 'vat',
 
                     },
                     {
-                        data: 'totalbillamount',
-                        name: 'totalbillamount',
+                        data: 'billamount',
+                        name: 'billamount',
 
                     },
                     {
-                        data: 'totalcollection',
-                        name: 'totalcollection',
+                        data: 'collection',
+                        name: 'collection',
 
                     },
                     {
@@ -453,11 +286,11 @@ table.dataTable tbody td:nth-child(4){
                         name: 'duetotal',
                         orderable: false
                     },
-//  {
-//                         data: 'status',
-//                         name: 'status',
-//                         orderable: false
-//                     },
+ {
+                        data: 'status',
+                        name: 'status',
+                        orderable: false
+                    },
 
 
                     {
@@ -560,7 +393,8 @@ $.ajax({
                 var total = isNaN((Number($("#monthlyrent").val()) + Number($("#due").val()) + Number($(
                     "#addicrg").val())) - (Number($("#advance").val()) + Number($("#discount")
                     .val()))) ? 0 : ((Number($("#monthlyrent").val()) + (Number($("#due").val()) +
-                    Number($("#addicrg").val())) - (Number($("#advance").val()) + Number($(
+                    Number($(
+                        "#addicrg").val())) - (Number($("#advance").val()) + Number($(
                         "#discount")
                     .val())))) + ((Number($("#monthlyrent").val()) + Number($("#addicrg").val())) *
                     Number($("#vat").val())) / 100;
@@ -659,52 +493,6 @@ $(document).on('click','.Approved', function(){
                     success: function (d) {
                         toastr.success(d.message);
                         $('#dataTable').DataTable().ajax.reload();
-        
-                    }
-                });
-        
-            
-        });
-        
-        $(document).on('click','.Sendemail', function(){
-      
-                        $("#id").val($(this).attr('cid'));
-                            $("#email").val($(this).attr('email'));
-                            $('#SentEmail').modal('open');
-
-                
-        
-            
-        }); 
-        $(document).on('click','#SendEmailToCustomer', function(){
-             if ($("#email").val() == '') {
-                    alert('Email Address Is Required');
-                    $("#email").focus();
-                    return false;
-
-                }
-                if ($("#message").val() == '') {
-                    alert('Message  Is Required');
-                    $("#message").focus();
-                    return false;
-
-                }
-                $.ajax({
-                    type: "post",
-                    url:url+'/admin/customeremail',
-                    data: {
-                        id:$("#id").val(),
-                        email:$("#email").val(),
-                        message:$("#message").val(),
-                        subject:$("#subject").val(),
-                    },
-                    dataType: "json",
-                    success: function (d) {
-                        toastr.success("email Send Successfully");
-                        $("#message").html(null);
-                        $("#email").html(null);
-                        $("#subject").html(null);
-                         $('#SentEmail').modal('close');
         
                     }
                 });

@@ -41,24 +41,21 @@ class Billcalculation extends Command
         $users = Customer::wherestatus(1)->select('id','status')->get();
         // dd($users);
          foreach ($users as $customer) {
-             $info=Bill::wherecustomer_id($customer->id)->find(757);
-            //  $info=Bill::wherecustomer_id($customer->id)->latest()->first();
+           
+             $info=Bill::wherecustomer_id($customer->id)->latest()->first();
             if($info){
-                if($info->total<$info->paid){
-                    $due=0;
-                    $advance=$info->paid-$info->total;
-                     Log::info('boro');
+                if(($info->total)<=($info->paid)){
+                    $in=Customer::find($customer->id);
+                $in->advance += ($info->paid)-($info->total);
+                $in->save();
+              // Log::info(($info->paid)-($info->total));
                 }
-                if($info->paid>$info->total){
-                    $due=$info->total-$info->paid;
-                    $advance=0;
-                    Log::info('coto');
+               else{
+                    $in=Customer::find($customer->id);
+                    $in->due += $info->total-$info->paid;
+                  $in->save();
                 }
-               $in=Customer::find($customer->id);
-               $in->due += $due;
-               $in->advance += $advance;
-               $in->total =($in->total+$due)-$advance;
-               $in->save();
+              
             }
         
         

@@ -20,10 +20,16 @@ $configData = Helper::applClasses();
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>@yield('title') | Admin</title>
+  <title style="font-size: 20px !important;">@yield('title') - {{@Auth::user()->company}}</title>
   <link rel="apple-touch-icon" href="../../den/images/logo/favicon.ico">
   <link rel="shortcut icon" type="image/x-icon" href="../../den/images/logo/favicon.ico">
-
+<style type="text/css" media="print">
+    @page 
+    {
+        size:  auto;
+        margin: 0mm;
+    }
+</style>
   {{-- Include core + vendor Styles --}}
   @include('panels.styles')
 

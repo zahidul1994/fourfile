@@ -111,7 +111,7 @@
                                                 class=" right-align" id="collection"></td>
                                     </tr>
                                     <tr>
-                                        <td><strong>Subtotal Payable Amount</strong></td>
+                                        <td><strong>Current Payable Amount</strong></td>
 
                                         <td class="indigo-text right-align" id="paybleamount"></td>
                                     </tr>
@@ -158,7 +158,7 @@
 
     <script>
         $(document).ready(function() {
-            $("#search").focus();
+            // clearform();
             function delay(callback, ms) {
                 var timer = 0;
                 return function() {
@@ -198,26 +198,22 @@
                         $('#name').append('<span>' + data.result.customername + '</span>');
                         $('#ppusername').append('<span>' + data.result.secretname +
                             '</span>');
-                        $('#adress').append('<span> House No # '+ data.result.houseno + ', '+ data.result.floor + ', '  + data.result.district.district + ', ' +
-                            data.result.thana.thana + ', ' + data.result.area.areaname +
-                            ', ' + data.result.customermobile + '</span>');
+                        $('#adress').append('<span> House No # '+ data.result.houseno + ','+ data.result.floor + ','  + data.result.district.district + ',' +
+                            data.result.thana.thana + ',' + data.result.area.areaname +
+                            ',' + data.result.customermobile + '</span>');
                         $('#monthlyrent').append('<span>' + data.result.bill[0]
                             .monthlyrent + '</span>');
                         $('#due').append('<span>' + data.result.bill[0].due + '</span>');
-                        $('#intotal').append('<input type="hidden" value="' +(data
-                            .result.bill[0].total-data
-                            .result.bill[0].paid) +
+                        $('#intotal').append('<input type="hidden" value="' + data.result
+                            .bill[0].total +
                             '" id="totall"/><input type="hidden" value="' + data.result
-                            .bill[0].id + '" id="collectionid" />' + '<span>' + (data
-                            .result.bill[0].total-data
-                            .result.bill[0].paid) + '</span>');
+                            .bill[0].id + '" id="collectionid" />' + '<span>' + data
+                            .result.bill[0].total + '</span>');
                             $('#collection').val( data
-                            .result.bill[0].total- data
-                            .result.bill[0].paid);
+                            .result.bill[0].total);
                             $('#collection').focus();
-                            $("#paybleamount").html('<strong>' + (data
-                            .result.bill[0].total-data
-                            .result.bill[0].paid) + '</strong>');
+                            $("#paybleamount").html('<strong>' + data
+                            .result.bill[0].total + '</strong>');
 
                     }
                 });
@@ -243,7 +239,7 @@
                 }
                 if ($("#payby").val() == '') {
                     // console.log($("#collection").val());
-                    alert('Select Minimum One Collection  Type');
+                    alert('Select Minimum One collection Amount');
                     $("#payby").focus();
                     return false;
 
@@ -274,7 +270,7 @@
                                 timer: 2000,
                                 buttons: false
                             });
-                            location.reload();
+
                             $('#userid').html(null);
                             $('#name').html(null);
                             $('#ppusername').html(null);

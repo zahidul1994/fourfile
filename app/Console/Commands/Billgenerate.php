@@ -43,18 +43,26 @@ class Billgenerate extends Command
         $users = Customer::wherestatus(1)->get();
        // dd($users);
         foreach ($users as $customer) {
-           Bill::create(['customer_id' => $customer->id,
+          $info= Bill::create(['customer_id' => $customer->id,
            'monthlyrent' => $customer->monthlyrent,
            'due' => $customer->due?:0,
            'addicrg' => $customer->addicrg?:0,
            'discount' => $customer->discount?:0,
            'advance' => $customer->advance?:0,
             'vat' => $customer->vat?:0,
-           'total' => $customer->total
+           'total' => (($customer->monthlyrent+$customer->due+$customer->addicrg)-($customer->advance+$customer->discount))+((($customer->monthlyrent+$customer->addicrg)*($customer->vat))) / 100,
           
         ]);
-        $smsinfo=['adminid'=>$customer->admin_id,'name'=>$customer->customername,'mobile'=>$customer->customermobile,'id'=>$customer->loginid,'billamount'=>$customer->total,'expeirydate'=>$customer->atd_month];
-        CommonFx::sentsmsbillcreate($smsinfo);      
+        if($info){
+            $infos=Customer::find($customer->id);
+             $infos->due=0;
+            $infos->discount=0;
+            $infos->addicrg=0;
+            $infos->advance=0;
+            $infos->total=((($infos->monthlyrent))+(($infos->monthlyrent)*($infos->vat)) / 100);
+            $infos->save();
+           }
+        
             
         }
          

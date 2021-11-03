@@ -2,7 +2,7 @@
 @extends('layouts.adminMaster')
 
 {{-- page styles --}}
-@section('title','Customer Report')
+@section('title','Collection List')
 
 @section('page-style')
 <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/pages/app-invoice.css')}}">
@@ -18,29 +18,29 @@
       <div class="card">
         <div class="card-content invoice-print-area">
          
-          <div class="card invoice-action-wrapper ">
-            <div class="row">
-            <div class="card-content col m4" >
+          <div class="card invoice-action-wrapper">
+            <div class="card-content" >
               <form>
                 <input placeholder="Customer id/Name/Phone" id="search" type="text" class="search-box validate white search-circle">
               </form>
-          </div>
-            <div class="col m4">  
-              <a href="#" class="btn-block btn btn-light-indigo waves-effect waves-light invoice-print">
-                  <span><i class="material-icons">print</i></span>
-              </a>
-          </div>
-          <div class="col m4"> <button id="downloadexcel"  title="Download Invoice As Pdf"  class="btn-block btn btn-light-indigo waves-effect waves-light ">Excel</button></div>
-          </div>
+              <div class="invoice-action-btn">
+                <a href="#"
+                  class="btn indigo waves-effect waves-light display-flex align-items-center justify-content-center">
+                  <i class="material-icons mr-4">check</i>
+                  <span class="text-nowrap">Search </span>
+                </a>
+              </div>
+              
+            </div>
           </div>
           
           <!-- invoice address and contact -->
           <div class="row invoice-info">
-            <h3 class="invoice-from center " id="collectionid">Customer Information</h3>
+            <h3 class="invoice-from center ">Customer Information</h3>
             <div class="col m6 s12">
            
               <div class="invoice-address">
-                <span>ID</span> 
+                <span>ID</span>
               </div>
               <div class="invoice-address">
                 <span>Name</span>
@@ -79,29 +79,12 @@
             <table class="striped responsive-table">
               <thead>
                 <th>Date</th>
-                <th>Monthly <br> Rent</th>
-                <th>Additional</th>
-                <th>Discount</th>
-                <th>Advance</th>
-                {{-- <th>SUM</th> --}}
-                <th>Vat %</th>
-              
-                <th>Due</th>
-                <th>Bill</th>
+                
                 <th>Paid</th>
-                <th>Total <br>Due</th>
-               </thead>
-              <tbody id="dd">
-
-              </tbody>
-            </table>
-            <table class="striped responsive-table">
-              <thead>
-                <th>Date</th>
-               <Th>Collection</Th>
+                <th>Cancel</th>
               </thead>
-              <tbody id="dtcollect">
-
+              <tbody id="dt">
+             <tr  id="dd"></tr>
               </tbody>
             </table>
           </div>
@@ -141,7 +124,7 @@ $(document).ready(function () {
     $search = $('#search').val();
   $.ajax({
           type: "post",
-          url:url+'/admin/customerreportinfo',
+          url:url+'/admin/searchsinglecustomerbill',
           data: {
               id:$search
              
@@ -154,46 +137,54 @@ $(document).ready(function () {
             $('#ppusername').html(null);
             $('#adress').html(null);
            $('#dd').html(null);
-           $('#dtcollect').html(null);
-           $('#collectionid').html(null);
-           $('#collection').removeAttr('value');
-           $('#collectionid').append('<input type="hidden" value="' + data.result.id + '" id="collection" />');
+           $('#dt td').html(null);
            $('#userid').append('<span>' + data.result.loginid + '</span>');
             $('#name').append('<span>' + data.result.customername + '</span>');
             $('#ppusername').append('<span>' + data.result.secretname + '</span>');
-            $('#adress').append('<span> House No # '+ data.result.houseno + ', '+ data.result.floor + ', '  + data.result.district.district + ', ' +
-                            data.result.thana.thana + ', ' + data.result.area.areaname +
-                            ', ' + data.result.customermobile + '</span>');
-          $.each(data.bill, function(key, value){
-                       // alert(key);
-                        $('#dd').append('<tr><td>' + value.created_at + '</td><td>' + value.monthlyrent + '</td><td>' + value.addicrg + '</td><td>' + value.discount + '</td><td>' + value.advance + '</td><td>' + value.vat + '</td><td>' + value.due + '</td><td>' + value.total + '</td><td>' + value.paid + '</td><td>' +((value.total).toFixed(2)-(value.paid)) + '</td></tr>');
-                      // console.log(value.collection.length);
-                        $.each(value.collection, function(key, newvalue){
-                        $('#dtcollect').append('<tr><td>' + newvalue.created_at + '</td><td></td><td></td><td></td><td></td><td></td><td></td><td>Collection By </br>' + newvalue.admin['name'] + ' Payment method </br>' + newvalue.payby['paybyname'] +  '</td><td>' + newvalue.paid + '</td><td></td></tr>'
+            $('#adress').append('<span> House No # '+ data.result.houseno + ','+ data.result.floor + ','  + data.result.district.district + ',' +
+                            data.result.thana.thana + ',' + data.result.area.areaname +
+                            ',' + data.result.customermobile + '</span>');
+                        $.each(data.result.bill[0].collection, function(key, newvalue){
+                        $('#dt').append('<tr><>' + newvalue.updated_at + '</td><td>Collection By </br>' + newvalue.admin['name'] +' Paymenent method </br>' + newvalue.payby['paybyname'] + '</td><td>' + newvalue.paid + '</td><td><button id="Deletepay" paidval="'+newvalue.paid+'" rid="'+newvalue.id+'"><i class="material-icons">cancel</i></button></td></tr>'
                         );
 
                     });
                         
-                    });
+                   
                    
                 
           }
         });
 }, 900));
 
-$(document).on('click','#downloadexcel', function(){
-if ($("#collection").val() == '') {
-                  toastr.warning('Please Type some Text');
-                   
-                    return false;
-              
-                }
-                window.location.href = url+'/admin/customerreportexcel/'+$("#collection").val();
-    
 
- 
-});
-
+  $(document).on('click','#Deletepay', function(){
+             //console.log($(this).attr('paidval'));
+             if(!confirm('Sure?')) return;
+             $payid = $(this).attr('rid');
+             var payamount = $(this).attr('paidval');
+            $info_url = url + '/admin/cancelcollection/'+$payid;
+             $.ajax({
+                 url:$info_url,
+                 method: "DELETE",
+                 type: "DELETE",
+                 data:{
+                  payamount
+                 },
+                 success: function(data){
+                     if(data) {
+                        toastr.warning('Payment delete');
+                         location.reload();
+                      // delay();
+                
+                         }
+                 },
+                 error:function(data){
+                     console.log(data);
+                 }
+             });
+         });
+  
 });
 </script>
 

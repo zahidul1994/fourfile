@@ -489,6 +489,35 @@ Admin::find($smssetting->admin_id)->notify(new Adminupdatenotification($data));
 }
    }
         }
+//poyojone  
+        public static function newsentsmsbillcreate($smsinfo){
+            $smssetting=Smssent::whereadmin_id($smsinfo['adminid'])->firstOrFail();
+            if($smssetting->billing==1){
+                $text='Dear subscriber, internet connection has been restored, thank you very much for using our service - MyNet';
+                $number=$smsinfo['mobile'];
+               $dataall= array(
+                 'username'=>$smssetting->username,
+                 'password'=>$smssetting->password,
+                 'number'=>$number,
+                 'message'=>$text
+                 );
+                // $smssetting->blance -=$smssetting->smsrate *(CommonFx::Smscount($text));
+             //    $smssetting->save();
+   
+      
+   $url = "http://66.45.237.70/api.php";
+       $ch = curl_init(); // Initialize cURL
+       curl_setopt($ch, CURLOPT_URL,$url);
+       curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($dataall));
+       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+       $smsresult = curl_exec($ch);
+       $p = explode("|",$smsresult);
+       $sendstatus = $p[0];
+
+  
+        }
+        }
+
          public static function Sendsmsopencomplain($smsinfo){
             $smssetting=Smssent::whereadmin_id(Auth::id())->firstOrFail();
             if($smssetting->openticket==1){

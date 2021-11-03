@@ -287,7 +287,8 @@ return response()->json([
       }
 
    public function collectiondelete(Request $request,$id){
-$info=Collection::whereadmin_id(Auth::id())->find($id);
+//$info=Collection::whereadmin_id(Auth::id())->find($id);
+$info=Collection::find($id);
 if($info){
   $pa=Bill::find($info->bill_id);
   $pa->paid-=$request->payamount;
@@ -302,7 +303,7 @@ $data = [
   'customerdata' =>'<a class="black-text"  href="'. url('/customer/pyamentlist') . '">'. Auth::user()->name. ' Delete Your Payment </a>',
 ];
 
-Customer::find($infos->customer_id)->notify(new Customernotification($data));
+Customer::find($pa->customer_id)->notify(new Customernotification($data));
 }  
 $info->delete();
 return response()->json([

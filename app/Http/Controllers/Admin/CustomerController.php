@@ -85,7 +85,7 @@ class CustomerController extends Controller
     return (($data->bill[0]->total)-($data->bill[0]->paid));
 })
       ->addColumn('address' ,function($data){
-        return 'House No- '. @$data->houseno.'<br/>'. @$data->district->district.'<br/>'.@$data->thana->thana.'<br/>'.@$data->area->areaname;
+        return 'House No- '. @$data->houseno.', '.@$data->floor.', <br/>'.@$data->area->areaname.', <br/>'. @$data->district->district.', <br/>'.@$data->thana->thana.', <br/> Post # '.@$data->post;
     })
    
         ->addIndexColumn()
@@ -121,9 +121,10 @@ class CustomerController extends Controller
         return $button;
     }})
        
-      ->addColumn('address' ,function($data){
-        return 'House No- '. @$data->houseno.'<br/>'. @$data->district->district.'<br/>'.@$data->thana->thana.'<br/>'.@$data->area->areaname;
-    })
+      
+    ->addColumn('address' ,function($data){
+      return 'House No- '. @$data->houseno.', '.@$data->floor.', <br/>'.@$data->area->areaname.', <br/>'. @$data->district->district.', <br/>'.@$data->thana->thana.', <br/> Post # '.@$data->post;
+  })
         ->addIndexColumn()
         ->rawColumns(['action','status','address'])
         ->make(true);
@@ -564,25 +565,17 @@ $info->save();
        'total' => $request->total
     
   ]);
-  return response($info);
+  //return response($info);
   if($info){
-    Customer::findOrFail($request->customerid)->update(
-      [
-      'monthlyrent' => $request->monthlyrent,
-       'due' => $request->due,
-       'addicrg' => $request->addicrg,
-       'discount' => $request->discount,
-       'advance' => $request->advance,
-        'vat' => $request->vat,
-       'total' => $request->total
-    
-  ]);
-  }
-    return response()->json([
+   $infos= Customer::find($request->customerid);
+        $infos->monthlyrent= $request->monthlyrent;
+    $infos->total = (($request->monthlyrent+$infos->due+$infos->addicrg)-($infos->advance+$infos->discount))+((($request->monthlyrent+$infos->addicrg))*($infos->vat)) / 100;
+    $infos->save();
+  return response()->json([
       'suceess'=>true,
     ],201);
    
-   
+  }
   }
 
 
@@ -651,7 +644,7 @@ return response()->json(['success' => true]);
 }
 
 public function deletedara(){
-  $info=Bill::with('collection')->whereDate('created_at', '2021-09-29')->select('id','created_at')->delete();
+   $info=Bill::with('collection')->whereDate('created_at', '2021-11-02')->select('id','created_at')->delete();
   
 }
 

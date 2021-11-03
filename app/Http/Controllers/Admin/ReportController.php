@@ -35,7 +35,7 @@ class ReportController extends Controller
           
           if(!empty($searchvalue))
   {
-    $bill=Bill::wherecustomer_id($searchvalue->id)->get();
+    $bill=Bill::with('collection.admin','collection.payby')->wherecustomer_id($searchvalue->id)->get();
 return response()->json([
   'result'=>$searchvalue,
   'bill'=>$bill,
@@ -46,18 +46,18 @@ return response()->json([
           
           if(!empty($searchvalue))
   {
-    $bill=Bill::wherecustomer_id($searchvalue->id)->get();
+    $bill=Bill::with('collection.admin','collection.payby')->wherecustomer_id($searchvalue->id)->get();
 return response()->json([
   'result'=>$searchvalue,
   'bill'=>$bill,
   
   ],200);
   }
-  $searchvalue = Customer::with('district','thana','area')->wherestatus(1)->whereadmin_id(Auth::id())->where('customername','LIKE','%'.$request->id."%")->first();
+  $searchvalue = Customer::with('collection.admin','district','thana','area')->wherestatus(1)->whereadmin_id(Auth::id())->where('customername','LIKE','%'.$request->id."%")->first();
           
           if(!empty($searchvalue))
   {
-    $bill=Bill::wherecustomer_id($searchvalue->id)->get();
+    $bill=Bill::with('collection.admin','collection.payby')->wherecustomer_id($searchvalue->id)->get();
 return response()->json([
   'result'=>$searchvalue,
   'bill'=>$bill,
@@ -68,7 +68,7 @@ return response()->json([
           
           if(!empty($searchvalue))
   {
-    $bill=Bill::wherecustomer_id($searchvalue->id)->get();
+    $bill=Bill::with('collection.admin','collection.payby')->wherecustomer_id($searchvalue->id)->get();
     return response()->json([
       'result'=>$searchvalue,
       'bill'=>$bill,
