@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-use App\Mail\Custommail;
 use App\Models\Bill;
 use App\Models\Smssent;
+use App\Mail\Custommail;
 use App\Models\Customer;
 use App\Helpers\CommonFx;
 use Illuminate\Support\Str;
@@ -11,18 +11,19 @@ use App\Events\SendsmsEvent;
 use Illuminate\Http\Request;
 use App\Jobs\Sendcustomersms;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 use Kamaln7\Toastr\Facades\Toastr;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Event;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
-use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Support\Facades\Redirect;
 use Yajra\DataTables\Contracts\DataTable;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\Mail;
 
 class CustomerController extends Controller
 {
@@ -33,10 +34,65 @@ class CustomerController extends Controller
    */
   public function index(Request $request)
   {
+
     if (request()->ajax()) {
-      return datatables()->of(Customer::with('district','thana','area','bill.collection')->whereadmin_id(Auth::guard('admin')->user()->id)->wherestatus(1))
-        ->addColumn('action', function ($data) {
-          $button ='<button type="button" id="UpdateBillBtn" style="border:0; background: none; padding: 0 !important; margin: 0 !important" uid="' . $data->bill[0]->id . '" class="invoice-action-view btn-sm" title="Update Bill"><i class="material-icons" style="font-size: 16px; color: #F77B00;">sync</i></button>'; 
+
+     // return response($request->all());
+     if(empty($request->collection) && empty($request->withoutcollection)){
+      $info = DB::table('customers')
+      ->join('bills', 'customers.id', '=', 'bills.customer_id')
+     ->join('districts', 'districts.id', '=', 'customers.district_id')
+     ->join('thanas', 'thanas.id', '=', 'customers.thana_id')
+      ->leftjoin('areas', 'areas.id', '=', 'customers.area_id')
+      ->whereMonth('bills.created_at', date('m'))
+->whereYear('bills.created_at', date('Y'))
+  ->where('customers.admin_id','=',Auth::guard('admin')->user()->id)->where('status','=',1)
+     ->select('customers.id','customers.email','customers.status','customers.houseno','customers.floor','areas.areaname','districts.district','thanas.thana','customers.post','customers.loginid','customers.customername','customers.customermobile','customers.secretname','customers.id','bills.monthlyrent','bills.due','bills.advance','bills.discount','bills.advance','bills.vat','bills.total','bills.paid','bills.id as bill')->get();
+    }
+     elseif(!empty($request->collection) && empty($request->withoutcollection)){
+     
+        $info = DB::table('customers')
+        ->join('bills', 'customers.id', '=', 'bills.customer_id')
+       ->join('districts', 'districts.id', '=', 'customers.district_id')
+       ->join('thanas', 'thanas.id', '=', 'customers.thana_id')
+        ->leftjoin('areas', 'areas.id', '=', 'customers.area_id')
+        ->whereMonth('bills.created_at', date('m'))
+ ->whereYear('bills.created_at', date('Y'))
+       ->where('bills.paid','>',0)
+       ->where('customers.admin_id','=',Auth::guard('admin')->user()->id)->where('status','=',1)
+       ->select('customers.id','customers.email','customers.status','customers.houseno','customers.floor','areas.areaname','districts.district','thanas.thana','customers.post','customers.loginid','customers.customername','customers.customermobile','customers.secretname','customers.id','bills.monthlyrent','bills.due','bills.advance','bills.discount','bills.advance','bills.vat','bills.total','bills.paid','bills.id as bill')->get();
+  
+     
+     }
+     elseif(empty($request->collection) && !empty($request->withoutcollection)){
+     
+      $info = DB::table('customers')
+      ->join('bills', 'customers.id', '=', 'bills.customer_id')
+     ->join('districts', 'districts.id', '=', 'customers.district_id')
+     ->join('thanas', 'thanas.id', '=', 'customers.thana_id')
+      ->leftjoin('areas', 'areas.id', '=', 'customers.area_id')
+      ->whereMonth('bills.created_at', date('m'))
+->whereYear('bills.created_at', date('Y'))
+     ->where('bills.paid','<=',0)
+     ->where('customers.admin_id','=',Auth::guard('admin')->user()->id)->where('status','=',1)
+     ->select('customers.id','customers.email','customers.status','customers.houseno','customers.floor','areas.areaname','districts.district','thanas.thana','customers.post','customers.loginid','customers.customername','customers.customermobile','customers.secretname','customers.id','bills.monthlyrent','bills.due','bills.advance','bills.discount','bills.advance','bills.vat','bills.total','bills.paid','bills.id as bill')->get();
+
+   
+   }
+     else{
+     
+      $info = DB::table('customers')
+      ->join('bills', 'customers.id', '=', 'bills.customer_id')
+     ->join('districts', 'districts.id', '=', 'customers.district_id')
+     ->join('thanas', 'thanas.id', '=', 'customers.thana_id')
+      ->leftjoin('areas', 'areas.id', '=', 'customers.area_id')
+      ->whereMonth('bills.created_at', date('m'))
+->whereYear('bills.created_at', date('Y'))
+  ->where('customers.admin_id','=',Auth::guard('admin')->user()->id)->where('status','=',1)
+     ->select('customers.id','customers.email','customers.status','customers.houseno','customers.floor','areas.areaname','districts.district','thanas.thana','customers.post','customers.loginid','customers.customername','customers.customermobile','customers.secretname','customers.id','bills.monthlyrent','bills.due','bills.advance','bills.discount','bills.advance','bills.vat','bills.total','bills.paid','bills.id as bill')->get();
+     }
+     return datatables()->of($info)->addColumn('action', function ($data) {
+          $button ='<button type="button" id="UpdateBillBtn" style="border:0; background: none; padding: 0 !important; margin: 0 !important" uid="' . $data->bill . '" class="invoice-action-view btn-sm" title="Update Bill"><i class="material-icons" style="font-size: 16px; color: #F77B00;">sync</i></button>'; 
           $button .= '&nbsp;&nbsp;';
           $button .= '<a title="Edit Customer" href="/admin/editcustomer/' . $data->id . '" class="btn-sm" style="border:0; background: none; padding: 0 !important"><i class="material-icons" style="font-size: 16px; color: #9B01BA;">edit</i></a>';
           $button .= '&nbsp;&nbsp;';
@@ -55,44 +111,45 @@ class CustomerController extends Controller
         $button = '<button type="button" title="Update Status" class=" btn-sm Notapproved" rid="'.$data->id.'"><i class="material-icons">block</i> </button>';
         return $button;
     }})
-    
+  
       ->addColumn('totalmonthlyrent' ,function($data){
        
-        return $data->bill[0]->monthlyrent;
+        return @$data->monthlyrent;
     })  
         ->addColumn('totaldue' ,function($data){
-        return $data->bill[0]->due;
+        return @$data->due;
     }) 
       ->addColumn('totaldiscount' ,function($data){
-        return $data->bill[0]->discount;
+        return @$data->discount;
     }) 
         ->addColumn('totaladvance' ,function($data){
-        return $data->bill[0]->advance;
+        return @$data->advance;
     }) 
     ->addColumn('totaladdicrg' ,function($data){
-        return $data->bill[0]->addicrg;
+        return @$data->addicrg;
     })
      ->addColumn('totalvat' ,function($data){
-        return $data->bill[0]->vat;
+        return @$data->vat;
     }) 
       ->addColumn('totalbillamount' ,function($data){
-        return $data->bill[0]->total;
+        return @$data->total;
     })
     ->addColumn('totalcollection' ,function($data){
-      return $data->bill[0]->collection->sum('paid');
+      return (@$data->paid);
   })
   ->addColumn('duetotal' ,function($data){
-    return (($data->bill[0]->total)-($data->bill[0]->paid));
+    return ((@$data->total)-($data->paid));
 })
       ->addColumn('address' ,function($data){
-        return 'House No- '. @$data->houseno.', '.@$data->floor.', <br/>'.@$data->area->areaname.', <br/>'. @$data->district->district.', <br/>'.@$data->thana->thana.', <br/> Post # '.@$data->post;
+        return 'House No- '. @$data->houseno.', '.@$data->floor.', <br/>'.@$data->areaname.', <br/>'. @$data->district.', <br/>'.@$data->thana.', <br/> Post # '.@$data->post;
     })
-   
+  
         ->addIndexColumn()
         ->rawColumns(['action','duetotal','status','address','totalmonthlyrent','totaldue','totaldiscount','totaladvance','totaladdicrg','totalvat','totalbillamount','totalcollection'])
         
         ->make(true);
     }
+    
     $pageConfigs = ['pageHeader' => false, 'isFabButton' => false];
 
     return view('admin.customer.index')->with('pageConfigs', $pageConfigs);
@@ -601,6 +658,7 @@ $info->save();
 
 } 
 public function sendsmscustomer(Request $request){
+  return response($request->all());
  $customers=Customer::whereadmin_id(Auth::id())->whereloginid($request->loginid)->get();
 foreach($customers as $customer){
 

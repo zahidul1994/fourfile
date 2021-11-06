@@ -69,8 +69,27 @@ table.dataTable tbody td:nth-child(4){
         <div class="col s12">
             <div class="card">
                 <div class="card-content">
-                    <div class="input-field col s12 m6">
-
+                  
+                    <div class="input-field col s12 m6 p-0">
+                        <form  style="display: flex">
+                            <p style="margin: 0 10px 10px 4px; padding: 5px 10px; border: 1px solid #A9A9A9; background: linear-gradient(to bottom, rgba(153,153,153,0.1) 0%, rgba(0,0,0,0.1) 100%)">
+                              <label id="collectionval">
+                                <input type="checkbox"  id="collectionval" />
+                                <span style="padding-left: 25px !important; color: #222; font-size: 14px">Collection List</span>
+                              </label>
+                            </p>
+                            <p style="margin: 0 0 10px 10px; padding: 5px 10px; border: 1px solid #A9A9A9; background: linear-gradient(to bottom, rgba(153,153,153,0.1) 0%, rgba(0,0,0,0.1) 100%)">
+                                <label id="withoutcollectionval">
+                                  <input type="checkbox" id="withoutcollectionval"/>
+                                  <span style="padding-left: 25px !important; color: #222; font-size: 14px">Without Collection List</span>
+                                </label>
+                              </p><p style="margin: 0 0 10px 10px; padding: 5px 10px; border: 1px solid #A9A9A9; background: linear-gradient(to bottom, rgba(153,153,153,0.1) 0%, rgba(0,0,0,0.1) 100%)">
+                                <label id="withoutcollectionval">
+                                 <span style=color: #222; font-size: 14px"   >Total Record <strong id="Totalselect"></strong></span>
+                                </label>
+                              </p>
+                           
+                          </form>
                     </div>
 
 
@@ -319,10 +338,13 @@ table.dataTable tbody td:nth-child(4){
 });
 
         $(document).ready(function() {
-           
-
-            $('#dataTable').DataTable({
-                fixedHeader: {
+            $(function load_data(allempty=null,collection=null, withoutcollection=null) {
+       
+        var table = $('#dataTable').DataTable({
+            initComplete: function() {
+      $('#Totalselect').text( table.rows( ).count())
+   },
+             fixedHeader: {
         header: false,
         footer: true
     },
@@ -369,14 +391,21 @@ table.dataTable tbody td:nth-child(4){
             $(row).addClass("danger");
         }
     },
+    
                 ajax: {
                     // url:"{{ url('admin/pendingcustomerlist') }}",
                     url: "{{ url('admin/customerlist') }}",
-
+                   
+                    data: {
+                 allempty:allempty,
+                  collection:collection,
+                    withoutcollection:withoutcollection,
+                  
+                }
                 },
 
                 columns: [
-
+                
 
                     {
                         data: 'DT_RowIndex',
@@ -466,9 +495,46 @@ table.dataTable tbody td:nth-child(4){
                         orderable: false
                     }
 
-                ]
+                ],
+    
+               
+        });
+        $('#dataTable_filter').on('keyup change', function(){
+            $('#Totalselect').text( table.rows( ).count());
+});
+        $('#collectionval>input[type="checkbox"]').click(function() {
+            if($(this).prop("checked") == true){
+               $('#dataTable').DataTable().destroy();
+                  load_data(allempty=null,collection='notnull',withoutcollection=null);
+                  $('#Totalselect').text( table.rows( ).count());
+            }
+            else{
+             $('#dataTable').DataTable().destroy();
+                load_data(allempty=null,collection=null, withoutcollection=null);
+                $('#Totalselect').text( table.rows( ).count());
+            }
+           
+            
+        });
+        
+        $('#withoutcollectionval>input[type="checkbox"]').click(function() {
+            if($(this).prop("checked") == true){
+               $('#dataTable').DataTable().destroy();
+                  load_data(allempty=null,collection=null,withoutcollection='notnull');
+                  $('#Totalselect').text( table.rows( ).count());
+            }
+            else{
+                $('#dataTable').DataTable().destroy();
+                load_data(allempty=null,collection=null, withoutcollection=null);
+                $('#Totalselect').text( table.rows( ).count());
+            }
+           
+            
+        });
 
             });
+            
+      
             //Delete Admin
             $(document).on('click', '#deleteBtn', function() {
 
@@ -498,27 +564,28 @@ table.dataTable tbody td:nth-child(4){
             //Delete Admin end
 //sent sms
 $(document).on('click', '#Sendsmssubmit', function() {
-
+   
 if (!confirm('Are You Confirm  ?')) return;
-;
+table = $('#dataTable').DataTable().data();
+ // console.log(table); 
+  for (let i = 0; i <table.length; i++) {
+ 
 $info_url = url + '/admin/sendsmscustomer';
 $.ajax({
     url: $info_url,
     method: "post",
     type: "POST",
     data: {
+        loginid:table[i]['loginid'],
         smsmessage:$('#problemmessage').val()
     },
-    success: function(data) {
-        if (data) {
-            toastr.info('Request Process');
-            $('#SendSms').modal('close');
-        }
-    },
-    error: function(data) {
-        console.log(data);
-    }
+   
 });
+} 
+
+ toastr.info('Request Process');
+  $('#SendSms').modal('close');
+       
 });
 
 
