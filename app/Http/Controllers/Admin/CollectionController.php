@@ -186,7 +186,7 @@ class CollectionController extends Controller
 
              public function searchsinglecustomer(Request $request){
               if(! $request->id==null){
-              $searchvalue = Customer::with('district','thana','area','bill.collection')->wherestatus(1)->whereadmin_id(Auth::id())->Where('loginid','LIKE','%'.$request->id."%")->first();
+              $searchvalue = Customer::with('district','thana','area','bill.collection')->whereIn('status',[1,3])->whereadmin_id(Auth::id())->Where('loginid','LIKE','%'.$request->id."%")->first();
               
               if(!empty($searchvalue))
       {
@@ -195,7 +195,7 @@ class CollectionController extends Controller
       
       ],200);
       }
-              $searchvalue = Customer::with('district','thana','area','bill.collection')->wherestatus(1)->whereadmin_id(Auth::id())->where('customermobile','LIKE','%'.$request->id."%")->first();
+              $searchvalue = Customer::with('district','thana','area','bill.collection')->whereIn('status',[1,3])->whereadmin_id(Auth::id())->where('customermobile','LIKE','%'.$request->id."%")->first();
               
               if(!empty($searchvalue))
       {
@@ -204,7 +204,7 @@ class CollectionController extends Controller
       
       ],200);
       }
-      $searchvalue = Customer::with('district','thana','area','bill.collection')->wherestatus(1)->whereadmin_id(Auth::id())->where('customername','LIKE','%'.$request->id."%")->first();
+      $searchvalue = Customer::with('district','thana','area','bill.collection')->whereIn('status',[1,3])->whereadmin_id(Auth::id())->where('customername','LIKE','%'.$request->id."%")->first();
               
               if(!empty($searchvalue))
       {
@@ -213,7 +213,7 @@ class CollectionController extends Controller
       
       ],200);
       }
-      $searchvalue = Customer::with('district','thana','area','bill.collection')->wherestatus(1)->whereadmin_id(Auth::id())->where('secretname','LIKE','%'.$request->id."%")->first();
+      $searchvalue = Customer::with('district','thana','area','bill.collection')->whereIn('status',[1,3])->whereadmin_id(Auth::id())->where('secretname','LIKE','%'.$request->id."%")->first();
               
               if(!empty($searchvalue))
       {
@@ -240,7 +240,7 @@ class CollectionController extends Controller
       
       public function singlecustomerbill(Request $request){
         if(! $request->id==null){
-        $searchvalue = Customer::with('district','thana','area','bill.collection.admin','bill.collection.payby')->wherestatus(1)->whereadmin_id(Auth::id())->Where('loginid','LIKE','%'.$request->id."%")->first();
+        $searchvalue = Customer::with('district','thana','area','bill.collection.admin','bill.collection.payby')->whereIn('status',[1,3])->whereadmin_id(Auth::id())->Where('loginid','LIKE','%'.$request->id."%")->first();
         
         if(!empty($searchvalue))
 {
@@ -249,7 +249,7 @@ return response()->json([
 
 ],200);
 }
-        $searchvalue = Customer::with('district','thana','area','bill.collection.admin','bill.collection.payby')->wherestatus(1)->whereadmin_id(Auth::id())->where('customermobile','LIKE','%'.$request->id."%")->first();
+        $searchvalue = Customer::with('district','thana','area','bill.collection.admin','bill.collection.payby')->whereIn('status',[1,3])->whereadmin_id(Auth::id())->where('customermobile','LIKE','%'.$request->id."%")->first();
         
         if(!empty($searchvalue))
 {
@@ -258,7 +258,7 @@ return response()->json([
 
 ],200);
 }
-$searchvalue = Customer::with('district','thana','area','bill.collection.admin','bill.collection.payby')->wherestatus(1)->whereadmin_id(Auth::id())->where('customername','LIKE','%'.$request->id."%")->first();
+$searchvalue = Customer::with('district','thana','area','bill.collection.admin','bill.collection.payby')->whereIn('status',[1,3])->whereadmin_id(Auth::id())->where('customername','LIKE','%'.$request->id."%")->first();
         
         if(!empty($searchvalue))
 {
@@ -267,7 +267,7 @@ return response()->json([
 
 ],200);
 }
-$searchvalue = Customer::with('district','thana','area','bill.collection.admin','bill.collection.payby')->wherestatus(1)->whereadmin_id(Auth::id())->where('secretname','LIKE','%'.$request->id."%")->first();
+$searchvalue = Customer::with('district','thana','area','bill.collection.admin','bill.collection.payby')->whereIn('status',[1,3])->whereadmin_id(Auth::id())->where('secretname','LIKE','%'.$request->id."%")->first();
         
         if(!empty($searchvalue))
 {

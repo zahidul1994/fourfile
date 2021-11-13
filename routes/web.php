@@ -476,7 +476,8 @@ Route::delete('deletetodo/{id}','TodolistController@destroy');
    //Report Area 
 Route::get('customerreport','ReportController@index');
  Route::post('customerreportinfo','ReportController@findcustomer');
-// Route::post('createcollection','CollectionController@store');
+ Route::get('collectionreport','ReportController@collectionreport');
+//  Route::post('collectionreport','ReportController@collectionreport');
 // Route::get('editcollect/{id}','CollectionController@edit');
 //  Route::put('updatecollection/{id}','CollectionController@update');
 //  Route::post('blogstatus', 'CollectionController@setapproval');

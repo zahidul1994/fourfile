@@ -15,7 +15,7 @@ class User extends Authenticatable
        
 		  protected $guard_name = 'admin';
         protected $fillable = ['admin_id',
-            'username','phone','email','image','remember_token','status','password' ];
+            'username','phone','email','image','remember_token','status','password','id' ];
 
         protected $hidden = [
             'password', 'remember_token',
@@ -26,7 +26,10 @@ class User extends Authenticatable
          public function admin(){
             return $this->belongsTo('App\Models\Admin','admin_id','id');
         }
-        
+        public function collection()
+        {
+            return $this->hasMany('App\Models\Collection');
+        } 
      
      
         public function status(){

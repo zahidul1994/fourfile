@@ -293,6 +293,7 @@ public static function Divisionname(){
         // ->join('collections', 'bills.id', '=', 'collections.bill_id')
          ->where('customers.admin_id','=',Auth::guard('admin')->user()->id)
          ->where('customers.status','=',1)
+        //  ->whereIn('customers.status',[1,3])
          ->whereMonth('bills.created_at', date('m'))
 ->whereYear('bills.created_at', date('Y'))
         ->select('customers.id','bills.monthlyrent','bills.due','bills.discount','bills.advance','bills.addicrg','bills.vat','bills.paid','bills.total')
@@ -306,7 +307,7 @@ public static function Divisionname(){
             ->join('bills', 'customers.id', '=', 'bills.customer_id')
              ->join('collections', 'bills.id', '=', 'collections.bill_id')
              ->where('customers.admin_id','=',Auth::guard('admin')->user()->id)
-             ->where('customers.status','=',1)
+             ->whereIn('customers.status',[1,3])
              ->whereMonth('bills.created_at', date('m'))
     ->whereYear('bills.created_at', date('Y'))
             ->select('customers.id','collections.paid')
@@ -322,11 +323,17 @@ public static function Divisionname(){
         public static function Connect(){
             $info=User::whereadmin_id(Auth::id())->first();
             if($info){
-                return User::whereadmin_id(Auth::id())->pluck('username','id');
+                return User::whereadmin_id(Auth::id())->select('username','id');
             }
             else{
                 return Admin::whereid(Auth::id())->pluck('name','id');
             }
+     
+        
+        }    public static function CompanyEmploye(){
+          
+            return User::whereadmin_id(Auth::id())->select('username','id')->get();
+          
      
         
         }

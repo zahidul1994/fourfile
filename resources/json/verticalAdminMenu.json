@@ -144,8 +144,13 @@
                     "name": "Customer Report",
                     "i18n": "Customer Report",
                     "slug": "admin/customerreport"
+                },
+                {
+                    "url": "admin/collectionreport",
+                    "name": "Collections Report",
+                    "i18n": "Collections Report",
+                    "slug": "admin-collectionreport"
                 }
-               
                 
                 
 

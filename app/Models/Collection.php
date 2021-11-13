@@ -28,6 +28,10 @@ public function admin()
 {
     return $this->belongsTo('App\Models\Admin');
 }
+public function user()
+{
+    return $this->belongsTo('App\Models\User');
+}
 public function payby()
 {
     return $this->belongsTo('App\Models\Payby');

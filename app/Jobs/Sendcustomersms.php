@@ -52,8 +52,7 @@ $url = "http://66.45.237.70/api.php";
    $p = explode("|",$smsresult);
    $sendstatus = $p[0];
 
- 
-//    Log::info($sendstatus);
+    Log::info($sendstatus);
 }
 
 // Log::info((strlen('আমার সোনার')));

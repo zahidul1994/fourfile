@@ -207,6 +207,7 @@ return [
 	"Customer Excel Form"=> "Customer Excel Form",
 	"Report"=> "Report",
 	"Customer Report"=> "Customer Report",
+	"Collections Report"=> "Collections Report",
     "Customer Pay"=>"Customer Pay",
     "Todo List"=>"Todo List",
 ];

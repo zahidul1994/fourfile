@@ -47,7 +47,7 @@ class CustomerController extends Controller
       ->whereMonth('bills.created_at', date('m'))
 ->whereYear('bills.created_at', date('Y'))
   ->where('customers.admin_id','=',Auth::guard('admin')->user()->id)->where('status','=',1)
-     ->select('customers.id','customers.email','customers.status','customers.houseno','customers.floor','areas.areaname','districts.district','thanas.thana','customers.post','customers.loginid','customers.customername','customers.customermobile','customers.secretname','customers.id','bills.monthlyrent','bills.due','bills.advance','bills.discount','bills.advance','bills.vat','bills.total','bills.paid','bills.id as bill')->get();
+     ->select('customers.id','customers.email','customers.status','customers.houseno','customers.floor','areas.areaname','districts.district','thanas.thana','customers.post','customers.loginid','customers.customername','customers.customermobile','customers.secretname','customers.id','bills.monthlyrent','bills.due','bills.addicrg','bills.advance','bills.discount','bills.advance','bills.vat','bills.total','bills.paid','bills.id as bill')->get();
     }
      elseif(!empty($request->collection) && empty($request->withoutcollection)){
      
@@ -60,7 +60,7 @@ class CustomerController extends Controller
  ->whereYear('bills.created_at', date('Y'))
        ->where('bills.paid','>',0)
        ->where('customers.admin_id','=',Auth::guard('admin')->user()->id)->where('status','=',1)
-       ->select('customers.id','customers.email','customers.status','customers.houseno','customers.floor','areas.areaname','districts.district','thanas.thana','customers.post','customers.loginid','customers.customername','customers.customermobile','customers.secretname','customers.id','bills.monthlyrent','bills.due','bills.advance','bills.discount','bills.advance','bills.vat','bills.total','bills.paid','bills.id as bill')->get();
+       ->select('customers.id','customers.email','customers.status','customers.houseno','customers.floor','areas.areaname','districts.district','thanas.thana','customers.post','customers.loginid','customers.customername','customers.customermobile','customers.secretname','customers.id','bills.monthlyrent','bills.due','bills.addicrg','bills.advance','bills.discount','bills.advance','bills.vat','bills.total','bills.paid','bills.id as bill')->get();
   
      
      }
@@ -75,8 +75,7 @@ class CustomerController extends Controller
 ->whereYear('bills.created_at', date('Y'))
      ->where('bills.paid','<=',0)
      ->where('customers.admin_id','=',Auth::guard('admin')->user()->id)->where('status','=',1)
-     ->select('customers.id','customers.email','customers.status','customers.houseno','customers.floor','areas.areaname','districts.district','thanas.thana','customers.post','customers.loginid','customers.customername','customers.customermobile','customers.secretname','customers.id','bills.monthlyrent','bills.due','bills.advance','bills.discount','bills.advance','bills.vat','bills.total','bills.paid','bills.id as bill')->get();
-
+     ->select('customers.id','customers.email','customers.status','customers.houseno','customers.floor','areas.areaname','districts.district','thanas.thana','customers.post','customers.loginid','customers.customername','customers.customermobile','customers.secretname','customers.id','bills.monthlyrent','bills.due','bills.addicrg','bills.advance','bills.discount','bills.advance','bills.vat','bills.total','bills.paid','bills.id as bill')->get();
    
    }
      else{
@@ -112,31 +111,6 @@ class CustomerController extends Controller
         return $button;
     }})
   
-      ->addColumn('totalmonthlyrent' ,function($data){
-       
-        return @$data->monthlyrent;
-    })  
-        ->addColumn('totaldue' ,function($data){
-        return @$data->due;
-    }) 
-      ->addColumn('totaldiscount' ,function($data){
-        return @$data->discount;
-    }) 
-        ->addColumn('totaladvance' ,function($data){
-        return @$data->advance;
-    }) 
-    ->addColumn('totaladdicrg' ,function($data){
-        return @$data->addicrg;
-    })
-     ->addColumn('totalvat' ,function($data){
-        return @$data->vat;
-    }) 
-      ->addColumn('totalbillamount' ,function($data){
-        return @$data->total;
-    })
-    ->addColumn('totalcollection' ,function($data){
-      return (@$data->paid);
-  })
   ->addColumn('duetotal' ,function($data){
     return ((@$data->total)-($data->paid));
 })
@@ -145,7 +119,7 @@ class CustomerController extends Controller
     })
   
         ->addIndexColumn()
-        ->rawColumns(['action','duetotal','status','address','totalmonthlyrent','totaldue','totaldiscount','totaladvance','totaladdicrg','totalvat','totalbillamount','totalcollection'])
+        ->rawColumns(['action','duetotal','status','address'])
         
         ->make(true);
     }
@@ -658,8 +632,8 @@ $info->save();
 
 } 
 public function sendsmscustomer(Request $request){
-  return response($request->all());
- $customers=Customer::whereadmin_id(Auth::id())->whereloginid($request->loginid)->get();
+  //return response($request->all());
+ $customers=Customer::with('bill')->whereadmin_id(Auth::id())->whereloginid($request->loginid)->get();
 foreach($customers as $customer){
 
 $data = [
@@ -673,7 +647,7 @@ $data = [
   'oppusername'=>$customer->oppusername,
   'companyname'=>Auth::user()->company,
   'companynumber'=>Auth::user()->phone,
-  'billamount'=>$customer->total,
+  'billamount'=>$customer->bill[0]->total,
   'expeirydate'=>$customer->atd_day,
   'exmonth'=>$customer->atd_month
  

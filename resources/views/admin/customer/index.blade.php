@@ -1,5 +1,5 @@
 @extends('layouts.adminMaster')
-@section('title', ' Customer List')
+@section('title', 'Customer List')
 {{-- vendor styles --}}
 @section('vendor-style')
     <link rel="stylesheet" type="text/css" href="{{ asset('vendors/flag-icon/css/flag-icon.min.css') }}">
@@ -8,56 +8,95 @@
         href="{{ asset('vendors/data-tables/extensions/responsive/css/responsive.dataTables.min.css') }}">
    
     <link href="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css" rel="stylesheet">
    
 @endsection
 {{-- page style --}}
 @section('page-style')
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/pages/data-tables.css') }}">
-   
-    <style>
+    <link rel="stylesheet" type="text/css" href="https://datatables.net/release-datatables/extensions/FixedHeader/css/fixedHeader.dataTables.css">
+   <style>
+        td {
+            border: 1px solid #ddd;
+            white-space: normal !important;
+            padding: 5px !important;
+            text-align: center;
+        }
 
-td{
-    border: 1px solid #ddd;
-    white-space: normal !important;
-    padding: 5px !important;
-    text-align: center;
-}
-table.dataTable thead th, table.dataTable thead td{
-    padding: 5px !important;
-}
-th{
-    border: 1px solid #ddd;
-    padding: 5px !important;
-    text-align: left;
-}
-.card-content{
-    padding: 10px !important;
-}
+        table.dataTable thead th,
+        table.dataTable thead td {
+            padding: 5px !important;
+        }
 
-table.dataTable thead .sorting{
-    background-image: blod;
-}
-table.dataTable thead .sorting_asc{
-    background-image: blod;
-}
-.sorting-icon{
-    display: flex;
-    align-items: center;
-    
-}
-.sorting-icon i{
-    font-size: 15px !important;
-    margin-left: auto
-}
-table.dataTable tbody td:nth-child(3){
-    text-align: left
-}
-table.dataTable tbody td:nth-child(4){
-    text-align: left
-}
+        th {
+            border: 1px solid #ddd;
+            padding: 5px !important;
+            text-align: left;
+        }
+
+        .card-content {
+            padding: 10px !important;
+        }
+
+        table.dataTable thead .sorting {
+            background-image: blod;
+        }
+
+        table.dataTable thead .sorting_asc {
+            background-image: blod;
+        }
+
+        .sorting-icon {
+            display: flex;
+            align-items: center;
+
+        }
+
+        .sorting-icon i {
+            font-size: 15px !important;
+            margin-left: auto
+        }
+
+        table.dataTable tbody td:nth-child(3) {
+            text-align: left
+        }
+
+        table.dataTable tbody td:nth-child(4) {
+            text-align: left
+        }
 
 
 
+        table.dataTable thead .sorting,
+        table.dataTable thead .sorting_asc,
+        table.dataTable thead .sorting_desc,
+        table.dataTable thead .sorting_asc_disabled,
+        table.dataTable thead .sorting_desc_disabled {
+            background-position: 90% 50%;
+        }
+
+        .sorting_asc {
+            width: 40px;
+        }
+
+        input:not([type]),
+        input[type="text"]:not(.browser-default),
+        input[type="password"]:not(.browser-default),
+        input[type="email"]:not(.browser-default),
+        input[type="url"]:not(.browser-default),
+        input[type="time"]:not(.browser-default),
+        input[type="date"]:not(.browser-default),
+        input[type="datetime"]:not(.browser-default),
+        input[type="datetime-local"]:not(.browser-default),
+        input[type="tel"]:not(.browser-default),
+        input[type="number"]:not(.browser-default),
+        input[type="search"]:not(.browser-default),
+        textarea.materialize-textarea {
+            width: auto;
+            height: 36px;
+            margin-bottom: 30px;
+            margin-left: 10px !important;
+        }
 
     </style>
 @endsection
@@ -137,26 +176,24 @@ table.dataTable tbody td:nth-child(4){
 
                                 </tbody>
                                 <tfoot>
-                                    <tr role="row" style="position: sticky; bottom: 0; background: #fff;"><td class="sorting_asc" rowspan="1" colspan="1" style="width: 18px;" aria-label="SL">SL</td><td class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 67px;" aria-label="ID: activate to sort column ascending">ID</td><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 77px;" aria-label="Name: activate to sort column ascending">Name</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 104px;" aria-label="Address">Address</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 83px;" aria-label="Mobile">Mobile</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 72px;" aria-label="IP/Username">IP/<br>Username</th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 57px;" aria-label="Monthly Rent: activate to sort column ascending">Monthly <br>Rent
-                                      <span style="color: slateblue; display: block">{{CommonFx::Totalcustomerinfo()->sum('monthlyrent')}}</span>
-                                    </th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 52px;" aria-label="Previus Due: activate to sort column ascending">Previus <br>Due
-                                      <span style="color: slateblue; display: block">{{CommonFx::Totalcustomerinfo()->sum('due')}}</span>
-                                    </th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 62px;" aria-label="Discount: activate to sort column ascending">Discount
-                                      <span style="color: slateblue; display: block">{{CommonFx::Totalcustomerinfo()->sum('discount')}}</span>
-                                    </th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 62px;" aria-label="Advance: activate to sort column ascending">Advance
-                                      <span style="color: slateblue; display: block">{{CommonFx::Totalcustomerinfo()->sum('advance')}}</span>
-                                    </th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 52px;" aria-label="Add Charge: activate to sort column ascending">Add <br>Charge
-                                      <span style="color: slateblue; display: block">{{CommonFx::Totalcustomerinfo()->sum('addicrg')}}</span>
-                                    </th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 42px;" aria-label="Vat %: activate to sort column ascending">Vat %</th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 57px;" aria-label="Bill Amount: activate to sort column ascending">Bill <br>Amount
-                                      <span style="color: slateblue; display: block">{{CommonFx::Totalcustomerinfo()->sum('total')}}</span>
-                                    </th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 69px;" aria-label="Collection Amount: activate to sort column ascending">Collection <br>Amount
-                                      <span style="color: slateblue; display: block">{{CommonFx::Totalcustomercollection()->sum('paid')}}</span>
-                                    </th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 35px;" aria-label="Total Due">Total <br>Due
-                                      <span style="color: slateblue; display: block">{{CommonFx::Totalcustomerinfo()->sum('total')- CommonFx::Totalcustomercollection()->sum('paid')}}</span>
-                                    </th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 128px;" aria-label="Action">Action</th></tr>
-                                   
-                                       
-                                      
+                                    <th>SL</th>
+                                    <th>ID</th>
+                                    <th style="text-align: left !important">Name </th>
+                                    <th style="text-align: left !important">Address</th>
+                                    <th>Mobile</th>
+                                    <th>IP/<br>Username</th>
+                                    <th>Rent </th>
+                                    <th> </th>
+                                    <th> </th>
+                                    <th> </th>
+                                    <th> </th>
+                                    <th> </th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    {{-- <th>Status</th> --}}
+                                    <th>Action</th>
+                                     
                                 </tfoot>
                             </table>
 
@@ -318,7 +355,9 @@ table.dataTable tbody td:nth-child(4){
  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.print.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.colVis.min.js "></script>
+<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.colVis.min.js"></script>
+<script src="//cdn.datatables.net/plug-ins/1.11.3/api/sum().js"></script>
+<script src="https://datatables.net/release-datatables/extensions/FixedHeader/js/dataTables.fixedHeader.js"></script>
     <script>
         $( document ).ready(function() {
     $(".sidenav-main").addClass("nav-collapsed");
@@ -341,11 +380,9 @@ table.dataTable tbody td:nth-child(4){
             $(function load_data(allempty=null,collection=null, withoutcollection=null) {
        
         var table = $('#dataTable').DataTable({
-            initComplete: function() {
-      $('#Totalselect').text( table.rows( ).count())
-   },
+          
              fixedHeader: {
-        header: false,
+             header: false,
         footer: true
     },
           
@@ -409,7 +446,7 @@ table.dataTable tbody td:nth-child(4){
 
                     {
                         data: 'DT_RowIndex',
-                        orderable: false,
+                        orderable: true,
                         searchable: false,
                         
                     },
@@ -438,55 +475,50 @@ table.dataTable tbody td:nth-child(4){
                         orderable: false
                     },
                     {
-                        data: 'totalmonthlyrent',
-                        name: 'totalmonthlyrent',
+                        data: 'monthlyrent',
+                        orderable: false
 
                     },
                     {
-                        data: 'totaldue',
-                        name: 'totaldue',
+                        data: 'due',
+                        orderable: false
 
                     },
                     {
-                        data: 'totaldiscount',
-                        name: 'totaldiscount',
+                        data: 'discount',
+                        orderable: false
 
                     },
                     {
-                        data: 'totaladvance',
-                        name: 'totaladvance',
+                        data: 'advance',
+                        orderable: false
 
                     },
                     {
-                        data: 'totaladdicrg',
-                        name: 'totaladdicrg',
+                        data: 'addicrg',
+                        orderable: false
+                    },
+                    {
+                        data: 'vat',
+                        orderable: false
 
                     },
                     {
-                        data: 'totalvat',
-                        name: 'totalvat',
+                        data: 'total',
+                        orderable: false
 
                     },
                     {
-                        data: 'totalbillamount',
-                        name: 'totalbillamount',
-
-                    },
-                    {
-                        data: 'totalcollection',
-                        name: 'totalcollection',
+                        data: 'paid',
+                        orderable: false
 
                     },
                     {
                         data: 'duetotal',
                         name: 'duetotal',
-                        orderable: false
+                        orderable: true
                     },
-//  {
-//                         data: 'status',
-//                         name: 'status',
-//                         orderable: false
-//                     },
+
 
 
                     {
@@ -496,8 +528,23 @@ table.dataTable tbody td:nth-child(4){
                     }
 
                 ],
-    
-               
+                "footerCallback": function ( row, data ) {
+            var api = this.api(), data;
+
+             $( api.column( 6, {page:'current'} ).footer() ).html('Rent <br>'+ api.column(6, {page:'current'}).data().sum());
+             $( api.column( 7, {page:'current'} ).footer() ).html('Due <br>'+ api.column(7, {page:'current'}).data().sum());
+             $( api.column( 8, {page:'current'} ).footer() ).html('Discount <br>'+ api.column(8, {page:'current'}).data().sum());
+             $( api.column( 9, {page:'current'} ).footer() ).html('Advance <br>'+ api.column(9, {page:'current'}).data().sum());
+             $( api.column( 10, {page:'current'} ).footer() ).html('Add <br>'+ api.column(10, {page:'current'}).data().sum());
+             $( api.column( 11, {page:'current'} ).footer() ).html('Vat % <br>'+ api.column(11, {page:'current'}).data().sum());
+             $( api.column( 12, {page:'current'} ).footer() ).html('Bill Amount <br>'+ api.column(12, {page:'current'}).data().sum());
+             $( api.column( 13, {page:'current'} ).footer() ).html('Collection <br> Amount <br>'+ api.column(13, {page:'current'}).data().sum());
+             $( api.column( 14, {page:'current'} ).footer() ).html('Total Due <br>'+ api.column(14, {page:'current'}).data().sum());
+            
+        },
+        initComplete: function() {
+      $('#Totalselect').text( table.rows( ).count())
+   },   
         });
         $('#dataTable_filter').on('keyup change', function(){
             $('#Totalselect').text( table.rows( ).count());
