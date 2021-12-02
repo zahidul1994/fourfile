@@ -1,5 +1,5 @@
 @extends('layouts.adminMaster')
-@section('title', ' Collection Report')
+@section('title', 'Customer Collection Report')
 {{-- vendor styles --}}
 @section('vendor-style')
     <link rel="stylesheet" type="text/css" href="{{ asset('vendors/flag-icon/css/flag-icon.min.css') }}">
@@ -235,8 +235,8 @@ $('.datepickertwo').datetimepicker({
     },
     
                 ajax: {
-                    // url:"{{ url('admin/pendingcustomerlist') }}",
-                    url: "{{ url('admin/collectionreport') }}",
+                    
+                    url: "{{ url('admin/customercollectionreport') }}",
                    
                     data: {
                  allempty:allempty,

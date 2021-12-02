@@ -96,6 +96,12 @@
                 "slug": "admin/monthlyprint"
                 },
                 {
+                    "url": "admin/singlebillprint",
+                    "name": "Bill by Customer",
+                    "i18n": "Bill by Customer",
+                    "slug": "admin/singlebillprint"
+                },
+                {
                     "url": "admin/printlocationwise",
                     "name": "By Location",
                     "i18n": "By Location",
@@ -146,10 +152,10 @@
                     "slug": "admin/customerreport"
                 },
                 {
-                    "url": "admin/collectionreport",
+                    "url": "admin/customercollectionreport",
                     "name": "Collections Report",
                     "i18n": "Collections Report",
-                    "slug": "admin-collectionreport"
+                    "slug": "admin-customercollectionreport"
                 }
                 
                 

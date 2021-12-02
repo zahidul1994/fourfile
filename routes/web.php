@@ -58,8 +58,7 @@ Route::prefix('admin')->group(function () {
 
 );
 
-// locale route
-Route::get('lang/{locale}', [LanguageController::class, 'swap']);
+
 Route::group(['prefix'=> 'filemanager', 'middleware'=> ['auth:superadmin,admin']], function () {
         \UniSharp\LaravelFilemanager\Lfm::routes();
     }
@@ -371,6 +370,7 @@ Route::get('monthlyprint','PrintController@monthly');
 Route::get('printlocationwise','PrintController@printlocationwise');
 Route::get('billlocationwise','PrintController@billlocationwise');
 Route::get('printbylocation','PrintController@printbylocation');
+Route::get('singlebillprint','PrintController@singlecustomer');
 
 
 //print end
@@ -476,7 +476,7 @@ Route::delete('deletetodo/{id}','TodolistController@destroy');
    //Report Area 
 Route::get('customerreport','ReportController@index');
  Route::post('customerreportinfo','ReportController@findcustomer');
- Route::get('collectionreport','ReportController@collectionreport');
+ Route::get('customercollectionreport','ReportController@collectionreport');
 //  Route::post('collectionreport','ReportController@collectionreport');
 // Route::get('editcollect/{id}','CollectionController@edit');
 //  Route::put('updatecollection/{id}','CollectionController@update');

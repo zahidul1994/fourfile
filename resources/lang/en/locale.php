@@ -171,6 +171,7 @@ return [
 	"By Location"=> "By Location",
     "Medicineinfo List"=> "Medicineinfo List",
     "Monthly Print"=> "Monthly Print",
+    "Bill By Customer"=> "Bill By Customer",
 	"Inactive Customer"=> "Inactive Customer", 
 	"Customer"=> "Customer",
     "Customer List"=> "Customer List",

@@ -234,13 +234,20 @@
 
             $("#collectionsubmit").on('click', function() {
                 // console.log($("#payby").val());
-                if ($("#collection").val() == '') {
+                if ($("#collection").val() == 0) {
 
-                    alert('Collected Amount (Paid) Is Required');
+                    alert('Collected Amount Minimum 1');
                     $("#collection").focus();
                     return false;
 
                 }
+                if ($("#collection").val() == '') {
+
+alert('Collected Amount (Paid) Is Required');
+$("#collection").focus();
+return false;
+
+}
                 if ($("#payby").val() == '') {
                     // console.log($("#collection").val());
                     alert('Select Minimum One Collection  Type');

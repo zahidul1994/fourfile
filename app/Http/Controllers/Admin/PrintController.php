@@ -124,4 +124,13 @@ $userinfo = Printsetting::whereadmin_id(Auth::user()->id)->find($id)->update(arr
 
     return response(Customer::whereadmin_id(Auth::id())->delete($id));
   }
+
+  
+  public function singlecustomer(){
+     
+    $pageConfigs = ['pageHeader' => false, 'isFabButton' => false];
+       
+        return view('admin.print.singlebillprint')->with('pageConfigs',$pageConfigs);
+    }
+  
 }
